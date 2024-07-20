@@ -125,66 +125,49 @@ void hardfault_handler(void)
 void _nvm_start(void)
 {
 
-    // *******************Test of hb_ctrl; LED Blinking at HB Pins *********************
+    /* States 1 and 5 are safe states, i.e. we should be able to loop infinitely in them */
 
-    // bring the 4 bit output of hb_ctrl to GPIO 11 downto 8
-    uint32_t time  = 511;  // Controls the Switch Frequenz, The Systick will be loaded by multiples of 1ms (--> see: SysTick->LOAD  = wait_about_1ms * time;)
-    uint32_t count = 300;
-    uint32_t  i;
-    /*lint -esym(550,dummy) variable dummy not accessed */
-    uint8_t  dummy __attribute__((unused));
+    /* STATE 1:  Locked, Idle */
+    // TODO: clear variable that indicates that it is verified
+    // TODO: wait for NFC; how to check if we have an NFC signal? Should be an interrupt, check cl_uart_handler or hw_field_off_handler
+    // TODO: save NFC data, propagate to next state 
 
-    for (uint8_t j = 0; j < 4; j++)
-    {
-        // to switch the HB switch control lines to GPIO8-GPIO11 as well
-        set_singlegpio_alt(8 + j, 0, 3);
-        dummy = single_gpio_iocfg( true, false, true, false, false, 8 + j);
-    }
+    /* STATE 2 : Locked, Verifying */
+    // maybe investigate dandeliion protocol, but this is extra
+    // TODO: decrypt data, compare passcodes (for the time being, just do a straight comparison)
+    // TODO: if incorrect passcode, return to state 1, else continue
+    // TODO: set variable that indicates that it is verified 
+    // TODO: if charging interrupt not received, move to state 3, if received, move to state 4
 
-    sl_counter = 0;
-    i = 0;
+    /* STATE 3: Locked, Verified, Charging */
+    // TODO: wait for charging of the capacitor to occur
+    // TODO: will need to set up an interrupt (or something similar) to determine when the capacitor is charged 
+    // TODO: should set a timer as a timeout in case charging does not happen, if timeout go to state 1? -> should determine action here
+    // TODO: move to state 4 when charging interrupt received
 
-    set_hb_eventctrl(false);
+    /* STATE 4: Unlocking */
+    // TODO: send signal to H-bridge to move motor
+    // TODO: move to state 5 
 
-    // initialize the data exchange library
-    vars_init();
+    /* STATE 5: Unlocked, Idle */
+    // TODO: clear variable that indicates that it is verified
+    // TODO: similar to state 1
+    // TODO: move to state 6
 
-    //set_hb_switch(bool hs1_set, bool ls1_set, bool hs2_set, bool ls2_set)
-    while (i < count)
-    {
-        set_hb_switch(true, false, false, false);
-        set_hb_switch(true, false, false, true);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * time, 14);
-        sl_counter++;
+    /* STATE 6: Unlocked, Verifying */
+    // TODO: similar to state 2
+    // TODO: if incorrect passcode, return to state 5, else continue
+    // TODO: move to state 7 if no charging interrupt, if received move to state 8
+    
+    /* STATE 7: Unlocked, Verifying, Charging */
+    // TODO: similar to state 3
+    // TODO: move to state 8 when charging interrupt received
 
-        set_hb_switch(true, false, false, false);
-        set_hb_switch(true, false, true, false);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * time, 14);
-        sl_counter++;
+    /* STATE 8: Locking */
+    // TODO: similar to state 4, but with opposite polarity so that the motor will move to a locked position
+    // TODO: move to state 1
 
-        set_hb_switch(false, false, true, false);
-        set_hb_switch(false, true, true, false);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * time, 14);
-        sl_counter++;
-
-        set_hb_switch(false, false, true, false);
-        set_hb_switch(true, false, true, false);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * time, 14);
-        sl_counter++;
-
-        i++;
-    }
-
-    set_hb_switch(false, false, false, false);
-
-    // ****************** END BLINKING DEMO ********************
-    single_gpio_iocfg(true, false, true, false, false, 0);
-    set_singlegpio_out(0x1, 0);
-    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
-    set_singlegpio_out(0x0, 0);
-
-    // background task is just an endless
-    /*lint -e(716) while(1) */
+    /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
     while (true)
     {
         /*
@@ -192,7 +175,7 @@ void _nvm_start(void)
         SCUS_GPIO_OUT_EN__SET(1);
         SCUC_GPIO_OUT_DAT__SET(0x1 & BIT_TO_PUT_ON_PIN);
         */
-        asm("WFI");
+        asm("WFI"); 
     }
 
 }
