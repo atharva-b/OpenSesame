@@ -129,7 +129,7 @@ void _nvm_start(void)
 
     // bring the 4 bit output of hb_ctrl to GPIO 11 downto 8
     uint32_t time  = 511;  // Controls the Switch Frequenz, The Systick will be loaded by multiples of 1ms (--> see: SysTick->LOAD  = wait_about_1ms * time;)
-    uint32_t count = 300;
+    uint32_t count = 10;
     uint32_t  i;
     /*lint -esym(550,dummy) variable dummy not accessed */
     uint8_t  dummy __attribute__((unused));
@@ -179,6 +179,10 @@ void _nvm_start(void)
 
     // ****************** END BLINKING DEMO ********************
 
+    single_gpio_iocfg(true, false, true, false, false, 0);
+    set_singlegpio_out(0x1, 0);
+    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
+    set_singlegpio_out(0x0, 0);
 
     // background task is just an endless
     /*lint -e(716) while(1) */
