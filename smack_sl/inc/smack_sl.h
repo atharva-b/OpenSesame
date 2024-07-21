@@ -49,6 +49,18 @@ extern const uint8_t smack_sl_tag[];
 // Offer a counter for external access
 extern uint32_t sl_counter;
 
+typedef enum 
+{
+    SM_LOCKED = 0, 
+    SM_AUTHENTICATE_UL = 1, 
+    SM_CHARGING_UL = 2,
+    SM_UNLOCKING = 3,
+    SM_UNLOCKED = 4,
+    SM_AUTHENTICATE_L = 5, 
+    SM_CHARGING_L = 6, 
+    SM_LOCKING = 7
+} SM_State_enum_t; 
+
 
 /** @} */ /* End of group fw_config */
 
