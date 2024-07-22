@@ -43,6 +43,7 @@
 
 extern void example_handler(void);
 extern void hardfault_handler(void);
+extern void led_blink(void);
 
 extern const uint8_t smack_sl_tag[];
 

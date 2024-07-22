@@ -198,13 +198,24 @@ void open_sesame_state_machine(void)
     }
 }
 
+void led_blink(void) {
+    single_gpio_iocfg(true, false, true, false, false, 0);
+    for(int i = 0; i < 5; i++) {
+        set_singlegpio_out(0x1, 0);
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
+        set_singlegpio_out(0x0, 0);
+    }
+}
+
 // Start of the application program
 void _nvm_start(void)
 {
-
+    nfc_init(); 
+    init_dand();
     /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
     while (true)
     {
+        nfc_state_machine();
         /*
         // Uncomment these lines if you want to output data on pin 1
         SCUS_GPIO_OUT_EN__SET(1);
