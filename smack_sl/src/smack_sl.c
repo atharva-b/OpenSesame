@@ -123,85 +123,98 @@ void hardfault_handler(void)
 
 }
 
-void open_sesame_state_machine(void)
+uint32_t open_sesame_state_machine(Mailbox_t* mailbox)
 {
-    bool authenticated = false; 
-    SM_State_enum_t current_state = SM_LOCKED;     // how do we know if it is locked or unlocked here....
+    // bool authenticated = false; 
+    // SM_State_enum_t current_state = SM_LOCKED;     // how do we know if it is locked or unlocked here....
 
-    while (true)
-    {
-        /* States 1 and 5 are safe states, i.e. we should be able to loop infinitely in them */
-        switch (current_state)
-        {
-            /* STATE 1:  Locked, Idle */
-            // TODO: clear variable that indicates that it is verified
-            // TODO: wait for NFC; how to check if we have an NFC signal? Should be an interrupt, check cl_uart_handler or hw_field_off_handler
-            // TODO: save NFC data, propagate to next state 
-            case SM_LOCKED:
-                authenticated = false;
-                break;
-            
-            /* STATE 2 : Locked, Verifying */
-            // maybe investigate dandeliion protocol, but this is extra
-            // TODO: decrypt data, compare passcodes (for the time being, just do a straight comparison)
-            // TODO: if incorrect passcode, return to state 1, else continue
-            // TODO: set variable that indicates that it is verified 
-            // TODO: if charging interrupt not received, move to state 3, if received, move to state 4
-            case SM_AUTHENTICATE_UL:
-                break;
-
-
-            /* STATE 3: Locked, Verified, Charging */
-            // TODO: wait for charging of the capacitor to occur
-            // TODO: will need to set up an interrupt (or something similar) to determine when the capacitor is charged 
-            // TODO: should set a timer as a timeout in case charging does not happen, if timeout go to state 1? -> should determine action here
-            // TODO: move to state 4 when charging interrupt received
-            case SM_CHARGING_UL:
-                break;
-
-            /* STATE 4: Unlocking */
-            // TODO: send signal to H-bridge to move motor
-            // TODO: move to state 5
-            case SM_UNLOCKING:
-                break;
-
-            /* STATE 5: Unlocked, Idle */
-            // TODO: clear variable that indicates that it is verified
-            // TODO: similar to state 1
-            // TODO: move to state 6
-            case SM_UNLOCKED:
-                break;
-
-            /* STATE 6: Unlocked, Verifying */
-            // TODO: similar to state 2
-            // TODO: if incorrect passcode, return to state 5, else continue
-            // TODO: move to state 7 if no charging interrupt, if received move to state 8
-            case SM_AUTHENTICATE_L:
-                break;
-
-            /* STATE 7: Unlocked, Verifying, Charging */
-            // TODO: similar to state 3
-            // TODO: move to state 8 when charging interrupt received
-            case SM_CHARGING_L:
-                break;
-            
-            /* STATE 8: Locking */
-            // TODO: similar to state 4, but with opposite polarity so that the motor will move to a locked position
-            // TODO: move to state 1
-            case SM_LOCKING:
-                break;
-            
-            default:
-                break;
-        }
-
+    for(int i = 0; i < 5; i++) {
+        single_gpio_iocfg(true, false, true, false, false, 0);
+        set_singlegpio_out(0x1, 0);
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
+        set_singlegpio_out(0x0, 0);
     }
+
+    return 0;
+
+    // while (true)
+    // {
+    //     /* States 1 and 5 are safe states, i.e. we should be able to loop infinitely in them */
+    //     switch (current_state)
+    //     {
+    //         /* STATE 1:  Locked, Idle */
+    //         // TODO: clear variable that indicates that it is verified
+    //         // TODO: wait for NFC; how to check if we have an NFC signal? Should be an interrupt, check cl_uart_handler or hw_field_off_handler
+    //         // TODO: save NFC data, propagate to next state 
+    //         case SM_LOCKED:
+    //             authenticated = false;
+    //             break;
+            
+    //         /* STATE 2 : Locked, Verifying */
+    //         // maybe investigate dandeliion protocol, but this is extra
+    //         // TODO: decrypt data, compare passcodes (for the time being, just do a straight comparison)
+    //         // TODO: if incorrect passcode, return to state 1, else continue
+    //         // TODO: set variable that indicates that it is verified 
+    //         // TODO: if charging interrupt not received, move to state 3, if received, move to state 4
+    //         case SM_AUTHENTICATE_UL:
+    //             break;
+
+
+    //         /* STATE 3: Locked, Verified, Charging */
+    //         // TODO: wait for charging of the capacitor to occur
+    //         // TODO: will need to set up an interrupt (or something similar) to determine when the capacitor is charged 
+    //         // TODO: should set a timer as a timeout in case charging does not happen, if timeout go to state 1? -> should determine action here
+    //         // TODO: move to state 4 when charging interrupt received
+    //         case SM_CHARGING_UL:
+    //             break;
+
+    //         /* STATE 4: Unlocking */
+    //         // TODO: send signal to H-bridge to move motor
+    //         // TODO: move to state 5
+    //         case SM_UNLOCKING:
+    //             break;
+
+    //         /* STATE 5: Unlocked, Idle */
+    //         // TODO: clear variable that indicates that it is verified
+    //         // TODO: similar to state 1
+    //         // TODO: move to state 6
+    //         case SM_UNLOCKED:
+    //             break;
+
+    //         /* STATE 6: Unlocked, Verifying */
+    //         // TODO: similar to state 2
+    //         // TODO: if incorrect passcode, return to state 5, else continue
+    //         // TODO: move to state 7 if no charging interrupt, if received move to state 8
+    //         case SM_AUTHENTICATE_L:
+    //             break;
+
+    //         /* STATE 7: Unlocked, Verifying, Charging */
+    //         // TODO: similar to state 3
+    //         // TODO: move to state 8 when charging interrupt received
+    //         case SM_CHARGING_L:
+    //             break;
+            
+    //         /* STATE 8: Locking */
+    //         // TODO: similar to state 4, but with opposite polarity so that the motor will move to a locked position
+    //         // TODO: move to state 1
+    //         case SM_LOCKING:
+    //             break;
+            
+    //         default:
+    //             break;
+    //     }
+
+    // }
 }
 
 // Start of the application program
 void _nvm_start(void)
 {
-
+    nfc_init();
+    init_dand();
+    Mailbox_t* mbx = get_mailbox_address();
+    register_function(0, &open_sesame_state_machine);
+    nfc_state_machine();
     /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
     while (true)
     {
