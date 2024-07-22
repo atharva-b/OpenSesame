@@ -218,7 +218,9 @@ void _nvm_start(void)
     /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
     while (true)
     {
-        nfc_state_machine();
+        if(mbx->content[0] == 0x60000001){
+            led_blink(mbx);
+        }
         /*
         // Uncomment these lines if you want to output data on pin 1
         SCUS_GPIO_OUT_EN__SET(1);
