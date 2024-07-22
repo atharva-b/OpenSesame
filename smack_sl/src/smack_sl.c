@@ -204,6 +204,7 @@ uint32_t led_blink(Mailbox_t* mailbox) {
         set_singlegpio_out(0x1, 0);
         sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
         set_singlegpio_out(0x0, 0);
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
     }
     return 4;
 }
