@@ -198,13 +198,14 @@ void open_sesame_state_machine(void)
     }
 }
 
-void led_blink(void) {
+uint32_t led_blink(Mailbox_t* mailbox) {
     single_gpio_iocfg(true, false, true, false, false, 0);
     for(int i = 0; i < 5; i++) {
         set_singlegpio_out(0x1, 0);
         sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
         set_singlegpio_out(0x0, 0);
     }
+    return 4;
 }
 
 // Start of the application program
@@ -212,6 +213,8 @@ void _nvm_start(void)
 {
     nfc_init(); 
     init_dand();
+    Mailbox_t* mbx = get_mailbox_address();
+    register_function(1, &led_blink);
     /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
     while (true)
     {
