@@ -1,0 +1,714 @@
+   1              	 .cpu cortex-m0
+   2              	 .eabi_attribute 20,1
+   3              	 .eabi_attribute 21,1
+   4              	 .eabi_attribute 23,3
+   5              	 .eabi_attribute 24,1
+   6              	 .eabi_attribute 25,1
+   7              	 .eabi_attribute 26,1
+   8              	 .eabi_attribute 30,4
+   9              	 .eabi_attribute 34,0
+  10              	 .eabi_attribute 18,4
+  11              	 .file "sl_aparam.c"
+  12              	 .text
+  13              	.Ltext0:
+  14              	 .cfi_sections .debug_frame
+  15              	 .section .text.NVM_Reset_Handler,"ax",%progbits
+  16              	 .align 1
+  17              	 .weak NVM_Reset_Handler
+  18              	 .arch armv6s-m
+  19              	 .syntax unified
+  20              	 .code 16
+  21              	 .thumb_func
+  22              	 .fpu softvfp
+  24              	NVM_Reset_Handler:
+  25              	.LFB28:
+  26              	 .file 1 "C:/InfineonSDK/smack_sl/src/sl_aparam.c"
+   1:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /* ============================================================================
+   2:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** Copyright (c) 2021 Infineon Technologies AG
+   3:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** **               All rights reserved.
+   4:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** **               www.infineon.com
+   5:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** ============================================================================
+   6:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** **
+   7:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** ============================================================================
+   8:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** Redistribution and use of this software only permitted to the extent
+   9:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** expressly agreed with Infineon Technologies AG.
+  10:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** ============================================================================
+  11:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** *
+  12:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** */
+  13:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  14:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /**
+  15:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @file    empty_aparam.c
+  16:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @brief   Placeholder for application/customer specific aparams in NVM.
+  17:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  */
+  18:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  19:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /*
+  20:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ==============================================================================
+  21:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****    1. INCLUDE FILES
+  22:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ==============================================================================
+  23:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** */
+  24:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  25:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "cmsis_compiler.h"
+  26:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "aparam.h"
+  27:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "smack_sl.h"
+  28:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "aes_lib.h"
+  29:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "smack_exchange.h"
+  30:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  31:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /**
+  32:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @defgroup group_aparam_variables APARAM variables
+  33:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @ingroup group_aparam_interface
+  34:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @{
+  35:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  */
+  36:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /// @}
+  37:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  38:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** // Following default APARAM structure must be placed after the DPARAMS at beginning of NVM memory
+  39:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** // linker script for details
+  40:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** // Initialization of NVM is done by customer initiated NVM programming
+  41:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** Aparams_t const aparams __attribute__ ((section (".nvm.APARAMS"))) =
+  42:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** {
+  43:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_rom1 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
+  44:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
+  45:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_rom2 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
+  46:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
+  47:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_ram1 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
+  48:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
+  49:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_ram2 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
+  50:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
+  51:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_hw1 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
+  52:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
+  53:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_hw2 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
+  54:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
+  55:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_hw3 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
+  56:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
+  57:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_rfu =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
+  58:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
+  59:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  60:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .app_prog =                                                /**< [0x447:0x408] (32 * 16) absolut
+  61:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+  62:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         (param_func_ptr_t)smack_exchange_handler,
+  63:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  64:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  65:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  66:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  67:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  68:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  69:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  70:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  71:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  72:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  73:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  74:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  75:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  76:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  77:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff
+  78:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
+  79:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  80:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .bypass_mailbox =                                          /**< [0x44b:0x448] (32) 0x00000000 w
+  81:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  82:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  83:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .default_uart_baudrate =                                   /**< [0x44f:0x44c] (24) default UART
+  84:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  85:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  86:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .kill_debugger =                                           /**< [0x453:0x450] (32) 0x5deb0ff5 w
+  87:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  88:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  89:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .disable_default_uart =                                    /**< [0x457:0x454] (32) 0x11223344 d
+  90:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  91:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  92:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .message_disable =                                         /**< [0x0x45b:0x458] (32) 0x11E550FF
+  93:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  94:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+  95:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .rfu0 =                                                    /**< [0x47f:0x45C] (288) reserved fo
+  96:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+  97:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+  98:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+  99:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 100:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 101:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+ 102:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
+ 103:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 104:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_out_en =                                             /**< [0x483:0x480] (32)  0xabba + GP
+ 105:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 106:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 107:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_in_en =                                              /**< [0x487:0x484] (32)  0xabba + GP
+ 108:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 109:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 110:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_out_type =                                           /**< [0x48b:0x488] (32)  0xabba + GP
+ 111:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 112:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 113:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_pup_en =                                             /**< [0x48f:0x48c] (32)  0xabba + GP
+ 114:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 115:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 116:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_pdown_en =                                           /**< [0x493:0x490] (32)  0xabba + GP
+ 117:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 118:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 119:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_out_value =                                          /**< [0x497:0x494] (32)  0xabba + GP
+ 120:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 121:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 122:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_alt_valid =                                          /**< [0x49b:0x498] (32)  GPIO Alt Va
+ 123:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 124:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 125:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_alt =                                                /**< [0x4ab:0x49c] (32)  GPIO Alt 0.
+ 126:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+ 127:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+ 128:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+ 129:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+ 130:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
+ 131:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
+ 132:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 133:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler1_source =                                   /**< [0x4af:0x4ac] (32)  0x00 + cust
+ 134:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 135:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 136:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler2_source =                                   /**< [0x4b3:0x4b0] (32)  0x00 + cust
+ 137:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 138:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 139:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler3_source =                                   /**< [0x4b7:0x4b4] (32)  0x00 + cust
+ 140:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 141:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 142:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler4_source =                                   /**< [0x4bb:0x4b8] (32)  0x00 + cust
+ 143:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 144:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 145:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler5_source =                                   /**< [0x4bf:0x4bc] (32)  0x00 + cust
+ 146:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 147:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 148:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler6_source =                                   /**< [0x4c3:0x4c0] (32)  0x00 + cust
+ 149:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 150:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 151:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler7_source =                                   /**< [0x4c7:0x4c4] (32)  0x00 + cust
+ 152:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 153:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 154:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler8_source =                                   /**< [0x4cb:0x4c8] (32)  0x00 + cust
+ 155:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 156:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 157:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq9_cfg =                                             /**< [0x4cf:0x4cc] (32)  0x00 + irq 
+ 158:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 159:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 160:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq10_cfg =                                            /**< [0x4d3:0x4d0] (32)  0x00 + irq 
+ 161:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 162:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 163:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq11_cfg =                                            /**< [0x4d7:0x4d4] (32)  0x00 + irq 
+ 164:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 165:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 166:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq12_cfg =                                            /**< [0x4db:0x4d8] (32)  0x00 + irq 
+ 167:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 168:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 169:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq13_cfg =                                            /**< [0x4df:0x4dc] (32)  0x00 + irq 
+ 170:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 171:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 172:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq14_cfg =                                            /**< [0x4e3:0x4e0] (32)  0x00 + irq 
+ 173:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 174:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 175:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq9_col_cfg =                                         /**< [0x4e7:0x4e4] (32)  0x00 + colu
+ 176:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 177:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 178:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq10_col_cfg =                                        /**< [0x4eb:0x4e8] (32)  0x00 + colu
+ 179:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 180:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 181:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq11_col_cfg =                                        /**< [0x4ef:0x4ec] (32)  0x00 + colu
+ 182:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 183:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 184:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq12_col_cfg =                                        /**< [0x4f3:0x4f0] (32)  0x00 + colu
+ 185:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 186:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 187:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq13_col_cfg =                                        /**< [0x4f7:0x4f4] (32)  0x00 + colu
+ 188:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 189:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 190:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq14_col_cfg =                                        /**< [0x4fb:0x4f8] (32)  0x00 + colu
+ 191:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 192:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 193:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .rfu1 =                                                    /**< [0x4ff:0x4fc] (32)  0x00 + colu
+ 194:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+ 195:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
+ 196:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
+ 197:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 198:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .sense_adc_hand_addr =                                     /**< [0x503:0x500] (32)  absolute ad
+ 199:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 200:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 201:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer0_hand_addr =                                        /**< [0x507:0x504] (32)  absolute ad
+ 202:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 203:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 204:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer1_hand_addr =                                        /**< [0x50b:0x508] (32)  absolute ad
+ 205:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 206:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 207:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer2_hand_addr =                                        /**< [0x50f:0x50c] (32)  absolute ad
+ 208:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 209:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 210:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer3_hand_addr =                                        /**< [0x513:0x510] (32)  absolute ad
+ 211:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 212:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 213:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_evnt_hand_addr =                                     /**< [0x517:0x514] (32)  absolute ad
+ 214:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 215:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 216:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_evnt_gen_hand_addr =                                 /**< [0x51b:0x518] (32)  absolute ad
+ 217:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 218:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 219:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer4_hand_addr =                                        /**< [0x51f:0x51c] (32)  absolute ad
+ 220:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 221:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 222:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer5_hand_addr =                                        /**< [0x523:0x520] (32)  absolute ad
+ 223:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 224:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 225:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .uart_hand_addr =                                          /**< [0x527:0x524] (32)  absolute ad
+ 226:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 227:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 228:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .ssp_hand_addr =                                           /**< [0x52b:0x528] (32)  absolute ad
+ 229:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 230:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 231:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .i2c_hand_addr =                                           /**< [0x52f:0x52c] (32)  absolute ad
+ 232:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 233:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 234:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio0_hand_addr =                                         /**< [0x533:0x530] (32)  absolute ad
+ 235:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 236:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 237:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio1_hand_addr =                                         /**< [0x537:0x534] (32)  absolute ad
+ 238:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 239:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 240:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio2_hand_addr =                                         /**< [0x53b:0x538] (32)  absolute ad
+ 241:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 242:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 243:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio3_hand_addr =                                         /**< [0x53f:0x53c] (32)  absolute ad
+ 244:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 245:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 246:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio4_hand_addr =                                         /**< [0x543:0x540] (32)  absolute ad
+ 247:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 248:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 249:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio5_hand_addr =                                         /**< [0x547:0x544] (32)  absolute ad
+ 250:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 251:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 252:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio6_hand_addr =                                         /**< [0x54b:0x548] (32)  absolute ad
+ 253:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 254:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 255:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio7_hand_addr =                                         /**< [0x54f:0x54c] (32)  absolute ad
+ 256:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 257:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 258:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .aes_hand_addr =                                           /**< [0x553:0x550] (32)  absolute ad
+ 259:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 260:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 261:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hard_fault_hand_addr =                                    /**< [0x557:0x554] (32)  absolute ad
+ 262:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     (param_func_ptr_t)hardfault_handler,
+ 263:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 264:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .systick_hand_addr =                                       /**< [0x55b:0x558] (32)  absolute ad
+ 265:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     (param_func_ptr_t)example_handler,                         /**  example for a customer owned in
+ 266:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 267:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .wdt_hand_addr =                                           /**< [0x55f:0x55c] (32)  absolute ad
+ 268:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 269:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 270:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .nvm_hand_addr =                                           /**< [0x563:0x560] (32)  absolute ad
+ 271:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 272:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 273:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .rfu2 =                                                    /**< [0x57b:0x564] (192) reserved fo
+ 274:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+ 275:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+ 276:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 277:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 278:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
+ 279:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
+ 280:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 281:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .tag_type_2_ptr =                                          /**< [0x57f:0x57c] (32)  address of 
+ 282:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     (param_ptr_t)smack_sl_tag,
+ 283:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 284:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 285:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .nvm_prot_sect =                                           /**< [0x5f7:0x580] (120*8) R/W prote
+ 286:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+ 287:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 288:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 289:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 290:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 291:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 292:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 293:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 294:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 295:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 296:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 297:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 298:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 299:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 300:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 301:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+ 302:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
+ 303:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 304:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .rfu3 =                                                    /**< [0x5ff:0x5f8] (64)  reserved fo
+ 305:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+ 306:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+ 307:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
+ 308:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 309:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .secret =                                                  /**< [0x6ff:0x600] reserved for secr
+ 310:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+ 311:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 312:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 313:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 314:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 315:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 316:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 317:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 318:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 319:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 320:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 321:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 322:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 323:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 324:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 325:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 326:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 327:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 328:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
+ 329:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 330:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .public =                                                  /**< [0x7ff:0x700] reserved for publ
+ 331:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
+ 332:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 333:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 334:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 335:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 336:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 337:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 338:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 339:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 340:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 341:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 342:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 343:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 344:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 345:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 346:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 347:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 348:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 349:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     }
+ 350:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** };
+ 351:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
+ 352:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** __WEAK void NVM_Reset_Handler(void)
+ 353:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** {
+  27              	 .loc 1 353 1 view-0
+  28              	 .cfi_startproc
+  29              	 
+  30              	 
+  31              	 
+ 354:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** }
+  32              	 .loc 1 354 1 view .LVU1
+  33              	 
+  34 0000 7047     	 bx lr
+  35              	 .cfi_endproc
+  36              	.LFE28:
+  38              	 .global aparams
+  39              	 .section .nvm.APARAMS,"a"
+  40              	 .align 2
+  43              	aparams:
+  44 0000 FF       	 .byte -1
+  45 0001 FF       	 .byte -1
+  46 0002 FF       	 .byte -1
+  47 0003 FF       	 .byte -1
+  48 0004 FF       	 .byte -1
+  49 0005 FF       	 .byte -1
+  50 0006 FF       	 .byte -1
+  51 0007 FF       	 .byte -1
+  52 0008 00000000 	 .word smack_exchange_handler
+  53 000c FFFFFFFF 	 .word -1
+  54 0010 FFFFFFFF 	 .word -1
+  55 0014 FFFFFFFF 	 .word -1
+  56 0018 FFFFFFFF 	 .word -1
+  57 001c FFFFFFFF 	 .word -1
+  58 0020 FFFFFFFF 	 .word -1
+  59 0024 FFFFFFFF 	 .word -1
+  60 0028 FFFFFFFF 	 .word -1
+  61 002c FFFFFFFF 	 .word -1
+  62 0030 FFFFFFFF 	 .word -1
+  63 0034 FFFFFFFF 	 .word -1
+  64 0038 FFFFFFFF 	 .word -1
+  65 003c FFFFFFFF 	 .word -1
+  66 0040 FFFFFFFF 	 .word -1
+  67 0044 FFFFFFFF 	 .word -1
+  68 0048 FFFFFFFF 	 .word -1
+  69 004c FFFFFFFF 	 .word -1
+  70 0050 FFFFFFFF 	 .word -1
+  71 0054 FFFFFFFF 	 .word -1
+  72 0058 FFFFFFFF 	 .word -1
+  73 005c FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  73      FFFFFFFF 
+  73      FFFFFFFF 
+  73      FF
+  74 0069 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  74      FFFFFFFF 
+  74      FFFFFFFF 
+  74      FF
+  75 0076 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377"
+  75      FFFFFFFF 
+  75      FFFF
+  76 0080 FFFFFFFF 	 .word -1
+  77 0084 FFFFFFFF 	 .word -1
+  78 0088 FFFFFFFF 	 .word -1
+  79 008c FFFFFFFF 	 .word -1
+  80 0090 FFFFFFFF 	 .word -1
+  81 0094 FFFFFFFF 	 .word -1
+  82 0098 FFFFFFFF 	 .word -1
+  83 009c FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  83      FFFFFFFF 
+  83      FFFFFFFF 
+  83      FF
+  84 00a9 FFFFFF   	 .ascii "\377\377\377"
+  85 00ac FFFFFFFF 	 .word -1
+  86 00b0 FFFFFFFF 	 .word -1
+  87 00b4 FFFFFFFF 	 .word -1
+  88 00b8 FFFFFFFF 	 .word -1
+  89 00bc FFFFFFFF 	 .word -1
+  90 00c0 FFFFFFFF 	 .word -1
+  91 00c4 FFFFFFFF 	 .word -1
+  92 00c8 FFFFFFFF 	 .word -1
+  93 00cc FFFFFFFF 	 .word -1
+  94 00d0 FFFFFFFF 	 .word -1
+  95 00d4 FFFFFFFF 	 .word -1
+  96 00d8 FFFFFFFF 	 .word -1
+  97 00dc FFFFFFFF 	 .word -1
+  98 00e0 FFFFFFFF 	 .word -1
+  99 00e4 FFFFFFFF 	 .word -1
+ 100 00e8 FFFFFFFF 	 .word -1
+ 101 00ec FFFFFFFF 	 .word -1
+ 102 00f0 FFFFFFFF 	 .word -1
+ 103 00f4 FFFFFFFF 	 .word -1
+ 104 00f8 FFFFFFFF 	 .word -1
+ 105 00fc FFFFFFFF 	 .ascii "\377\377\377\377"
+ 106 0100 FFFFFFFF 	 .word -1
+ 107 0104 FFFFFFFF 	 .word -1
+ 108 0108 FFFFFFFF 	 .word -1
+ 109 010c FFFFFFFF 	 .word -1
+ 110 0110 FFFFFFFF 	 .word -1
+ 111 0114 FFFFFFFF 	 .word -1
+ 112 0118 FFFFFFFF 	 .word -1
+ 113 011c FFFFFFFF 	 .word -1
+ 114 0120 FFFFFFFF 	 .word -1
+ 115 0124 FFFFFFFF 	 .word -1
+ 116 0128 FFFFFFFF 	 .word -1
+ 117 012c FFFFFFFF 	 .word -1
+ 118 0130 FFFFFFFF 	 .word -1
+ 119 0134 FFFFFFFF 	 .word -1
+ 120 0138 FFFFFFFF 	 .word -1
+ 121 013c FFFFFFFF 	 .word -1
+ 122 0140 FFFFFFFF 	 .word -1
+ 123 0144 FFFFFFFF 	 .word -1
+ 124 0148 FFFFFFFF 	 .word -1
+ 125 014c FFFFFFFF 	 .word -1
+ 126 0150 FFFFFFFF 	 .word -1
+ 127 0154 00000000 	 .word hardfault_handler
+ 128 0158 00000000 	 .word example_handler
+ 129 015c FFFFFFFF 	 .word -1
+ 130 0160 FFFFFFFF 	 .word -1
+ 131 0164 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 131      FFFFFFFF 
+ 131      FFFFFFFF 
+ 131      FF
+ 132 0171 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377"
+ 132      FFFFFFFF 
+ 132      FFFFFF
+ 133 017c 00000000 	 .word smack_sl_tag
+ 134 0180 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 134      FFFFFFFF 
+ 134      FFFFFFFF 
+ 134      FF
+ 135 018d FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 135      FFFFFFFF 
+ 135      FFFFFFFF 
+ 135      FF
+ 136 019a FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 136      FFFFFFFF 
+ 136      FFFFFFFF 
+ 136      FF
+ 137 01a7 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 137      FFFFFFFF 
+ 137      FFFFFFFF 
+ 137      FF
+ 138 01b4 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 138      FFFFFFFF 
+ 138      FFFFFFFF 
+ 138      FF
+ 139 01c1 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 139      FFFFFFFF 
+ 139      FFFFFFFF 
+ 139      FF
+ 140 01ce FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 140      FFFFFFFF 
+ 140      FFFFFFFF 
+ 140      FF
+ 141 01db FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 141      FFFFFFFF 
+ 141      FFFFFFFF 
+ 141      FF
+ 142 01e8 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 142      FFFFFFFF 
+ 142      FFFFFFFF 
+ 142      FF
+ 143 01f5 FFFFFF   	 .ascii "\377\377\377"
+ 144 01f8 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377"
+ 144      FFFFFFFF 
+ 145 0200 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 145      FFFFFFFF 
+ 145      FFFFFFFF 
+ 145      FF
+ 146 020d FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 146      FFFFFFFF 
+ 146      FFFFFFFF 
+ 146      FF
+ 147 021a FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 147      FFFFFFFF 
+ 147      FFFFFFFF 
+ 147      FF
+ 148 0227 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 148      FFFFFFFF 
+ 148      FFFFFFFF 
+ 148      FF
+ 149 0234 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 149      FFFFFFFF 
+ 149      FFFFFFFF 
+ 149      FF
+ 150 0241 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 150      FFFFFFFF 
+ 150      FFFFFFFF 
+ 150      FF
+ 151 024e FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 151      FFFFFFFF 
+ 151      FFFFFFFF 
+ 151      FF
+ 152 025b FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 152      FFFFFFFF 
+ 152      FFFFFFFF 
+ 152      FF
+ 153 0268 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 153      FFFFFFFF 
+ 153      FFFFFFFF 
+ 153      FF
+ 154 0275 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 154      FFFFFFFF 
+ 154      FFFFFFFF 
+ 154      FF
+ 155 0282 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 155      FFFFFFFF 
+ 155      FFFFFFFF 
+ 155      FF
+ 156 028f FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 156      FFFFFFFF 
+ 156      FFFFFFFF 
+ 156      FF
+ 157 029c FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 157      FFFFFFFF 
+ 157      FFFFFFFF 
+ 157      FF
+ 158 02a9 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 158      FFFFFFFF 
+ 158      FFFFFFFF 
+ 158      FF
+ 159 02b6 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 159      FFFFFFFF 
+ 159      FFFFFFFF 
+ 159      FF
+ 160 02c3 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 160      FFFFFFFF 
+ 160      FFFFFFFF 
+ 160      FF
+ 161 02d0 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 161      FFFFFFFF 
+ 161      FFFFFFFF 
+ 161      FF
+ 162 02dd FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 162      FFFFFFFF 
+ 162      FFFFFFFF 
+ 162      FF
+ 163 02ea FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 163      FFFFFFFF 
+ 163      FFFFFFFF 
+ 163      FF
+ 164 02f7 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377"
+ 164      FFFFFFFF 
+ 164      FF
+ 165 0300 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 165      FFFFFFFF 
+ 165      FFFFFFFF 
+ 165      FF
+ 166 030d FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 166      FFFFFFFF 
+ 166      FFFFFFFF 
+ 166      FF
+ 167 031a FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 167      FFFFFFFF 
+ 167      FFFFFFFF 
+ 167      FF
+ 168 0327 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 168      FFFFFFFF 
+ 168      FFFFFFFF 
+ 168      FF
+ 169 0334 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 169      FFFFFFFF 
+ 169      FFFFFFFF 
+ 169      FF
+ 170 0341 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 170      FFFFFFFF 
+ 170      FFFFFFFF 
+ 170      FF
+ 171 034e FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 171      FFFFFFFF 
+ 171      FFFFFFFF 
+ 171      FF
+ 172 035b FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 172      FFFFFFFF 
+ 172      FFFFFFFF 
+ 172      FF
+ 173 0368 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 173      FFFFFFFF 
+ 173      FFFFFFFF 
+ 173      FF
+ 174 0375 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 174      FFFFFFFF 
+ 174      FFFFFFFF 
+ 174      FF
+ 175 0382 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 175      FFFFFFFF 
+ 175      FFFFFFFF 
+ 175      FF
+ 176 038f FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 176      FFFFFFFF 
+ 176      FFFFFFFF 
+ 176      FF
+ 177 039c FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 177      FFFFFFFF 
+ 177      FFFFFFFF 
+ 177      FF
+ 178 03a9 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 178      FFFFFFFF 
+ 178      FFFFFFFF 
+ 178      FF
+ 179 03b6 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 179      FFFFFFFF 
+ 179      FFFFFFFF 
+ 179      FF
+ 180 03c3 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 180      FFFFFFFF 
+ 180      FFFFFFFF 
+ 180      FF
+ 181 03d0 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 181      FFFFFFFF 
+ 181      FFFFFFFF 
+ 181      FF
+ 182 03dd FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 182      FFFFFFFF 
+ 182      FFFFFFFF 
+ 182      FF
+ 183 03ea FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 183      FFFFFFFF 
+ 183      FFFFFFFF 
+ 183      FF
+ 184 03f7 FFFFFFFF 	 .ascii "\377\377\377\377\377\377\377\377\377"
+ 184      FFFFFFFF 
+ 184      FF
+ 185              	 .text
+ 186              	.Letext0:
+ 187              	 .file 2 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 188              	 .file 3 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 189              	 .file 4 "C:/InfineonSDK/smack_rom/libs/smack_lib/inc/aparam.h"
+ 190              	 .file 5 "C:/InfineonSDK/smack_sl/inc/smack_sl.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 sl_aparam.c
+    {standard input}:16     .text.NVM_Reset_Handler:00000000 $t
+    {standard input}:24     .text.NVM_Reset_Handler:00000000 NVM_Reset_Handler
+    {standard input}:43     .nvm.APARAMS:00000000 aparams
+    {standard input}:40     .nvm.APARAMS:00000000 $d
+
+UNDEFINED SYMBOLS
+smack_exchange_handler
+hardfault_handler
+example_handler
+smack_sl_tag

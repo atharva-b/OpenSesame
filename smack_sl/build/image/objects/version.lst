@@ -1,0 +1,36 @@
+   1              	 .cpu cortex-m0
+   2              	 .eabi_attribute 20,1
+   3              	 .eabi_attribute 21,1
+   4              	 .eabi_attribute 23,3
+   5              	 .eabi_attribute 24,1
+   6              	 .eabi_attribute 25,1
+   7              	 .eabi_attribute 26,1
+   8              	 .eabi_attribute 30,4
+   9              	 .eabi_attribute 34,0
+  10              	 .eabi_attribute 18,4
+  11              	 .file "version.c"
+  12              	 .text
+  13              	.Ltext0:
+  14              	 .cfi_sections .debug_frame
+  15              	 .global version
+  16              	 .section .rodata.version,"a"
+  17              	 .align 2
+  20              	version:
+  21 0000 4C       	 .byte 76
+  22 0001 20       	 .byte 32
+  23 0002 0000     	 .short 0
+  24 0004 000000   	 .ascii "\000\000\000"
+  25 0007 00       	 .byte 0
+  26 0008 00000000 	 .word 0
+  27              	 .text
+  28              	.Letext0:
+  29              	 .file 1 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
+  30              	 .file 2 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+  31              	 .file 3 "C:/InfineonSDK/smack_sl/inc/version.h"
+  32              	 .file 4 "C:/InfineonSDK/smack_sl/src/version.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 version.c
+    {standard input}:20     .rodata.version:00000000 version
+    {standard input}:17     .rodata.version:00000000 $d
+
+NO UNDEFINED SYMBOLS
