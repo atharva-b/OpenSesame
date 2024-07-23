@@ -227,11 +227,14 @@ void _nvm_start(void)
     // volatile NFC_State_enum_t state = handle_DAND_protocol();
     // volatile NFC_Frame_enum_t frame_type = classify_frame();
     nfc_state_machine();
+    volatile NFC_Cmd_enum_t cmd_type = NFC_SEL_3;
 
     while (true)
     {
         asm("WFE");
         read_frame();
+        cmd_type = classify_command();
+
         handle_DAND_protocol();
 
         if(mbx->content[0] == 0xDEADBEEF){
