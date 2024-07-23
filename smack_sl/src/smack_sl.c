@@ -198,15 +198,14 @@ void open_sesame_state_machine(void)
     }
 }
 
-uint32_t led_blink(Mailbox_t* mailbox) {
+void led_blink(void) {
     single_gpio_iocfg(true, false, true, false, false, 0);
-    for(int i = 0; i < 5; i++) {
+    for(uint8_t i = 0; i < 5; i++) {
         set_singlegpio_out(0x1, 0);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 300, 14);
         set_singlegpio_out(0x0, 0);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 300, 14);
     }
-    return 4;
 }
 
 // Start of the application program
@@ -217,18 +216,19 @@ void _nvm_start(void)
     vars_init();
     Mailbox_t* mbx = get_mailbox_address();
     uint32_t mb_addr = (uint32_t) mbx; 
-    register_function(1, &led_blink);
+    // register_function(1, &led_blink);
     volatile NFC_State_enum_t state = handle_DAND_protocol();
+    volatile NFC_Frame_enum_t frame_type = classify_frame();
     nfc_state_machine();
 
     while (true)
     {
         read_frame();
-
-        state = handle_DAND_protocol();
+        frame_type = classify_frame();
+        // state = handle_DAND_protocol();
 
         if(mbx->content[0] == 0xDEADBEEF){
-            led_blink(mbx);
+            led_blink();
         }
         /*
         // Uncomment these lines if you want to output data on pin 1
