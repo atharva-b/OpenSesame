@@ -230,6 +230,7 @@ void _nvm_start(void)
 
     while (true)
     {
+        asm("WFE");
         read_frame();
         handle_DAND_protocol();
 
