@@ -202,9 +202,15 @@ void led_blink(void) {
     single_gpio_iocfg(true, false, true, false, false, 0);
     for(uint8_t i = 0; i < 5; i++) {
         set_singlegpio_out(0x1, 0);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 300, 14);
+        uint32_t cnt = 30000000;
+        while(cnt > 0){
+            cnt--;
+        }
         set_singlegpio_out(0x0, 0);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 300, 14);
+        cnt = 30000000;
+        while(cnt > 0){
+            cnt--;
+        }
     }
 }
 
