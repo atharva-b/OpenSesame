@@ -214,12 +214,20 @@ void _nvm_start(void)
 {
     nfc_init(); 
     init_dand();
+    vars_init();
     Mailbox_t* mbx = get_mailbox_address();
+    uint32_t mb_addr = (uint32_t) mbx; 
     register_function(1, &led_blink);
-    /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
+    volatile NFC_State_enum_t state = handle_DAND_protocol();
+    nfc_state_machine();
+
     while (true)
     {
-        if(mbx->content[0] == 0x60000001){
+        read_frame();
+
+        state = handle_DAND_protocol();
+
+        if(mbx->content[0] == 0xDEADBEEF){
             led_blink(mbx);
         }
         /*
@@ -227,6 +235,7 @@ void _nvm_start(void)
         SCUS_GPIO_OUT_EN__SET(1);
         SCUC_GPIO_OUT_DAT__SET(0x1 & BIT_TO_PUT_ON_PIN);
         */
+        /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
         asm("WFI"); 
     }
 
