@@ -1,95 +1,66 @@
 Archive member included to satisfy reference by file (symbol)
 
-C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
-                              C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o (smack_exchange_init)
-C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
-                              C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o (sys_tim_singleshot_32)
-C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
-                              C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (aes_load_key_ba)
-c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
-                              C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (__gnu_thumb1_case_sqi)
-c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
-                              C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (__gnu_thumb1_case_uqi)
-c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
-                              C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (memcpy)
-c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
-                              C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (strncpy)
-c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
-                              C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (strnlen)
+C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                              C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o (smack_exchange_init)
+C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                              C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (aes_load_key_ba)
+c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
+                              C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (__gnu_thumb1_case_sqi)
+c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
+                              C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (__gnu_thumb1_case_uqi)
+c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
+                              C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (memcpy)
+c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
+                              C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (strncpy)
+c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
+                              C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o) (strnlen)
 
 Discarded input sections
 
- .text          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
- .data          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
- .bss           0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .text          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .data          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .bss           0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
  .text.NVM_Reset_Handler
-                0x00000000        0x2 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
- .text          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .data          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .bss           0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .text          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .data          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .bss           0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .text          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .data          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .bss           0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .text          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/version.o
- .data          0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/version.o
- .bss           0x00000000        0x0 C:/OpenSesame/smack_sl/build/image/objects/version.o
- .text          0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .data          0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .bss           0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x00000000        0x2 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .text          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .data          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .bss           0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .text          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .data          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .bss           0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .text.open_sesame_state_machine
+                0x00000000        0x2 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .text          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .data          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .bss           0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .text          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
+ .data          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
+ .bss           0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
+ .text          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .data          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .bss           0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
  .text.smack_exchange_key_restore
-                0x00000000       0x5c C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x00000000       0x5c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
  .text.smack_exchange_alert
-                0x00000000        0xc C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .text          0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .data          0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .bss           0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_singleshot
-                0x00000000       0x90 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_cyclic_cascaded
-                0x00000000       0xa8 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_cyclic_cascaded_stop
-                0x00000000       0x60 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_cyclic_cascaded_get_upper
-                0x00000000       0x1c C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_cyclic_cascaded_get_combined
-                0x00000000       0x40 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_close
-                0x00000000       0x10 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_pwm_config
-                0x00000000       0x4c C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_pwm_start
-                0x00000000       0x18 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_pwm_stop
-                0x00000000       0x18 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .rodata.systimEmpty
-                0x00000000        0x7 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .rodata.systimTimer1
-                0x00000000        0x7 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .rodata.systimTimer2
-                0x00000000        0x7 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .rodata.systimTimerCont.0
-                0x00000000        0x7 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text          0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
- .data          0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
- .bss           0x00000000        0x0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                0x00000000        0xc C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .text          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+ .data          0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+ .bss           0x00000000        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
  .text.generate_random_number_lib
-                0x00000000       0x3c C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
- .data          0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
- .bss           0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
- .data          0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
- .bss           0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
- .text          0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
- .data          0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
- .bss           0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
- .text          0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
- .data          0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
- .bss           0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
- .text          0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
- .data          0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
- .bss           0x00000000        0x0 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
+                0x00000000       0x3c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+ .data          0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
+ .bss           0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
+ .data          0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
+ .bss           0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
+ .text          0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
+ .data          0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
+ .bss           0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
+ .text          0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
+ .data          0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
+ .bss           0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
+ .text          0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
+ .data          0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
+ .bss           0x00000000        0x0 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
 
 Memory Configuration
 
@@ -105,17 +76,17 @@ version          0x0001eff4         0x0000000c         r
 
 Linker script and memory map
 
-LOAD C:/OpenSesame/smack_rom/build/image/image_rom.elf
-LOAD C:/OpenSesame/smack_rom/build/dparams/default_dparam.elf
-LOAD C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
-LOAD C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
-LOAD C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
-LOAD C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
-LOAD C:/OpenSesame/smack_sl/build/image/objects/version.o
-LOAD C:/OpenSesame/smack_lib/build/image/\libsmack.a
+LOAD C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_rom/build/image/image_rom.elf
+LOAD C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_rom/build/dparams/default_dparam.elf
+LOAD C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+LOAD C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+LOAD C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+LOAD C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+LOAD C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
+LOAD C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a
 START GROUP
-LOAD c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a
-LOAD c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a
+LOAD c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a
+LOAD c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a
 END GROUP
                 0x00000000                __ROM_BASE = 0x0
                 0x00003ff4                __ROM_SIZE = 0x4000
@@ -139,7 +110,7 @@ END GROUP
 .version        0x0001eff4        0xc
  *(.rodata.version)
  .rodata.version
-                0x0001eff4        0xc C:/OpenSesame/smack_sl/build/image/objects/version.o
+                0x0001eff4        0xc C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
                 0x0001eff4                version
 
 .dparam         0x00010000        0x0
@@ -151,109 +122,107 @@ END GROUP
 .aparam         0x00010400      0x400
                 0x00010400                __nvm_aparam_section_start__ = .
  *(.nvm.APARAMS)
- .nvm.APARAMS   0x00010400      0x400 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .nvm.APARAMS   0x00010400      0x400 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
                 0x00010800                __nvm_aparam_section_end__ = .
 
-.text           0x00010800      0xd30
+.text           0x00010800      0xb58
                 0x00010800                __NVM_FIRMWARE_START = .
  *(.vectors)
- .vectors       0x00010800       0xc0 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .vectors       0x00010800       0xc0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
                 0x00010800                __Vectors
  *(.text*)
  .text.vars_init
-                0x000108c0       0x7c C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x000108c0       0x7c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
                 0x000108c0                vars_init
  .text.example_handler
-                0x0001093c       0x10 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x0001093c       0x10 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
                 0x0001093c                example_handler
  .text.hardfault_handler
-                0x0001094c       0x14 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x0001094c       0x14 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
                 0x0001094c                hardfault_handler
+ .text.led_blink
+                0x00010960       0x38 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x00010960                led_blink
  .text._nvm_start
-                0x00010960      0x138 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
-                0x00010960                _nvm_start
+                0x00010998       0x48 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x00010998                _nvm_start
  .text.Default_Handler
-                0x00010a98        0x2 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
-                0x00010a98                HPrio_Matrix3_Handler
-                0x00010a98                HPrio_Matrix5_Handler
-                0x00010a98                HardFault_Handler
-                0x00010a98                SysTick_Handler
-                0x00010a98                HPrio_Matrix0_Handler
-                0x00010a98                PendSV_Handler
-                0x00010a98                NMI_Handler
-                0x00010a98                Event_Bus6_Handler
-                0x00010a98                Unused1_Handler
-                0x00010a98                Unused7_Handler
-                0x00010a98                Event_Bus1_Handler
-                0x00010a98                HPrio_Matrix4_Handler
-                0x00010a98                Unused6_Handler
-                0x00010a98                HPrio_Matrix2_Handler
-                0x00010a98                Unused3_Handler
-                0x00010a98                Unused13_Handler
-                0x00010a98                Unused8_Handler
-                0x00010a98                WDT_Handler
-                0x00010a98                HPrio_Matrix1_Handler
-                0x00010a98                Event_Bus8_Handler
-                0x00010a98                Cl_uart_Handler
-                0x00010a98                Default_Handler
-                0x00010a98                Unused2_Handler
-                0x00010a98                HW_field_off_Handler
-                0x00010a98                Event_Bus2_Handler
-                0x00010a98                Unused9_Handler
-                0x00010a98                Unused11_Handler
-                0x00010a98                SVC_Handler
-                0x00010a98                Unused10_Handler
-                0x00010a98                Event_Bus3_Handler
-                0x00010a98                Event_Bus7_Handler
-                0x00010a98                Unused4_Handler
-                0x00010a98                Event_Bus5_Handler
-                0x00010a98                HW_nvm_Handler
-                0x00010a98                Unused12_Handler
-                0x00010a98                Unused5_Handler
-                0x00010a98                Event_Bus4_Handler
-                0x00010a98                Unused14_Handler
- *fill*         0x00010a9a        0x2 
+                0x000109e0        0x2 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+                0x000109e0                HPrio_Matrix3_Handler
+                0x000109e0                HPrio_Matrix5_Handler
+                0x000109e0                HardFault_Handler
+                0x000109e0                SysTick_Handler
+                0x000109e0                HPrio_Matrix0_Handler
+                0x000109e0                PendSV_Handler
+                0x000109e0                NMI_Handler
+                0x000109e0                Event_Bus6_Handler
+                0x000109e0                Unused1_Handler
+                0x000109e0                Unused7_Handler
+                0x000109e0                Event_Bus1_Handler
+                0x000109e0                HPrio_Matrix4_Handler
+                0x000109e0                Unused6_Handler
+                0x000109e0                HPrio_Matrix2_Handler
+                0x000109e0                Unused3_Handler
+                0x000109e0                Unused13_Handler
+                0x000109e0                Unused8_Handler
+                0x000109e0                WDT_Handler
+                0x000109e0                HPrio_Matrix1_Handler
+                0x000109e0                Event_Bus8_Handler
+                0x000109e0                Cl_uart_Handler
+                0x000109e0                Default_Handler
+                0x000109e0                Unused2_Handler
+                0x000109e0                HW_field_off_Handler
+                0x000109e0                Event_Bus2_Handler
+                0x000109e0                Unused9_Handler
+                0x000109e0                Unused11_Handler
+                0x000109e0                SVC_Handler
+                0x000109e0                Unused10_Handler
+                0x000109e0                Event_Bus3_Handler
+                0x000109e0                Event_Bus7_Handler
+                0x000109e0                Unused4_Handler
+                0x000109e0                Event_Bus5_Handler
+                0x000109e0                HW_nvm_Handler
+                0x000109e0                Unused12_Handler
+                0x000109e0                Unused5_Handler
+                0x000109e0                Event_Bus4_Handler
+                0x000109e0                Unused14_Handler
+ *fill*         0x000109e2        0x2 
  .text.NVM_Reset_Handler
-                0x00010a9c       0x58 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
-                0x00010a9c                NVM_Reset_Handler
+                0x000109e4       0x58 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+                0x000109e4                NVM_Reset_Handler
  .text.smack_exchange_notify_tx
-                0x00010af4       0x1c C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x00010a3c       0x1c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
  .text.smack_exchange_init
-                0x00010b10       0x2c C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
-                0x00010b10                smack_exchange_init
+                0x00010a58       0x2c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x00010a58                smack_exchange_init
  .text.smack_exchange_key_set
-                0x00010b3c       0x40 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
-                0x00010b3c                smack_exchange_key_set
+                0x00010a84       0x40 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x00010a84                smack_exchange_key_set
  .text.smack_exchange_handler
-                0x00010b7c      0x4a0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
-                0x00010b7c                smack_exchange_handler
- .text.sys_tim_set_matrix
-                0x0001101c       0x4c C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .text.sys_tim_singleshot_32
-                0x00011068       0xd4 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
-                0x00011068                sys_tim_singleshot_32
+                0x00010ac4      0x4a0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x00010ac4                smack_exchange_handler
  .text.aes_load_key_ba
-                0x0001113c       0x4c C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
-                0x0001113c                aes_load_key_ba
+                0x00010f64       0x4c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                0x00010f64                aes_load_key_ba
  .text.calc_aes_ba
-                0x00011188       0x8c C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
-                0x00011188                calc_aes_ba
+                0x00010fb0       0x8c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                0x00010fb0                calc_aes_ba
  .text.rand_lib
-                0x00011214       0x70 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
-                0x00011214                rand_lib
+                0x0001103c       0x70 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                0x0001103c                rand_lib
  .text.generate_random_number_fast
-                0x00011284       0x18 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
-                0x00011284                generate_random_number_fast
- .text          0x0001129c       0x14 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
-                0x0001129c                __gnu_thumb1_case_sqi
- .text          0x000112b0       0x14 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
-                0x000112b0                __gnu_thumb1_case_uqi
- .text.memcpy   0x000112c4       0xa4 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
-                0x000112c4                memcpy
- .text.strncpy  0x00011368       0x6c c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
-                0x00011368                strncpy
- .text.strnlen  0x000113d4       0x24 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
-                0x000113d4                strnlen
+                0x000110ac       0x18 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                0x000110ac                generate_random_number_fast
+ .text          0x000110c4       0x14 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
+                0x000110c4                __gnu_thumb1_case_sqi
+ .text          0x000110d8       0x14 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
+                0x000110d8                __gnu_thumb1_case_uqi
+ .text.memcpy   0x000110ec       0xa4 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
+                0x000110ec                memcpy
+ .text.strncpy  0x00011190       0x6c c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
+                0x00011190                strncpy
+ .text.strnlen  0x000111fc       0x24 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
+                0x000111fc                strnlen
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -268,59 +237,59 @@ END GROUP
  *(.dtors)
  *(.rodata*)
  .rodata.aes_default_key
-                0x000113f8       0x10 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x00011220       0x10 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  .rodata.data_point_list
-                0x00011408       0xc0 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x00011230       0xc0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  .rodata.smack_sl_tag
-                0x000114c8       0x68 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
-                0x000114c8                smack_sl_tag
+                0x000112f0       0x68 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x000112f0                smack_sl_tag
  *(.eh_frame*)
 
-.glue_7         0x00011530        0x0
- .glue_7        0x00011530        0x0 linker stubs
+.glue_7         0x00011358        0x0
+ .glue_7        0x00011358        0x0 linker stubs
 
-.glue_7t        0x00011530        0x0
- .glue_7t       0x00011530        0x0 linker stubs
+.glue_7t        0x00011358        0x0
+ .glue_7t       0x00011358        0x0 linker stubs
 
-.vfp11_veneer   0x00011530        0x0
- .vfp11_veneer  0x00011530        0x0 linker stubs
+.vfp11_veneer   0x00011358        0x0
+ .vfp11_veneer  0x00011358        0x0 linker stubs
 
-.v4_bx          0x00011530        0x0
- .v4_bx         0x00011530        0x0 linker stubs
+.v4_bx          0x00011358        0x0
+ .v4_bx         0x00011358        0x0 linker stubs
 
-.iplt           0x00011530        0x0
- .iplt          0x00011530        0x0 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+.iplt           0x00011358        0x0
+ .iplt          0x00011358        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
 
-.rel.dyn        0x00011530        0x0
- .rel.iplt      0x00011530        0x0 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+.rel.dyn        0x00011358        0x0
+ .rel.iplt      0x00011358        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
 
-.gnu.sgstubs    0x00011530       0x10
-                0x00011540                . = ALIGN (0x20)
- *fill*         0x00011530       0x10 
+.gnu.sgstubs    0x00011358        0x8
+                0x00011360                . = ALIGN (0x20)
+ *fill*         0x00011358        0x8 
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00011540                __exidx_start = .
+                0x00011360                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00011540                __exidx_end = .
+                0x00011360                __exidx_end = .
 
-.copy.table     0x00011540        0xc
-                0x00011540                . = ALIGN (0x4)
-                0x00011540                __nvm_copy_table_start__ = .
-                0x00011540        0x4 LONG 0x11554 __etext
-                0x00011544        0x4 LONG 0x20600 __data_start__
-                0x00011548        0x4 LONG 0x0 ((__data_end__ - __data_start__) / 0x4)
-                0x0001154c                __nvm_copy_table_end__ = .
+.copy.table     0x00011360        0xc
+                0x00011360                . = ALIGN (0x4)
+                0x00011360                __nvm_copy_table_start__ = .
+                0x00011360        0x4 LONG 0x11374 __etext
+                0x00011364        0x4 LONG 0x20600 __data_start__
+                0x00011368        0x4 LONG 0x0 ((__data_end__ - __data_start__) / 0x4)
+                0x0001136c                __nvm_copy_table_end__ = .
 
-.zero.table     0x0001154c        0x8
-                0x0001154c                . = ALIGN (0x4)
-                0x0001154c                __nvm_zero_table_start__ = .
-                0x0001154c        0x4 LONG 0x20600 __bss_start__
-                0x00011550        0x4 LONG 0x6c ((__bss_end__ - __bss_start__) / 0x4)
-                0x00011554                __nvm_zero_table_end__ = .
-                0x00011554                __etext = ALIGN (0x4)
+.zero.table     0x0001136c        0x8
+                0x0001136c                . = ALIGN (0x4)
+                0x0001136c                __nvm_zero_table_start__ = .
+                0x0001136c        0x4 LONG 0x20600 __bss_start__
+                0x00011370        0x4 LONG 0x6c ((__bss_end__ - __bss_start__) / 0x4)
+                0x00011374                __nvm_zero_table_end__ = .
+                0x00011374                __etext = ALIGN (0x4)
 
 .data_romcode   0x00020000      0x600
                 0x00020000                . = ALIGN (0x4)
@@ -330,7 +299,7 @@ END GROUP
                 0x00020600                . = ALIGN (0x4)
                 0x00020600                __data_romcode_end__ = .
 
-.data           0x00020600        0x0 load address 0x00011554
+.data           0x00020600        0x0 load address 0x00011374
                 0x00020600                . = ALIGN (0x4)
                 0x00020600                __data_start__ = .
  *(vtable)
@@ -355,7 +324,7 @@ END GROUP
                 0x00020600                __data_end__ = .
 
 .igot.plt       0x00020600        0x0
- .igot.plt      0x00020600        0x0 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .igot.plt      0x00020600        0x0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
 
 .ram2_dma       0x20000000      0x200
                 0x20000000                . = ALIGN (0x4)
@@ -375,36 +344,36 @@ END GROUP
                 0x00020600                __bss_start__ = .
  *(.bss)
  *(.bss.*)
- .bss.count8    0x00020600        0x1 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .bss.count8    0x00020600        0x1 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  *fill*         0x00020601        0x1 
- .bss.humidity  0x00020602        0x2 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .bss.humidity  0x00020602        0x2 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  .bss.m_reserved
-                0x00020604        0x4 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .bss.pressure  0x00020608        0x2 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x00020604        0x4 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .bss.pressure  0x00020608        0x2 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  *fill*         0x0002060a        0x6 
  .bss.scratch64
-                0x00020610        0x8 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .bss.scratch8  0x00020618        0x1 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x00020610        0x8 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .bss.scratch8  0x00020618        0x1 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  .bss.scratch_str
-                0x00020619       0x64 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x00020619       0x64 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  *fill*         0x0002067d        0x1 
  .bss.temperature
-                0x0002067e        0x2 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .bss.uid       0x00020680        0x8 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x0002067e        0x2 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .bss.uid       0x00020680        0x8 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  .bss.example_counter
-                0x00020688        0x4 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x00020688        0x4 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
  .bss.sl_counter
-                0x0002068c        0x4 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x0002068c        0x4 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
                 0x0002068c                sl_counter
- .bss.aes_key   0x00020690       0x10 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .bss.alert     0x000206a0        0x1 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .bss.aes_key   0x00020690       0x10 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .bss.alert     0x000206a0        0x1 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
  *fill*         0x000206a1        0x1 
  .bss.data_point_count
-                0x000206a2        0x2 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x000206a2        0x2 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
  .bss.data_points
-                0x000206a4        0x4 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .bss.de_data   0x000206a8       0xf8 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .bss.buffer    0x000207a0       0x10 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                0x000206a4        0x4 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .bss.de_data   0x000206a8       0xf8 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .bss.buffer    0x000207a0       0x10 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
  *(COMMON)
                 0x000207b0                . = ALIGN (0x4)
                 0x000207b0                __bss_end__ = .
@@ -436,147 +405,134 @@ END GROUP
                 0x00022000                __StackTop = .
                 [!provide]                PROVIDE (__stack = __StackTop)
                 0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region RAM overflowed with stack)
-                0x00011554                pad_start = (__etext + SIZEOF (.data))
-                0x0000da9f                pad_size = ((section_version_base - pad_start) - 0x1)
+                0x00011374                pad_start = (__etext + SIZEOF (.data))
+                0x0000dc7f                pad_size = ((section_version_base - pad_start) - 0x1)
 
-.text.pad2      0x00011554     0xdaa0
+.text.pad2      0x00011374     0xdc80
                 0x0001eff3                . = (. + pad_size)
- *fill*         0x00011554     0xda9f ffff
+ *fill*         0x00011374     0xdc7f ffff
                 0x0001eff3        0x1 BYTE 0xff
-OUTPUT(C:/OpenSesame/smack_sl/build/image/image_nvm_nocrc.elf elf32-littlearm)
+OUTPUT(C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/image_nvm_nocrc.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0xe3a2
- .debug_info    0x00000000      0x65a C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
- .debug_info    0x0000065a      0x603 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .debug_info    0x00000c5d     0x26ef C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .debug_info    0x0000334c      0x2e7 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .debug_info    0x00003633      0x18f C:/OpenSesame/smack_sl/build/image/objects/version.o
- .debug_info    0x000037c2     0x37ff C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .debug_info    0x00006fc1     0x41bf C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .debug_info    0x0000b180     0x3222 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+.debug_info     0x00000000     0xa07a
+ .debug_info    0x00000000      0x65a C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .debug_info    0x0000065a      0x603 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .debug_info    0x00000c5d     0x2586 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .debug_info    0x000031e3      0x2e7 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .debug_info    0x000034ca      0x18f C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
+ .debug_info    0x00003659     0x37ff C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .debug_info    0x00006e58     0x3222 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
 
-.debug_abbrev   0x00000000     0x146f
- .debug_abbrev  0x00000000       0xb9 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
- .debug_abbrev  0x000000b9      0x1a4 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .debug_abbrev  0x0000025d      0x287 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .debug_abbrev  0x000004e4      0x1a7 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .debug_abbrev  0x0000068b       0xc6 C:/OpenSesame/smack_sl/build/image/objects/version.o
- .debug_abbrev  0x00000751      0x46d C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .debug_abbrev  0x00000bbe      0x4c7 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .debug_abbrev  0x00001085      0x3ea C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+.debug_abbrev   0x00000000      0xfc5
+ .debug_abbrev  0x00000000       0xb9 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .debug_abbrev  0x000000b9      0x1a4 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .debug_abbrev  0x0000025d      0x2a4 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .debug_abbrev  0x00000501      0x1a7 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .debug_abbrev  0x000006a8       0xc6 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
+ .debug_abbrev  0x0000076e      0x46d C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .debug_abbrev  0x00000bdb      0x3ea C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
 
-.debug_aranges  0x00000000      0x1a8
+.debug_aranges  0x00000000      0x148
  .debug_aranges
-                0x00000000       0x20 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+                0x00000000       0x20 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
  .debug_aranges
-                0x00000020       0x20 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x00000020       0x20 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  .debug_aranges
-                0x00000040       0x30 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x00000040       0x40 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
  .debug_aranges
-                0x00000070       0x28 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+                0x00000080       0x28 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
  .debug_aranges
-                0x00000098       0x18 C:/OpenSesame/smack_sl/build/image/objects/version.o
+                0x000000a8       0x18 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
  .debug_aranges
-                0x000000b0       0x48 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x000000c0       0x48 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
  .debug_aranges
-                0x000000f8       0x70 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .debug_aranges
-                0x00000168       0x40 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                0x00000108       0x40 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
 
-.debug_ranges   0x00000000     0x13e0
- .debug_ranges  0x00000000       0x10 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
- .debug_ranges  0x00000010       0x10 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .debug_ranges  0x00000020       0x48 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .debug_ranges  0x00000068       0xa0 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .debug_ranges  0x00000108      0x4e0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .debug_ranges  0x000005e8      0x908 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .debug_ranges  0x00000ef0      0x4f0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+.debug_ranges   0x00000000      0xaf8
+ .debug_ranges  0x00000000       0x10 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .debug_ranges  0x00000010       0x10 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .debug_ranges  0x00000020       0x68 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .debug_ranges  0x00000088       0xa0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .debug_ranges  0x00000128      0x4e0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .debug_ranges  0x00000608      0x4f0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
 
-.debug_line     0x00000000     0x33d7
- .debug_line    0x00000000      0x172 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
- .debug_line    0x00000172      0x232 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .debug_line    0x000003a4      0x3ad C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .debug_line    0x00000751      0x1fd C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .debug_line    0x0000094e      0x124 C:/OpenSesame/smack_sl/build/image/objects/version.o
- .debug_line    0x00000a72      0xea5 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .debug_line    0x00001917     0x1106 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .debug_line    0x00002a1d      0x9ba C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+.debug_line     0x00000000     0x23f9
+ .debug_line    0x00000000      0x23f C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .debug_line    0x0000023f      0x232 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .debug_line    0x00000471      0x408 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .debug_line    0x00000879      0x1fd C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .debug_line    0x00000a76      0x124 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
+ .debug_line    0x00000b9a      0xea5 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .debug_line    0x00001a3f      0x9ba C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
 
-.debug_str      0x00000000     0x339e
- .debug_str     0x00000000      0x600 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
-                                0x64e (size before relaxing)
- .debug_str     0x00000600      0x359 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+.debug_str      0x00000000     0x2acb
+ .debug_str     0x00000000      0x652 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+                                0x6a0 (size before relaxing)
+ .debug_str     0x00000652      0x371 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
                                 0x52b (size before relaxing)
- .debug_str     0x00000959     0x1785 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
-                               0x1eb8 (size before relaxing)
- .debug_str     0x000020de       0xf8 C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .debug_str     0x000009c3     0x183c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                               0x1fa5 (size before relaxing)
+ .debug_str     0x000021ff       0xf8 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
                                 0x273 (size before relaxing)
- .debug_str     0x000021d6       0x70 C:/OpenSesame/smack_sl/build/image/objects/version.o
+ .debug_str     0x000022f7       0x70 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
                                 0x1f4 (size before relaxing)
- .debug_str     0x00002246      0x419 C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .debug_str     0x00002367      0x419 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
                                0x2424 (size before relaxing)
- .debug_str     0x0000265f      0xa1e C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
-                               0x287b (size before relaxing)
- .debug_str     0x0000307d      0x321 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+ .debug_str     0x00002780      0x34b C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
                                0x220b (size before relaxing)
 
 .comment        0x00000000       0x49
- .comment       0x00000000       0x49 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .comment       0x00000000       0x49 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
                                  0x4a (size before relaxing)
- .comment       0x00000049       0x4a C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .comment       0x00000049       0x4a C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .comment       0x00000049       0x4a C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .comment       0x00000049       0x4a C:/OpenSesame/smack_sl/build/image/objects/version.o
- .comment       0x00000049       0x4a C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .comment       0x00000049       0x4a C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .comment       0x00000049       0x4a C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+ .comment       0x00000049       0x4a C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .comment       0x00000049       0x4a C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .comment       0x00000049       0x4a C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .comment       0x00000049       0x4a C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
+ .comment       0x00000049       0x4a C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .comment       0x00000049       0x4a C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
 
 .ARM.attributes
                 0x00000000       0x2c
  .ARM.attributes
-                0x00000000       0x2c C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+                0x00000000       0x2c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
  .ARM.attributes
-                0x0000002c       0x2c C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+                0x0000002c       0x2c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
  .ARM.attributes
-                0x00000058       0x2c C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+                0x00000058       0x2c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
  .ARM.attributes
-                0x00000084       0x2c C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+                0x00000084       0x2c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
  .ARM.attributes
-                0x000000b0       0x31 C:/OpenSesame/smack_sl/build/image/objects/version.o
+                0x000000b0       0x31 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/version.o
  .ARM.attributes
-                0x000000e1       0x2c C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+                0x000000e1       0x2c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
  .ARM.attributes
-                0x0000010d       0x2c C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
+                0x0000010d       0x2c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
  .ARM.attributes
-                0x00000139       0x2c C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+                0x00000139       0x1e c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
  .ARM.attributes
-                0x00000165       0x1e c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_sqi.o)
+                0x00000157       0x1e c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
  .ARM.attributes
-                0x00000183       0x1e c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp\libgcc.a(_thumb1_case_uqi.o)
+                0x00000175       0x2c c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
  .ARM.attributes
-                0x000001a1       0x2c c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
+                0x000001a1       0x2c c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
  .ARM.attributes
-                0x000001cd       0x2c c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
- .ARM.attributes
-                0x000001f9       0x2c c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
+                0x000001cd       0x2c c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
 
-.debug_frame    0x00000000      0x3e8
- .debug_frame   0x00000000       0x20 C:/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
- .debug_frame   0x00000020       0x2c C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .debug_frame   0x0000004c       0x50 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .debug_frame   0x0000009c       0x3c C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .debug_frame   0x000000d8       0xac C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .debug_frame   0x00000184      0x138 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .debug_frame   0x000002bc       0xa0 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
- .debug_frame   0x0000035c       0x34 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
- .debug_frame   0x00000390       0x30 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
- .debug_frame   0x000003c0       0x28 c:/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
+.debug_frame    0x00000000      0x2e0
+ .debug_frame   0x00000000       0x20 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/sl_aparam.o
+ .debug_frame   0x00000020       0x2c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .debug_frame   0x0000004c       0x80 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .debug_frame   0x000000cc       0x3c C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .debug_frame   0x00000108       0xac C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .debug_frame   0x000001b4       0xa0 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+ .debug_frame   0x00000254       0x34 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00000288       0x30 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strncpy.o)
+ .debug_frame   0x000002b8       0x28 c:/users/alast/desktop/university/classes/4a/opensesame/tools/extern/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strnlen.o)
 
-.debug_loc      0x00000000     0x2d44
- .debug_loc     0x00000000       0x20 C:/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
- .debug_loc     0x00000020       0xe3 C:/OpenSesame/smack_sl/build/image/objects/smack_sl.o
- .debug_loc     0x00000103       0xaa C:/OpenSesame/smack_sl/build/image/objects/startup_smack.o
- .debug_loc     0x000001ad     0x11af C:/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
- .debug_loc     0x0000135c     0x1184 C:/OpenSesame/smack_lib/build/image/\libsmack.a(sys_tim_lib.o)
- .debug_loc     0x000024e0      0x864 C:/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)
+.debug_loc      0x00000000     0x1be8
+ .debug_loc     0x00000000       0x20 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_dataexchange.o
+ .debug_loc     0x00000020      0x10b C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/smack_sl.o
+ .debug_loc     0x0000012b       0xaa C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/objects/startup_smack.o
+ .debug_loc     0x000001d5     0x11af C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(smack_exchange.o)
+ .debug_loc     0x00001384      0x864 C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_lib/build/image/\libsmack.a(aes_lib.o)

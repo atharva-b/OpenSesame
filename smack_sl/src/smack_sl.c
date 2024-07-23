@@ -220,22 +220,24 @@ void _nvm_start(void)
     nfc_init(); 
     init_dand();
     vars_init();
+    
     Mailbox_t* mbx = get_mailbox_address();
-    uint32_t mb_addr = (uint32_t) mbx; 
+    
     // register_function(1, &led_blink);
-    volatile NFC_State_enum_t state = handle_DAND_protocol();
-    volatile NFC_Frame_enum_t frame_type = classify_frame();
+    // volatile NFC_State_enum_t state = handle_DAND_protocol();
+    // volatile NFC_Frame_enum_t frame_type = classify_frame();
     nfc_state_machine();
 
     while (true)
     {
         read_frame();
-        frame_type = classify_frame();
-        // state = handle_DAND_protocol();
+        handle_DAND_protocol();
 
         if(mbx->content[0] == 0xDEADBEEF){
             led_blink();
         }
+
+        send_return_frame();
         /*
         // Uncomment these lines if you want to output data on pin 1
         SCUS_GPIO_OUT_EN__SET(1);

@@ -1,5 +1,5 @@
 
-C:/OpenSesame/smack_sl/build/image/image_nvm.elf:     file format elf32-littlearm
+C:/Users/alast/Desktop/University/Classes/4A/OpenSesame/smack_sl/build/image/image_nvm.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
@@ -9,13 +9,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS
   2 .aparam       00000400  00010400  00010400  00000400  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .text         00000d30  00010800  00010800  00000800  2**2
+  3 .text         00000b58  00010800  00010800  00000800  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  4 .gnu.sgstubs  00000010  00011530  00011530  00001530  2**0
+  4 .gnu.sgstubs  00000008  00011358  00011358  00001358  2**0
                   ALLOC
-  5 .copy.table   0000000c  00011540  00011540  00001540  2**0
+  5 .copy.table   0000000c  00011360  00011360  00001360  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .zero.table   00000008  0001154c  0001154c  0000154c  2**0
+  6 .zero.table   00000008  0001136c  0001136c  0000136c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   7 .data_romcode 00000600  00020000  00020000  00010000  2**0
                   ALLOC
@@ -33,124 +33,85 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS
  14 .stack        00001850  000207b0  000207b0  00010000  2**0
                   ALLOC
- 15 .text.pad2    0000daa0  00011554  00011554  00001554  2**0
+ 15 .text.pad2    0000dc80  00011374  00011374  00001374  2**0
                   CONTENTS, ALLOC, LOAD, CODE
- 16 .debug_info   0000e3a2  00000000  00000000  0000f000  2**0
+ 16 .debug_info   0000a07a  00000000  00000000  0000f000  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_abbrev 0000146f  00000000  00000000  0001d3a2  2**0
+ 17 .debug_abbrev 00000fc5  00000000  00000000  0001907a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_aranges 000001a8  00000000  00000000  0001e811  2**0
+ 18 .debug_aranges 00000148  00000000  00000000  0001a03f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_ranges 000013e0  00000000  00000000  0001e9b9  2**0
+ 19 .debug_ranges 00000af8  00000000  00000000  0001a187  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_line   000033d7  00000000  00000000  0001fd99  2**0
+ 20 .debug_line   000023f9  00000000  00000000  0001ac7f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_str    0000339e  00000000  00000000  00023170  2**0
+ 21 .debug_str    00002acb  00000000  00000000  0001d078  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .comment      00000049  00000000  00000000  0002650e  2**0
+ 22 .comment      00000049  00000000  00000000  0001fb43  2**0
                   CONTENTS, READONLY
- 23 .ARM.attributes 0000002c  00000000  00000000  00026557  2**0
+ 23 .ARM.attributes 0000002c  00000000  00000000  0001fb8c  2**0
                   CONTENTS, READONLY
- 24 .debug_frame  000003e8  00000000  00000000  00026584  2**2
+ 24 .debug_frame  000002e0  00000000  00000000  0001fbb8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 25 .debug_loc    00002d44  00000000  00000000  0002696c  2**0
+ 25 .debug_loc    00001be8  00000000  00000000  0001fe98  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
 
 00010800 <__Vectors>:
-   10800:	00 20 02 00 9d 0a 01 00 99 0a 01 00 99 0a 01 00     . ..............
+   10800:	00 20 02 00 e5 09 01 00 e1 09 01 00 e1 09 01 00     . ..............
 	...
-   1082c:	99 0a 01 00 00 00 00 00 00 00 00 00 99 0a 01 00     ................
-   1083c:	99 0a 01 00 99 0a 01 00 99 0a 01 00 99 0a 01 00     ................
-   1084c:	99 0a 01 00 99 0a 01 00 99 0a 01 00 99 0a 01 00     ................
-   1085c:	99 0a 01 00 99 0a 01 00 99 0a 01 00 99 0a 01 00     ................
-   1086c:	99 0a 01 00 99 0a 01 00 99 0a 01 00 99 0a 01 00     ................
-   1087c:	99 0a 01 00 99 0a 01 00 99 0a 01 00 99 0a 01 00     ................
-   1088c:	99 0a 01 00 99 0a 01 00 99 0a 01 00 99 0a 01 00     ................
-   1089c:	99 0a 01 00 99 0a 01 00 99 0a 01 00 99 0a 01 00     ................
-   108ac:	99 0a 01 00 99 0a 01 00 99 0a 01 00 99 0a 01 00     ................
-   108bc:	99 0a 01 00                                         ....
+   1082c:	e1 09 01 00 00 00 00 00 00 00 00 00 e1 09 01 00     ................
+   1083c:	e1 09 01 00 e1 09 01 00 e1 09 01 00 e1 09 01 00     ................
+   1084c:	e1 09 01 00 e1 09 01 00 e1 09 01 00 e1 09 01 00     ................
+   1085c:	e1 09 01 00 e1 09 01 00 e1 09 01 00 e1 09 01 00     ................
+   1086c:	e1 09 01 00 e1 09 01 00 e1 09 01 00 e1 09 01 00     ................
+   1087c:	e1 09 01 00 e1 09 01 00 e1 09 01 00 e1 09 01 00     ................
+   1088c:	e1 09 01 00 e1 09 01 00 e1 09 01 00 e1 09 01 00     ................
+   1089c:	e1 09 01 00 e1 09 01 00 e1 09 01 00 e1 09 01 00     ................
+   108ac:	e1 09 01 00 e1 09 01 00 e1 09 01 00 e1 09 01 00     ................
+   108bc:	e1 09 01 00                                         ....
 
 000108c0 <vars_init>:
-//-------------------------------------------------------------
-
-// Initialize the Smack exchange library with our datapoint list.
-void vars_init(void)
-{
-    count8 = 1;
    108c0:	2201      	movs	r2, #1
    108c2:	4b14      	ldr	r3, [pc, #80]	; (10914 <vars_init+0x54>)
-{
    108c4:	b570      	push	{r4, r5, r6, lr}
-    count8 = 1;
    108c6:	701a      	strb	r2, [r3, #0]
-    uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
    108c8:	23e0      	movs	r3, #224	; 0xe0
    108ca:	4a13      	ldr	r2, [pc, #76]	; (10918 <vars_init+0x58>)
-          ((uint64_t)dparams.chip_uid.uid[1] << 40) |
    108cc:	4913      	ldr	r1, [pc, #76]	; (1091c <vars_init+0x5c>)
-    uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
    108ce:	009b      	lsls	r3, r3, #2
    108d0:	5cd3      	ldrb	r3, [r2, r3]
-          ((uint64_t)dparams.chip_uid.uid[1] << 40) |
    108d2:	5c51      	ldrb	r1, [r2, r1]
-    uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
    108d4:	041b      	lsls	r3, r3, #16
-          ((uint64_t)dparams.chip_uid.uid[2] << 32) |
-          ((uint64_t)dparams.chip_uid.uid[3] << 24) |
    108d6:	4d12      	ldr	r5, [pc, #72]	; (10920 <vars_init+0x60>)
-          ((uint64_t)dparams.chip_uid.uid[1] << 40) |
    108d8:	0209      	lsls	r1, r1, #8
-    uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
    108da:	4319      	orrs	r1, r3
-          ((uint64_t)dparams.chip_uid.uid[4] << 16) |
-          ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
-          ((uint64_t)dparams.chip_uid.uid[6] <<  0);
    108dc:	4b11      	ldr	r3, [pc, #68]	; (10924 <vars_init+0x64>)
-          ((uint64_t)dparams.chip_uid.uid[3] << 24) |
    108de:	5d55      	ldrb	r5, [r2, r5]
-          ((uint64_t)dparams.chip_uid.uid[6] <<  0);
    108e0:	5cd3      	ldrb	r3, [r2, r3]
-          ((uint64_t)dparams.chip_uid.uid[3] << 24) |
    108e2:	062d      	lsls	r5, r5, #24
-          ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
    108e4:	432b      	orrs	r3, r5
-          ((uint64_t)dparams.chip_uid.uid[4] << 16) |
    108e6:	25e1      	movs	r5, #225	; 0xe1
    108e8:	00ad      	lsls	r5, r5, #2
    108ea:	5d55      	ldrb	r5, [r2, r5]
-          ((uint64_t)dparams.chip_uid.uid[2] << 32) |
    108ec:	4c0e      	ldr	r4, [pc, #56]	; (10928 <vars_init+0x68>)
-          ((uint64_t)dparams.chip_uid.uid[4] << 16) |
    108ee:	042d      	lsls	r5, r5, #16
-          ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
    108f0:	432b      	orrs	r3, r5
    108f2:	4d0e      	ldr	r5, [pc, #56]	; (1092c <vars_init+0x6c>)
-          ((uint64_t)dparams.chip_uid.uid[2] << 32) |
    108f4:	5d14      	ldrb	r4, [r2, r4]
-          ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
    108f6:	5d52      	ldrb	r2, [r2, r5]
-    uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
    108f8:	480d      	ldr	r0, [pc, #52]	; (10930 <vars_init+0x70>)
-          ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
    108fa:	0212      	lsls	r2, r2, #8
    108fc:	4313      	orrs	r3, r2
    108fe:	4321      	orrs	r1, r4
    10900:	6003      	str	r3, [r0, #0]
    10902:	6041      	str	r1, [r0, #4]
-
-    // Setup NFC data point exchange
-    // The smack_exchange_handler() callback must be configured in the APARAM block
-    smack_exchange_init(data_point_list, data_point_count);
    10904:	210c      	movs	r1, #12
    10906:	480b      	ldr	r0, [pc, #44]	; (10934 <vars_init+0x74>)
-   10908:	f000 f902 	bl	10b10 <smack_exchange_init>
-
-    smack_exchange_key_set(&aes_default_key);
+   10908:	f000 f8a6 	bl	10a58 <smack_exchange_init>
    1090c:	480a      	ldr	r0, [pc, #40]	; (10938 <vars_init+0x78>)
-   1090e:	f000 f915 	bl	10b3c <smack_exchange_key_set>
-}
+   1090e:	f000 f8b9 	bl	10a84 <smack_exchange_key_set>
    10912:	bd70      	pop	{r4, r5, r6, pc}
    10914:	00020600 	.word	0x00020600
    10918:	00010000 	.word	0x00010000
@@ -160,8 +121,8 @@ void vars_init(void)
    10928:	00000382 	.word	0x00000382
    1092c:	00000385 	.word	0x00000385
    10930:	00020680 	.word	0x00020680
-   10934:	00011408 	.word	0x00011408
-   10938:	000113f8 	.word	0x000113f8
+   10934:	00011230 	.word	0x00011230
+   10938:	00011220 	.word	0x00011220
 
 0001093c <example_handler>:
 //    which can be easily monitored by the attached debugger
@@ -203,1438 +164,1285 @@ void hardfault_handler(void)
    1095a:	46c0      	nop			; (mov r8, r8)
    1095c:	01c9c381 	.word	0x01c9c381
 
-00010960 <_nvm_start>:
+00010960 <led_blink>:
+        }
+
+    }
+}
+
+void led_blink(void) {
+   10960:	b537      	push	{r0, r1, r2, r4, r5, lr}
+    single_gpio_iocfg(true, false, true, false, false, 0);
+   10962:	4d0c      	ldr	r5, [pc, #48]	; (10994 <led_blink+0x34>)
+   10964:	2100      	movs	r1, #0
+   10966:	002b      	movs	r3, r5
+   10968:	2201      	movs	r2, #1
+   1096a:	33a4      	adds	r3, #164	; 0xa4
+   1096c:	681c      	ldr	r4, [r3, #0]
+   1096e:	0010      	movs	r0, r2
+   10970:	000b      	movs	r3, r1
+   10972:	9101      	str	r1, [sp, #4]
+   10974:	9100      	str	r1, [sp, #0]
+   10976:	47a0      	blx	r4
+   10978:	2405      	movs	r4, #5
+    for(uint8_t i = 0; i < 5; i++) {
+        set_singlegpio_out(0x1, 0);
+   1097a:	35ac      	adds	r5, #172	; 0xac
+   1097c:	682d      	ldr	r5, [r5, #0]
+   1097e:	2100      	movs	r1, #0
+   10980:	2001      	movs	r0, #1
+   10982:	47a8      	blx	r5
+        uint32_t cnt = 30000000;
+        while(cnt > 0){
+            cnt--;
+        }
+        set_singlegpio_out(0x0, 0);
+   10984:	2100      	movs	r1, #0
+    for(uint8_t i = 0; i < 5; i++) {
+   10986:	3c01      	subs	r4, #1
+        set_singlegpio_out(0x0, 0);
+   10988:	0008      	movs	r0, r1
+    for(uint8_t i = 0; i < 5; i++) {
+   1098a:	b2e4      	uxtb	r4, r4
+        set_singlegpio_out(0x0, 0);
+   1098c:	47a8      	blx	r5
+    for(uint8_t i = 0; i < 5; i++) {
+   1098e:	2c00      	cmp	r4, #0
+   10990:	d1f5      	bne.n	1097e <led_blink+0x1e>
+        cnt = 30000000;
+        while(cnt > 0){
+            cnt--;
+        }
+    }
+}
+   10992:	bd37      	pop	{r0, r1, r2, r4, r5, pc}
+   10994:	000000c0 	.word	0x000000c0
+
+00010998 <_nvm_start>:
 
 // Start of the application program
 void _nvm_start(void)
 {
-   10960:	b5f0      	push	{r4, r5, r6, r7, lr}
-    uint8_t  dummy __attribute__((unused));
-
-    for (uint8_t j = 0; j < 4; j++)
-    {
-        // to switch the HB switch control lines to GPIO8-GPIO11 as well
-        set_singlegpio_alt(8 + j, 0, 3);
-   10962:	4d49      	ldr	r5, [pc, #292]	; (10a88 <_nvm_start+0x128>)
-{
-   10964:	2408      	movs	r4, #8
-        set_singlegpio_alt(8 + j, 0, 3);
-   10966:	002b      	movs	r3, r5
-   10968:	33b8      	adds	r3, #184	; 0xb8
-   1096a:	681b      	ldr	r3, [r3, #0]
-{
-   1096c:	b085      	sub	sp, #20
-        set_singlegpio_alt(8 + j, 0, 3);
-   1096e:	9303      	str	r3, [sp, #12]
-   10970:	0020      	movs	r0, r4
-   10972:	2203      	movs	r2, #3
-   10974:	2100      	movs	r1, #0
-   10976:	9b03      	ldr	r3, [sp, #12]
-   10978:	4798      	blx	r3
-        dummy = single_gpio_iocfg( true, false, true, false, false, 8 + j);
-   1097a:	002b      	movs	r3, r5
-   1097c:	2600      	movs	r6, #0
-   1097e:	2201      	movs	r2, #1
-   10980:	33a4      	adds	r3, #164	; 0xa4
-   10982:	681b      	ldr	r3, [r3, #0]
-   10984:	9401      	str	r4, [sp, #4]
-   10986:	9302      	str	r3, [sp, #8]
-    for (uint8_t j = 0; j < 4; j++)
-   10988:	3401      	adds	r4, #1
-        dummy = single_gpio_iocfg( true, false, true, false, false, 8 + j);
-   1098a:	0033      	movs	r3, r6
-   1098c:	0031      	movs	r1, r6
-   1098e:	0010      	movs	r0, r2
-   10990:	9f02      	ldr	r7, [sp, #8]
-   10992:	9600      	str	r6, [sp, #0]
-    for (uint8_t j = 0; j < 4; j++)
-   10994:	b2e4      	uxtb	r4, r4
-        dummy = single_gpio_iocfg( true, false, true, false, false, 8 + j);
-   10996:	47b8      	blx	r7
-    for (uint8_t j = 0; j < 4; j++)
-   10998:	2c0c      	cmp	r4, #12
-   1099a:	d1e9      	bne.n	10970 <_nvm_start+0x10>
-    }
-
-    sl_counter = 0;
-   1099c:	4b3b      	ldr	r3, [pc, #236]	; (10a8c <_nvm_start+0x12c>)
-    i = 0;
-
-    set_hb_eventctrl(false);
-   1099e:	35fc      	adds	r5, #252	; 0xfc
-   109a0:	0030      	movs	r0, r6
-    sl_counter = 0;
-   109a2:	601e      	str	r6, [r3, #0]
-    set_hb_eventctrl(false);
-   109a4:	6aab      	ldr	r3, [r5, #40]	; 0x28
-   109a6:	4798      	blx	r3
-
-    // initialize the data exchange library
+   10998:	b573      	push	{r0, r1, r4, r5, r6, lr}
+    nfc_init(); 
+   1099a:	4c0f      	ldr	r4, [pc, #60]	; (109d8 <_nvm_start+0x40>)
+   1099c:	0026      	movs	r6, r4
+   1099e:	36fc      	adds	r6, #252	; 0xfc
+   109a0:	6cb3      	ldr	r3, [r6, #72]	; 0x48
+   109a2:	4798      	blx	r3
+    init_dand();
+   109a4:	6a23      	ldr	r3, [r4, #32]
+   109a6:	9301      	str	r3, [sp, #4]
+   109a8:	4798      	blx	r3
     vars_init();
-   109a8:	f7ff ff8a 	bl	108c0 <vars_init>
+   109aa:	f7ff ff89 	bl	108c0 <vars_init>
+    
+    Mailbox_t* mbx = get_mailbox_address();
+   109ae:	6a63      	ldr	r3, [r4, #36]	; 0x24
+   109b0:	9301      	str	r3, [sp, #4]
+   109b2:	4798      	blx	r3
+    
+    // register_function(1, &led_blink);
+    // volatile NFC_State_enum_t state = handle_DAND_protocol();
+    // volatile NFC_Frame_enum_t frame_type = classify_frame();
+    nfc_state_machine();
+   109b4:	6fb3      	ldr	r3, [r6, #120]	; 0x78
+    Mailbox_t* mbx = get_mailbox_address();
+   109b6:	0005      	movs	r5, r0
+    nfc_state_machine();
+   109b8:	4798      	blx	r3
 
-    //set_hb_switch(bool hs1_set, bool ls1_set, bool hs2_set, bool ls2_set)
-    while (i < count)
+    while (true)
     {
-        set_hb_switch(true, false, false, false);
-   109ac:	6a6e      	ldr	r6, [r5, #36]	; 0x24
-   109ae:	2501      	movs	r5, #1
-    vars_init();
-   109b0:	3421      	adds	r4, #33	; 0x21
-   109b2:	34ff      	adds	r4, #255	; 0xff
-        set_hb_switch(true, false, false, false);
-   109b4:	2300      	movs	r3, #0
-   109b6:	0028      	movs	r0, r5
-   109b8:	001a      	movs	r2, r3
-   109ba:	0019      	movs	r1, r3
-   109bc:	47b0      	blx	r6
-        set_hb_switch(true, false, false, true);
-   109be:	2200      	movs	r2, #0
-   109c0:	002b      	movs	r3, r5
-   109c2:	0011      	movs	r1, r2
-   109c4:	0028      	movs	r0, r5
-   109c6:	47b0      	blx	r6
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * time, 14);
-   109c8:	220e      	movs	r2, #14
-   109ca:	2000      	movs	r0, #0
-   109cc:	4930      	ldr	r1, [pc, #192]	; (10a90 <_nvm_start+0x130>)
-   109ce:	f000 fb4b 	bl	11068 <sys_tim_singleshot_32>
-        sl_counter++;
-   109d2:	4f2e      	ldr	r7, [pc, #184]	; (10a8c <_nvm_start+0x12c>)
+        asm("WFE");
+   109ba:	bf20      	wfe
+        read_frame();
+   109bc:	0026      	movs	r6, r4
+   109be:	36fc      	adds	r6, #252	; 0xfc
+   109c0:	6cf3      	ldr	r3, [r6, #76]	; 0x4c
+   109c2:	4798      	blx	r3
+        nfc_state_machine();
+   109c4:	6fb3      	ldr	r3, [r6, #120]	; 0x78
+   109c6:	4798      	blx	r3
 
-        set_hb_switch(true, false, false, false);
-   109d4:	0028      	movs	r0, r5
-        sl_counter++;
-   109d6:	683b      	ldr	r3, [r7, #0]
-    while (i < count)
-   109d8:	3c01      	subs	r4, #1
-        sl_counter++;
-   109da:	3301      	adds	r3, #1
-   109dc:	603b      	str	r3, [r7, #0]
-        set_hb_switch(true, false, false, false);
-   109de:	2300      	movs	r3, #0
-   109e0:	001a      	movs	r2, r3
-   109e2:	0019      	movs	r1, r3
-   109e4:	47b0      	blx	r6
-        set_hb_switch(true, false, true, false);
-   109e6:	2300      	movs	r3, #0
-   109e8:	002a      	movs	r2, r5
-   109ea:	0019      	movs	r1, r3
-   109ec:	0028      	movs	r0, r5
-   109ee:	47b0      	blx	r6
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * time, 14);
-   109f0:	220e      	movs	r2, #14
-   109f2:	2000      	movs	r0, #0
-   109f4:	4926      	ldr	r1, [pc, #152]	; (10a90 <_nvm_start+0x130>)
-   109f6:	f000 fb37 	bl	11068 <sys_tim_singleshot_32>
-        sl_counter++;
-   109fa:	683b      	ldr	r3, [r7, #0]
-
-        set_hb_switch(false, false, true, false);
-   109fc:	002a      	movs	r2, r5
-        sl_counter++;
-   109fe:	3301      	adds	r3, #1
-   10a00:	603b      	str	r3, [r7, #0]
-        set_hb_switch(false, false, true, false);
-   10a02:	2300      	movs	r3, #0
-   10a04:	0019      	movs	r1, r3
-   10a06:	0018      	movs	r0, r3
-   10a08:	47b0      	blx	r6
-        set_hb_switch(false, true, true, false);
-   10a0a:	2300      	movs	r3, #0
-   10a0c:	002a      	movs	r2, r5
-   10a0e:	0018      	movs	r0, r3
-   10a10:	0029      	movs	r1, r5
-   10a12:	47b0      	blx	r6
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * time, 14);
-   10a14:	220e      	movs	r2, #14
-   10a16:	2000      	movs	r0, #0
-   10a18:	491d      	ldr	r1, [pc, #116]	; (10a90 <_nvm_start+0x130>)
-   10a1a:	f000 fb25 	bl	11068 <sys_tim_singleshot_32>
-        sl_counter++;
-   10a1e:	683b      	ldr	r3, [r7, #0]
-
-        set_hb_switch(false, false, true, false);
-   10a20:	002a      	movs	r2, r5
-        sl_counter++;
-   10a22:	3301      	adds	r3, #1
-   10a24:	603b      	str	r3, [r7, #0]
-        set_hb_switch(false, false, true, false);
-   10a26:	2300      	movs	r3, #0
-   10a28:	0019      	movs	r1, r3
-   10a2a:	0018      	movs	r0, r3
-   10a2c:	47b0      	blx	r6
-        set_hb_switch(true, false, true, false);
-   10a2e:	2300      	movs	r3, #0
-   10a30:	002a      	movs	r2, r5
-   10a32:	0019      	movs	r1, r3
-   10a34:	0028      	movs	r0, r5
-   10a36:	47b0      	blx	r6
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * time, 14);
-   10a38:	220e      	movs	r2, #14
-   10a3a:	2000      	movs	r0, #0
-   10a3c:	4914      	ldr	r1, [pc, #80]	; (10a90 <_nvm_start+0x130>)
-   10a3e:	f000 fb13 	bl	11068 <sys_tim_singleshot_32>
-        sl_counter++;
-   10a42:	683b      	ldr	r3, [r7, #0]
-   10a44:	3301      	adds	r3, #1
-   10a46:	603b      	str	r3, [r7, #0]
-    while (i < count)
-   10a48:	2c00      	cmp	r4, #0
-   10a4a:	d1b3      	bne.n	109b4 <_nvm_start+0x54>
-
-        i++;
-    }
-
-    set_hb_switch(false, false, false, false);
-   10a4c:	0023      	movs	r3, r4
-   10a4e:	0022      	movs	r2, r4
-   10a50:	0021      	movs	r1, r4
-   10a52:	0020      	movs	r0, r4
-   10a54:	47b0      	blx	r6
-
-    // ****************** END BLINKING DEMO ********************
-    single_gpio_iocfg(true, false, true, false, false, 0);
-   10a56:	2201      	movs	r2, #1
-   10a58:	0023      	movs	r3, r4
-   10a5a:	0010      	movs	r0, r2
-   10a5c:	0021      	movs	r1, r4
-   10a5e:	9d02      	ldr	r5, [sp, #8]
-   10a60:	9401      	str	r4, [sp, #4]
-   10a62:	9400      	str	r4, [sp, #0]
-   10a64:	47a8      	blx	r5
-    set_singlegpio_out(0x1, 0);
-   10a66:	4b08      	ldr	r3, [pc, #32]	; (10a88 <_nvm_start+0x128>)
-   10a68:	0021      	movs	r1, r4
-   10a6a:	33ac      	adds	r3, #172	; 0xac
-   10a6c:	2001      	movs	r0, #1
-   10a6e:	681d      	ldr	r5, [r3, #0]
-   10a70:	47a8      	blx	r5
-    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 3000, 14);
-   10a72:	0020      	movs	r0, r4
-   10a74:	4907      	ldr	r1, [pc, #28]	; (10a94 <_nvm_start+0x134>)
-   10a76:	220e      	movs	r2, #14
-   10a78:	f000 faf6 	bl	11068 <sys_tim_singleshot_32>
-    set_singlegpio_out(0x0, 0);
-   10a7c:	0021      	movs	r1, r4
-   10a7e:	0020      	movs	r0, r4
-   10a80:	47a8      	blx	r5
-        /*
+        if(mbx->content[0] == 0xDEADBEEF){
+   109c8:	4b04      	ldr	r3, [pc, #16]	; (109dc <_nvm_start+0x44>)
+   109ca:	682a      	ldr	r2, [r5, #0]
+   109cc:	429a      	cmp	r2, r3
+   109ce:	d101      	bne.n	109d4 <_nvm_start+0x3c>
+            led_blink();
+   109d0:	f7ff ffc6 	bl	10960 <led_blink>
         // Uncomment these lines if you want to output data on pin 1
         SCUS_GPIO_OUT_EN__SET(1);
         SCUC_GPIO_OUT_DAT__SET(0x1 & BIT_TO_PUT_ON_PIN);
         */
-        asm("WFI");
-   10a82:	bf30      	wfi
-    while (true)
-   10a84:	e7fd      	b.n	10a82 <_nvm_start+0x122>
-   10a86:	46c0      	nop			; (mov r8, r8)
-   10a88:	000000c0 	.word	0x000000c0
-   10a8c:	0002068c 	.word	0x0002068c
-   10a90:	00ff8000 	.word	0x00ff8000
-   10a94:	05dc0000 	.word	0x05dc0000
+        /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
+        asm("WFI"); 
+   109d4:	bf30      	wfi
+        asm("WFE");
+   109d6:	e7f0      	b.n	109ba <_nvm_start+0x22>
+   109d8:	000000c0 	.word	0x000000c0
+   109dc:	deadbeef 	.word	0xdeadbeef
 
-00010a98 <Default_Handler>:
-  Default Handler for Exceptions / Interrupts
- *----------------------------------------------------------------------------*/
-void Default_Handler(void)
-{
-    /*lint -e(716) while(1) */
-    while (1)
-   10a98:	e7fe      	b.n	10a98 <Default_Handler>
+000109e0 <Default_Handler>:
+   109e0:	e7fe      	b.n	109e0 <Default_Handler>
 	...
 
-00010a9c <NVM_Reset_Handler>:
-{
-   10a9c:	b570      	push	{r4, r5, r6, lr}
-  extern const __copy_table_t __nvm_copy_table_start__;
-  extern const __copy_table_t __nvm_copy_table_end__;
-  extern const __zero_table_t __nvm_zero_table_start__;
-  extern const __zero_table_t __nvm_zero_table_end__;
+000109e4 <NVM_Reset_Handler>:
+   109e4:	b570      	push	{r4, r5, r6, lr}
+   109e6:	4b11      	ldr	r3, [pc, #68]	; (10a2c <NVM_Reset_Handler+0x48>)
+   109e8:	4811      	ldr	r0, [pc, #68]	; (10a30 <NVM_Reset_Handler+0x4c>)
+   109ea:	4283      	cmp	r3, r0
+   109ec:	d311      	bcc.n	10a12 <NVM_Reset_Handler+0x2e>
+   109ee:	2000      	movs	r0, #0
+   109f0:	4b10      	ldr	r3, [pc, #64]	; (10a34 <NVM_Reset_Handler+0x50>)
+   109f2:	4911      	ldr	r1, [pc, #68]	; (10a38 <NVM_Reset_Handler+0x54>)
+   109f4:	428b      	cmp	r3, r1
+   109f6:	d317      	bcc.n	10a28 <NVM_Reset_Handler+0x44>
+   109f8:	f7ff ffce 	bl	10998 <_nvm_start>
+   109fc:	681c      	ldr	r4, [r3, #0]
+   109fe:	0091      	lsls	r1, r2, #2
+   10a00:	5864      	ldr	r4, [r4, r1]
+   10a02:	685d      	ldr	r5, [r3, #4]
+   10a04:	3201      	adds	r2, #1
+   10a06:	506c      	str	r4, [r5, r1]
+   10a08:	6899      	ldr	r1, [r3, #8]
+   10a0a:	428a      	cmp	r2, r1
+   10a0c:	d3f6      	bcc.n	109fc <NVM_Reset_Handler+0x18>
+   10a0e:	330c      	adds	r3, #12
+   10a10:	e7eb      	b.n	109ea <NVM_Reset_Handler+0x6>
+   10a12:	2200      	movs	r2, #0
+   10a14:	e7f8      	b.n	10a08 <NVM_Reset_Handler+0x24>
+   10a16:	681d      	ldr	r5, [r3, #0]
+   10a18:	0094      	lsls	r4, r2, #2
+   10a1a:	5160      	str	r0, [r4, r5]
+   10a1c:	3201      	adds	r2, #1
+   10a1e:	685c      	ldr	r4, [r3, #4]
+   10a20:	42a2      	cmp	r2, r4
+   10a22:	d3f8      	bcc.n	10a16 <NVM_Reset_Handler+0x32>
+   10a24:	3308      	adds	r3, #8
+   10a26:	e7e5      	b.n	109f4 <NVM_Reset_Handler+0x10>
+   10a28:	2200      	movs	r2, #0
+   10a2a:	e7f8      	b.n	10a1e <NVM_Reset_Handler+0x3a>
+   10a2c:	00011360 	.word	0x00011360
+   10a30:	0001136c 	.word	0x0001136c
+   10a34:	0001136c 	.word	0x0001136c
+   10a38:	00011374 	.word	0x00011374
 
-  for (__copy_table_t const* pTable = &__nvm_copy_table_start__; pTable < &__nvm_copy_table_end__; ++pTable) {
-   10a9e:	4b11      	ldr	r3, [pc, #68]	; (10ae4 <NVM_Reset_Handler+0x48>)
-   10aa0:	4811      	ldr	r0, [pc, #68]	; (10ae8 <NVM_Reset_Handler+0x4c>)
-   10aa2:	4283      	cmp	r3, r0
-   10aa4:	d311      	bcc.n	10aca <NVM_Reset_Handler+0x2e>
-    }
-  }
+00010a3c <smack_exchange_notify_tx>:
+   10a3c:	4a05      	ldr	r2, [pc, #20]	; (10a54 <smack_exchange_notify_tx+0x18>)
+   10a3e:	68c3      	ldr	r3, [r0, #12]
+   10a40:	b510      	push	{r4, lr}
+   10a42:	1899      	adds	r1, r3, r2
+   10a44:	22f0      	movs	r2, #240	; 0xf0
+   10a46:	0212      	lsls	r2, r2, #8
+   10a48:	4291      	cmp	r1, r2
+   10a4a:	d201      	bcs.n	10a50 <smack_exchange_notify_tx+0x14>
+   10a4c:	8800      	ldrh	r0, [r0, #0]
+   10a4e:	4798      	blx	r3
+   10a50:	bd10      	pop	{r4, pc}
+   10a52:	46c0      	nop			; (mov r8, r8)
+   10a54:	ffff0000 	.word	0xffff0000
 
-  for (__zero_table_t const* pTable = &__nvm_zero_table_start__; pTable < &__nvm_zero_table_end__; ++pTable) {
-    for(uint32_t i=0u; i<pTable->wlen; ++i) {
-      pTable->dest[i] = 0u;
-   10aa6:	2000      	movs	r0, #0
-  for (__zero_table_t const* pTable = &__nvm_zero_table_start__; pTable < &__nvm_zero_table_end__; ++pTable) {
-   10aa8:	4b10      	ldr	r3, [pc, #64]	; (10aec <NVM_Reset_Handler+0x50>)
-   10aaa:	4911      	ldr	r1, [pc, #68]	; (10af0 <NVM_Reset_Handler+0x54>)
-   10aac:	428b      	cmp	r3, r1
-   10aae:	d317      	bcc.n	10ae0 <NVM_Reset_Handler+0x44>
-    }
-  }
+00010a58 <smack_exchange_init>:
+   10a58:	2300      	movs	r3, #0
+   10a5a:	4a07      	ldr	r2, [pc, #28]	; (10a78 <smack_exchange_init+0x20>)
+   10a5c:	b530      	push	{r4, r5, lr}
+   10a5e:	7013      	strb	r3, [r2, #0]
+   10a60:	4c06      	ldr	r4, [pc, #24]	; (10a7c <smack_exchange_init+0x24>)
+   10a62:	4a07      	ldr	r2, [pc, #28]	; (10a80 <smack_exchange_init+0x28>)
+   10a64:	0785      	lsls	r5, r0, #30
+   10a66:	d104      	bne.n	10a72 <smack_exchange_init+0x1a>
+   10a68:	4299      	cmp	r1, r3
+   10a6a:	d002      	beq.n	10a72 <smack_exchange_init+0x1a>
+   10a6c:	6020      	str	r0, [r4, #0]
+   10a6e:	8011      	strh	r1, [r2, #0]
+   10a70:	bd30      	pop	{r4, r5, pc}
+   10a72:	6023      	str	r3, [r4, #0]
+   10a74:	8013      	strh	r3, [r2, #0]
+   10a76:	e7fb      	b.n	10a70 <smack_exchange_init+0x18>
+   10a78:	000206a0 	.word	0x000206a0
+   10a7c:	000206a4 	.word	0x000206a4
+   10a80:	000206a2 	.word	0x000206a2
 
-  _nvm_start();
-   10ab0:	f7ff ff56 	bl	10960 <_nvm_start>
-      pTable->dest[i] = pTable->src[i];
-   10ab4:	681c      	ldr	r4, [r3, #0]
-   10ab6:	0091      	lsls	r1, r2, #2
-   10ab8:	5864      	ldr	r4, [r4, r1]
-   10aba:	685d      	ldr	r5, [r3, #4]
-    for(uint32_t i=0u; i<pTable->wlen; ++i) {
-   10abc:	3201      	adds	r2, #1
-      pTable->dest[i] = pTable->src[i];
-   10abe:	506c      	str	r4, [r5, r1]
-    for(uint32_t i=0u; i<pTable->wlen; ++i) {
-   10ac0:	6899      	ldr	r1, [r3, #8]
-   10ac2:	428a      	cmp	r2, r1
-   10ac4:	d3f6      	bcc.n	10ab4 <NVM_Reset_Handler+0x18>
-  for (__copy_table_t const* pTable = &__nvm_copy_table_start__; pTable < &__nvm_copy_table_end__; ++pTable) {
-   10ac6:	330c      	adds	r3, #12
-   10ac8:	e7eb      	b.n	10aa2 <NVM_Reset_Handler+0x6>
-    for(uint32_t i=0u; i<pTable->wlen; ++i) {
-   10aca:	2200      	movs	r2, #0
-   10acc:	e7f8      	b.n	10ac0 <NVM_Reset_Handler+0x24>
-      pTable->dest[i] = 0u;
-   10ace:	681d      	ldr	r5, [r3, #0]
-   10ad0:	0094      	lsls	r4, r2, #2
-   10ad2:	5160      	str	r0, [r4, r5]
-    for(uint32_t i=0u; i<pTable->wlen; ++i) {
-   10ad4:	3201      	adds	r2, #1
-   10ad6:	685c      	ldr	r4, [r3, #4]
-   10ad8:	42a2      	cmp	r2, r4
-   10ada:	d3f8      	bcc.n	10ace <NVM_Reset_Handler+0x32>
-  for (__zero_table_t const* pTable = &__nvm_zero_table_start__; pTable < &__nvm_zero_table_end__; ++pTable) {
-   10adc:	3308      	adds	r3, #8
-   10ade:	e7e5      	b.n	10aac <NVM_Reset_Handler+0x10>
-    for(uint32_t i=0u; i<pTable->wlen; ++i) {
-   10ae0:	2200      	movs	r2, #0
-   10ae2:	e7f8      	b.n	10ad6 <NVM_Reset_Handler+0x3a>
-   10ae4:	00011540 	.word	0x00011540
-   10ae8:	0001154c 	.word	0x0001154c
-   10aec:	0001154c 	.word	0x0001154c
-   10af0:	00011554 	.word	0x00011554
+00010a84 <smack_exchange_key_set>:
+   10a84:	b510      	push	{r4, lr}
+   10a86:	0004      	movs	r4, r0
+   10a88:	f000 fa6c 	bl	10f64 <aes_load_key_ba>
+   10a8c:	6821      	ldr	r1, [r4, #0]
+   10a8e:	4a08      	ldr	r2, [pc, #32]	; (10ab0 <smack_exchange_key_set+0x2c>)
+   10a90:	4b08      	ldr	r3, [pc, #32]	; (10ab4 <smack_exchange_key_set+0x30>)
+   10a92:	404a      	eors	r2, r1
+   10a94:	601a      	str	r2, [r3, #0]
+   10a96:	6861      	ldr	r1, [r4, #4]
+   10a98:	4a07      	ldr	r2, [pc, #28]	; (10ab8 <smack_exchange_key_set+0x34>)
+   10a9a:	404a      	eors	r2, r1
+   10a9c:	605a      	str	r2, [r3, #4]
+   10a9e:	68a1      	ldr	r1, [r4, #8]
+   10aa0:	4a06      	ldr	r2, [pc, #24]	; (10abc <smack_exchange_key_set+0x38>)
+   10aa2:	404a      	eors	r2, r1
+   10aa4:	609a      	str	r2, [r3, #8]
+   10aa6:	68e1      	ldr	r1, [r4, #12]
+   10aa8:	4a05      	ldr	r2, [pc, #20]	; (10ac0 <smack_exchange_key_set+0x3c>)
+   10aaa:	404a      	eors	r2, r1
+   10aac:	60da      	str	r2, [r3, #12]
+   10aae:	bd10      	pop	{r4, pc}
+   10ab0:	7824ac0e 	.word	0x7824ac0e
+   10ab4:	00020690 	.word	0x00020690
+   10ab8:	46a49004 	.word	0x46a49004
+   10abc:	91059c12 	.word	0x91059c12
+   10ac0:	990d980c 	.word	0x990d980c
 
-00010af4 <smack_exchange_notify_tx>:
-   10af4:	4a05      	ldr	r2, [pc, #20]	; (10b0c <smack_exchange_notify_tx+0x18>)
-   10af6:	68c3      	ldr	r3, [r0, #12]
-   10af8:	b510      	push	{r4, lr}
-   10afa:	1899      	adds	r1, r3, r2
-   10afc:	22f0      	movs	r2, #240	; 0xf0
-   10afe:	0212      	lsls	r2, r2, #8
-   10b00:	4291      	cmp	r1, r2
-   10b02:	d201      	bcs.n	10b08 <smack_exchange_notify_tx+0x14>
-   10b04:	8800      	ldrh	r0, [r0, #0]
-   10b06:	4798      	blx	r3
-   10b08:	bd10      	pop	{r4, pc}
-   10b0a:	46c0      	nop			; (mov r8, r8)
-   10b0c:	ffff0000 	.word	0xffff0000
-
-00010b10 <smack_exchange_init>:
-   10b10:	2300      	movs	r3, #0
-   10b12:	4a07      	ldr	r2, [pc, #28]	; (10b30 <smack_exchange_init+0x20>)
-   10b14:	b530      	push	{r4, r5, lr}
-   10b16:	7013      	strb	r3, [r2, #0]
-   10b18:	4c06      	ldr	r4, [pc, #24]	; (10b34 <smack_exchange_init+0x24>)
-   10b1a:	4a07      	ldr	r2, [pc, #28]	; (10b38 <smack_exchange_init+0x28>)
-   10b1c:	0785      	lsls	r5, r0, #30
-   10b1e:	d104      	bne.n	10b2a <smack_exchange_init+0x1a>
-   10b20:	4299      	cmp	r1, r3
-   10b22:	d002      	beq.n	10b2a <smack_exchange_init+0x1a>
-   10b24:	6020      	str	r0, [r4, #0]
-   10b26:	8011      	strh	r1, [r2, #0]
-   10b28:	bd30      	pop	{r4, r5, pc}
-   10b2a:	6023      	str	r3, [r4, #0]
-   10b2c:	8013      	strh	r3, [r2, #0]
-   10b2e:	e7fb      	b.n	10b28 <smack_exchange_init+0x18>
-   10b30:	000206a0 	.word	0x000206a0
-   10b34:	000206a4 	.word	0x000206a4
-   10b38:	000206a2 	.word	0x000206a2
-
-00010b3c <smack_exchange_key_set>:
-   10b3c:	b510      	push	{r4, lr}
-   10b3e:	0004      	movs	r4, r0
-   10b40:	f000 fafc 	bl	1113c <aes_load_key_ba>
-   10b44:	6821      	ldr	r1, [r4, #0]
-   10b46:	4a08      	ldr	r2, [pc, #32]	; (10b68 <smack_exchange_key_set+0x2c>)
-   10b48:	4b08      	ldr	r3, [pc, #32]	; (10b6c <smack_exchange_key_set+0x30>)
-   10b4a:	404a      	eors	r2, r1
-   10b4c:	601a      	str	r2, [r3, #0]
-   10b4e:	6861      	ldr	r1, [r4, #4]
-   10b50:	4a07      	ldr	r2, [pc, #28]	; (10b70 <smack_exchange_key_set+0x34>)
-   10b52:	404a      	eors	r2, r1
-   10b54:	605a      	str	r2, [r3, #4]
-   10b56:	68a1      	ldr	r1, [r4, #8]
-   10b58:	4a06      	ldr	r2, [pc, #24]	; (10b74 <smack_exchange_key_set+0x38>)
-   10b5a:	404a      	eors	r2, r1
-   10b5c:	609a      	str	r2, [r3, #8]
-   10b5e:	68e1      	ldr	r1, [r4, #12]
-   10b60:	4a05      	ldr	r2, [pc, #20]	; (10b78 <smack_exchange_key_set+0x3c>)
-   10b62:	404a      	eors	r2, r1
-   10b64:	60da      	str	r2, [r3, #12]
-   10b66:	bd10      	pop	{r4, pc}
-   10b68:	7824ac0e 	.word	0x7824ac0e
-   10b6c:	00020690 	.word	0x00020690
-   10b70:	46a49004 	.word	0x46a49004
-   10b74:	91059c12 	.word	0x91059c12
-   10b78:	990d980c 	.word	0x990d980c
-
-00010b7c <smack_exchange_handler>:
-   10b7c:	b5f0      	push	{r4, r5, r6, r7, lr}
-   10b7e:	4bac      	ldr	r3, [pc, #688]	; (10e30 <smack_exchange_handler+0x2b4>)
-   10b80:	b08d      	sub	sp, #52	; 0x34
-   10b82:	6a5b      	ldr	r3, [r3, #36]	; 0x24
-   10b84:	9301      	str	r3, [sp, #4]
-   10b86:	4798      	blx	r3
-   10b88:	4baa      	ldr	r3, [pc, #680]	; (10e34 <smack_exchange_handler+0x2b8>)
-   10b8a:	9004      	str	r0, [sp, #16]
-   10b8c:	681b      	ldr	r3, [r3, #0]
-   10b8e:	2b00      	cmp	r3, #0
-   10b90:	d003      	beq.n	10b9a <smack_exchange_handler+0x1e>
-   10b92:	4ba9      	ldr	r3, [pc, #676]	; (10e38 <smack_exchange_handler+0x2bc>)
-   10b94:	881b      	ldrh	r3, [r3, #0]
-   10b96:	2b00      	cmp	r3, #0
-   10b98:	d11a      	bne.n	10bd0 <smack_exchange_handler+0x54>
-   10b9a:	2380      	movs	r3, #128	; 0x80
-   10b9c:	2600      	movs	r6, #0
-   10b9e:	b2a4      	uxth	r4, r4
-   10ba0:	035b      	lsls	r3, r3, #13
-   10ba2:	431c      	orrs	r4, r3
-   10ba4:	4ba5      	ldr	r3, [pc, #660]	; (10e3c <smack_exchange_handler+0x2c0>)
-   10ba6:	781b      	ldrb	r3, [r3, #0]
-   10ba8:	2b00      	cmp	r3, #0
-   10baa:	d006      	beq.n	10bba <smack_exchange_handler+0x3e>
-   10bac:	2280      	movs	r2, #128	; 0x80
-   10bae:	0c23      	lsrs	r3, r4, #16
-   10bb0:	01d2      	lsls	r2, r2, #7
-   10bb2:	4313      	orrs	r3, r2
-   10bb4:	041b      	lsls	r3, r3, #16
-   10bb6:	b2a4      	uxth	r4, r4
-   10bb8:	431c      	orrs	r4, r3
-   10bba:	0c24      	lsrs	r4, r4, #16
-   10bbc:	ba64      	rev16	r4, r4
-   10bbe:	ba76      	rev16	r6, r6
-   10bc0:	b2b6      	uxth	r6, r6
-   10bc2:	0424      	lsls	r4, r4, #16
-   10bc4:	9b04      	ldr	r3, [sp, #16]
-   10bc6:	4334      	orrs	r4, r6
-   10bc8:	ba24      	rev	r4, r4
-   10bca:	605c      	str	r4, [r3, #4]
-   10bcc:	b00d      	add	sp, #52	; 0x34
-   10bce:	bdf0      	pop	{r4, r5, r6, r7, pc}
-   10bd0:	2101      	movs	r1, #1
-   10bd2:	0008      	movs	r0, r1
-   10bd4:	9b04      	ldr	r3, [sp, #16]
-   10bd6:	685b      	ldr	r3, [r3, #4]
-   10bd8:	ba1c      	rev	r4, r3
-   10bda:	9301      	str	r3, [sp, #4]
-   10bdc:	0c23      	lsrs	r3, r4, #16
-   10bde:	ba5b      	rev16	r3, r3
-   10be0:	4018      	ands	r0, r3
-   10be2:	0022      	movs	r2, r4
-   10be4:	9003      	str	r0, [sp, #12]
-   10be6:	4219      	tst	r1, r3
-   10be8:	d0d7      	beq.n	10b9a <smack_exchange_handler+0x1e>
-   10bea:	ba52      	rev16	r2, r2
-   10bec:	b297      	uxth	r7, r2
-   10bee:	b21a      	sxth	r2, r3
-   10bf0:	b2a4      	uxth	r4, r4
-   10bf2:	9201      	str	r2, [sp, #4]
-   10bf4:	041b      	lsls	r3, r3, #16
-   10bf6:	d504      	bpl.n	10c02 <smack_exchange_handler+0x86>
-   10bf8:	003b      	movs	r3, r7
-   10bfa:	220f      	movs	r2, #15
-   10bfc:	330f      	adds	r3, #15
-   10bfe:	4393      	bics	r3, r2
-   10c00:	b29f      	uxth	r7, r3
-   10c02:	9b04      	ldr	r3, [sp, #16]
-   10c04:	1cfa      	adds	r2, r7, #3
-   10c06:	3308      	adds	r3, #8
-   10c08:	b292      	uxth	r2, r2
-   10c0a:	9302      	str	r3, [sp, #8]
-   10c0c:	1c13      	adds	r3, r2, #0
-   10c0e:	2af8      	cmp	r2, #248	; 0xf8
-   10c10:	d900      	bls.n	10c14 <smack_exchange_handler+0x98>
-   10c12:	23f8      	movs	r3, #248	; 0xf8
-   10c14:	b29b      	uxth	r3, r3
-   10c16:	9902      	ldr	r1, [sp, #8]
-   10c18:	4889      	ldr	r0, [pc, #548]	; (10e40 <smack_exchange_handler+0x2c4>)
-   10c1a:	089b      	lsrs	r3, r3, #2
-   10c1c:	3b01      	subs	r3, #1
-   10c1e:	4a89      	ldr	r2, [pc, #548]	; (10e44 <smack_exchange_handler+0x2c8>)
-   10c20:	b29b      	uxth	r3, r3
-   10c22:	4293      	cmp	r3, r2
-   10c24:	d120      	bne.n	10c68 <smack_exchange_handler+0xec>
-   10c26:	9b01      	ldr	r3, [sp, #4]
-   10c28:	2b00      	cmp	r3, #0
-   10c2a:	da0b      	bge.n	10c44 <smack_exchange_handler+0xc8>
-   10c2c:	2f00      	cmp	r7, #0
-   10c2e:	d009      	beq.n	10c44 <smack_exchange_handler+0xc8>
-   10c30:	003b      	movs	r3, r7
-   10c32:	330f      	adds	r3, #15
-   10c34:	111b      	asrs	r3, r3, #4
-   10c36:	2b01      	cmp	r3, #1
-   10c38:	d11a      	bne.n	10c70 <smack_exchange_handler+0xf4>
-   10c3a:	4881      	ldr	r0, [pc, #516]	; (10e40 <smack_exchange_handler+0x2c4>)
-   10c3c:	2201      	movs	r2, #1
-   10c3e:	0001      	movs	r1, r0
-   10c40:	f000 faa2 	bl	11188 <calc_aes_ba>
-   10c44:	4b7e      	ldr	r3, [pc, #504]	; (10e40 <smack_exchange_handler+0x2c4>)
-   10c46:	4a7b      	ldr	r2, [pc, #492]	; (10e34 <smack_exchange_handler+0x2b8>)
-   10c48:	88db      	ldrh	r3, [r3, #6]
-   10c4a:	6815      	ldr	r5, [r2, #0]
-   10c4c:	ba5b      	rev16	r3, r3
-   10c4e:	b29b      	uxth	r3, r3
-   10c50:	2d00      	cmp	r5, #0
-   10c52:	d004      	beq.n	10c5e <smack_exchange_handler+0xe2>
-   10c54:	4a78      	ldr	r2, [pc, #480]	; (10e38 <smack_exchange_handler+0x2bc>)
-   10c56:	8810      	ldrh	r0, [r2, #0]
-   10c58:	2200      	movs	r2, #0
-   10c5a:	4282      	cmp	r2, r0
-   10c5c:	db29      	blt.n	10cb2 <smack_exchange_handler+0x136>
-   10c5e:	2380      	movs	r3, #128	; 0x80
-   10c60:	b2a4      	uxth	r4, r4
-   10c62:	035b      	lsls	r3, r3, #13
-   10c64:	431c      	orrs	r4, r3
-   10c66:	e1a1      	b.n	10fac <smack_exchange_handler+0x430>
-   10c68:	c904      	ldmia	r1!, {r2}
-   10c6a:	ba12      	rev	r2, r2
-   10c6c:	c004      	stmia	r0!, {r2}
-   10c6e:	e7d5      	b.n	10c1c <smack_exchange_handler+0xa0>
-   10c70:	b29b      	uxth	r3, r3
-   10c72:	1c1d      	adds	r5, r3, #0
-   10c74:	2b0f      	cmp	r3, #15
-   10c76:	d900      	bls.n	10c7a <smack_exchange_handler+0xfe>
-   10c78:	250f      	movs	r5, #15
-   10c7a:	3d01      	subs	r5, #1
-   10c7c:	4b70      	ldr	r3, [pc, #448]	; (10e40 <smack_exchange_handler+0x2c4>)
-   10c7e:	b2ad      	uxth	r5, r5
-   10c80:	012e      	lsls	r6, r5, #4
-   10c82:	18f6      	adds	r6, r6, r3
-   10c84:	0031      	movs	r1, r6
-   10c86:	0030      	movs	r0, r6
-   10c88:	2201      	movs	r2, #1
-   10c8a:	9605      	str	r6, [sp, #20]
-   10c8c:	f000 fa7c 	bl	11188 <calc_aes_ba>
-   10c90:	2300      	movs	r3, #0
-   10c92:	3e10      	subs	r6, #16
-   10c94:	9a05      	ldr	r2, [sp, #20]
-   10c96:	58f1      	ldr	r1, [r6, r3]
-   10c98:	58d2      	ldr	r2, [r2, r3]
-   10c9a:	9206      	str	r2, [sp, #24]
-   10c9c:	404a      	eors	r2, r1
-   10c9e:	9905      	ldr	r1, [sp, #20]
-   10ca0:	50ca      	str	r2, [r1, r3]
-   10ca2:	3304      	adds	r3, #4
-   10ca4:	2b10      	cmp	r3, #16
-   10ca6:	d1f5      	bne.n	10c94 <smack_exchange_handler+0x118>
-   10ca8:	3d01      	subs	r5, #1
-   10caa:	b2ad      	uxth	r5, r5
-   10cac:	2d00      	cmp	r5, #0
-   10cae:	d1e9      	bne.n	10c84 <smack_exchange_handler+0x108>
-   10cb0:	e7c3      	b.n	10c3a <smack_exchange_handler+0xbe>
-   10cb2:	8829      	ldrh	r1, [r5, #0]
-   10cb4:	428b      	cmp	r3, r1
-   10cb6:	d100      	bne.n	10cba <smack_exchange_handler+0x13e>
-   10cb8:	e165      	b.n	10f86 <smack_exchange_handler+0x40a>
-   10cba:	4e62      	ldr	r6, [pc, #392]	; (10e44 <smack_exchange_handler+0x2c8>)
-   10cbc:	3510      	adds	r5, #16
-   10cbe:	42b1      	cmp	r1, r6
-   10cc0:	d0cd      	beq.n	10c5e <smack_exchange_handler+0xe2>
-   10cc2:	3201      	adds	r2, #1
-   10cc4:	e7c9      	b.n	10c5a <smack_exchange_handler+0xde>
-   10cc6:	b259      	sxtb	r1, r3
-   10cc8:	0423      	lsls	r3, r4, #16
-   10cca:	2900      	cmp	r1, #0
-   10ccc:	db00      	blt.n	10cd0 <smack_exchange_handler+0x154>
-   10cce:	e088      	b.n	10de2 <smack_exchange_handler+0x266>
-   10cd0:	b251      	sxtb	r1, r2
-   10cd2:	2900      	cmp	r1, #0
-   10cd4:	db03      	blt.n	10cde <smack_exchange_handler+0x162>
-   10cd6:	2480      	movs	r4, #128	; 0x80
-   10cd8:	0c36      	lsrs	r6, r6, #16
-   10cda:	03e4      	lsls	r4, r4, #15
-   10cdc:	e165      	b.n	10faa <smack_exchange_handler+0x42e>
-   10cde:	203f      	movs	r0, #63	; 0x3f
-   10ce0:	4010      	ands	r0, r2
-   10ce2:	3801      	subs	r0, #1
-   10ce4:	2810      	cmp	r0, #16
-   10ce6:	d878      	bhi.n	10dda <smack_exchange_handler+0x25e>
-   10ce8:	4a55      	ldr	r2, [pc, #340]	; (10e40 <smack_exchange_handler+0x2c4>)
-   10cea:	f000 fae1 	bl	112b0 <__gnu_thumb1_case_uqi>
-   10cee:	2a3c      	.short	0x2a3c
-   10cf0:	0923232a 	.word	0x0923232a
-   10cf4:	76303009 	.word	0x76303009
-   10cf8:	76767676 	.word	0x76767676
-   10cfc:	4276      	.short	0x4276
-   10cfe:	59          	.byte	0x59
-   10cff:	00          	.byte	0x00
-   10d00:	2f0b      	cmp	r7, #11
-   10d02:	d80f      	bhi.n	10d24 <smack_exchange_handler+0x1a8>
-   10d04:	2380      	movs	r3, #128	; 0x80
-   10d06:	b2a4      	uxth	r4, r4
-   10d08:	031b      	lsls	r3, r3, #12
-   10d0a:	4a4f      	ldr	r2, [pc, #316]	; (10e48 <smack_exchange_handler+0x2cc>)
-   10d0c:	431c      	orrs	r4, r3
-   10d0e:	68ab      	ldr	r3, [r5, #8]
-   10d10:	2608      	movs	r6, #8
-   10d12:	1899      	adds	r1, r3, r2
-   10d14:	22f0      	movs	r2, #240	; 0xf0
-   10d16:	0212      	lsls	r2, r2, #8
-   10d18:	4291      	cmp	r1, r2
-   10d1a:	d300      	bcc.n	10d1e <smack_exchange_handler+0x1a2>
-   10d1c:	e147      	b.n	10fae <smack_exchange_handler+0x432>
-   10d1e:	8828      	ldrh	r0, [r5, #0]
-   10d20:	4798      	blx	r3
-   10d22:	e144      	b.n	10fae <smack_exchange_handler+0x432>
-   10d24:	6892      	ldr	r2, [r2, #8]
-   10d26:	6869      	ldr	r1, [r5, #4]
-   10d28:	ba12      	rev	r2, r2
-   10d2a:	600a      	str	r2, [r1, #0]
-   10d2c:	2480      	movs	r4, #128	; 0x80
-   10d2e:	0c1b      	lsrs	r3, r3, #16
-   10d30:	02e4      	lsls	r4, r4, #11
-   10d32:	e7ea      	b.n	10d0a <smack_exchange_handler+0x18e>
-   10d34:	2f09      	cmp	r7, #9
-   10d36:	d9e5      	bls.n	10d04 <smack_exchange_handler+0x188>
-   10d38:	8912      	ldrh	r2, [r2, #8]
-   10d3a:	6869      	ldr	r1, [r5, #4]
-   10d3c:	ba52      	rev16	r2, r2
-   10d3e:	800a      	strh	r2, [r1, #0]
-   10d40:	e7f4      	b.n	10d2c <smack_exchange_handler+0x1b0>
-   10d42:	2f08      	cmp	r7, #8
-   10d44:	d9de      	bls.n	10d04 <smack_exchange_handler+0x188>
-   10d46:	7a12      	ldrb	r2, [r2, #8]
-   10d48:	6869      	ldr	r1, [r5, #4]
-   10d4a:	700a      	strb	r2, [r1, #0]
-   10d4c:	e7ee      	b.n	10d2c <smack_exchange_handler+0x1b0>
-   10d4e:	2f0f      	cmp	r7, #15
-   10d50:	d9d8      	bls.n	10d04 <smack_exchange_handler+0x188>
-   10d52:	6893      	ldr	r3, [r2, #8]
-   10d54:	68d2      	ldr	r2, [r2, #12]
-   10d56:	6869      	ldr	r1, [r5, #4]
-   10d58:	ba12      	rev	r2, r2
-   10d5a:	ba1b      	rev	r3, r3
-   10d5c:	c10c      	stmia	r1!, {r2, r3}
-   10d5e:	2380      	movs	r3, #128	; 0x80
-   10d60:	b2a4      	uxth	r4, r4
-   10d62:	02db      	lsls	r3, r3, #11
-   10d64:	e7d1      	b.n	10d0a <smack_exchange_handler+0x18e>
-   10d66:	2f08      	cmp	r7, #8
-   10d68:	d9cc      	bls.n	10d04 <smack_exchange_handler+0x188>
-   10d6a:	7a12      	ldrb	r2, [r2, #8]
-   10d6c:	1e51      	subs	r1, r2, #1
-   10d6e:	418a      	sbcs	r2, r1
-   10d70:	e7ea      	b.n	10d48 <smack_exchange_handler+0x1cc>
-   10d72:	7953      	ldrb	r3, [r2, #5]
-   10d74:	78ee      	ldrb	r6, [r5, #3]
-   10d76:	429e      	cmp	r6, r3
-   10d78:	d1c4      	bne.n	10d04 <smack_exchange_handler+0x188>
-   10d7a:	0033      	movs	r3, r6
-   10d7c:	3308      	adds	r3, #8
-   10d7e:	9305      	str	r3, [sp, #20]
-   10d80:	429f      	cmp	r7, r3
-   10d82:	d3bf      	bcc.n	10d04 <smack_exchange_handler+0x188>
-   10d84:	4b2a      	ldr	r3, [pc, #168]	; (10e30 <smack_exchange_handler+0x2b4>)
-   10d86:	6a9b      	ldr	r3, [r3, #40]	; 0x28
-   10d88:	9306      	str	r3, [sp, #24]
-   10d8a:	4798      	blx	r3
-   10d8c:	9b05      	ldr	r3, [sp, #20]
-   10d8e:	0080      	lsls	r0, r0, #2
-   10d90:	4283      	cmp	r3, r0
-   10d92:	d8b7      	bhi.n	10d04 <smack_exchange_handler+0x188>
-   10d94:	0032      	movs	r2, r6
-   10d96:	492d      	ldr	r1, [pc, #180]	; (10e4c <smack_exchange_handler+0x2d0>)
-   10d98:	6868      	ldr	r0, [r5, #4]
-   10d9a:	f000 fa93 	bl	112c4 <memcpy>
-   10d9e:	e7de      	b.n	10d5e <smack_exchange_handler+0x1e2>
-   10da0:	7956      	ldrb	r6, [r2, #5]
-   10da2:	78eb      	ldrb	r3, [r5, #3]
-   10da4:	42b3      	cmp	r3, r6
-   10da6:	d3ad      	bcc.n	10d04 <smack_exchange_handler+0x188>
-   10da8:	0033      	movs	r3, r6
-   10daa:	3308      	adds	r3, #8
-   10dac:	9305      	str	r3, [sp, #20]
-   10dae:	429f      	cmp	r7, r3
-   10db0:	d3a8      	bcc.n	10d04 <smack_exchange_handler+0x188>
-   10db2:	4b1f      	ldr	r3, [pc, #124]	; (10e30 <smack_exchange_handler+0x2b4>)
-   10db4:	6a9b      	ldr	r3, [r3, #40]	; 0x28
-   10db6:	9306      	str	r3, [sp, #24]
-   10db8:	4798      	blx	r3
-   10dba:	9b05      	ldr	r3, [sp, #20]
-   10dbc:	0080      	lsls	r0, r0, #2
-   10dbe:	4283      	cmp	r3, r0
-   10dc0:	d8a0      	bhi.n	10d04 <smack_exchange_handler+0x188>
-   10dc2:	78ea      	ldrb	r2, [r5, #3]
-   10dc4:	4921      	ldr	r1, [pc, #132]	; (10e4c <smack_exchange_handler+0x2d0>)
-   10dc6:	6868      	ldr	r0, [r5, #4]
-   10dc8:	f000 face 	bl	11368 <strncpy>
-   10dcc:	78eb      	ldrb	r3, [r5, #3]
-   10dce:	42b3      	cmp	r3, r6
-   10dd0:	d9c5      	bls.n	10d5e <smack_exchange_handler+0x1e2>
-   10dd2:	2300      	movs	r3, #0
-   10dd4:	686a      	ldr	r2, [r5, #4]
-   10dd6:	5593      	strb	r3, [r2, r6]
-   10dd8:	e7c1      	b.n	10d5e <smack_exchange_handler+0x1e2>
-   10dda:	2480      	movs	r4, #128	; 0x80
-   10ddc:	0c1b      	lsrs	r3, r3, #16
-   10dde:	03a4      	lsls	r4, r4, #14
-   10de0:	e740      	b.n	10c64 <smack_exchange_handler+0xe8>
-   10de2:	2f07      	cmp	r7, #7
-   10de4:	d803      	bhi.n	10dee <smack_exchange_handler+0x272>
-   10de6:	2480      	movs	r4, #128	; 0x80
+00010ac4 <smack_exchange_handler>:
+   10ac4:	b5f0      	push	{r4, r5, r6, r7, lr}
+   10ac6:	4bac      	ldr	r3, [pc, #688]	; (10d78 <smack_exchange_handler+0x2b4>)
+   10ac8:	b08d      	sub	sp, #52	; 0x34
+   10aca:	6a5b      	ldr	r3, [r3, #36]	; 0x24
+   10acc:	9301      	str	r3, [sp, #4]
+   10ace:	4798      	blx	r3
+   10ad0:	4baa      	ldr	r3, [pc, #680]	; (10d7c <smack_exchange_handler+0x2b8>)
+   10ad2:	9004      	str	r0, [sp, #16]
+   10ad4:	681b      	ldr	r3, [r3, #0]
+   10ad6:	2b00      	cmp	r3, #0
+   10ad8:	d003      	beq.n	10ae2 <smack_exchange_handler+0x1e>
+   10ada:	4ba9      	ldr	r3, [pc, #676]	; (10d80 <smack_exchange_handler+0x2bc>)
+   10adc:	881b      	ldrh	r3, [r3, #0]
+   10ade:	2b00      	cmp	r3, #0
+   10ae0:	d11a      	bne.n	10b18 <smack_exchange_handler+0x54>
+   10ae2:	2380      	movs	r3, #128	; 0x80
+   10ae4:	2600      	movs	r6, #0
+   10ae6:	b2a4      	uxth	r4, r4
+   10ae8:	035b      	lsls	r3, r3, #13
+   10aea:	431c      	orrs	r4, r3
+   10aec:	4ba5      	ldr	r3, [pc, #660]	; (10d84 <smack_exchange_handler+0x2c0>)
+   10aee:	781b      	ldrb	r3, [r3, #0]
+   10af0:	2b00      	cmp	r3, #0
+   10af2:	d006      	beq.n	10b02 <smack_exchange_handler+0x3e>
+   10af4:	2280      	movs	r2, #128	; 0x80
+   10af6:	0c23      	lsrs	r3, r4, #16
+   10af8:	01d2      	lsls	r2, r2, #7
+   10afa:	4313      	orrs	r3, r2
+   10afc:	041b      	lsls	r3, r3, #16
+   10afe:	b2a4      	uxth	r4, r4
+   10b00:	431c      	orrs	r4, r3
+   10b02:	0c24      	lsrs	r4, r4, #16
+   10b04:	ba64      	rev16	r4, r4
+   10b06:	ba76      	rev16	r6, r6
+   10b08:	b2b6      	uxth	r6, r6
+   10b0a:	0424      	lsls	r4, r4, #16
+   10b0c:	9b04      	ldr	r3, [sp, #16]
+   10b0e:	4334      	orrs	r4, r6
+   10b10:	ba24      	rev	r4, r4
+   10b12:	605c      	str	r4, [r3, #4]
+   10b14:	b00d      	add	sp, #52	; 0x34
+   10b16:	bdf0      	pop	{r4, r5, r6, r7, pc}
+   10b18:	2101      	movs	r1, #1
+   10b1a:	0008      	movs	r0, r1
+   10b1c:	9b04      	ldr	r3, [sp, #16]
+   10b1e:	685b      	ldr	r3, [r3, #4]
+   10b20:	ba1c      	rev	r4, r3
+   10b22:	9301      	str	r3, [sp, #4]
+   10b24:	0c23      	lsrs	r3, r4, #16
+   10b26:	ba5b      	rev16	r3, r3
+   10b28:	4018      	ands	r0, r3
+   10b2a:	0022      	movs	r2, r4
+   10b2c:	9003      	str	r0, [sp, #12]
+   10b2e:	4219      	tst	r1, r3
+   10b30:	d0d7      	beq.n	10ae2 <smack_exchange_handler+0x1e>
+   10b32:	ba52      	rev16	r2, r2
+   10b34:	b297      	uxth	r7, r2
+   10b36:	b21a      	sxth	r2, r3
+   10b38:	b2a4      	uxth	r4, r4
+   10b3a:	9201      	str	r2, [sp, #4]
+   10b3c:	041b      	lsls	r3, r3, #16
+   10b3e:	d504      	bpl.n	10b4a <smack_exchange_handler+0x86>
+   10b40:	003b      	movs	r3, r7
+   10b42:	220f      	movs	r2, #15
+   10b44:	330f      	adds	r3, #15
+   10b46:	4393      	bics	r3, r2
+   10b48:	b29f      	uxth	r7, r3
+   10b4a:	9b04      	ldr	r3, [sp, #16]
+   10b4c:	1cfa      	adds	r2, r7, #3
+   10b4e:	3308      	adds	r3, #8
+   10b50:	b292      	uxth	r2, r2
+   10b52:	9302      	str	r3, [sp, #8]
+   10b54:	1c13      	adds	r3, r2, #0
+   10b56:	2af8      	cmp	r2, #248	; 0xf8
+   10b58:	d900      	bls.n	10b5c <smack_exchange_handler+0x98>
+   10b5a:	23f8      	movs	r3, #248	; 0xf8
+   10b5c:	b29b      	uxth	r3, r3
+   10b5e:	9902      	ldr	r1, [sp, #8]
+   10b60:	4889      	ldr	r0, [pc, #548]	; (10d88 <smack_exchange_handler+0x2c4>)
+   10b62:	089b      	lsrs	r3, r3, #2
+   10b64:	3b01      	subs	r3, #1
+   10b66:	4a89      	ldr	r2, [pc, #548]	; (10d8c <smack_exchange_handler+0x2c8>)
+   10b68:	b29b      	uxth	r3, r3
+   10b6a:	4293      	cmp	r3, r2
+   10b6c:	d120      	bne.n	10bb0 <smack_exchange_handler+0xec>
+   10b6e:	9b01      	ldr	r3, [sp, #4]
+   10b70:	2b00      	cmp	r3, #0
+   10b72:	da0b      	bge.n	10b8c <smack_exchange_handler+0xc8>
+   10b74:	2f00      	cmp	r7, #0
+   10b76:	d009      	beq.n	10b8c <smack_exchange_handler+0xc8>
+   10b78:	003b      	movs	r3, r7
+   10b7a:	330f      	adds	r3, #15
+   10b7c:	111b      	asrs	r3, r3, #4
+   10b7e:	2b01      	cmp	r3, #1
+   10b80:	d11a      	bne.n	10bb8 <smack_exchange_handler+0xf4>
+   10b82:	4881      	ldr	r0, [pc, #516]	; (10d88 <smack_exchange_handler+0x2c4>)
+   10b84:	2201      	movs	r2, #1
+   10b86:	0001      	movs	r1, r0
+   10b88:	f000 fa12 	bl	10fb0 <calc_aes_ba>
+   10b8c:	4b7e      	ldr	r3, [pc, #504]	; (10d88 <smack_exchange_handler+0x2c4>)
+   10b8e:	4a7b      	ldr	r2, [pc, #492]	; (10d7c <smack_exchange_handler+0x2b8>)
+   10b90:	88db      	ldrh	r3, [r3, #6]
+   10b92:	6815      	ldr	r5, [r2, #0]
+   10b94:	ba5b      	rev16	r3, r3
+   10b96:	b29b      	uxth	r3, r3
+   10b98:	2d00      	cmp	r5, #0
+   10b9a:	d004      	beq.n	10ba6 <smack_exchange_handler+0xe2>
+   10b9c:	4a78      	ldr	r2, [pc, #480]	; (10d80 <smack_exchange_handler+0x2bc>)
+   10b9e:	8810      	ldrh	r0, [r2, #0]
+   10ba0:	2200      	movs	r2, #0
+   10ba2:	4282      	cmp	r2, r0
+   10ba4:	db29      	blt.n	10bfa <smack_exchange_handler+0x136>
+   10ba6:	2380      	movs	r3, #128	; 0x80
+   10ba8:	b2a4      	uxth	r4, r4
+   10baa:	035b      	lsls	r3, r3, #13
+   10bac:	431c      	orrs	r4, r3
+   10bae:	e1a1      	b.n	10ef4 <smack_exchange_handler+0x430>
+   10bb0:	c904      	ldmia	r1!, {r2}
+   10bb2:	ba12      	rev	r2, r2
+   10bb4:	c004      	stmia	r0!, {r2}
+   10bb6:	e7d5      	b.n	10b64 <smack_exchange_handler+0xa0>
+   10bb8:	b29b      	uxth	r3, r3
+   10bba:	1c1d      	adds	r5, r3, #0
+   10bbc:	2b0f      	cmp	r3, #15
+   10bbe:	d900      	bls.n	10bc2 <smack_exchange_handler+0xfe>
+   10bc0:	250f      	movs	r5, #15
+   10bc2:	3d01      	subs	r5, #1
+   10bc4:	4b70      	ldr	r3, [pc, #448]	; (10d88 <smack_exchange_handler+0x2c4>)
+   10bc6:	b2ad      	uxth	r5, r5
+   10bc8:	012e      	lsls	r6, r5, #4
+   10bca:	18f6      	adds	r6, r6, r3
+   10bcc:	0031      	movs	r1, r6
+   10bce:	0030      	movs	r0, r6
+   10bd0:	2201      	movs	r2, #1
+   10bd2:	9605      	str	r6, [sp, #20]
+   10bd4:	f000 f9ec 	bl	10fb0 <calc_aes_ba>
+   10bd8:	2300      	movs	r3, #0
+   10bda:	3e10      	subs	r6, #16
+   10bdc:	9a05      	ldr	r2, [sp, #20]
+   10bde:	58f1      	ldr	r1, [r6, r3]
+   10be0:	58d2      	ldr	r2, [r2, r3]
+   10be2:	9206      	str	r2, [sp, #24]
+   10be4:	404a      	eors	r2, r1
+   10be6:	9905      	ldr	r1, [sp, #20]
+   10be8:	50ca      	str	r2, [r1, r3]
+   10bea:	3304      	adds	r3, #4
+   10bec:	2b10      	cmp	r3, #16
+   10bee:	d1f5      	bne.n	10bdc <smack_exchange_handler+0x118>
+   10bf0:	3d01      	subs	r5, #1
+   10bf2:	b2ad      	uxth	r5, r5
+   10bf4:	2d00      	cmp	r5, #0
+   10bf6:	d1e9      	bne.n	10bcc <smack_exchange_handler+0x108>
+   10bf8:	e7c3      	b.n	10b82 <smack_exchange_handler+0xbe>
+   10bfa:	8829      	ldrh	r1, [r5, #0]
+   10bfc:	428b      	cmp	r3, r1
+   10bfe:	d100      	bne.n	10c02 <smack_exchange_handler+0x13e>
+   10c00:	e165      	b.n	10ece <smack_exchange_handler+0x40a>
+   10c02:	4e62      	ldr	r6, [pc, #392]	; (10d8c <smack_exchange_handler+0x2c8>)
+   10c04:	3510      	adds	r5, #16
+   10c06:	42b1      	cmp	r1, r6
+   10c08:	d0cd      	beq.n	10ba6 <smack_exchange_handler+0xe2>
+   10c0a:	3201      	adds	r2, #1
+   10c0c:	e7c9      	b.n	10ba2 <smack_exchange_handler+0xde>
+   10c0e:	b259      	sxtb	r1, r3
+   10c10:	0423      	lsls	r3, r4, #16
+   10c12:	2900      	cmp	r1, #0
+   10c14:	db00      	blt.n	10c18 <smack_exchange_handler+0x154>
+   10c16:	e088      	b.n	10d2a <smack_exchange_handler+0x266>
+   10c18:	b251      	sxtb	r1, r2
+   10c1a:	2900      	cmp	r1, #0
+   10c1c:	db03      	blt.n	10c26 <smack_exchange_handler+0x162>
+   10c1e:	2480      	movs	r4, #128	; 0x80
+   10c20:	0c36      	lsrs	r6, r6, #16
+   10c22:	03e4      	lsls	r4, r4, #15
+   10c24:	e165      	b.n	10ef2 <smack_exchange_handler+0x42e>
+   10c26:	203f      	movs	r0, #63	; 0x3f
+   10c28:	4010      	ands	r0, r2
+   10c2a:	3801      	subs	r0, #1
+   10c2c:	2810      	cmp	r0, #16
+   10c2e:	d878      	bhi.n	10d22 <smack_exchange_handler+0x25e>
+   10c30:	4a55      	ldr	r2, [pc, #340]	; (10d88 <smack_exchange_handler+0x2c4>)
+   10c32:	f000 fa51 	bl	110d8 <__gnu_thumb1_case_uqi>
+   10c36:	2a3c      	.short	0x2a3c
+   10c38:	0923232a 	.word	0x0923232a
+   10c3c:	76303009 	.word	0x76303009
+   10c40:	76767676 	.word	0x76767676
+   10c44:	4276      	.short	0x4276
+   10c46:	59          	.byte	0x59
+   10c47:	00          	.byte	0x00
+   10c48:	2f0b      	cmp	r7, #11
+   10c4a:	d80f      	bhi.n	10c6c <smack_exchange_handler+0x1a8>
+   10c4c:	2380      	movs	r3, #128	; 0x80
+   10c4e:	b2a4      	uxth	r4, r4
+   10c50:	031b      	lsls	r3, r3, #12
+   10c52:	4a4f      	ldr	r2, [pc, #316]	; (10d90 <smack_exchange_handler+0x2cc>)
+   10c54:	431c      	orrs	r4, r3
+   10c56:	68ab      	ldr	r3, [r5, #8]
+   10c58:	2608      	movs	r6, #8
+   10c5a:	1899      	adds	r1, r3, r2
+   10c5c:	22f0      	movs	r2, #240	; 0xf0
+   10c5e:	0212      	lsls	r2, r2, #8
+   10c60:	4291      	cmp	r1, r2
+   10c62:	d300      	bcc.n	10c66 <smack_exchange_handler+0x1a2>
+   10c64:	e147      	b.n	10ef6 <smack_exchange_handler+0x432>
+   10c66:	8828      	ldrh	r0, [r5, #0]
+   10c68:	4798      	blx	r3
+   10c6a:	e144      	b.n	10ef6 <smack_exchange_handler+0x432>
+   10c6c:	6892      	ldr	r2, [r2, #8]
+   10c6e:	6869      	ldr	r1, [r5, #4]
+   10c70:	ba12      	rev	r2, r2
+   10c72:	600a      	str	r2, [r1, #0]
+   10c74:	2480      	movs	r4, #128	; 0x80
+   10c76:	0c1b      	lsrs	r3, r3, #16
+   10c78:	02e4      	lsls	r4, r4, #11
+   10c7a:	e7ea      	b.n	10c52 <smack_exchange_handler+0x18e>
+   10c7c:	2f09      	cmp	r7, #9
+   10c7e:	d9e5      	bls.n	10c4c <smack_exchange_handler+0x188>
+   10c80:	8912      	ldrh	r2, [r2, #8]
+   10c82:	6869      	ldr	r1, [r5, #4]
+   10c84:	ba52      	rev16	r2, r2
+   10c86:	800a      	strh	r2, [r1, #0]
+   10c88:	e7f4      	b.n	10c74 <smack_exchange_handler+0x1b0>
+   10c8a:	2f08      	cmp	r7, #8
+   10c8c:	d9de      	bls.n	10c4c <smack_exchange_handler+0x188>
+   10c8e:	7a12      	ldrb	r2, [r2, #8]
+   10c90:	6869      	ldr	r1, [r5, #4]
+   10c92:	700a      	strb	r2, [r1, #0]
+   10c94:	e7ee      	b.n	10c74 <smack_exchange_handler+0x1b0>
+   10c96:	2f0f      	cmp	r7, #15
+   10c98:	d9d8      	bls.n	10c4c <smack_exchange_handler+0x188>
+   10c9a:	6893      	ldr	r3, [r2, #8]
+   10c9c:	68d2      	ldr	r2, [r2, #12]
+   10c9e:	6869      	ldr	r1, [r5, #4]
+   10ca0:	ba12      	rev	r2, r2
+   10ca2:	ba1b      	rev	r3, r3
+   10ca4:	c10c      	stmia	r1!, {r2, r3}
+   10ca6:	2380      	movs	r3, #128	; 0x80
+   10ca8:	b2a4      	uxth	r4, r4
+   10caa:	02db      	lsls	r3, r3, #11
+   10cac:	e7d1      	b.n	10c52 <smack_exchange_handler+0x18e>
+   10cae:	2f08      	cmp	r7, #8
+   10cb0:	d9cc      	bls.n	10c4c <smack_exchange_handler+0x188>
+   10cb2:	7a12      	ldrb	r2, [r2, #8]
+   10cb4:	1e51      	subs	r1, r2, #1
+   10cb6:	418a      	sbcs	r2, r1
+   10cb8:	e7ea      	b.n	10c90 <smack_exchange_handler+0x1cc>
+   10cba:	7953      	ldrb	r3, [r2, #5]
+   10cbc:	78ee      	ldrb	r6, [r5, #3]
+   10cbe:	429e      	cmp	r6, r3
+   10cc0:	d1c4      	bne.n	10c4c <smack_exchange_handler+0x188>
+   10cc2:	0033      	movs	r3, r6
+   10cc4:	3308      	adds	r3, #8
+   10cc6:	9305      	str	r3, [sp, #20]
+   10cc8:	429f      	cmp	r7, r3
+   10cca:	d3bf      	bcc.n	10c4c <smack_exchange_handler+0x188>
+   10ccc:	4b2a      	ldr	r3, [pc, #168]	; (10d78 <smack_exchange_handler+0x2b4>)
+   10cce:	6a9b      	ldr	r3, [r3, #40]	; 0x28
+   10cd0:	9306      	str	r3, [sp, #24]
+   10cd2:	4798      	blx	r3
+   10cd4:	9b05      	ldr	r3, [sp, #20]
+   10cd6:	0080      	lsls	r0, r0, #2
+   10cd8:	4283      	cmp	r3, r0
+   10cda:	d8b7      	bhi.n	10c4c <smack_exchange_handler+0x188>
+   10cdc:	0032      	movs	r2, r6
+   10cde:	492d      	ldr	r1, [pc, #180]	; (10d94 <smack_exchange_handler+0x2d0>)
+   10ce0:	6868      	ldr	r0, [r5, #4]
+   10ce2:	f000 fa03 	bl	110ec <memcpy>
+   10ce6:	e7de      	b.n	10ca6 <smack_exchange_handler+0x1e2>
+   10ce8:	7956      	ldrb	r6, [r2, #5]
+   10cea:	78eb      	ldrb	r3, [r5, #3]
+   10cec:	42b3      	cmp	r3, r6
+   10cee:	d3ad      	bcc.n	10c4c <smack_exchange_handler+0x188>
+   10cf0:	0033      	movs	r3, r6
+   10cf2:	3308      	adds	r3, #8
+   10cf4:	9305      	str	r3, [sp, #20]
+   10cf6:	429f      	cmp	r7, r3
+   10cf8:	d3a8      	bcc.n	10c4c <smack_exchange_handler+0x188>
+   10cfa:	4b1f      	ldr	r3, [pc, #124]	; (10d78 <smack_exchange_handler+0x2b4>)
+   10cfc:	6a9b      	ldr	r3, [r3, #40]	; 0x28
+   10cfe:	9306      	str	r3, [sp, #24]
+   10d00:	4798      	blx	r3
+   10d02:	9b05      	ldr	r3, [sp, #20]
+   10d04:	0080      	lsls	r0, r0, #2
+   10d06:	4283      	cmp	r3, r0
+   10d08:	d8a0      	bhi.n	10c4c <smack_exchange_handler+0x188>
+   10d0a:	78ea      	ldrb	r2, [r5, #3]
+   10d0c:	4921      	ldr	r1, [pc, #132]	; (10d94 <smack_exchange_handler+0x2d0>)
+   10d0e:	6868      	ldr	r0, [r5, #4]
+   10d10:	f000 fa3e 	bl	11190 <strncpy>
+   10d14:	78eb      	ldrb	r3, [r5, #3]
+   10d16:	42b3      	cmp	r3, r6
+   10d18:	d9c5      	bls.n	10ca6 <smack_exchange_handler+0x1e2>
+   10d1a:	2300      	movs	r3, #0
+   10d1c:	686a      	ldr	r2, [r5, #4]
+   10d1e:	5593      	strb	r3, [r2, r6]
+   10d20:	e7c1      	b.n	10ca6 <smack_exchange_handler+0x1e2>
+   10d22:	2480      	movs	r4, #128	; 0x80
+   10d24:	0c1b      	lsrs	r3, r3, #16
+   10d26:	03a4      	lsls	r4, r4, #14
+   10d28:	e740      	b.n	10bac <smack_exchange_handler+0xe8>
+   10d2a:	2f07      	cmp	r7, #7
+   10d2c:	d803      	bhi.n	10d36 <smack_exchange_handler+0x272>
+   10d2e:	2480      	movs	r4, #128	; 0x80
+   10d30:	0c36      	lsrs	r6, r6, #16
+   10d32:	0324      	lsls	r4, r4, #12
+   10d34:	e0dd      	b.n	10ef2 <smack_exchange_handler+0x42e>
+   10d36:	203f      	movs	r0, #63	; 0x3f
+   10d38:	4010      	ands	r0, r2
+   10d3a:	3801      	subs	r0, #1
+   10d3c:	2810      	cmp	r0, #16
+   10d3e:	d8f0      	bhi.n	10d22 <smack_exchange_handler+0x25e>
+   10d40:	4f11      	ldr	r7, [pc, #68]	; (10d88 <smack_exchange_handler+0x2c4>)
+   10d42:	f000 f9bf 	bl	110c4 <__gnu_thumb1_case_sqi>
+   10d46:	4a4a      	.short	0x4a4a
+   10d48:	0929294a 	.word	0x0929294a
+   10d4c:	ee383809 	.word	0xee383809
+   10d50:	eeeeeeee 	.word	0xeeeeeeee
+   10d54:	58ee      	.short	0x58ee
+   10d56:	6f          	.byte	0x6f
+   10d57:	00          	.byte	0x00
+   10d58:	0028      	movs	r0, r5
+   10d5a:	f7ff fe6f 	bl	10a3c <smack_exchange_notify_tx>
+   10d5e:	2304      	movs	r3, #4
+   10d60:	2480      	movs	r4, #128	; 0x80
+   10d62:	717b      	strb	r3, [r7, #5]
+   10d64:	686b      	ldr	r3, [r5, #4]
+   10d66:	0c36      	lsrs	r6, r6, #16
+   10d68:	681b      	ldr	r3, [r3, #0]
+   10d6a:	02e4      	lsls	r4, r4, #11
+   10d6c:	ba1b      	rev	r3, r3
+   10d6e:	4334      	orrs	r4, r6
+   10d70:	60bb      	str	r3, [r7, #8]
+   10d72:	260c      	movs	r6, #12
+   10d74:	e0bf      	b.n	10ef6 <smack_exchange_handler+0x432>
+   10d76:	46c0      	nop			; (mov r8, r8)
+   10d78:	000000c0 	.word	0x000000c0
+   10d7c:	000206a4 	.word	0x000206a4
+   10d80:	000206a2 	.word	0x000206a2
+   10d84:	000206a0 	.word	0x000206a0
+   10d88:	000206a8 	.word	0x000206a8
+   10d8c:	0000ffff 	.word	0x0000ffff
+   10d90:	ffff0000 	.word	0xffff0000
+   10d94:	000206b0 	.word	0x000206b0
+   10d98:	0028      	movs	r0, r5
+   10d9a:	f7ff fe4f 	bl	10a3c <smack_exchange_notify_tx>
+   10d9e:	2302      	movs	r3, #2
+   10da0:	2480      	movs	r4, #128	; 0x80
+   10da2:	717b      	strb	r3, [r7, #5]
+   10da4:	686b      	ldr	r3, [r5, #4]
+   10da6:	0c36      	lsrs	r6, r6, #16
+   10da8:	881b      	ldrh	r3, [r3, #0]
+   10daa:	02e4      	lsls	r4, r4, #11
+   10dac:	ba5b      	rev16	r3, r3
+   10dae:	4334      	orrs	r4, r6
+   10db0:	813b      	strh	r3, [r7, #8]
+   10db2:	260a      	movs	r6, #10
+   10db4:	e09f      	b.n	10ef6 <smack_exchange_handler+0x432>
+   10db6:	0028      	movs	r0, r5
+   10db8:	f7ff fe40 	bl	10a3c <smack_exchange_notify_tx>
+   10dbc:	2308      	movs	r3, #8
+   10dbe:	2480      	movs	r4, #128	; 0x80
+   10dc0:	686a      	ldr	r2, [r5, #4]
+   10dc2:	717b      	strb	r3, [r7, #5]
+   10dc4:	6813      	ldr	r3, [r2, #0]
+   10dc6:	6852      	ldr	r2, [r2, #4]
+   10dc8:	0c36      	lsrs	r6, r6, #16
+   10dca:	ba12      	rev	r2, r2
+   10dcc:	ba1b      	rev	r3, r3
+   10dce:	02e4      	lsls	r4, r4, #11
+   10dd0:	4334      	orrs	r4, r6
+   10dd2:	60ba      	str	r2, [r7, #8]
+   10dd4:	2610      	movs	r6, #16
+   10dd6:	60fb      	str	r3, [r7, #12]
+   10dd8:	e08d      	b.n	10ef6 <smack_exchange_handler+0x432>
+   10dda:	0028      	movs	r0, r5
+   10ddc:	f7ff fe2e 	bl	10a3c <smack_exchange_notify_tx>
+   10de0:	2301      	movs	r3, #1
+   10de2:	2480      	movs	r4, #128	; 0x80
+   10de4:	717b      	strb	r3, [r7, #5]
+   10de6:	686b      	ldr	r3, [r5, #4]
    10de8:	0c36      	lsrs	r6, r6, #16
-   10dea:	0324      	lsls	r4, r4, #12
-   10dec:	e0dd      	b.n	10faa <smack_exchange_handler+0x42e>
-   10dee:	203f      	movs	r0, #63	; 0x3f
-   10df0:	4010      	ands	r0, r2
-   10df2:	3801      	subs	r0, #1
-   10df4:	2810      	cmp	r0, #16
-   10df6:	d8f0      	bhi.n	10dda <smack_exchange_handler+0x25e>
-   10df8:	4f11      	ldr	r7, [pc, #68]	; (10e40 <smack_exchange_handler+0x2c4>)
-   10dfa:	f000 fa4f 	bl	1129c <__gnu_thumb1_case_sqi>
-   10dfe:	4a4a      	.short	0x4a4a
-   10e00:	0929294a 	.word	0x0929294a
-   10e04:	ee383809 	.word	0xee383809
-   10e08:	eeeeeeee 	.word	0xeeeeeeee
-   10e0c:	58ee      	.short	0x58ee
-   10e0e:	6f          	.byte	0x6f
-   10e0f:	00          	.byte	0x00
-   10e10:	0028      	movs	r0, r5
-   10e12:	f7ff fe6f 	bl	10af4 <smack_exchange_notify_tx>
-   10e16:	2304      	movs	r3, #4
-   10e18:	2480      	movs	r4, #128	; 0x80
-   10e1a:	717b      	strb	r3, [r7, #5]
-   10e1c:	686b      	ldr	r3, [r5, #4]
-   10e1e:	0c36      	lsrs	r6, r6, #16
-   10e20:	681b      	ldr	r3, [r3, #0]
-   10e22:	02e4      	lsls	r4, r4, #11
-   10e24:	ba1b      	rev	r3, r3
-   10e26:	4334      	orrs	r4, r6
-   10e28:	60bb      	str	r3, [r7, #8]
-   10e2a:	260c      	movs	r6, #12
-   10e2c:	e0bf      	b.n	10fae <smack_exchange_handler+0x432>
-   10e2e:	46c0      	nop			; (mov r8, r8)
-   10e30:	000000c0 	.word	0x000000c0
-   10e34:	000206a4 	.word	0x000206a4
-   10e38:	000206a2 	.word	0x000206a2
-   10e3c:	000206a0 	.word	0x000206a0
-   10e40:	000206a8 	.word	0x000206a8
-   10e44:	0000ffff 	.word	0x0000ffff
-   10e48:	ffff0000 	.word	0xffff0000
-   10e4c:	000206b0 	.word	0x000206b0
-   10e50:	0028      	movs	r0, r5
-   10e52:	f7ff fe4f 	bl	10af4 <smack_exchange_notify_tx>
-   10e56:	2302      	movs	r3, #2
-   10e58:	2480      	movs	r4, #128	; 0x80
-   10e5a:	717b      	strb	r3, [r7, #5]
-   10e5c:	686b      	ldr	r3, [r5, #4]
-   10e5e:	0c36      	lsrs	r6, r6, #16
-   10e60:	881b      	ldrh	r3, [r3, #0]
-   10e62:	02e4      	lsls	r4, r4, #11
-   10e64:	ba5b      	rev16	r3, r3
-   10e66:	4334      	orrs	r4, r6
-   10e68:	813b      	strh	r3, [r7, #8]
-   10e6a:	260a      	movs	r6, #10
-   10e6c:	e09f      	b.n	10fae <smack_exchange_handler+0x432>
-   10e6e:	0028      	movs	r0, r5
-   10e70:	f7ff fe40 	bl	10af4 <smack_exchange_notify_tx>
-   10e74:	2308      	movs	r3, #8
-   10e76:	2480      	movs	r4, #128	; 0x80
-   10e78:	686a      	ldr	r2, [r5, #4]
-   10e7a:	717b      	strb	r3, [r7, #5]
-   10e7c:	6813      	ldr	r3, [r2, #0]
-   10e7e:	6852      	ldr	r2, [r2, #4]
-   10e80:	0c36      	lsrs	r6, r6, #16
-   10e82:	ba12      	rev	r2, r2
-   10e84:	ba1b      	rev	r3, r3
-   10e86:	02e4      	lsls	r4, r4, #11
-   10e88:	4334      	orrs	r4, r6
-   10e8a:	60ba      	str	r2, [r7, #8]
-   10e8c:	2610      	movs	r6, #16
-   10e8e:	60fb      	str	r3, [r7, #12]
-   10e90:	e08d      	b.n	10fae <smack_exchange_handler+0x432>
-   10e92:	0028      	movs	r0, r5
-   10e94:	f7ff fe2e 	bl	10af4 <smack_exchange_notify_tx>
-   10e98:	2301      	movs	r3, #1
-   10e9a:	2480      	movs	r4, #128	; 0x80
-   10e9c:	717b      	strb	r3, [r7, #5]
-   10e9e:	686b      	ldr	r3, [r5, #4]
-   10ea0:	0c36      	lsrs	r6, r6, #16
-   10ea2:	781b      	ldrb	r3, [r3, #0]
-   10ea4:	02e4      	lsls	r4, r4, #11
-   10ea6:	4334      	orrs	r4, r6
-   10ea8:	723b      	strb	r3, [r7, #8]
-   10eaa:	2609      	movs	r6, #9
-   10eac:	e07f      	b.n	10fae <smack_exchange_handler+0x432>
-   10eae:	797b      	ldrb	r3, [r7, #5]
-   10eb0:	2b00      	cmp	r3, #0
-   10eb2:	d002      	beq.n	10eba <smack_exchange_handler+0x33e>
-   10eb4:	78ea      	ldrb	r2, [r5, #3]
-   10eb6:	429a      	cmp	r2, r3
-   10eb8:	d195      	bne.n	10de6 <smack_exchange_handler+0x26a>
-   10eba:	0028      	movs	r0, r5
-   10ebc:	f7ff fe1a 	bl	10af4 <smack_exchange_notify_tx>
-   10ec0:	78ea      	ldrb	r2, [r5, #3]
-   10ec2:	4b52      	ldr	r3, [pc, #328]	; (1100c <smack_exchange_handler+0x490>)
-   10ec4:	6869      	ldr	r1, [r5, #4]
-   10ec6:	4852      	ldr	r0, [pc, #328]	; (11010 <smack_exchange_handler+0x494>)
-   10ec8:	715a      	strb	r2, [r3, #5]
-   10eca:	f000 f9fb 	bl	112c4 <memcpy>
-   10ece:	78ee      	ldrb	r6, [r5, #3]
-   10ed0:	3608      	adds	r6, #8
-   10ed2:	2380      	movs	r3, #128	; 0x80
-   10ed4:	b2a4      	uxth	r4, r4
-   10ed6:	02db      	lsls	r3, r3, #11
-   10ed8:	431c      	orrs	r4, r3
-   10eda:	e068      	b.n	10fae <smack_exchange_handler+0x432>
-   10edc:	0028      	movs	r0, r5
-   10ede:	f7ff fe09 	bl	10af4 <smack_exchange_notify_tx>
-   10ee2:	4b4a      	ldr	r3, [pc, #296]	; (1100c <smack_exchange_handler+0x490>)
-   10ee4:	78ea      	ldrb	r2, [r5, #3]
-   10ee6:	795b      	ldrb	r3, [r3, #5]
-   10ee8:	b296      	uxth	r6, r2
-   10eea:	2b00      	cmp	r3, #0
-   10eec:	d002      	beq.n	10ef4 <smack_exchange_handler+0x378>
-   10eee:	429a      	cmp	r2, r3
-   10ef0:	d900      	bls.n	10ef4 <smack_exchange_handler+0x378>
-   10ef2:	b29e      	uxth	r6, r3
-   10ef4:	4f46      	ldr	r7, [pc, #280]	; (11010 <smack_exchange_handler+0x494>)
-   10ef6:	6869      	ldr	r1, [r5, #4]
-   10ef8:	0032      	movs	r2, r6
-   10efa:	0038      	movs	r0, r7
-   10efc:	f000 fa34 	bl	11368 <strncpy>
-   10f00:	78e9      	ldrb	r1, [r5, #3]
-   10f02:	428e      	cmp	r6, r1
-   10f04:	d203      	bcs.n	10f0e <smack_exchange_handler+0x392>
-   10f06:	4b41      	ldr	r3, [pc, #260]	; (1100c <smack_exchange_handler+0x490>)
-   10f08:	199e      	adds	r6, r3, r6
-   10f0a:	2300      	movs	r3, #0
-   10f0c:	7233      	strb	r3, [r6, #8]
-   10f0e:	0038      	movs	r0, r7
-   10f10:	f000 fa60 	bl	113d4 <strnlen>
-   10f14:	4b3d      	ldr	r3, [pc, #244]	; (1100c <smack_exchange_handler+0x490>)
-   10f16:	7158      	strb	r0, [r3, #5]
-   10f18:	3008      	adds	r0, #8
-   10f1a:	b286      	uxth	r6, r0
-   10f1c:	e7d9      	b.n	10ed2 <smack_exchange_handler+0x356>
-   10f1e:	5cfa      	ldrb	r2, [r7, r3]
-   10f20:	493a      	ldr	r1, [pc, #232]	; (1100c <smack_exchange_handler+0x490>)
-   10f22:	1998      	adds	r0, r3, r6
-   10f24:	3301      	adds	r3, #1
-   10f26:	540a      	strb	r2, [r1, r0]
-   10f28:	b29b      	uxth	r3, r3
-   10f2a:	9a01      	ldr	r2, [sp, #4]
-   10f2c:	4293      	cmp	r3, r2
-   10f2e:	dbf6      	blt.n	10f1e <smack_exchange_handler+0x3a2>
-   10f30:	002b      	movs	r3, r5
-   10f32:	330f      	adds	r3, #15
-   10f34:	b29b      	uxth	r3, r3
-   10f36:	091b      	lsrs	r3, r3, #4
-   10f38:	1c1f      	adds	r7, r3, #0
-   10f3a:	2b0f      	cmp	r3, #15
-   10f3c:	d900      	bls.n	10f40 <smack_exchange_handler+0x3c4>
-   10f3e:	270f      	movs	r7, #15
-   10f40:	4e32      	ldr	r6, [pc, #200]	; (1100c <smack_exchange_handler+0x490>)
-   10f42:	2200      	movs	r2, #0
-   10f44:	0031      	movs	r1, r6
-   10f46:	0030      	movs	r0, r6
-   10f48:	b2bf      	uxth	r7, r7
-   10f4a:	f000 f91d 	bl	11188 <calc_aes_ba>
-   10f4e:	9a03      	ldr	r2, [sp, #12]
-   10f50:	0033      	movs	r3, r6
-   10f52:	4297      	cmp	r7, r2
-   10f54:	d03e      	beq.n	10fd4 <smack_exchange_handler+0x458>
-   10f56:	001e      	movs	r6, r3
-   10f58:	2200      	movs	r2, #0
-   10f5a:	3610      	adds	r6, #16
-   10f5c:	58b1      	ldr	r1, [r6, r2]
-   10f5e:	5898      	ldr	r0, [r3, r2]
-   10f60:	4041      	eors	r1, r0
-   10f62:	50b1      	str	r1, [r6, r2]
-   10f64:	3204      	adds	r2, #4
-   10f66:	2a10      	cmp	r2, #16
-   10f68:	d1f8      	bne.n	10f5c <smack_exchange_handler+0x3e0>
-   10f6a:	2200      	movs	r2, #0
-   10f6c:	0031      	movs	r1, r6
-   10f6e:	0030      	movs	r0, r6
-   10f70:	f000 f90a 	bl	11188 <calc_aes_ba>
-   10f74:	9b03      	ldr	r3, [sp, #12]
-   10f76:	3301      	adds	r3, #1
-   10f78:	b29b      	uxth	r3, r3
-   10f7a:	9303      	str	r3, [sp, #12]
-   10f7c:	e7e7      	b.n	10f4e <smack_exchange_handler+0x3d2>
-   10f7e:	1baa      	subs	r2, r5, r6
-   10f80:	2300      	movs	r3, #0
-   10f82:	9201      	str	r2, [sp, #4]
-   10f84:	e7d1      	b.n	10f2a <smack_exchange_handler+0x3ae>
-   10f86:	4b21      	ldr	r3, [pc, #132]	; (1100c <smack_exchange_handler+0x490>)
-   10f88:	78aa      	ldrb	r2, [r5, #2]
-   10f8a:	791b      	ldrb	r3, [r3, #4]
-   10f8c:	0426      	lsls	r6, r4, #16
-   10f8e:	0019      	movs	r1, r3
-   10f90:	4051      	eors	r1, r2
-   10f92:	0689      	lsls	r1, r1, #26
-   10f94:	d106      	bne.n	10fa4 <smack_exchange_handler+0x428>
-   10f96:	9901      	ldr	r1, [sp, #4]
-   10f98:	2900      	cmp	r1, #0
-   10f9a:	da00      	bge.n	10f9e <smack_exchange_handler+0x422>
-   10f9c:	e693      	b.n	10cc6 <smack_exchange_handler+0x14a>
-   10f9e:	0651      	lsls	r1, r2, #25
-   10fa0:	d400      	bmi.n	10fa4 <smack_exchange_handler+0x428>
-   10fa2:	e690      	b.n	10cc6 <smack_exchange_handler+0x14a>
-   10fa4:	2480      	movs	r4, #128	; 0x80
-   10fa6:	0c36      	lsrs	r6, r6, #16
-   10fa8:	03a4      	lsls	r4, r4, #14
-   10faa:	4334      	orrs	r4, r6
-   10fac:	2600      	movs	r6, #0
-   10fae:	9b01      	ldr	r3, [sp, #4]
-   10fb0:	2b00      	cmp	r3, #0
-   10fb2:	da16      	bge.n	10fe2 <smack_exchange_handler+0x466>
-   10fb4:	af08      	add	r7, sp, #32
-   10fb6:	0038      	movs	r0, r7
-   10fb8:	f000 f964 	bl	11284 <generate_random_number_fast>
-   10fbc:	9b08      	ldr	r3, [sp, #32]
-   10fbe:	4a13      	ldr	r2, [pc, #76]	; (1100c <smack_exchange_handler+0x490>)
-   10fc0:	0035      	movs	r5, r6
-   10fc2:	6013      	str	r3, [r2, #0]
-   10fc4:	230f      	movs	r3, #15
-   10fc6:	350f      	adds	r5, #15
-   10fc8:	439d      	bics	r5, r3
-   10fca:	b2ad      	uxth	r5, r5
-   10fcc:	42ae      	cmp	r6, r5
-   10fce:	d3d6      	bcc.n	10f7e <smack_exchange_handler+0x402>
-   10fd0:	2d00      	cmp	r5, #0
-   10fd2:	d1ad      	bne.n	10f30 <smack_exchange_handler+0x3b4>
-   10fd4:	002e      	movs	r6, r5
-   10fd6:	4b0f      	ldr	r3, [pc, #60]	; (11014 <smack_exchange_handler+0x498>)
-   10fd8:	0c22      	lsrs	r2, r4, #16
-   10fda:	4313      	orrs	r3, r2
-   10fdc:	041b      	lsls	r3, r3, #16
-   10fde:	b2a4      	uxth	r4, r4
-   10fe0:	431c      	orrs	r4, r3
-   10fe2:	1cf2      	adds	r2, r6, #3
-   10fe4:	b292      	uxth	r2, r2
-   10fe6:	1c13      	adds	r3, r2, #0
-   10fe8:	2af8      	cmp	r2, #248	; 0xf8
-   10fea:	d900      	bls.n	10fee <smack_exchange_handler+0x472>
-   10fec:	23f8      	movs	r3, #248	; 0xf8
-   10fee:	b29b      	uxth	r3, r3
-   10ff0:	4906      	ldr	r1, [pc, #24]	; (1100c <smack_exchange_handler+0x490>)
-   10ff2:	089b      	lsrs	r3, r3, #2
-   10ff4:	3b01      	subs	r3, #1
-   10ff6:	4a08      	ldr	r2, [pc, #32]	; (11018 <smack_exchange_handler+0x49c>)
-   10ff8:	b29b      	uxth	r3, r3
-   10ffa:	4293      	cmp	r3, r2
-   10ffc:	d100      	bne.n	11000 <smack_exchange_handler+0x484>
-   10ffe:	e5d1      	b.n	10ba4 <smack_exchange_handler+0x28>
-   11000:	c904      	ldmia	r1!, {r2}
-   11002:	9802      	ldr	r0, [sp, #8]
-   11004:	ba12      	rev	r2, r2
-   11006:	c004      	stmia	r0!, {r2}
-   11008:	9002      	str	r0, [sp, #8]
-   1100a:	e7f3      	b.n	10ff4 <smack_exchange_handler+0x478>
-   1100c:	000206a8 	.word	0x000206a8
-   11010:	000206b0 	.word	0x000206b0
-   11014:	ffff8000 	.word	0xffff8000
-   11018:	0000ffff 	.word	0x0000ffff
+   10dea:	781b      	ldrb	r3, [r3, #0]
+   10dec:	02e4      	lsls	r4, r4, #11
+   10dee:	4334      	orrs	r4, r6
+   10df0:	723b      	strb	r3, [r7, #8]
+   10df2:	2609      	movs	r6, #9
+   10df4:	e07f      	b.n	10ef6 <smack_exchange_handler+0x432>
+   10df6:	797b      	ldrb	r3, [r7, #5]
+   10df8:	2b00      	cmp	r3, #0
+   10dfa:	d002      	beq.n	10e02 <smack_exchange_handler+0x33e>
+   10dfc:	78ea      	ldrb	r2, [r5, #3]
+   10dfe:	429a      	cmp	r2, r3
+   10e00:	d195      	bne.n	10d2e <smack_exchange_handler+0x26a>
+   10e02:	0028      	movs	r0, r5
+   10e04:	f7ff fe1a 	bl	10a3c <smack_exchange_notify_tx>
+   10e08:	78ea      	ldrb	r2, [r5, #3]
+   10e0a:	4b52      	ldr	r3, [pc, #328]	; (10f54 <smack_exchange_handler+0x490>)
+   10e0c:	6869      	ldr	r1, [r5, #4]
+   10e0e:	4852      	ldr	r0, [pc, #328]	; (10f58 <smack_exchange_handler+0x494>)
+   10e10:	715a      	strb	r2, [r3, #5]
+   10e12:	f000 f96b 	bl	110ec <memcpy>
+   10e16:	78ee      	ldrb	r6, [r5, #3]
+   10e18:	3608      	adds	r6, #8
+   10e1a:	2380      	movs	r3, #128	; 0x80
+   10e1c:	b2a4      	uxth	r4, r4
+   10e1e:	02db      	lsls	r3, r3, #11
+   10e20:	431c      	orrs	r4, r3
+   10e22:	e068      	b.n	10ef6 <smack_exchange_handler+0x432>
+   10e24:	0028      	movs	r0, r5
+   10e26:	f7ff fe09 	bl	10a3c <smack_exchange_notify_tx>
+   10e2a:	4b4a      	ldr	r3, [pc, #296]	; (10f54 <smack_exchange_handler+0x490>)
+   10e2c:	78ea      	ldrb	r2, [r5, #3]
+   10e2e:	795b      	ldrb	r3, [r3, #5]
+   10e30:	b296      	uxth	r6, r2
+   10e32:	2b00      	cmp	r3, #0
+   10e34:	d002      	beq.n	10e3c <smack_exchange_handler+0x378>
+   10e36:	429a      	cmp	r2, r3
+   10e38:	d900      	bls.n	10e3c <smack_exchange_handler+0x378>
+   10e3a:	b29e      	uxth	r6, r3
+   10e3c:	4f46      	ldr	r7, [pc, #280]	; (10f58 <smack_exchange_handler+0x494>)
+   10e3e:	6869      	ldr	r1, [r5, #4]
+   10e40:	0032      	movs	r2, r6
+   10e42:	0038      	movs	r0, r7
+   10e44:	f000 f9a4 	bl	11190 <strncpy>
+   10e48:	78e9      	ldrb	r1, [r5, #3]
+   10e4a:	428e      	cmp	r6, r1
+   10e4c:	d203      	bcs.n	10e56 <smack_exchange_handler+0x392>
+   10e4e:	4b41      	ldr	r3, [pc, #260]	; (10f54 <smack_exchange_handler+0x490>)
+   10e50:	199e      	adds	r6, r3, r6
+   10e52:	2300      	movs	r3, #0
+   10e54:	7233      	strb	r3, [r6, #8]
+   10e56:	0038      	movs	r0, r7
+   10e58:	f000 f9d0 	bl	111fc <strnlen>
+   10e5c:	4b3d      	ldr	r3, [pc, #244]	; (10f54 <smack_exchange_handler+0x490>)
+   10e5e:	7158      	strb	r0, [r3, #5]
+   10e60:	3008      	adds	r0, #8
+   10e62:	b286      	uxth	r6, r0
+   10e64:	e7d9      	b.n	10e1a <smack_exchange_handler+0x356>
+   10e66:	5cfa      	ldrb	r2, [r7, r3]
+   10e68:	493a      	ldr	r1, [pc, #232]	; (10f54 <smack_exchange_handler+0x490>)
+   10e6a:	1998      	adds	r0, r3, r6
+   10e6c:	3301      	adds	r3, #1
+   10e6e:	540a      	strb	r2, [r1, r0]
+   10e70:	b29b      	uxth	r3, r3
+   10e72:	9a01      	ldr	r2, [sp, #4]
+   10e74:	4293      	cmp	r3, r2
+   10e76:	dbf6      	blt.n	10e66 <smack_exchange_handler+0x3a2>
+   10e78:	002b      	movs	r3, r5
+   10e7a:	330f      	adds	r3, #15
+   10e7c:	b29b      	uxth	r3, r3
+   10e7e:	091b      	lsrs	r3, r3, #4
+   10e80:	1c1f      	adds	r7, r3, #0
+   10e82:	2b0f      	cmp	r3, #15
+   10e84:	d900      	bls.n	10e88 <smack_exchange_handler+0x3c4>
+   10e86:	270f      	movs	r7, #15
+   10e88:	4e32      	ldr	r6, [pc, #200]	; (10f54 <smack_exchange_handler+0x490>)
+   10e8a:	2200      	movs	r2, #0
+   10e8c:	0031      	movs	r1, r6
+   10e8e:	0030      	movs	r0, r6
+   10e90:	b2bf      	uxth	r7, r7
+   10e92:	f000 f88d 	bl	10fb0 <calc_aes_ba>
+   10e96:	9a03      	ldr	r2, [sp, #12]
+   10e98:	0033      	movs	r3, r6
+   10e9a:	4297      	cmp	r7, r2
+   10e9c:	d03e      	beq.n	10f1c <smack_exchange_handler+0x458>
+   10e9e:	001e      	movs	r6, r3
+   10ea0:	2200      	movs	r2, #0
+   10ea2:	3610      	adds	r6, #16
+   10ea4:	58b1      	ldr	r1, [r6, r2]
+   10ea6:	5898      	ldr	r0, [r3, r2]
+   10ea8:	4041      	eors	r1, r0
+   10eaa:	50b1      	str	r1, [r6, r2]
+   10eac:	3204      	adds	r2, #4
+   10eae:	2a10      	cmp	r2, #16
+   10eb0:	d1f8      	bne.n	10ea4 <smack_exchange_handler+0x3e0>
+   10eb2:	2200      	movs	r2, #0
+   10eb4:	0031      	movs	r1, r6
+   10eb6:	0030      	movs	r0, r6
+   10eb8:	f000 f87a 	bl	10fb0 <calc_aes_ba>
+   10ebc:	9b03      	ldr	r3, [sp, #12]
+   10ebe:	3301      	adds	r3, #1
+   10ec0:	b29b      	uxth	r3, r3
+   10ec2:	9303      	str	r3, [sp, #12]
+   10ec4:	e7e7      	b.n	10e96 <smack_exchange_handler+0x3d2>
+   10ec6:	1baa      	subs	r2, r5, r6
+   10ec8:	2300      	movs	r3, #0
+   10eca:	9201      	str	r2, [sp, #4]
+   10ecc:	e7d1      	b.n	10e72 <smack_exchange_handler+0x3ae>
+   10ece:	4b21      	ldr	r3, [pc, #132]	; (10f54 <smack_exchange_handler+0x490>)
+   10ed0:	78aa      	ldrb	r2, [r5, #2]
+   10ed2:	791b      	ldrb	r3, [r3, #4]
+   10ed4:	0426      	lsls	r6, r4, #16
+   10ed6:	0019      	movs	r1, r3
+   10ed8:	4051      	eors	r1, r2
+   10eda:	0689      	lsls	r1, r1, #26
+   10edc:	d106      	bne.n	10eec <smack_exchange_handler+0x428>
+   10ede:	9901      	ldr	r1, [sp, #4]
+   10ee0:	2900      	cmp	r1, #0
+   10ee2:	da00      	bge.n	10ee6 <smack_exchange_handler+0x422>
+   10ee4:	e693      	b.n	10c0e <smack_exchange_handler+0x14a>
+   10ee6:	0651      	lsls	r1, r2, #25
+   10ee8:	d400      	bmi.n	10eec <smack_exchange_handler+0x428>
+   10eea:	e690      	b.n	10c0e <smack_exchange_handler+0x14a>
+   10eec:	2480      	movs	r4, #128	; 0x80
+   10eee:	0c36      	lsrs	r6, r6, #16
+   10ef0:	03a4      	lsls	r4, r4, #14
+   10ef2:	4334      	orrs	r4, r6
+   10ef4:	2600      	movs	r6, #0
+   10ef6:	9b01      	ldr	r3, [sp, #4]
+   10ef8:	2b00      	cmp	r3, #0
+   10efa:	da16      	bge.n	10f2a <smack_exchange_handler+0x466>
+   10efc:	af08      	add	r7, sp, #32
+   10efe:	0038      	movs	r0, r7
+   10f00:	f000 f8d4 	bl	110ac <generate_random_number_fast>
+   10f04:	9b08      	ldr	r3, [sp, #32]
+   10f06:	4a13      	ldr	r2, [pc, #76]	; (10f54 <smack_exchange_handler+0x490>)
+   10f08:	0035      	movs	r5, r6
+   10f0a:	6013      	str	r3, [r2, #0]
+   10f0c:	230f      	movs	r3, #15
+   10f0e:	350f      	adds	r5, #15
+   10f10:	439d      	bics	r5, r3
+   10f12:	b2ad      	uxth	r5, r5
+   10f14:	42ae      	cmp	r6, r5
+   10f16:	d3d6      	bcc.n	10ec6 <smack_exchange_handler+0x402>
+   10f18:	2d00      	cmp	r5, #0
+   10f1a:	d1ad      	bne.n	10e78 <smack_exchange_handler+0x3b4>
+   10f1c:	002e      	movs	r6, r5
+   10f1e:	4b0f      	ldr	r3, [pc, #60]	; (10f5c <smack_exchange_handler+0x498>)
+   10f20:	0c22      	lsrs	r2, r4, #16
+   10f22:	4313      	orrs	r3, r2
+   10f24:	041b      	lsls	r3, r3, #16
+   10f26:	b2a4      	uxth	r4, r4
+   10f28:	431c      	orrs	r4, r3
+   10f2a:	1cf2      	adds	r2, r6, #3
+   10f2c:	b292      	uxth	r2, r2
+   10f2e:	1c13      	adds	r3, r2, #0
+   10f30:	2af8      	cmp	r2, #248	; 0xf8
+   10f32:	d900      	bls.n	10f36 <smack_exchange_handler+0x472>
+   10f34:	23f8      	movs	r3, #248	; 0xf8
+   10f36:	b29b      	uxth	r3, r3
+   10f38:	4906      	ldr	r1, [pc, #24]	; (10f54 <smack_exchange_handler+0x490>)
+   10f3a:	089b      	lsrs	r3, r3, #2
+   10f3c:	3b01      	subs	r3, #1
+   10f3e:	4a08      	ldr	r2, [pc, #32]	; (10f60 <smack_exchange_handler+0x49c>)
+   10f40:	b29b      	uxth	r3, r3
+   10f42:	4293      	cmp	r3, r2
+   10f44:	d100      	bne.n	10f48 <smack_exchange_handler+0x484>
+   10f46:	e5d1      	b.n	10aec <smack_exchange_handler+0x28>
+   10f48:	c904      	ldmia	r1!, {r2}
+   10f4a:	9802      	ldr	r0, [sp, #8]
+   10f4c:	ba12      	rev	r2, r2
+   10f4e:	c004      	stmia	r0!, {r2}
+   10f50:	9002      	str	r0, [sp, #8]
+   10f52:	e7f3      	b.n	10f3c <smack_exchange_handler+0x478>
+   10f54:	000206a8 	.word	0x000206a8
+   10f58:	000206b0 	.word	0x000206b0
+   10f5c:	ffff8000 	.word	0xffff8000
+   10f60:	0000ffff 	.word	0x0000ffff
 
-0001101c <sys_tim_set_matrix>:
-   1101c:	2301      	movs	r3, #1
-   1101e:	3004      	adds	r0, #4
-   11020:	3909      	subs	r1, #9
-   11022:	4083      	lsls	r3, r0
-   11024:	b500      	push	{lr}
-   11026:	0008      	movs	r0, r1
-   11028:	2905      	cmp	r1, #5
-   1102a:	d806      	bhi.n	1103a <sys_tim_set_matrix+0x1e>
-   1102c:	f000 f940 	bl	112b0 <__gnu_thumb1_case_uqi>
-   11030:	0a080603 	.word	0x0a080603
-   11034:	0e0c      	.short	0x0e0c
-   11036:	4a06      	ldr	r2, [pc, #24]	; (11050 <sys_tim_set_matrix+0x34>)
-   11038:	6013      	str	r3, [r2, #0]
-   1103a:	bd00      	pop	{pc}
-   1103c:	4a05      	ldr	r2, [pc, #20]	; (11054 <sys_tim_set_matrix+0x38>)
-   1103e:	e7fb      	b.n	11038 <sys_tim_set_matrix+0x1c>
-   11040:	4a05      	ldr	r2, [pc, #20]	; (11058 <sys_tim_set_matrix+0x3c>)
-   11042:	e7f9      	b.n	11038 <sys_tim_set_matrix+0x1c>
-   11044:	4a05      	ldr	r2, [pc, #20]	; (1105c <sys_tim_set_matrix+0x40>)
-   11046:	e7f7      	b.n	11038 <sys_tim_set_matrix+0x1c>
-   11048:	4a05      	ldr	r2, [pc, #20]	; (11060 <sys_tim_set_matrix+0x44>)
-   1104a:	e7f5      	b.n	11038 <sys_tim_set_matrix+0x1c>
-   1104c:	4a05      	ldr	r2, [pc, #20]	; (11064 <sys_tim_set_matrix+0x48>)
-   1104e:	e7f3      	b.n	11038 <sys_tim_set_matrix+0x1c>
-   11050:	20015084 	.word	0x20015084
-   11054:	20015088 	.word	0x20015088
-   11058:	2001508c 	.word	0x2001508c
-   1105c:	20015090 	.word	0x20015090
-   11060:	20015094 	.word	0x20015094
-   11064:	20015098 	.word	0x20015098
+00010f64 <aes_load_key_ba>:
+   10f64:	2200      	movs	r2, #0
+   10f66:	4b0c      	ldr	r3, [pc, #48]	; (10f98 <aes_load_key_ba+0x34>)
+   10f68:	b510      	push	{r4, lr}
+   10f6a:	601a      	str	r2, [r3, #0]
+   10f6c:	3204      	adds	r2, #4
+   10f6e:	601a      	str	r2, [r3, #0]
+   10f70:	6803      	ldr	r3, [r0, #0]
+   10f72:	4a0a      	ldr	r2, [pc, #40]	; (10f9c <aes_load_key_ba+0x38>)
+   10f74:	ba1b      	rev	r3, r3
+   10f76:	6013      	str	r3, [r2, #0]
+   10f78:	6843      	ldr	r3, [r0, #4]
+   10f7a:	4a09      	ldr	r2, [pc, #36]	; (10fa0 <aes_load_key_ba+0x3c>)
+   10f7c:	ba1b      	rev	r3, r3
+   10f7e:	6013      	str	r3, [r2, #0]
+   10f80:	6883      	ldr	r3, [r0, #8]
+   10f82:	4a08      	ldr	r2, [pc, #32]	; (10fa4 <aes_load_key_ba+0x40>)
+   10f84:	ba1b      	rev	r3, r3
+   10f86:	6013      	str	r3, [r2, #0]
+   10f88:	68c3      	ldr	r3, [r0, #12]
+   10f8a:	4a07      	ldr	r2, [pc, #28]	; (10fa8 <aes_load_key_ba+0x44>)
+   10f8c:	ba1b      	rev	r3, r3
+   10f8e:	6013      	str	r3, [r2, #0]
+   10f90:	4b06      	ldr	r3, [pc, #24]	; (10fac <aes_load_key_ba+0x48>)
+   10f92:	681b      	ldr	r3, [r3, #0]
+   10f94:	4798      	blx	r3
+   10f96:	bd10      	pop	{r4, pc}
+   10f98:	2000c400 	.word	0x2000c400
+   10f9c:	2000c424 	.word	0x2000c424
+   10fa0:	2000c428 	.word	0x2000c428
+   10fa4:	2000c42c 	.word	0x2000c42c
+   10fa8:	2000c430 	.word	0x2000c430
+   10fac:	000000c0 	.word	0x000000c0
 
-00011068 <sys_tim_singleshot_32>:
-   11068:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
-   1106a:	0006      	movs	r6, r0
-   1106c:	0014      	movs	r4, r2
-   1106e:	2805      	cmp	r0, #5
-   11070:	d850      	bhi.n	11114 <sys_tim_singleshot_32+0xac>
-   11072:	0c0b      	lsrs	r3, r1, #16
-   11074:	9300      	str	r3, [sp, #0]
-   11076:	b28b      	uxth	r3, r1
-   11078:	2108      	movs	r1, #8
-   1107a:	4a27      	ldr	r2, [pc, #156]	; (11118 <sys_tim_singleshot_32+0xb0>)
-   1107c:	9301      	str	r3, [sp, #4]
-   1107e:	6813      	ldr	r3, [r2, #0]
-   11080:	430b      	orrs	r3, r1
-   11082:	6013      	str	r3, [r2, #0]
-   11084:	0021      	movs	r1, r4
-   11086:	f7ff ffc9 	bl	1101c <sys_tim_set_matrix>
-   1108a:	2180      	movs	r1, #128	; 0x80
-   1108c:	4b23      	ldr	r3, [pc, #140]	; (1111c <sys_tim_singleshot_32+0xb4>)
-   1108e:	0170      	lsls	r0, r6, #5
-   11090:	18c2      	adds	r2, r0, r3
-   11092:	4b23      	ldr	r3, [pc, #140]	; (11120 <sys_tim_singleshot_32+0xb8>)
-   11094:	0609      	lsls	r1, r1, #24
-   11096:	6013      	str	r3, [r2, #0]
-   11098:	4b22      	ldr	r3, [pc, #136]	; (11124 <sys_tim_singleshot_32+0xbc>)
-   1109a:	18c3      	adds	r3, r0, r3
-   1109c:	6019      	str	r1, [r3, #0]
-   1109e:	213f      	movs	r1, #63	; 0x3f
-   110a0:	4b21      	ldr	r3, [pc, #132]	; (11128 <sys_tim_singleshot_32+0xc0>)
-   110a2:	18c3      	adds	r3, r0, r3
-   110a4:	6019      	str	r1, [r3, #0]
-   110a6:	b261      	sxtb	r1, r4
-   110a8:	468c      	mov	ip, r1
-   110aa:	2900      	cmp	r1, #0
-   110ac:	db05      	blt.n	110ba <sys_tim_singleshot_32+0x52>
-   110ae:	261f      	movs	r6, #31
-   110b0:	2101      	movs	r1, #1
-   110b2:	4026      	ands	r6, r4
-   110b4:	40b1      	lsls	r1, r6
-   110b6:	4e1d      	ldr	r6, [pc, #116]	; (1112c <sys_tim_singleshot_32+0xc4>)
-   110b8:	6031      	str	r1, [r6, #0]
-   110ba:	491d      	ldr	r1, [pc, #116]	; (11130 <sys_tim_singleshot_32+0xc8>)
-   110bc:	1846      	adds	r6, r0, r1
-   110be:	491d      	ldr	r1, [pc, #116]	; (11134 <sys_tim_singleshot_32+0xcc>)
-   110c0:	1847      	adds	r7, r0, r1
-   110c2:	e006      	b.n	110d2 <sys_tim_singleshot_32+0x6a>
-   110c4:	2101      	movs	r1, #1
-   110c6:	6031      	str	r1, [r6, #0]
-   110c8:	bf20      	wfe
-   110ca:	2501      	movs	r5, #1
-   110cc:	6839      	ldr	r1, [r7, #0]
-   110ce:	4229      	tst	r1, r5
-   110d0:	d1fa      	bne.n	110c8 <sys_tim_singleshot_32+0x60>
-   110d2:	9900      	ldr	r1, [sp, #0]
-   110d4:	3901      	subs	r1, #1
-   110d6:	9100      	str	r1, [sp, #0]
-   110d8:	d2f4      	bcs.n	110c4 <sys_tim_singleshot_32+0x5c>
-   110da:	9901      	ldr	r1, [sp, #4]
-   110dc:	2900      	cmp	r1, #0
-   110de:	d00a      	beq.n	110f6 <sys_tim_singleshot_32+0x8e>
-   110e0:	6011      	str	r1, [r2, #0]
-   110e2:	4a13      	ldr	r2, [pc, #76]	; (11130 <sys_tim_singleshot_32+0xc8>)
-   110e4:	1881      	adds	r1, r0, r2
-   110e6:	2201      	movs	r2, #1
-   110e8:	600a      	str	r2, [r1, #0]
-   110ea:	4912      	ldr	r1, [pc, #72]	; (11134 <sys_tim_singleshot_32+0xcc>)
-   110ec:	1840      	adds	r0, r0, r1
-   110ee:	bf20      	wfe
-   110f0:	6801      	ldr	r1, [r0, #0]
-   110f2:	4211      	tst	r1, r2
-   110f4:	d1fb      	bne.n	110ee <sys_tim_singleshot_32+0x86>
-   110f6:	2200      	movs	r2, #0
-   110f8:	601a      	str	r2, [r3, #0]
-   110fa:	4663      	mov	r3, ip
-   110fc:	4293      	cmp	r3, r2
-   110fe:	db09      	blt.n	11114 <sys_tim_singleshot_32+0xac>
-   11100:	2301      	movs	r3, #1
-   11102:	321f      	adds	r2, #31
-   11104:	4014      	ands	r4, r2
-   11106:	40a3      	lsls	r3, r4
-   11108:	4a0b      	ldr	r2, [pc, #44]	; (11138 <sys_tim_singleshot_32+0xd0>)
-   1110a:	67d3      	str	r3, [r2, #124]	; 0x7c
-   1110c:	f3bf 8f4f 	dsb	sy
-   11110:	f3bf 8f6f 	isb	sy
-   11114:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
-   11116:	46c0      	nop			; (mov r8, r8)
-   11118:	20015008 	.word	0x20015008
-   1111c:	20017c18 	.word	0x20017c18
-   11120:	0000ffff 	.word	0x0000ffff
-   11124:	20017c24 	.word	0x20017c24
-   11128:	20017c10 	.word	0x20017c10
-   1112c:	e000e100 	.word	0xe000e100
-   11130:	20017c14 	.word	0x20017c14
-   11134:	20017c20 	.word	0x20017c20
-   11138:	e000e104 	.word	0xe000e104
+00010fb0 <calc_aes_ba>:
+   10fb0:	680b      	ldr	r3, [r1, #0]
+   10fb2:	b573      	push	{r0, r1, r4, r5, r6, lr}
+   10fb4:	0004      	movs	r4, r0
+   10fb6:	4817      	ldr	r0, [pc, #92]	; (11014 <calc_aes_ba+0x64>)
+   10fb8:	ba1b      	rev	r3, r3
+   10fba:	6003      	str	r3, [r0, #0]
+   10fbc:	684b      	ldr	r3, [r1, #4]
+   10fbe:	4816      	ldr	r0, [pc, #88]	; (11018 <calc_aes_ba+0x68>)
+   10fc0:	ba1b      	rev	r3, r3
+   10fc2:	6003      	str	r3, [r0, #0]
+   10fc4:	688b      	ldr	r3, [r1, #8]
+   10fc6:	4815      	ldr	r0, [pc, #84]	; (1101c <calc_aes_ba+0x6c>)
+   10fc8:	ba1b      	rev	r3, r3
+   10fca:	6003      	str	r3, [r0, #0]
+   10fcc:	68cb      	ldr	r3, [r1, #12]
+   10fce:	4914      	ldr	r1, [pc, #80]	; (11020 <calc_aes_ba+0x70>)
+   10fd0:	ba1b      	rev	r3, r3
+   10fd2:	600b      	str	r3, [r1, #0]
+   10fd4:	4d13      	ldr	r5, [pc, #76]	; (11024 <calc_aes_ba+0x74>)
+   10fd6:	2305      	movs	r3, #5
+   10fd8:	4e13      	ldr	r6, [pc, #76]	; (11028 <calc_aes_ba+0x78>)
+   10fda:	2a00      	cmp	r2, #0
+   10fdc:	d003      	beq.n	10fe6 <calc_aes_ba+0x36>
+   10fde:	6833      	ldr	r3, [r6, #0]
+   10fe0:	9301      	str	r3, [sp, #4]
+   10fe2:	4798      	blx	r3
+   10fe4:	2345      	movs	r3, #69	; 0x45
+   10fe6:	602b      	str	r3, [r5, #0]
+   10fe8:	6873      	ldr	r3, [r6, #4]
+   10fea:	9301      	str	r3, [sp, #4]
+   10fec:	4798      	blx	r3
+   10fee:	4b0f      	ldr	r3, [pc, #60]	; (1102c <calc_aes_ba+0x7c>)
+   10ff0:	681b      	ldr	r3, [r3, #0]
+   10ff2:	ba1b      	rev	r3, r3
+   10ff4:	6023      	str	r3, [r4, #0]
+   10ff6:	4b0e      	ldr	r3, [pc, #56]	; (11030 <calc_aes_ba+0x80>)
+   10ff8:	681b      	ldr	r3, [r3, #0]
+   10ffa:	ba1b      	rev	r3, r3
+   10ffc:	6063      	str	r3, [r4, #4]
+   10ffe:	4b0d      	ldr	r3, [pc, #52]	; (11034 <calc_aes_ba+0x84>)
+   11000:	681b      	ldr	r3, [r3, #0]
+   11002:	ba1b      	rev	r3, r3
+   11004:	60a3      	str	r3, [r4, #8]
+   11006:	4b0c      	ldr	r3, [pc, #48]	; (11038 <calc_aes_ba+0x88>)
+   11008:	681b      	ldr	r3, [r3, #0]
+   1100a:	ba1b      	rev	r3, r3
+   1100c:	60e3      	str	r3, [r4, #12]
+   1100e:	2304      	movs	r3, #4
+   11010:	602b      	str	r3, [r5, #0]
+   11012:	bd73      	pop	{r0, r1, r4, r5, r6, pc}
+   11014:	2000c404 	.word	0x2000c404
+   11018:	2000c408 	.word	0x2000c408
+   1101c:	2000c40c 	.word	0x2000c40c
+   11020:	2000c410 	.word	0x2000c410
+   11024:	2000c400 	.word	0x2000c400
+   11028:	000000c0 	.word	0x000000c0
+   1102c:	2000c414 	.word	0x2000c414
+   11030:	2000c418 	.word	0x2000c418
+   11034:	2000c41c 	.word	0x2000c41c
+   11038:	2000c420 	.word	0x2000c420
 
-0001113c <aes_load_key_ba>:
-   1113c:	2200      	movs	r2, #0
-   1113e:	4b0c      	ldr	r3, [pc, #48]	; (11170 <aes_load_key_ba+0x34>)
-   11140:	b510      	push	{r4, lr}
-   11142:	601a      	str	r2, [r3, #0]
-   11144:	3204      	adds	r2, #4
-   11146:	601a      	str	r2, [r3, #0]
-   11148:	6803      	ldr	r3, [r0, #0]
-   1114a:	4a0a      	ldr	r2, [pc, #40]	; (11174 <aes_load_key_ba+0x38>)
-   1114c:	ba1b      	rev	r3, r3
-   1114e:	6013      	str	r3, [r2, #0]
-   11150:	6843      	ldr	r3, [r0, #4]
-   11152:	4a09      	ldr	r2, [pc, #36]	; (11178 <aes_load_key_ba+0x3c>)
-   11154:	ba1b      	rev	r3, r3
-   11156:	6013      	str	r3, [r2, #0]
-   11158:	6883      	ldr	r3, [r0, #8]
-   1115a:	4a08      	ldr	r2, [pc, #32]	; (1117c <aes_load_key_ba+0x40>)
-   1115c:	ba1b      	rev	r3, r3
-   1115e:	6013      	str	r3, [r2, #0]
-   11160:	68c3      	ldr	r3, [r0, #12]
-   11162:	4a07      	ldr	r2, [pc, #28]	; (11180 <aes_load_key_ba+0x44>)
-   11164:	ba1b      	rev	r3, r3
-   11166:	6013      	str	r3, [r2, #0]
-   11168:	4b06      	ldr	r3, [pc, #24]	; (11184 <aes_load_key_ba+0x48>)
-   1116a:	681b      	ldr	r3, [r3, #0]
-   1116c:	4798      	blx	r3
-   1116e:	bd10      	pop	{r4, pc}
-   11170:	2000c400 	.word	0x2000c400
-   11174:	2000c424 	.word	0x2000c424
-   11178:	2000c428 	.word	0x2000c428
-   1117c:	2000c42c 	.word	0x2000c42c
-   11180:	2000c430 	.word	0x2000c430
-   11184:	000000c0 	.word	0x000000c0
+0001103c <rand_lib>:
+   1103c:	b537      	push	{r0, r1, r2, r4, r5, lr}
+   1103e:	4b15      	ldr	r3, [pc, #84]	; (11094 <rand_lib+0x58>)
+   11040:	4c15      	ldr	r4, [pc, #84]	; (11098 <rand_lib+0x5c>)
+   11042:	4916      	ldr	r1, [pc, #88]	; (1109c <rand_lib+0x60>)
+   11044:	6860      	ldr	r0, [r4, #4]
+   11046:	680d      	ldr	r5, [r1, #0]
+   11048:	681a      	ldr	r2, [r3, #0]
+   1104a:	6823      	ldr	r3, [r4, #0]
+   1104c:	4303      	orrs	r3, r0
+   1104e:	68a0      	ldr	r0, [r4, #8]
+   11050:	4303      	orrs	r3, r0
+   11052:	68e0      	ldr	r0, [r4, #12]
+   11054:	4303      	orrs	r3, r0
+   11056:	d10e      	bne.n	11076 <rand_lib+0x3a>
+   11058:	20e1      	movs	r0, #225	; 0xe1
+   1105a:	4b11      	ldr	r3, [pc, #68]	; (110a0 <rand_lib+0x64>)
+   1105c:	0080      	lsls	r0, r0, #2
+   1105e:	5818      	ldr	r0, [r3, r0]
+   11060:	6809      	ldr	r1, [r1, #0]
+   11062:	9001      	str	r0, [sp, #4]
+   11064:	6020      	str	r0, [r4, #0]
+   11066:	20e0      	movs	r0, #224	; 0xe0
+   11068:	0080      	lsls	r0, r0, #2
+   1106a:	5818      	ldr	r0, [r3, r0]
+   1106c:	6060      	str	r0, [r4, #4]
+   1106e:	4048      	eors	r0, r1
+   11070:	490c      	ldr	r1, [pc, #48]	; (110a4 <rand_lib+0x68>)
+   11072:	4041      	eors	r1, r0
+   11074:	60a1      	str	r1, [r4, #8]
+   11076:	6823      	ldr	r3, [r4, #0]
+   11078:	0020      	movs	r0, r4
+   1107a:	405a      	eors	r2, r3
+   1107c:	6863      	ldr	r3, [r4, #4]
+   1107e:	6022      	str	r2, [r4, #0]
+   11080:	405d      	eors	r5, r3
+   11082:	4b09      	ldr	r3, [pc, #36]	; (110a8 <rand_lib+0x6c>)
+   11084:	6065      	str	r5, [r4, #4]
+   11086:	68db      	ldr	r3, [r3, #12]
+   11088:	2200      	movs	r2, #0
+   1108a:	0021      	movs	r1, r4
+   1108c:	9301      	str	r3, [sp, #4]
+   1108e:	4798      	blx	r3
+   11090:	6820      	ldr	r0, [r4, #0]
+   11092:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}
+   11094:	2001500c 	.word	0x2001500c
+   11098:	000207a0 	.word	0x000207a0
+   1109c:	200150e4 	.word	0x200150e4
+   110a0:	00010000 	.word	0x00010000
+   110a4:	c33caaaa 	.word	0xc33caaaa
+   110a8:	000000c0 	.word	0x000000c0
 
-00011188 <calc_aes_ba>:
-   11188:	680b      	ldr	r3, [r1, #0]
-   1118a:	b573      	push	{r0, r1, r4, r5, r6, lr}
-   1118c:	0004      	movs	r4, r0
-   1118e:	4817      	ldr	r0, [pc, #92]	; (111ec <calc_aes_ba+0x64>)
-   11190:	ba1b      	rev	r3, r3
-   11192:	6003      	str	r3, [r0, #0]
-   11194:	684b      	ldr	r3, [r1, #4]
-   11196:	4816      	ldr	r0, [pc, #88]	; (111f0 <calc_aes_ba+0x68>)
-   11198:	ba1b      	rev	r3, r3
-   1119a:	6003      	str	r3, [r0, #0]
-   1119c:	688b      	ldr	r3, [r1, #8]
-   1119e:	4815      	ldr	r0, [pc, #84]	; (111f4 <calc_aes_ba+0x6c>)
-   111a0:	ba1b      	rev	r3, r3
-   111a2:	6003      	str	r3, [r0, #0]
-   111a4:	68cb      	ldr	r3, [r1, #12]
-   111a6:	4914      	ldr	r1, [pc, #80]	; (111f8 <calc_aes_ba+0x70>)
-   111a8:	ba1b      	rev	r3, r3
-   111aa:	600b      	str	r3, [r1, #0]
-   111ac:	4d13      	ldr	r5, [pc, #76]	; (111fc <calc_aes_ba+0x74>)
-   111ae:	2305      	movs	r3, #5
-   111b0:	4e13      	ldr	r6, [pc, #76]	; (11200 <calc_aes_ba+0x78>)
-   111b2:	2a00      	cmp	r2, #0
-   111b4:	d003      	beq.n	111be <calc_aes_ba+0x36>
-   111b6:	6833      	ldr	r3, [r6, #0]
-   111b8:	9301      	str	r3, [sp, #4]
-   111ba:	4798      	blx	r3
-   111bc:	2345      	movs	r3, #69	; 0x45
-   111be:	602b      	str	r3, [r5, #0]
-   111c0:	6873      	ldr	r3, [r6, #4]
-   111c2:	9301      	str	r3, [sp, #4]
-   111c4:	4798      	blx	r3
-   111c6:	4b0f      	ldr	r3, [pc, #60]	; (11204 <calc_aes_ba+0x7c>)
-   111c8:	681b      	ldr	r3, [r3, #0]
-   111ca:	ba1b      	rev	r3, r3
-   111cc:	6023      	str	r3, [r4, #0]
-   111ce:	4b0e      	ldr	r3, [pc, #56]	; (11208 <calc_aes_ba+0x80>)
-   111d0:	681b      	ldr	r3, [r3, #0]
-   111d2:	ba1b      	rev	r3, r3
-   111d4:	6063      	str	r3, [r4, #4]
-   111d6:	4b0d      	ldr	r3, [pc, #52]	; (1120c <calc_aes_ba+0x84>)
-   111d8:	681b      	ldr	r3, [r3, #0]
-   111da:	ba1b      	rev	r3, r3
-   111dc:	60a3      	str	r3, [r4, #8]
-   111de:	4b0c      	ldr	r3, [pc, #48]	; (11210 <calc_aes_ba+0x88>)
-   111e0:	681b      	ldr	r3, [r3, #0]
-   111e2:	ba1b      	rev	r3, r3
-   111e4:	60e3      	str	r3, [r4, #12]
-   111e6:	2304      	movs	r3, #4
-   111e8:	602b      	str	r3, [r5, #0]
-   111ea:	bd73      	pop	{r0, r1, r4, r5, r6, pc}
-   111ec:	2000c404 	.word	0x2000c404
-   111f0:	2000c408 	.word	0x2000c408
-   111f4:	2000c40c 	.word	0x2000c40c
-   111f8:	2000c410 	.word	0x2000c410
-   111fc:	2000c400 	.word	0x2000c400
-   11200:	000000c0 	.word	0x000000c0
-   11204:	2000c414 	.word	0x2000c414
-   11208:	2000c418 	.word	0x2000c418
-   1120c:	2000c41c 	.word	0x2000c41c
-   11210:	2000c420 	.word	0x2000c420
+000110ac <generate_random_number_fast>:
+   110ac:	b510      	push	{r4, lr}
+   110ae:	0004      	movs	r4, r0
+   110b0:	f7ff ffc4 	bl	1103c <rand_lib>
+   110b4:	2210      	movs	r2, #16
+   110b6:	0020      	movs	r0, r4
+   110b8:	4901      	ldr	r1, [pc, #4]	; (110c0 <generate_random_number_fast+0x14>)
+   110ba:	f000 f817 	bl	110ec <memcpy>
+   110be:	bd10      	pop	{r4, pc}
+   110c0:	000207a0 	.word	0x000207a0
 
-00011214 <rand_lib>:
-   11214:	b537      	push	{r0, r1, r2, r4, r5, lr}
-   11216:	4b15      	ldr	r3, [pc, #84]	; (1126c <rand_lib+0x58>)
-   11218:	4c15      	ldr	r4, [pc, #84]	; (11270 <rand_lib+0x5c>)
-   1121a:	4916      	ldr	r1, [pc, #88]	; (11274 <rand_lib+0x60>)
-   1121c:	6860      	ldr	r0, [r4, #4]
-   1121e:	680d      	ldr	r5, [r1, #0]
-   11220:	681a      	ldr	r2, [r3, #0]
-   11222:	6823      	ldr	r3, [r4, #0]
-   11224:	4303      	orrs	r3, r0
-   11226:	68a0      	ldr	r0, [r4, #8]
-   11228:	4303      	orrs	r3, r0
-   1122a:	68e0      	ldr	r0, [r4, #12]
-   1122c:	4303      	orrs	r3, r0
-   1122e:	d10e      	bne.n	1124e <rand_lib+0x3a>
-   11230:	20e1      	movs	r0, #225	; 0xe1
-   11232:	4b11      	ldr	r3, [pc, #68]	; (11278 <rand_lib+0x64>)
-   11234:	0080      	lsls	r0, r0, #2
-   11236:	5818      	ldr	r0, [r3, r0]
-   11238:	6809      	ldr	r1, [r1, #0]
-   1123a:	9001      	str	r0, [sp, #4]
-   1123c:	6020      	str	r0, [r4, #0]
-   1123e:	20e0      	movs	r0, #224	; 0xe0
-   11240:	0080      	lsls	r0, r0, #2
-   11242:	5818      	ldr	r0, [r3, r0]
-   11244:	6060      	str	r0, [r4, #4]
-   11246:	4048      	eors	r0, r1
-   11248:	490c      	ldr	r1, [pc, #48]	; (1127c <rand_lib+0x68>)
-   1124a:	4041      	eors	r1, r0
-   1124c:	60a1      	str	r1, [r4, #8]
-   1124e:	6823      	ldr	r3, [r4, #0]
-   11250:	0020      	movs	r0, r4
-   11252:	405a      	eors	r2, r3
-   11254:	6863      	ldr	r3, [r4, #4]
-   11256:	6022      	str	r2, [r4, #0]
-   11258:	405d      	eors	r5, r3
-   1125a:	4b09      	ldr	r3, [pc, #36]	; (11280 <rand_lib+0x6c>)
-   1125c:	6065      	str	r5, [r4, #4]
-   1125e:	68db      	ldr	r3, [r3, #12]
-   11260:	2200      	movs	r2, #0
-   11262:	0021      	movs	r1, r4
-   11264:	9301      	str	r3, [sp, #4]
-   11266:	4798      	blx	r3
-   11268:	6820      	ldr	r0, [r4, #0]
-   1126a:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}
-   1126c:	2001500c 	.word	0x2001500c
-   11270:	000207a0 	.word	0x000207a0
-   11274:	200150e4 	.word	0x200150e4
-   11278:	00010000 	.word	0x00010000
-   1127c:	c33caaaa 	.word	0xc33caaaa
-   11280:	000000c0 	.word	0x000000c0
+000110c4 <__gnu_thumb1_case_sqi>:
+   110c4:	b402      	push	{r1}
+   110c6:	4671      	mov	r1, lr
+   110c8:	0849      	lsrs	r1, r1, #1
+   110ca:	0049      	lsls	r1, r1, #1
+   110cc:	5609      	ldrsb	r1, [r1, r0]
+   110ce:	0049      	lsls	r1, r1, #1
+   110d0:	448e      	add	lr, r1
+   110d2:	bc02      	pop	{r1}
+   110d4:	4770      	bx	lr
+   110d6:	46c0      	nop			; (mov r8, r8)
 
-00011284 <generate_random_number_fast>:
-   11284:	b510      	push	{r4, lr}
-   11286:	0004      	movs	r4, r0
-   11288:	f7ff ffc4 	bl	11214 <rand_lib>
-   1128c:	2210      	movs	r2, #16
-   1128e:	0020      	movs	r0, r4
-   11290:	4901      	ldr	r1, [pc, #4]	; (11298 <generate_random_number_fast+0x14>)
-   11292:	f000 f817 	bl	112c4 <memcpy>
-   11296:	bd10      	pop	{r4, pc}
-   11298:	000207a0 	.word	0x000207a0
+000110d8 <__gnu_thumb1_case_uqi>:
+   110d8:	b402      	push	{r1}
+   110da:	4671      	mov	r1, lr
+   110dc:	0849      	lsrs	r1, r1, #1
+   110de:	0049      	lsls	r1, r1, #1
+   110e0:	5c09      	ldrb	r1, [r1, r0]
+   110e2:	0049      	lsls	r1, r1, #1
+   110e4:	448e      	add	lr, r1
+   110e6:	bc02      	pop	{r1}
+   110e8:	4770      	bx	lr
+   110ea:	46c0      	nop			; (mov r8, r8)
 
-0001129c <__gnu_thumb1_case_sqi>:
-   1129c:	b402      	push	{r1}
-   1129e:	4671      	mov	r1, lr
-   112a0:	0849      	lsrs	r1, r1, #1
-   112a2:	0049      	lsls	r1, r1, #1
-   112a4:	5609      	ldrsb	r1, [r1, r0]
-   112a6:	0049      	lsls	r1, r1, #1
-   112a8:	448e      	add	lr, r1
-   112aa:	bc02      	pop	{r1}
-   112ac:	4770      	bx	lr
-   112ae:	46c0      	nop			; (mov r8, r8)
+000110ec <memcpy>:
+   110ec:	b5f0      	push	{r4, r5, r6, r7, lr}
+   110ee:	46c6      	mov	lr, r8
+   110f0:	b500      	push	{lr}
+   110f2:	2a0f      	cmp	r2, #15
+   110f4:	d941      	bls.n	1117a <memcpy+0x8e>
+   110f6:	2703      	movs	r7, #3
+   110f8:	000d      	movs	r5, r1
+   110fa:	003e      	movs	r6, r7
+   110fc:	4305      	orrs	r5, r0
+   110fe:	000c      	movs	r4, r1
+   11100:	0003      	movs	r3, r0
+   11102:	402e      	ands	r6, r5
+   11104:	422f      	tst	r7, r5
+   11106:	d13d      	bne.n	11184 <memcpy+0x98>
+   11108:	0015      	movs	r5, r2
+   1110a:	3d10      	subs	r5, #16
+   1110c:	092d      	lsrs	r5, r5, #4
+   1110e:	46a8      	mov	r8, r5
+   11110:	012d      	lsls	r5, r5, #4
+   11112:	46ac      	mov	ip, r5
+   11114:	4484      	add	ip, r0
+   11116:	6827      	ldr	r7, [r4, #0]
+   11118:	001d      	movs	r5, r3
+   1111a:	601f      	str	r7, [r3, #0]
+   1111c:	6867      	ldr	r7, [r4, #4]
+   1111e:	605f      	str	r7, [r3, #4]
+   11120:	68a7      	ldr	r7, [r4, #8]
+   11122:	609f      	str	r7, [r3, #8]
+   11124:	68e7      	ldr	r7, [r4, #12]
+   11126:	3410      	adds	r4, #16
+   11128:	60df      	str	r7, [r3, #12]
+   1112a:	3310      	adds	r3, #16
+   1112c:	4565      	cmp	r5, ip
+   1112e:	d1f2      	bne.n	11116 <memcpy+0x2a>
+   11130:	4645      	mov	r5, r8
+   11132:	230f      	movs	r3, #15
+   11134:	240c      	movs	r4, #12
+   11136:	3501      	adds	r5, #1
+   11138:	012d      	lsls	r5, r5, #4
+   1113a:	1949      	adds	r1, r1, r5
+   1113c:	4013      	ands	r3, r2
+   1113e:	1945      	adds	r5, r0, r5
+   11140:	4214      	tst	r4, r2
+   11142:	d022      	beq.n	1118a <memcpy+0x9e>
+   11144:	598c      	ldr	r4, [r1, r6]
+   11146:	51ac      	str	r4, [r5, r6]
+   11148:	3604      	adds	r6, #4
+   1114a:	1b9c      	subs	r4, r3, r6
+   1114c:	2c03      	cmp	r4, #3
+   1114e:	d8f9      	bhi.n	11144 <memcpy+0x58>
+   11150:	3b04      	subs	r3, #4
+   11152:	089b      	lsrs	r3, r3, #2
+   11154:	3301      	adds	r3, #1
+   11156:	009b      	lsls	r3, r3, #2
+   11158:	18ed      	adds	r5, r5, r3
+   1115a:	18c9      	adds	r1, r1, r3
+   1115c:	2303      	movs	r3, #3
+   1115e:	401a      	ands	r2, r3
+   11160:	1e56      	subs	r6, r2, #1
+   11162:	2a00      	cmp	r2, #0
+   11164:	d006      	beq.n	11174 <memcpy+0x88>
+   11166:	2300      	movs	r3, #0
+   11168:	5ccc      	ldrb	r4, [r1, r3]
+   1116a:	001a      	movs	r2, r3
+   1116c:	54ec      	strb	r4, [r5, r3]
+   1116e:	3301      	adds	r3, #1
+   11170:	4296      	cmp	r6, r2
+   11172:	d1f9      	bne.n	11168 <memcpy+0x7c>
+   11174:	bc80      	pop	{r7}
+   11176:	46b8      	mov	r8, r7
+   11178:	bdf0      	pop	{r4, r5, r6, r7, pc}
+   1117a:	0005      	movs	r5, r0
+   1117c:	1e56      	subs	r6, r2, #1
+   1117e:	2a00      	cmp	r2, #0
+   11180:	d1f1      	bne.n	11166 <memcpy+0x7a>
+   11182:	e7f7      	b.n	11174 <memcpy+0x88>
+   11184:	0005      	movs	r5, r0
+   11186:	1e56      	subs	r6, r2, #1
+   11188:	e7ed      	b.n	11166 <memcpy+0x7a>
+   1118a:	001a      	movs	r2, r3
+   1118c:	e7f6      	b.n	1117c <memcpy+0x90>
+   1118e:	46c0      	nop			; (mov r8, r8)
 
-000112b0 <__gnu_thumb1_case_uqi>:
-   112b0:	b402      	push	{r1}
-   112b2:	4671      	mov	r1, lr
-   112b4:	0849      	lsrs	r1, r1, #1
-   112b6:	0049      	lsls	r1, r1, #1
-   112b8:	5c09      	ldrb	r1, [r1, r0]
-   112ba:	0049      	lsls	r1, r1, #1
-   112bc:	448e      	add	lr, r1
-   112be:	bc02      	pop	{r1}
-   112c0:	4770      	bx	lr
-   112c2:	46c0      	nop			; (mov r8, r8)
+00011190 <strncpy>:
+   11190:	b5f0      	push	{r4, r5, r6, r7, lr}
+   11192:	000c      	movs	r4, r1
+   11194:	4304      	orrs	r4, r0
+   11196:	0003      	movs	r3, r0
+   11198:	0007      	movs	r7, r0
+   1119a:	07a4      	lsls	r4, r4, #30
+   1119c:	d112      	bne.n	111c4 <strncpy+0x34>
+   1119e:	2a03      	cmp	r2, #3
+   111a0:	d910      	bls.n	111c4 <strncpy+0x34>
+   111a2:	4c14      	ldr	r4, [pc, #80]	; (111f4 <strncpy+0x64>)
+   111a4:	46a4      	mov	ip, r4
+   111a6:	4667      	mov	r7, ip
+   111a8:	680d      	ldr	r5, [r1, #0]
+   111aa:	4c13      	ldr	r4, [pc, #76]	; (111f8 <strncpy+0x68>)
+   111ac:	001e      	movs	r6, r3
+   111ae:	192c      	adds	r4, r5, r4
+   111b0:	43ac      	bics	r4, r5
+   111b2:	423c      	tst	r4, r7
+   111b4:	d11b      	bne.n	111ee <strncpy+0x5e>
+   111b6:	3304      	adds	r3, #4
+   111b8:	3a04      	subs	r2, #4
+   111ba:	001f      	movs	r7, r3
+   111bc:	3104      	adds	r1, #4
+   111be:	6035      	str	r5, [r6, #0]
+   111c0:	2a03      	cmp	r2, #3
+   111c2:	d8f0      	bhi.n	111a6 <strncpy+0x16>
+   111c4:	2400      	movs	r4, #0
+   111c6:	18be      	adds	r6, r7, r2
+   111c8:	e006      	b.n	111d8 <strncpy+0x48>
+   111ca:	5d0d      	ldrb	r5, [r1, r4]
+   111cc:	3a01      	subs	r2, #1
+   111ce:	553d      	strb	r5, [r7, r4]
+   111d0:	1ab3      	subs	r3, r6, r2
+   111d2:	3401      	adds	r4, #1
+   111d4:	2d00      	cmp	r5, #0
+   111d6:	d002      	beq.n	111de <strncpy+0x4e>
+   111d8:	2a00      	cmp	r2, #0
+   111da:	d1f6      	bne.n	111ca <strncpy+0x3a>
+   111dc:	bdf0      	pop	{r4, r5, r6, r7, pc}
+   111de:	2100      	movs	r1, #0
+   111e0:	2a00      	cmp	r2, #0
+   111e2:	d0fb      	beq.n	111dc <strncpy+0x4c>
+   111e4:	7019      	strb	r1, [r3, #0]
+   111e6:	3301      	adds	r3, #1
+   111e8:	429e      	cmp	r6, r3
+   111ea:	d1fb      	bne.n	111e4 <strncpy+0x54>
+   111ec:	e7f6      	b.n	111dc <strncpy+0x4c>
+   111ee:	001f      	movs	r7, r3
+   111f0:	e7e8      	b.n	111c4 <strncpy+0x34>
+   111f2:	46c0      	nop			; (mov r8, r8)
+   111f4:	80808080 	.word	0x80808080
+   111f8:	fefefeff 	.word	0xfefefeff
 
-000112c4 <memcpy>:
-   112c4:	b5f0      	push	{r4, r5, r6, r7, lr}
-   112c6:	46c6      	mov	lr, r8
-   112c8:	b500      	push	{lr}
-   112ca:	2a0f      	cmp	r2, #15
-   112cc:	d941      	bls.n	11352 <memcpy+0x8e>
-   112ce:	2703      	movs	r7, #3
-   112d0:	000d      	movs	r5, r1
-   112d2:	003e      	movs	r6, r7
-   112d4:	4305      	orrs	r5, r0
-   112d6:	000c      	movs	r4, r1
-   112d8:	0003      	movs	r3, r0
-   112da:	402e      	ands	r6, r5
-   112dc:	422f      	tst	r7, r5
-   112de:	d13d      	bne.n	1135c <memcpy+0x98>
-   112e0:	0015      	movs	r5, r2
-   112e2:	3d10      	subs	r5, #16
-   112e4:	092d      	lsrs	r5, r5, #4
-   112e6:	46a8      	mov	r8, r5
-   112e8:	012d      	lsls	r5, r5, #4
-   112ea:	46ac      	mov	ip, r5
-   112ec:	4484      	add	ip, r0
-   112ee:	6827      	ldr	r7, [r4, #0]
-   112f0:	001d      	movs	r5, r3
-   112f2:	601f      	str	r7, [r3, #0]
-   112f4:	6867      	ldr	r7, [r4, #4]
-   112f6:	605f      	str	r7, [r3, #4]
-   112f8:	68a7      	ldr	r7, [r4, #8]
-   112fa:	609f      	str	r7, [r3, #8]
-   112fc:	68e7      	ldr	r7, [r4, #12]
-   112fe:	3410      	adds	r4, #16
-   11300:	60df      	str	r7, [r3, #12]
-   11302:	3310      	adds	r3, #16
-   11304:	4565      	cmp	r5, ip
-   11306:	d1f2      	bne.n	112ee <memcpy+0x2a>
-   11308:	4645      	mov	r5, r8
-   1130a:	230f      	movs	r3, #15
-   1130c:	240c      	movs	r4, #12
-   1130e:	3501      	adds	r5, #1
-   11310:	012d      	lsls	r5, r5, #4
-   11312:	1949      	adds	r1, r1, r5
-   11314:	4013      	ands	r3, r2
-   11316:	1945      	adds	r5, r0, r5
-   11318:	4214      	tst	r4, r2
-   1131a:	d022      	beq.n	11362 <memcpy+0x9e>
-   1131c:	598c      	ldr	r4, [r1, r6]
-   1131e:	51ac      	str	r4, [r5, r6]
-   11320:	3604      	adds	r6, #4
-   11322:	1b9c      	subs	r4, r3, r6
-   11324:	2c03      	cmp	r4, #3
-   11326:	d8f9      	bhi.n	1131c <memcpy+0x58>
-   11328:	3b04      	subs	r3, #4
-   1132a:	089b      	lsrs	r3, r3, #2
-   1132c:	3301      	adds	r3, #1
-   1132e:	009b      	lsls	r3, r3, #2
-   11330:	18ed      	adds	r5, r5, r3
-   11332:	18c9      	adds	r1, r1, r3
-   11334:	2303      	movs	r3, #3
-   11336:	401a      	ands	r2, r3
-   11338:	1e56      	subs	r6, r2, #1
-   1133a:	2a00      	cmp	r2, #0
-   1133c:	d006      	beq.n	1134c <memcpy+0x88>
-   1133e:	2300      	movs	r3, #0
-   11340:	5ccc      	ldrb	r4, [r1, r3]
-   11342:	001a      	movs	r2, r3
-   11344:	54ec      	strb	r4, [r5, r3]
-   11346:	3301      	adds	r3, #1
-   11348:	4296      	cmp	r6, r2
-   1134a:	d1f9      	bne.n	11340 <memcpy+0x7c>
-   1134c:	bc80      	pop	{r7}
-   1134e:	46b8      	mov	r8, r7
-   11350:	bdf0      	pop	{r4, r5, r6, r7, pc}
-   11352:	0005      	movs	r5, r0
-   11354:	1e56      	subs	r6, r2, #1
-   11356:	2a00      	cmp	r2, #0
-   11358:	d1f1      	bne.n	1133e <memcpy+0x7a>
-   1135a:	e7f7      	b.n	1134c <memcpy+0x88>
-   1135c:	0005      	movs	r5, r0
-   1135e:	1e56      	subs	r6, r2, #1
-   11360:	e7ed      	b.n	1133e <memcpy+0x7a>
-   11362:	001a      	movs	r2, r3
-   11364:	e7f6      	b.n	11354 <memcpy+0x90>
-   11366:	46c0      	nop			; (mov r8, r8)
+000111fc <strnlen>:
+   111fc:	b510      	push	{r4, lr}
+   111fe:	0003      	movs	r3, r0
+   11200:	1844      	adds	r4, r0, r1
+   11202:	2900      	cmp	r1, #0
+   11204:	d103      	bne.n	1120e <strnlen+0x12>
+   11206:	e009      	b.n	1121c <strnlen+0x20>
+   11208:	3301      	adds	r3, #1
+   1120a:	429c      	cmp	r4, r3
+   1120c:	d004      	beq.n	11218 <strnlen+0x1c>
+   1120e:	781a      	ldrb	r2, [r3, #0]
+   11210:	2a00      	cmp	r2, #0
+   11212:	d1f9      	bne.n	11208 <strnlen+0xc>
+   11214:	1a18      	subs	r0, r3, r0
+   11216:	bd10      	pop	{r4, pc}
+   11218:	1a20      	subs	r0, r4, r0
+   1121a:	e7fc      	b.n	11216 <strnlen+0x1a>
+   1121c:	2000      	movs	r0, #0
+   1121e:	e7fa      	b.n	11216 <strnlen+0x1a>
 
-00011368 <strncpy>:
-   11368:	b5f0      	push	{r4, r5, r6, r7, lr}
-   1136a:	000c      	movs	r4, r1
-   1136c:	4304      	orrs	r4, r0
-   1136e:	0003      	movs	r3, r0
-   11370:	0007      	movs	r7, r0
-   11372:	07a4      	lsls	r4, r4, #30
-   11374:	d112      	bne.n	1139c <strncpy+0x34>
-   11376:	2a03      	cmp	r2, #3
-   11378:	d910      	bls.n	1139c <strncpy+0x34>
-   1137a:	4c14      	ldr	r4, [pc, #80]	; (113cc <strncpy+0x64>)
-   1137c:	46a4      	mov	ip, r4
-   1137e:	4667      	mov	r7, ip
-   11380:	680d      	ldr	r5, [r1, #0]
-   11382:	4c13      	ldr	r4, [pc, #76]	; (113d0 <strncpy+0x68>)
-   11384:	001e      	movs	r6, r3
-   11386:	192c      	adds	r4, r5, r4
-   11388:	43ac      	bics	r4, r5
-   1138a:	423c      	tst	r4, r7
-   1138c:	d11b      	bne.n	113c6 <strncpy+0x5e>
-   1138e:	3304      	adds	r3, #4
-   11390:	3a04      	subs	r2, #4
-   11392:	001f      	movs	r7, r3
-   11394:	3104      	adds	r1, #4
-   11396:	6035      	str	r5, [r6, #0]
-   11398:	2a03      	cmp	r2, #3
-   1139a:	d8f0      	bhi.n	1137e <strncpy+0x16>
-   1139c:	2400      	movs	r4, #0
-   1139e:	18be      	adds	r6, r7, r2
-   113a0:	e006      	b.n	113b0 <strncpy+0x48>
-   113a2:	5d0d      	ldrb	r5, [r1, r4]
-   113a4:	3a01      	subs	r2, #1
-   113a6:	553d      	strb	r5, [r7, r4]
-   113a8:	1ab3      	subs	r3, r6, r2
-   113aa:	3401      	adds	r4, #1
-   113ac:	2d00      	cmp	r5, #0
-   113ae:	d002      	beq.n	113b6 <strncpy+0x4e>
-   113b0:	2a00      	cmp	r2, #0
-   113b2:	d1f6      	bne.n	113a2 <strncpy+0x3a>
-   113b4:	bdf0      	pop	{r4, r5, r6, r7, pc}
-   113b6:	2100      	movs	r1, #0
-   113b8:	2a00      	cmp	r2, #0
-   113ba:	d0fb      	beq.n	113b4 <strncpy+0x4c>
-   113bc:	7019      	strb	r1, [r3, #0]
-   113be:	3301      	adds	r3, #1
-   113c0:	429e      	cmp	r6, r3
-   113c2:	d1fb      	bne.n	113bc <strncpy+0x54>
-   113c4:	e7f6      	b.n	113b4 <strncpy+0x4c>
-   113c6:	001f      	movs	r7, r3
-   113c8:	e7e8      	b.n	1139c <strncpy+0x34>
-   113ca:	46c0      	nop			; (mov r8, r8)
-   113cc:	80808080 	.word	0x80808080
-   113d0:	fefefeff 	.word	0xfefefeff
+00011220 <aes_default_key>:
+   11220:	0100 0302 0504 0706 0908 0b0a 0d0c 0f0e     ................
 
-000113d4 <strnlen>:
-   113d4:	b510      	push	{r4, lr}
-   113d6:	0003      	movs	r3, r0
-   113d8:	1844      	adds	r4, r0, r1
-   113da:	2900      	cmp	r1, #0
-   113dc:	d103      	bne.n	113e6 <strnlen+0x12>
-   113de:	e009      	b.n	113f4 <strnlen+0x20>
-   113e0:	3301      	adds	r3, #1
-   113e2:	429c      	cmp	r4, r3
-   113e4:	d004      	beq.n	113f0 <strnlen+0x1c>
-   113e6:	781a      	ldrb	r2, [r3, #0]
-   113e8:	2a00      	cmp	r2, #0
-   113ea:	d1f9      	bne.n	113e0 <strnlen+0xc>
-   113ec:	1a18      	subs	r0, r3, r0
-   113ee:	bd10      	pop	{r4, pc}
-   113f0:	1a20      	subs	r0, r4, r0
-   113f2:	e7fc      	b.n	113ee <strnlen+0x1a>
-   113f4:	2000      	movs	r0, #0
-   113f6:	e7fa      	b.n	113ee <strnlen+0x1a>
+00011230 <data_point_list>:
+   11230:	0004 0809 0680 0002 0000 0000 0000 0000     ................
+   11240:	0005 0809 0610 0002 0000 0000 0000 0000     ................
+   11250:	0030 0103 0600 0002 0000 0000 0000 0000     0...............
+   11260:	0080 0204 067e 0002 0000 0000 0000 0000     ....~...........
+   11270:	0081 0204 0602 0002 0000 0000 0000 0000     ................
+   11280:	0082 0204 0608 0002 0000 0000 0000 0000     ................
+   11290:	0083 0406 0604 0002 0000 0000 0000 0000     ................
+   112a0:	1800 0888 0610 0002 0000 0000 0000 0000     ................
+   112b0:	1801 6391 0619 0002 0000 0000 0000 0000     ...c............
+   112c0:	1900 0183 0618 0002 0000 0000 0000 0000     ................
+   112d0:	f000 0487 068c 0002 0000 0000 0000 0000     ................
+   112e0:	f002 0183 0618 0002 0000 0000 0000 0000     ................
 
-000113f8 <aes_default_key>:
-   113f8:	0100 0302 0504 0706 0908 0b0a 0d0c 0f0e     ................
-
-00011408 <data_point_list>:
-   11408:	0004 0809 0680 0002 0000 0000 0000 0000     ................
-   11418:	0005 0809 0610 0002 0000 0000 0000 0000     ................
-   11428:	0030 0103 0600 0002 0000 0000 0000 0000     0...............
-   11438:	0080 0204 067e 0002 0000 0000 0000 0000     ....~...........
-   11448:	0081 0204 0602 0002 0000 0000 0000 0000     ................
-   11458:	0082 0204 0608 0002 0000 0000 0000 0000     ................
-   11468:	0083 0406 0604 0002 0000 0000 0000 0000     ................
-   11478:	1800 0888 0610 0002 0000 0000 0000 0000     ................
-   11488:	1801 6391 0619 0002 0000 0000 0000 0000     ...c............
-   11498:	1900 0183 0618 0002 0000 0000 0000 0000     ................
-   114a8:	f000 0487 068c 0002 0000 0000 0000 0000     ................
-   114b8:	f002 0183 0618 0002 0000 0000 0000 0000     ................
-
-000114c8 <smack_sl_tag>:
-   114c8:	c005 efbe adde 0000 ffff ffff 10e1 0f0b     ................
-   114d8:	4f03 01d1 544b 6502 496e 666e 6e69 6f65     .O..KT.enInfineo
-   114e8:	206e 6554 6863 6f6e 6f6c 6967 7365 4120     n Technologies A
-   114f8:	2047 4e20 4347 3031 3038 2020 6d53 6341     G  NGC1080  SmAc
-   11508:	204b 3020 4335 4230 4545 4446 4145 3044     K  05C0BEEFDEAD0
-   11518:	3030 2030 5620 2e34 2e30 2031 4e28 4d56     000  V4.0.1 (NVM
-   11528:	fe29 ffff ffff ffff                         ).......
+000112f0 <smack_sl_tag>:
+   112f0:	c005 efbe adde 0000 ffff ffff 10e1 0f0b     ................
+   11300:	4f03 01d1 544b 6502 496e 666e 6e69 6f65     .O..KT.enInfineo
+   11310:	206e 6554 6863 6f6e 6f6c 6967 7365 4120     n Technologies A
+   11320:	2047 4e20 4347 3031 3038 2020 6d53 6341     G  NGC1080  SmAc
+   11330:	204b 3020 4335 4230 4545 4446 4145 3044     K  05C0BEEFDEAD0
+   11340:	3030 2030 5620 2e34 2e30 2031 4e28 4d56     000  V4.0.1 (NVM
+   11350:	fe29 ffff ffff ffff                         ).......
 
 Disassembly of section .text.pad2:
 
-00011554 <.text.pad2>:
+00011374 <.text.pad2>:
+   11374:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11378:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1137c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11380:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11384:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11388:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1138c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11390:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11394:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11398:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1139c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113a0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113a4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113a8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113ac:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113b0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113b4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113b8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113bc:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113c0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113c4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113c8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113cc:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113d0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113d4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113d8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113dc:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113e0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113e4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113e8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113ec:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113f0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113f4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113f8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   113fc:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11400:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11404:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11408:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1140c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11410:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11414:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11418:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1141c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11420:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11424:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11428:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1142c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11430:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11434:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11438:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1143c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11440:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11444:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11448:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1144c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11450:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11454:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11458:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1145c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11460:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11464:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11468:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1146c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11470:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11474:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11478:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1147c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11480:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11484:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11488:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1148c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11490:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11494:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11498:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1149c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114a0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114a4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114a8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114ac:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114b0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114b4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114b8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114bc:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114c0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114c4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114c8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114cc:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114d0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114d4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114d8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114dc:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114e0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114e4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114e8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114ec:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114f0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114f4:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114f8:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   114fc:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11500:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11504:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11508:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1150c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11510:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11514:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11518:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1151c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11520:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11524:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11528:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1152c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11530:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11534:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11538:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1153c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11540:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11544:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11548:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   1154c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
+   11550:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
    11554:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
    11558:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
    1155c:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
