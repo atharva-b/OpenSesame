@@ -38,6 +38,10 @@
 #endif
 
 #define MCU_VALID 0xA55B00B5
+#define PASSCODE 0x12344321
+#define ZERO_32 0x00000000
+#define PC_VAL 0x55555555
+#define PC_INVAL 0x99999999
 
 /* NDEF tag defined by user.
  * To activate this tag, set the field "tag_type_2_ptr" in aparams.
@@ -130,14 +134,29 @@ void hardfault_handler(void)
 void run_power_state_machine(void)
 {
     bool authenticated = false; 
+    Mailbox_t* mbx = get_mailbox_address();
 
     while (true)
     {
         switch (current_state)
         {
             case POWER_POWER_OFF:
+                mbx->content[1] = MCU_VALID;
+                current_state = POWER_READY_FOR_PASSCODE;
                 break;
             case POWER_READY_FOR_PASSCODE:
+                if(mbx->content[2] == PASSCODE){
+                    authenticated = true;
+                    current_state = POWER_HARVESTING;
+                    mbx->content[3] = PC_VAL;
+                }
+                else if(mbx->content[2] == ZERO_32){
+                    current_state = POWER_READY_FOR_PASSCODE;
+                }
+                else {
+                    mbx->content[3] = PC_INVAL;
+                    current_state = POWER_POWER_OFF;
+                }
                 break;
             case POWER_HARVESTING:
                 break;
