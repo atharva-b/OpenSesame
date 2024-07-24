@@ -46,6 +46,8 @@ extern void hardfault_handler(void);
 extern void led_blink_handler(void);
 extern void led_blink(void);
 
+extern uint16_t get_threshold_from_voltage(float);
+
 extern const uint8_t smack_sl_tag[];
 
 // Offer a counter for external access
