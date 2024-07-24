@@ -42,6 +42,7 @@
 #define ZERO_32 0x00000000
 #define PC_VAL 0x55555555
 #define PC_INVAL 0x99999999
+#define HARVESTING_DONE 0xBADAB00B
 
 /* NDEF tag defined by user.
  * To activate this tag, set the field "tag_type_2_ptr" in aparams.
@@ -87,6 +88,7 @@ const uint8_t smack_sl_tag[] =                    /**< [0x3a0:0x3ff] 96 Bytes Ta
 // Offer a counter for external access
 uint32_t sl_counter;
 Power_State_enum_t current_state = POWER_POWER_OFF;
+uint32_t turn_cycles = 0;
 
 
 /** _nvm_start() is the main() routine of the application code:
@@ -131,6 +133,23 @@ void hardfault_handler(void)
 
 }
 
+uint16_t voltage_sweep = 0;
+bool done_sweep = false;
+
+void sweep_voltages(void)
+{
+    Mailbox_t* mbx = get_mailbox_address();
+    if (shc_compare(shc_channel_ma, voltage_sweep*100.0F) == false)
+    {
+        mbx->content[6] = voltage_sweep;
+        done_sweep = true;
+    }
+    else
+    {
+        voltage_sweep++;
+    }
+}
+
 void run_power_state_machine(void)
 {
     bool authenticated = false; 
@@ -149,18 +168,69 @@ void run_power_state_machine(void)
                     authenticated = true;
                     current_state = POWER_HARVESTING;
                     mbx->content[3] = PC_VAL;
+                    set_hb_switch(true, false, false, false);
                 }
                 else if(mbx->content[2] == ZERO_32){
                     current_state = POWER_READY_FOR_PASSCODE;
                 }
                 else {
                     mbx->content[3] = PC_INVAL;
-                    current_state = POWER_POWER_OFF;
+                    current_state = POWER_IDLE;
                 }
                 break;
             case POWER_HARVESTING:
+                // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
+                // {
+                //     set_hb_switch(true, false, false, true);
+                //     turn_cycles++;
+                //     if (turn_cycles > 10)
+                //     {
+                //         turn_cycles = 0;
+                //         set_hb_switch(true, false, false, false);
+                //         current_state = POWER_HARVESTING_DONE;
+                //     }
+                // }
+                // else if (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)) == false)
+                // {
+                //     set_hb_switch(true, false, false, false);
+                // }
+                // if (done_sweep == false)
+                // {
+                //     sweep_voltages();
+                // }
+                if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
+                {
+                    mbx->content[5] = 0x11111111;
+                    current_state = POWER_HARVESTING_DONE;
+                }
                 break;
             case POWER_HARVESTING_DONE:
+                // sweep_voltages();
+                while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)))
+                {
+                    mbx->content[5] = 0x22222222;
+                } 
+                set_hb_switch(true, false, false, true);
+                sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);
+                while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
+                {
+                    mbx->content[5] = 0x33333333;
+                }
+                set_hb_switch(true, false, false, false);
+                // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
+                // {
+                //     // set_hb_switch(true, false, false, false);
+                //     mbx->content[5] = 0x22222222;
+                //     set_hb_switch(true, false, false, true);
+                // }
+                // else if (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)) == false)
+                // {
+                //     mbx->content[5] = 0x33333333;
+                //     set_hb_switch(true, false, false, false);
+                // }
+                // mbx->content[5] = 0x88888888;
+                mbx->content[3] = HARVESTING_DONE;
+                current_state = POWER_IDLE;
                 break;
             case POWER_IDLE:
                 break;
@@ -224,7 +294,7 @@ void run_lock_state_machine(void)
 
 uint16_t get_threshold_from_voltage(float input_voltage)
 {
-    return (uint16_t) (input_voltage*1024.00);
+    return (uint16_t) (input_voltage*1000.00);
 }
 
 // Start of the application program
@@ -234,11 +304,10 @@ void _nvm_start(void)
     init_dand();
     vars_init();
     shc_init();
-    
-    Mailbox_t* mbx = get_mailbox_address();
-    mbx->content[1] = MCU_VALID;
 
-    uint32_t mb_addr = (uint32_t) mbx; 
+    // uint16_t* nvm_mem_address = (uint16_t*)(0x00010800 + sizeof(uint16_t));
+    // *nvm_mem_address = 2000;
+
     single_gpio_iocfg(true, false, true, false, false, 0);
     volatile NFC_State_enum_t state = handle_DAND_protocol();
     volatile NFC_Frame_enum_t frame_type = classify_frame();
@@ -248,35 +317,13 @@ void _nvm_start(void)
 
     while (true)
     {
-        run_power_state_machine();
-        asm("WFI");
-    }
-
-
-    // On NAC1080 Dev App, set Function 1 and enter 'DEADBEEF' as data
-    // If the tap works, the yellow LED blinks 5 times and the red LED will turn on
-    while (true)
-    {
         read_frame();
         frame_type = classify_frame();
 
-        if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
-        {
-            // set_hb_switch(true, false, false, false);
-            set_hb_switch(true, false, false, true);
-        }
-        else if (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)) == false)
-        {
-            set_hb_switch(true, false, false, false);
-        }
-        
-        /*
-        // Uncomment these lines if you want to output data on pin 1
-        SCUS_GPIO_OUT_EN__SET(1);
-        SCUC_GPIO_OUT_DAT__SET(0x1 & BIT_TO_PUT_ON_PIN);
-        */
+        run_power_state_machine();
+
         /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
-        asm("WFI"); 
+        asm("WFI");
     }
 
 }
