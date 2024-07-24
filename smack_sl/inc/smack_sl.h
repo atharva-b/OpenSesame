@@ -43,8 +43,6 @@
 
 extern void example_handler(void);
 extern void hardfault_handler(void);
-extern void led_blink_handler(void);
-extern void led_blink(void);
 
 extern uint16_t get_threshold_from_voltage(float);
 
@@ -55,15 +53,20 @@ extern uint32_t sl_counter;
 
 typedef enum 
 {
-    SM_LOCKED = 0, 
-    SM_AUTHENTICATE_UL = 1, 
-    SM_CHARGING_UL = 2,
-    SM_UNLOCKING = 3,
-    SM_UNLOCKED = 4,
-    SM_AUTHENTICATE_L = 5, 
-    SM_CHARGING_L = 6, 
-    SM_LOCKING = 7
-} SM_State_enum_t; 
+    POWER_POWER_OFF = 0, 
+    POWER_READY_FOR_PASSCODE = 1, 
+    POWER_HARVESTING = 2,
+    POWER_HARVESTING_DONE = 3,
+    POWER_IDLE = 4
+} Power_State_enum_t; 
+
+typedef enum 
+{
+    LOCK_LOCKED = 0, 
+    LOCK_UNLOCKING = 1, 
+    LOCK_UNLOCKED = 2,
+    LOCK_LOCKING = 3,
+} Lock_State_enum_t; 
 
 
 /** @} */ /* End of group fw_config */
