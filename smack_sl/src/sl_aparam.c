@@ -60,7 +60,7 @@ Aparams_t const aparams __attribute__ ((section (".nvm.APARAMS"))) =
     .app_prog =                                                /**< [0x447:0x408] (32 * 16) absolute address App function 0 through 15 */
     {
         (param_func_ptr_t)smack_exchange_handler,
-        (param_func_ptr_t)led_blink,
+        (param_func_ptr_t)led_blink_handler,
         0xffffffff,
         0xffffffff,
         0xffffffff,

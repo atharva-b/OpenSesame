@@ -79,6 +79,7 @@ const uint8_t smack_sl_tag[] =                    /**< [0x3a0:0x3ff] 96 Bytes Ta
 
 // Offer a counter for external access
 uint32_t sl_counter;
+bool blink_led = false;
 
 
 /** _nvm_start() is the main() routine of the application code:
@@ -198,13 +199,17 @@ void open_sesame_state_machine(void)
     }
 }
 
+void led_blink_handler(void) {
+    blink_led = true;
+}
+
 void led_blink(void) {
     single_gpio_iocfg(true, false, true, false, false, 0);
-    for(uint8_t i = 0; i < 5; i++) {
+    for(uint8_t i = 0; i < 10; i++) {
         set_singlegpio_out(0x1, 0);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 300, 14);
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);
         set_singlegpio_out(0x0, 0);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 300, 14);
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);
     }
 }
 
@@ -216,19 +221,32 @@ void _nvm_start(void)
     vars_init();
     Mailbox_t* mbx = get_mailbox_address();
     uint32_t mb_addr = (uint32_t) mbx; 
-    // register_function(1, &led_blink);
+    single_gpio_iocfg(true, false, true, false, false, 0);
     volatile NFC_State_enum_t state = handle_DAND_protocol();
     volatile NFC_Frame_enum_t frame_type = classify_frame();
     nfc_state_machine();
 
+    set_hb_eventctrl(false);
+
+    // On NAC1080 Dev App, set Function 1 and enter 'DEADBEEF' as data
+    // If the tap works, the yellow LED blinks 5 times and the red LED will turn on
     while (true)
     {
         read_frame();
         frame_type = classify_frame();
         // state = handle_DAND_protocol();
 
-        if(mbx->content[0] == 0xDEADBEEF){
+        // turn on red LED if DEADBEEF message successfully sent
+        if(mbx->content[1] == 0xDEADBEEF){
+            set_hb_switch(true, false, false, false);
+            set_hb_switch(true, false, false, true);
+            // sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 1000, 14);
+        }
+
+        if (blink_led == true)
+        {
             led_blink();
+            blink_led = false;
         }
         /*
         // Uncomment these lines if you want to output data on pin 1
