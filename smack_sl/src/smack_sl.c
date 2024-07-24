@@ -37,6 +37,7 @@
 #define WAIT_ABOUT_1MS   0x8000   //!< clock tick constant ~1ms @ 28MHz
 #endif
 
+#define MCU_VALID 0xA55B00B5
 
 /* NDEF tag defined by user.
  * To activate this tag, set the field "tag_type_2_ptr" in aparams.
@@ -81,7 +82,7 @@ const uint8_t smack_sl_tag[] =                    /**< [0x3a0:0x3ff] 96 Bytes Ta
 
 // Offer a counter for external access
 uint32_t sl_counter;
-bool blink_led = false;
+Power_State_enum_t current_state = POWER_POWER_OFF;
 
 
 /** _nvm_start() is the main() routine of the application code:
@@ -126,11 +127,37 @@ void hardfault_handler(void)
 
 }
 
-void open_sesame_state_machine(void)
+void run_power_state_machine(void)
 {
     bool authenticated = false; 
-    SM_State_enum_t current_state = SM_LOCKED;     // how do we know if it is locked or unlocked here....
 
+    while (true)
+    {
+        switch (current_state)
+        {
+            case POWER_POWER_OFF:
+                break;
+            case POWER_READY_FOR_PASSCODE:
+                break;
+            case POWER_HARVESTING:
+                break;
+            case POWER_HARVESTING_DONE:
+                break;
+            case POWER_IDLE:
+                break;
+            default:
+                break;
+        }
+
+    }
+}
+
+void run_lock_state_machine(void)
+{
+    bool authenticated = false;
+    Mailbox_t* mbx;
+
+    // ignore comments below
     while (true)
     {
         /* States 1 and 5 are safe states, i.e. we should be able to loop infinitely in them */
@@ -140,8 +167,9 @@ void open_sesame_state_machine(void)
             // TODO: clear variable that indicates that it is verified
             // TODO: wait for NFC; how to check if we have an NFC signal? Should be an interrupt, check cl_uart_handler or hw_field_off_handler
             // TODO: save NFC data, propagate to next state 
-            case SM_LOCKED:
-                authenticated = false;
+            case LOCK_LOCKED:
+                mbx = get_mailbox_address();
+                mbx->content[1] = MCU_VALID;
                 break;
             
             /* STATE 2 : Locked, Verifying */
@@ -150,7 +178,7 @@ void open_sesame_state_machine(void)
             // TODO: if incorrect passcode, return to state 1, else continue
             // TODO: set variable that indicates that it is verified 
             // TODO: if charging interrupt not received, move to state 3, if received, move to state 4
-            case SM_AUTHENTICATE_UL:
+            case LOCK_UNLOCKING:
                 break;
 
 
@@ -159,59 +187,19 @@ void open_sesame_state_machine(void)
             // TODO: will need to set up an interrupt (or something similar) to determine when the capacitor is charged 
             // TODO: should set a timer as a timeout in case charging does not happen, if timeout go to state 1? -> should determine action here
             // TODO: move to state 4 when charging interrupt received
-            case SM_CHARGING_UL:
+            case LOCK_UNLOCKED:
                 break;
 
             /* STATE 4: Unlocking */
             // TODO: send signal to H-bridge to move motor
             // TODO: move to state 5
-            case SM_UNLOCKING:
-                break;
-
-            /* STATE 5: Unlocked, Idle */
-            // TODO: clear variable that indicates that it is verified
-            // TODO: similar to state 1
-            // TODO: move to state 6
-            case SM_UNLOCKED:
-                break;
-
-            /* STATE 6: Unlocked, Verifying */
-            // TODO: similar to state 2
-            // TODO: if incorrect passcode, return to state 5, else continue
-            // TODO: move to state 7 if no charging interrupt, if received move to state 8
-            case SM_AUTHENTICATE_L:
-                break;
-
-            /* STATE 7: Unlocked, Verifying, Charging */
-            // TODO: similar to state 3
-            // TODO: move to state 8 when charging interrupt received
-            case SM_CHARGING_L:
-                break;
-            
-            /* STATE 8: Locking */
-            // TODO: similar to state 4, but with opposite polarity so that the motor will move to a locked position
-            // TODO: move to state 1
-            case SM_LOCKING:
+            case LOCK_LOCKING:
                 break;
             
             default:
                 break;
         }
 
-    }
-}
-
-void led_blink_handler(void) {
-    blink_led = true;
-}
-
-void led_blink(void) {
-    single_gpio_iocfg(true, false, true, false, false, 0);
-    for(uint8_t i = 0; i < 10; i++) {
-        set_singlegpio_out(0x1, 0);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);
-        set_singlegpio_out(0x0, 0);
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);
     }
 }
 
@@ -229,6 +217,8 @@ void _nvm_start(void)
     shc_init();
     
     Mailbox_t* mbx = get_mailbox_address();
+    mbx->content[1] = MCU_VALID;
+
     uint32_t mb_addr = (uint32_t) mbx; 
     single_gpio_iocfg(true, false, true, false, false, 0);
     volatile NFC_State_enum_t state = handle_DAND_protocol();
@@ -237,7 +227,11 @@ void _nvm_start(void)
 
     set_hb_eventctrl(false);
 
-    set_hb_switch(true, false, false, false);
+    while (true)
+    {
+        run_power_state_machine();
+        asm("WFI");
+    }
 
 
     // On NAC1080 Dev App, set Function 1 and enter 'DEADBEEF' as data
