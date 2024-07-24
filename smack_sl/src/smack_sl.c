@@ -30,6 +30,8 @@
 #include "smack_sl.h"
 #include "smack_dataexchange.h"
 
+#include "shc_lib.h"
+
 
 #ifndef wait_about_1ms
 #define WAIT_ABOUT_1MS   0x8000   //!< clock tick constant ~1ms @ 28MHz
@@ -213,12 +215,19 @@ void led_blink(void) {
     }
 }
 
+uint16_t get_threshold_from_voltage(float input_voltage)
+{
+    return (uint16_t) (input_voltage*1024.00);
+}
+
 // Start of the application program
 void _nvm_start(void)
 {
     nfc_init(); 
     init_dand();
     vars_init();
+    shc_init();
+    
     Mailbox_t* mbx = get_mailbox_address();
     uint32_t mb_addr = (uint32_t) mbx; 
     single_gpio_iocfg(true, false, true, false, false, 0);
@@ -228,26 +237,26 @@ void _nvm_start(void)
 
     set_hb_eventctrl(false);
 
+    set_hb_switch(true, false, false, false);
+
+
     // On NAC1080 Dev App, set Function 1 and enter 'DEADBEEF' as data
     // If the tap works, the yellow LED blinks 5 times and the red LED will turn on
     while (true)
     {
         read_frame();
         frame_type = classify_frame();
-        // state = handle_DAND_protocol();
 
-        // turn on red LED if DEADBEEF message successfully sent
-        if(mbx->content[1] == 0xDEADBEEF){
-            set_hb_switch(true, false, false, false);
-            set_hb_switch(true, false, false, true);
-            // sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 1000, 14);
-        }
-
-        if (blink_led == true)
+        if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
         {
-            led_blink();
-            blink_led = false;
+            // set_hb_switch(true, false, false, false);
+            set_hb_switch(true, false, false, true);
         }
+        else if (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)) == false)
+        {
+            set_hb_switch(true, false, false, false);
+        }
+        
         /*
         // Uncomment these lines if you want to output data on pin 1
         SCUS_GPIO_OUT_EN__SET(1);
