@@ -1,2 +1,2 @@
 # OpenSesame
-The software repository for the Open Sesame project.
+The firmware repository for the Open Sesame project.
