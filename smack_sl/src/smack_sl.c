@@ -157,6 +157,7 @@ void run_power_state_machine(void)
 
     while (true)
     {
+        asm("WFE");
         switch (current_state)
         {
             case POWER_POWER_OFF:
@@ -315,12 +316,15 @@ void _nvm_start(void)
 
     set_hb_eventctrl(false);
 
+    current_state = POWER_POWER_OFF;
+
     while (true)
     {
-        read_frame();
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14); //adding some arbitrary delay
         frame_type = classify_frame();
 
         run_power_state_machine();
+        send_return_frame();
 
         /* ****************** THIS CODE SHOULD NOT BE ALTERED FOR THE TIME BEING ******************** */
         asm("WFI");
