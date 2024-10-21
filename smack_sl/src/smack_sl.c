@@ -89,6 +89,7 @@ const uint8_t smack_sl_tag[] =                    /**< [0x3a0:0x3ff] 96 Bytes Ta
 uint32_t sl_counter;
 Power_State_enum_t current_state = POWER_POWER_OFF;
 uint32_t turn_cycles = 0;
+bool authenticated = false;
 
 
 /** _nvm_start() is the main() routine of the application code:
@@ -203,7 +204,6 @@ void sweep_voltages(void)
 
 void run_power_state_machine(void)
 {
-    bool authenticated = false; 
     Mailbox_t* mbx = get_mailbox_address();
 
     while (true)
@@ -251,11 +251,12 @@ void run_power_state_machine(void)
                 set_hb_switch(true, false, false, false);
                 mbx->content[3] = HARVESTING_DONE;
                 current_state = POWER_IDLE;
+                cleanup_routine();
                 break;
             case POWER_IDLE:
-                break;
+                return;
             default:
-                break;
+                return;
         }
 
     }
@@ -282,6 +283,7 @@ void _nvm_start(void)
     nfc_state_machine();
 
     set_hb_eventctrl(false);
+    // TODO: need to add a call to purge_mailbox() at some point in order to clear it of any values
 
     current_state = POWER_POWER_OFF;
 
