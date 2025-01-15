@@ -224,18 +224,21 @@ void run_power_state_machine(void)
                 break;
             case POWER_HARVESTING_DONE:
                 // sweep_voltages();
-                while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)))
+                for (uint8_t i = 0; i < 10; i++)
                 {
-                    mbx->content[5] = 0x22222222;
-                } 
-                // this should power the motor
-                set_hb_switch(true, false, false, true); // hs1, ls1, hs2, ls2
-                sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
-                while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
-                {
-                    mbx->content[5] = 0x33333333;
+                    while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)))
+                    {
+                        mbx->content[5] = 0x22222222;
+                    } 
+                    // this should power the motor
+                    set_hb_switch(true, false, false, true); // hs1, ls1, hs2, ls2
+                    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
+                    while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
+                    {
+                        mbx->content[5] = 0x33333333;
+                    }
+                    set_hb_switch(true, false, false, false);
                 }
-                set_hb_switch(true, false, false, false);
                 // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
                 // {
                 //     // set_hb_switch(true, false, false, false);
