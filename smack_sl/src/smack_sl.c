@@ -238,6 +238,19 @@ void run_power_state_machine(void)
                         mbx->content[5] = 0x33333333;
                     }
                     set_hb_switch(true, false, false, false);
+                    
+                    set_hb_switch(false, false, false, false);
+                    set_hb_switch(false, false, true, false);
+
+                    while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0))) {} 
+                    // this should power the motor
+                    set_hb_switch(false, true, true, false); // hs1, ls1, hs2, ls2
+                    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
+                    while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5))) {}
+                    set_hb_switch(false, false, true, false);
+                    
+                    set_hb_switch(false, false, false, false);
+                    set_hb_switch(true, false, false, false);
                 }
                 // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
                 // {
