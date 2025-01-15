@@ -107,6 +107,24 @@ uint32_t turn_cycles = 0;
  * @return nothing
  */
 
+/**
+ * H-BRIDGE LAYOUT
+ * 
+ *      ---------*VDD_HB*---------
+ *      |                        |   
+ *      |                        |
+ *      *HS1*                 *HS2*
+ *      |                        |
+ *      |---*M_A*        *M_B*---|
+ *      |                        |
+ *      |                        |
+ *      *LS1*                 *LS2*
+ *      |                        |
+ *      |                        |
+ *      -----------*GND*----------
+ * 
+ */
+
 void _nvm_start(void);
 
 // Example for application specific interrupt service routine
@@ -210,8 +228,9 @@ void run_power_state_machine(void)
                 {
                     mbx->content[5] = 0x22222222;
                 } 
-                set_hb_switch(true, false, false, true);
-                sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);
+                // this should power the motor
+                set_hb_switch(true, false, false, true); // hs1, ls1, hs2, ls2
+                sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
                 while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
                 {
                     mbx->content[5] = 0x33333333;
