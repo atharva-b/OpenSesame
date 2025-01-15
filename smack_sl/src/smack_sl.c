@@ -197,25 +197,6 @@ void run_power_state_machine(void)
                 }
                 break;
             case POWER_HARVESTING:
-                // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
-                // {
-                //     set_hb_switch(true, false, false, true);
-                //     turn_cycles++;
-                //     if (turn_cycles > 10)
-                //     {
-                //         turn_cycles = 0;
-                //         set_hb_switch(true, false, false, false);
-                //         current_state = POWER_HARVESTING_DONE;
-                //     }
-                // }
-                // else if (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)) == false)
-                // {
-                //     set_hb_switch(true, false, false, false);
-                // }
-                // if (done_sweep == false)
-                // {
-                //     sweep_voltages();
-                // }
                 if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
                 {
                     mbx->content[5] = 0x11111111;
@@ -236,18 +217,6 @@ void run_power_state_machine(void)
                     mbx->content[5] = 0x33333333;
                 }
                 set_hb_switch(true, false, false, false);
-                // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
-                // {
-                //     // set_hb_switch(true, false, false, false);
-                //     mbx->content[5] = 0x22222222;
-                //     set_hb_switch(true, false, false, true);
-                // }
-                // else if (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)) == false)
-                // {
-                //     mbx->content[5] = 0x33333333;
-                //     set_hb_switch(true, false, false, false);
-                // }
-                // mbx->content[5] = 0x88888888;
                 mbx->content[3] = HARVESTING_DONE;
                 current_state = POWER_IDLE;
                 break;
