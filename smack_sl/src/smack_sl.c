@@ -168,10 +168,60 @@ void sweep_voltages(void)
     }
 }
 
+// Function to toggle lock
+void toggle_lock(bool *hs1, bool *ls1, bool *hs2, bool *ls2, bool lock) {
+    if (lock) {
+        // Final state for lock == true: hs1=0, ls1=1, hs2=1, ls2=0
+        if (*hs1) {
+            *hs1 = false;
+            set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+        }
+        if(!*ls1){
+            *ls1 = true;
+            set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+        }
+        if(!*hs2){
+            if(*ls2){
+                *ls2 = false;
+                set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+            }
+            *hs2 = true;
+            set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+        }
+        if(*ls2){
+            *ls2 = false;
+            set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+        }
+    } else {
+        // Final state for lock == false: hs1=1, ls1=0, hs2=0, ls2=1
+        if (!*hs1) {
+            if(*ls1){
+                *ls1 = false;
+                set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+            }
+            *hs1 = true;
+            set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+        } if (*ls1) {
+            *ls1 = false;
+            set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+        } if (*hs2) {
+            *hs2 = false;
+            set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+        } if (!*ls2) {
+            *ls2 = true;
+            set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+        }
+    }
+}
+
 void run_power_state_machine(void)
 {
     bool authenticated = false; 
     Mailbox_t* mbx = get_mailbox_address();
+    bool hs1 = true;
+    bool hs2 = false;
+    bool ls1 = false;
+    bool ls2 = false;
 
     while (true)
     {
@@ -186,7 +236,7 @@ void run_power_state_machine(void)
                     authenticated = true;
                     current_state = POWER_HARVESTING;
                     mbx->content[3] = PC_VAL;
-                    set_hb_switch(true, false, false, false);
+                    set_hb_switch(hs1, ls1, hs2, ls2);
                 }
                 else if(mbx->content[2] == ZERO_32){
                     current_state = POWER_READY_FOR_PASSCODE;
@@ -197,25 +247,6 @@ void run_power_state_machine(void)
                 }
                 break;
             case POWER_HARVESTING:
-                // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
-                // {
-                //     set_hb_switch(true, false, false, true);
-                //     turn_cycles++;
-                //     if (turn_cycles > 10)
-                //     {
-                //         turn_cycles = 0;
-                //         set_hb_switch(true, false, false, false);
-                //         current_state = POWER_HARVESTING_DONE;
-                //     }
-                // }
-                // else if (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)) == false)
-                // {
-                //     set_hb_switch(true, false, false, false);
-                // }
-                // if (done_sweep == false)
-                // {
-                //     sweep_voltages();
-                // }
                 if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
                 {
                     mbx->content[5] = 0x11111111;
@@ -231,39 +262,19 @@ void run_power_state_machine(void)
                         mbx->content[5] = 0x22222222;
                     } 
                     // this should power the motor
-                    set_hb_switch(true, false, false, true); // hs1, ls1, hs2, ls2
+                    toggle_lock(&hs1, &ls1, &hs2, &ls2, false); // hs1, ls1, hs2, ls2   --- THIS IS UNLOCK
                     sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
                     while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
                     {
                         mbx->content[5] = 0x33333333;
                     }
-                    set_hb_switch(true, false, false, false);
-                    
-                    set_hb_switch(false, false, false, false);
-                    set_hb_switch(false, false, true, false);
 
                     while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0))) {} 
                     // this should power the motor
-                    set_hb_switch(false, true, true, false); // hs1, ls1, hs2, ls2
+                    toggle_lock(&hs1, &ls1, &hs2, &ls2, true);
                     sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
                     while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5))) {}
-                    set_hb_switch(false, false, true, false);
-                    
-                    set_hb_switch(false, false, false, false);
-                    set_hb_switch(true, false, false, false);
                 }
-                // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
-                // {
-                //     // set_hb_switch(true, false, false, false);
-                //     mbx->content[5] = 0x22222222;
-                //     set_hb_switch(true, false, false, true);
-                // }
-                // else if (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)) == false)
-                // {
-                //     mbx->content[5] = 0x33333333;
-                //     set_hb_switch(true, false, false, false);
-                // }
-                // mbx->content[5] = 0x88888888;
                 mbx->content[3] = HARVESTING_DONE;
                 current_state = POWER_IDLE;
                 break;
