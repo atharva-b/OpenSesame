@@ -255,7 +255,8 @@ void run_power_state_machine(void)
                 break;
             case POWER_HARVESTING_DONE:
                 // sweep_voltages();
-                for (uint8_t i = 0; i < 10; i++)
+                // for (uint8_t i = 0; i < 10; i++)
+                for(;;)
                 {
                     while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)))
                     {
@@ -263,17 +264,19 @@ void run_power_state_machine(void)
                     } 
                     // this should power the motor
                     toggle_lock(&hs1, &ls1, &hs2, &ls2, false); // hs1, ls1, hs2, ls2   --- THIS IS UNLOCK
-                    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
+                    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 1024, 14);  // wait seems to be necessary
                     while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
                     {
                         mbx->content[5] = 0x33333333;
                     }
 
-                    while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0))) {} 
+                    ls2 = false;
+                    set_hb_switch(hs1, ls1, hs2, ls2);
+                    // while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0))) {} 
                     // this should power the motor
-                    toggle_lock(&hs1, &ls1, &hs2, &ls2, true);
+                    // toggle_lock(&hs1, &ls1, &hs2, &ls2, false);
                     sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
-                    while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5))) {}
+                    // while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5))) {}
                 }
                 mbx->content[3] = HARVESTING_DONE;
                 current_state = POWER_IDLE;
