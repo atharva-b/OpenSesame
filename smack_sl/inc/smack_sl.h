@@ -57,7 +57,8 @@ typedef enum
     POWER_READY_FOR_PASSCODE = 1, 
     POWER_HARVESTING = 2,
     POWER_HARVESTING_DONE = 3,
-    POWER_IDLE = 4
+    POWER_IDLE = 4, 
+    POWER_NOT_REGISTERED = 5
 } Power_State_enum_t; 
 
 typedef enum 

@@ -44,6 +44,13 @@
 #define PC_INVAL 0x99999999
 #define HARVESTING_DONE 0xBADAB00B
 
+#define NVM_ADDR_REGISTER 0x0001EE00  // second last page in the NVM, avoiding overlap with any firmware
+
+typedef struct registration_data
+{
+    bool registered;
+} registration_data_t ;
+
 /* NDEF tag defined by user.
  * To activate this tag, set the field "tag_type_2_ptr" in aparams.
  */
@@ -223,13 +230,33 @@ void run_power_state_machine(void)
     bool ls1 = false;
     bool ls2 = false;
 
+    if (!nvm_open_assembly_buffer(NVM_ADDR_REGISTER) == 0) {}
+    uint32_t* nvm_data = (uint32_t*) NVM_ADDR_REGISTER;
+    uint32_t num = *nvm_data;
+    bool registered = (num == 1);   // read from NVM
+    volatile access_state_t access_state = get_nvm_access_state(NVM_ADDR_REGISTER);
+
     while (true)
     {
         switch (current_state)
         {
             case POWER_POWER_OFF:
                 mbx->content[1] = MCU_VALID;
-                current_state = POWER_READY_FOR_PASSCODE;
+                if(registered)
+                    current_state = POWER_READY_FOR_PASSCODE;
+                else {
+                    current_state = POWER_NOT_REGISTERED;
+                }
+                break;
+            case POWER_NOT_REGISTERED:
+                /* registration logic here */
+                if(mbx->content[2] == PASSCODE){
+                    
+                    *nvm_data = 0x00000001;
+                    nvm_program_page();
+                    registered = true;
+                    current_state = POWER_READY_FOR_PASSCODE;
+                }
                 break;
             case POWER_READY_FOR_PASSCODE:
                 if(mbx->content[2] == PASSCODE){
@@ -282,59 +309,12 @@ void run_power_state_machine(void)
                 current_state = POWER_IDLE;
                 break;
             case POWER_IDLE:
+                switch_off_nvm();
+                request_power_saving_mode(true, false, false, false);
                 break;
             default:
-                break;
-        }
-
-    }
-}
-
-void run_lock_state_machine(void)
-{
-    bool authenticated = false;
-    Mailbox_t* mbx;
-
-    // ignore comments below
-    while (true)
-    {
-        /* States 1 and 5 are safe states, i.e. we should be able to loop infinitely in them */
-        switch (current_state)
-        {
-            /* STATE 1:  Locked, Idle */
-            // TODO: clear variable that indicates that it is verified
-            // TODO: wait for NFC; how to check if we have an NFC signal? Should be an interrupt, check cl_uart_handler or hw_field_off_handler
-            // TODO: save NFC data, propagate to next state 
-            case LOCK_LOCKED:
-                mbx = get_mailbox_address();
-                mbx->content[1] = MCU_VALID;
-                break;
-            
-            /* STATE 2 : Locked, Verifying */
-            // maybe investigate dandeliion protocol, but this is extra
-            // TODO: decrypt data, compare passcodes (for the time being, just do a straight comparison)
-            // TODO: if incorrect passcode, return to state 1, else continue
-            // TODO: set variable that indicates that it is verified 
-            // TODO: if charging interrupt not received, move to state 3, if received, move to state 4
-            case LOCK_UNLOCKING:
-                break;
-
-
-            /* STATE 3: Locked, Verified, Charging */
-            // TODO: wait for charging of the capacitor to occur
-            // TODO: will need to set up an interrupt (or something similar) to determine when the capacitor is charged 
-            // TODO: should set a timer as a timeout in case charging does not happen, if timeout go to state 1? -> should determine action here
-            // TODO: move to state 4 when charging interrupt received
-            case LOCK_UNLOCKED:
-                break;
-
-            /* STATE 4: Unlocking */
-            // TODO: send signal to H-bridge to move motor
-            // TODO: move to state 5
-            case LOCK_LOCKING:
-                break;
-            
-            default:
+                switch_off_nvm();
+                request_power_saving_mode(true, false, false, false);
                 break;
         }
 
@@ -353,6 +333,8 @@ void _nvm_start(void)
     init_dand();
     vars_init();
     shc_init();
+    switch_on_nvm();
+    nvm_config();
 
     // uint16_t* nvm_mem_address = (uint16_t*)(0x00010800 + sizeof(uint16_t));
     // *nvm_mem_address = 2000;
