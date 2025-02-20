@@ -46,6 +46,10 @@
 
 #define NVM_ADDR_REGISTER 0x0001EE00  // second last page in the NVM, avoiding overlap with any firmware
 
+#define ALIGN_TO_WORD(addr) ((addr + 3) & ~3) // Rounds up to nearest multiple of 4
+
+uint32_t aligned_address = ALIGN_TO_WORD(NVM_ADDR_REGISTER);
+
 typedef struct registration_data
 {
     bool registered;
@@ -221,6 +225,15 @@ void toggle_lock(bool *hs1, bool *ls1, bool *hs2, bool *ls2, bool lock) {
     }
 }
 
+void write_nvm_unaligned(uint32_t address, uint32_t value) {
+    uint8_t* byte_ptr = (uint8_t*)address;
+    
+    for (int i = 0; i < 4; i++) {
+        byte_ptr[i] = (value >> (i * 8)) & 0xFF; // Store byte-by-byte
+    }
+}
+
+
 void run_power_state_machine(void)
 {
     bool authenticated = false; 
@@ -230,11 +243,11 @@ void run_power_state_machine(void)
     bool ls1 = false;
     bool ls2 = false;
 
-    if (!nvm_open_assembly_buffer(NVM_ADDR_REGISTER) == 0) {}
-    uint32_t* nvm_data = (uint32_t*) NVM_ADDR_REGISTER;
+    if (!nvm_open_assembly_buffer(aligned_address) == 0) { return ;}
+    uint32_t* nvm_data = (uint32_t*) aligned_address;
     uint32_t num = *nvm_data;
     bool registered = (num == 1);   // read from NVM
-    volatile access_state_t access_state = get_nvm_access_state(NVM_ADDR_REGISTER);
+    volatile access_state_t access_state = get_nvm_access_state(aligned_address);
 
     while (true)
     {
@@ -251,8 +264,7 @@ void run_power_state_machine(void)
             case POWER_NOT_REGISTERED:
                 /* registration logic here */
                 if(mbx->content[2] == PASSCODE){
-                    
-                    *nvm_data = 0x00000001;
+                    write_nvm_unaligned(aligned_address, 1);
                     nvm_program_page();
                     registered = true;
                     current_state = POWER_READY_FOR_PASSCODE;
