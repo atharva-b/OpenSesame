@@ -32,6 +32,8 @@
 
 #include "shc_lib.h"
 
+// #include "cmsis_gcc.h"
+
 
 #ifndef wait_about_1ms
 #define WAIT_ABOUT_1MS   0x8000   //!< clock tick constant ~1ms @ 28MHz
@@ -50,10 +52,14 @@
 
 uint32_t aligned_address = ALIGN_TO_WORD(NVM_ADDR_REGISTER);
 
-typedef struct registration_data
-{
-    bool registered;
-} registration_data_t ;
+/* 
+    registration_data[0] -> registered boolean
+    registration_data[1] -> passcode 
+    registration_data[2] -> rfu1
+    registration_data[3] -> rfu2
+*/
+uint32_t registration_data[4];  
+registration_data[1] = PASSCODE;
 
 /* NDEF tag defined by user.
  * To activate this tag, set the field "tag_type_2_ptr" in aparams.
@@ -225,11 +231,18 @@ void toggle_lock(bool *hs1, bool *ls1, bool *hs2, bool *ls2, bool lock) {
     }
 }
 
-void write_nvm_unaligned(uint32_t address, uint32_t value) {
-    uint8_t* byte_ptr = (uint8_t*)address;
+// update registration data, and then write to nvm
+void write_nvm(uint32_t* address) {
     
     for (int i = 0; i < 4; i++) {
-        byte_ptr[i] = (value >> (i * 8)) & 0xFF; // Store byte-by-byte
+        address[i] = registration_data[i]; // Store word-by-word
+    }
+}
+
+void read_nvm(uint32_t* address) {
+
+    for(int i = 0; i < 4; i++) {
+        registration_data[i] = address[i];   // Read word-by-word into array
     }
 }
 
@@ -245,9 +258,8 @@ void run_power_state_machine(void)
 
     if (!nvm_open_assembly_buffer(aligned_address) == 0) { return ;}
     uint32_t* nvm_data = (uint32_t*) aligned_address;
-    uint32_t num = *nvm_data;
-    bool registered = (num == 1);   // read from NVM
-    volatile access_state_t access_state = get_nvm_access_state(aligned_address);
+    read_nvm(nvm_data);
+    bool registered = (registration_data[0] == 1);   // read from NVM
 
     while (true)
     {
@@ -264,14 +276,15 @@ void run_power_state_machine(void)
             case POWER_NOT_REGISTERED:
                 /* registration logic here */
                 if(mbx->content[2] == PASSCODE){
-                    write_nvm_unaligned(aligned_address, 1);
+                    registration_data[0] = 0x00000001;
+                    write_nvm((uint32_t*) aligned_address);
                     nvm_program_page();
                     registered = true;
                     current_state = POWER_READY_FOR_PASSCODE;
                 }
                 break;
             case POWER_READY_FOR_PASSCODE:
-                if(mbx->content[2] == PASSCODE){
+                if(mbx->content[2] == registration_data[1]){
                     authenticated = true;
                     current_state = POWER_HARVESTING;
                     mbx->content[3] = PC_VAL;
