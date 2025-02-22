@@ -214,6 +214,24 @@ void toggle_lock(bool *hs1, bool *ls1, bool *hs2, bool *ls2, bool lock) {
     }
 }
 
+void turn_motor(Mailbox_t* mbx, bool* hs1, bool* ls1, bool* hs2, bool* ls2, bool lock) {
+    while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)))
+    {
+        mbx->content[5] = 0x22222222;
+    } 
+    // this should power the motor
+    toggle_lock(hs1, ls1, hs2, ls2, lock); // hs1, ls1, hs2, ls2   --- THIS IS UNLOCK
+    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 1024, 14);  // wait seems to be necessary
+    while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
+    {
+        mbx->content[5] = 0x33333333;
+    }
+
+    *ls2 = false;
+    set_hb_switch(*hs1, *ls1, *hs2, *ls2);
+    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
+}
+
 void run_power_state_machine(void)
 {
     bool authenticated = false; 
@@ -222,6 +240,7 @@ void run_power_state_machine(void)
     bool hs2 = false;
     bool ls1 = false;
     bool ls2 = false;
+    bool locked = true;
 
     while (true)
     {
@@ -258,25 +277,7 @@ void run_power_state_machine(void)
                 // for (uint8_t i = 0; i < 10; i++)
                 for(;;)
                 {
-                    while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)))
-                    {
-                        mbx->content[5] = 0x22222222;
-                    } 
-                    // this should power the motor
-                    toggle_lock(&hs1, &ls1, &hs2, &ls2, false); // hs1, ls1, hs2, ls2   --- THIS IS UNLOCK
-                    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 1024, 14);  // wait seems to be necessary
-                    while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
-                    {
-                        mbx->content[5] = 0x33333333;
-                    }
-
-                    ls2 = false;
-                    set_hb_switch(hs1, ls1, hs2, ls2);
-                    // while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0))) {} 
-                    // this should power the motor
-                    // toggle_lock(&hs1, &ls1, &hs2, &ls2, false);
-                    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
-                    // while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5))) {}
+                    turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
                 }
                 mbx->content[3] = HARVESTING_DONE;
                 current_state = POWER_IDLE;
