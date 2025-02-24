@@ -193,7 +193,7 @@ void toggle_lock(bool *hs1, bool *ls1, bool *hs2, bool *ls2, bool lock) {
             set_hb_switch(*hs1, *ls1, *hs2, *ls2);
         }
     } else {
-        // Final state for lock == false: hs1=1, ls1=0, hs2=0, ls2=1
+        // Final state for unlock == false: hs1=1, ls1=0, hs2=0, ls2=1
         if (!*hs1) {
             if(*ls1){
                 *ls1 = false;
@@ -215,21 +215,30 @@ void toggle_lock(bool *hs1, bool *ls1, bool *hs2, bool *ls2, bool lock) {
 }
 
 void turn_motor(Mailbox_t* mbx, bool* hs1, bool* ls1, bool* hs2, bool* ls2, bool lock) {
+    const uint32_t wait_time_discharge = WAIT_ABOUT_1MS * 32;
+    const uint32_t wait_time_charge = WAIT_ABOUT_1MS;
+
     while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)))
     {
         mbx->content[5] = 0x22222222;
     } 
     // this should power the motor
-    toggle_lock(hs1, ls1, hs2, ls2, lock); // hs1, ls1, hs2, ls2   --- THIS IS UNLOCK
-    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 1024, 14);  // wait seems to be necessary
-    while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
-    {
-        mbx->content[5] = 0x33333333;
-    }
+    toggle_lock(hs1, ls1, hs2, ls2, lock); // LOCK - 0110; UNLOCK - 1001
+    sys_tim_singleshot_32(0, wait_time_discharge, 14);  // wait seems to be necessary
+    // while (shc_compare(shc_channel_ma, get_threshold_from_voltage(2.5)))
+    // {
+    //     mbx->content[5] = 0x33333333;
+    // }
 
-    *ls2 = false;
+    // open the circuit to charge the capacitor
+    if(!lock) {
+        *ls2 = false;  
+    }
+    else {
+        *ls1 = false;
+    }
     set_hb_switch(*hs1, *ls1, *hs2, *ls2);
-    sys_tim_singleshot_32(0, WAIT_ABOUT_1MS * 511, 14);  // wait seems to be necessary
+    sys_tim_singleshot_32(0, wait_time_charge, 14);  // wait seems to be necessary
 }
 
 void run_power_state_machine(void)
