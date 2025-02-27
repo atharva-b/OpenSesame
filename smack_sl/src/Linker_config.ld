@@ -36,11 +36,17 @@ OUTPUT_ARCH(arm)
 
 INCLUDE smack_memory.ld
 
+section_registration_size = 16;
+
 section_version_base = __NVM_BASE + __NVM_SIZE;
+section_registration_base = section_version_base - section_registration_size;
 MEMORY
 {
 	/* holds version and code identification for NVM application firmware*/
 	version (r) : ORIGIN = section_version_base, LENGTH = section_version_size
+
+	/* holds registration information for lock users */ 
+	registration (rw) : ORIGIN = section_registration_base, LENGTH = section_registration_size
 }
 
 

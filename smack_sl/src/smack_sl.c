@@ -44,6 +44,16 @@
 #define PC_INVAL 0x99999999
 #define HARVESTING_DONE 0xBADAB00B
 
+#define REGISTRATION_STRUCT_ADDR 0x0001EFE4
+
+// typedef struct {
+//     uint32_t registered; 
+//     uint32_t passcode;
+//     uint32_t lock_state;
+//     uint32_t rfu2;
+// } registration_data_t;
+
+uint32_t reg_data[4];
 /* NDEF tag defined by user.
  * To activate this tag, set the field "tag_type_2_ptr" in aparams.
  */
@@ -215,7 +225,7 @@ void toggle_lock(bool *hs1, bool *ls1, bool *hs2, bool *ls2, bool lock) {
 }
 
 void turn_motor(Mailbox_t* mbx, bool* hs1, bool* ls1, bool* hs2, bool* ls2, bool lock) {
-    const uint32_t wait_time_discharge = WAIT_ABOUT_1MS * 32;
+    const uint32_t wait_time_discharge = WAIT_ABOUT_1MS * 64;
     const uint32_t wait_time_charge = WAIT_ABOUT_1MS;
 
     while (!shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)))
@@ -241,6 +251,21 @@ void turn_motor(Mailbox_t* mbx, bool* hs1, bool* ls1, bool* hs2, bool* ls2, bool
     sys_tim_singleshot_32(0, wait_time_charge, 14);  // wait seems to be necessary
 }
 
+// update registration data, and then write to nvm
+void write_nvm(uint32_t* address) {
+    
+    for (int i = 0; i < 4; i++) {
+        address[i] = reg_data[i]; // Store word-by-word
+    }
+}
+
+void read_nvm(uint32_t* address) {
+
+    for(int i = 0; i < 4; i++) {
+        reg_data[i] = address[i];   // Read word-by-word into array
+    }
+}
+
 void run_power_state_machine(void)
 {
     bool authenticated = false; 
@@ -249,7 +274,12 @@ void run_power_state_machine(void)
     bool hs2 = false;
     bool ls1 = false;
     bool ls2 = false;
-    bool locked = true;
+    // bool locked = true;
+    bool registered = false;
+    if (nvm_open_assembly_buffer(REGISTRATION_STRUCT_ADDR) != 0) { return; }
+    read_nvm((uint32_t*) REGISTRATION_STRUCT_ADDR);
+    bool locked = (reg_data[2] == 1);
+    registered = (reg_data[0] == 1);
 
     while (true)
     {
@@ -283,8 +313,10 @@ void run_power_state_machine(void)
                 break;
             case POWER_HARVESTING_DONE:
                 // sweep_voltages();
-                // for (uint8_t i = 0; i < 10; i++)
-                for(;;)
+                reg_data[2] = (uint32_t) !locked;
+                nvm_program_verify();
+                for (uint8_t i = 0; i < 3; i++)
+                // for(;;)
                 {
                     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
                 }
@@ -363,6 +395,8 @@ void _nvm_start(void)
     init_dand();
     vars_init();
     shc_init();
+    switch_on_nvm();
+    nvm_config();
 
     // uint16_t* nvm_mem_address = (uint16_t*)(0x00010800 + sizeof(uint16_t));
     // *nvm_mem_address = 2000;
