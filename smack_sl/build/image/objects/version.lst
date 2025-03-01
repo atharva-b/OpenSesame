@@ -24,10 +24,10 @@
   26 0008 00000000 	 .word 0
   27              	 .text
   28              	.Letext0:
-  29              	 .file 1 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
-  30              	 .file 2 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
-  31              	 .file 3 "C:/InfineonSDK/smack_sl/inc/version.h"
-  32              	 .file 4 "C:/InfineonSDK/smack_sl/src/version.c"
+  29              	 .file 1 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
+  30              	 .file 2 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+  31              	 .file 3 "Z:/Documents/GitHub/OpenSesame/smack_sl/inc/version.h"
+  32              	 .file 4 "Z:/Documents/GitHub/OpenSesame/smack_sl/src/version.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 version.c
     {standard input}:20     .rodata.version:00000000 version
