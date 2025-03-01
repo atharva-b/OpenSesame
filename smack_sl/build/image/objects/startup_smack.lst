@@ -22,186 +22,186 @@
   22              	 .fpu softvfp
   24              	Default_Handler:
   25              	.LFB44:
-  26              	 .file 1 "C:/InfineonSDK/smack_sl/src/startup_smack.c"
-   1:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /* ============================================================================
-   2:C:/InfineonSDK/smack_sl/src\startup_smack.c **** ** Copyright (c) 2021 Infineon Technologies AG
-   3:C:/InfineonSDK/smack_sl/src\startup_smack.c **** **               All rights reserved.
-   4:C:/InfineonSDK/smack_sl/src\startup_smack.c **** **               www.infineon.com
-   5:C:/InfineonSDK/smack_sl/src\startup_smack.c **** ** ============================================================================
-   6:C:/InfineonSDK/smack_sl/src\startup_smack.c **** *
-   7:C:/InfineonSDK/smack_sl/src\startup_smack.c **** */
-   8:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-   9:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /******************************************************************************
-  10:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * @file     startup_smack.c
-  11:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * @brief    CMSIS-Core(M) Device Startup File for a Cortex-M0 Device
-  12:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * @version  V2.0.0
-  13:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * @date     04. June 2019
-  14:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  ******************************************************************************/
-  15:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /*
-  16:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
-  17:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *
-  18:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * SPDX-License-Identifier: Apache-2.0
-  19:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *
-  20:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
-  21:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * not use this file except in compliance with the License.
-  22:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * You may obtain a copy of the License at
-  23:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *
-  24:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * www.apache.org/licenses/LICENSE-2.0
-  25:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *
-  26:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * Unless required by applicable law or agreed to in writing, software
-  27:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
-  28:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  29:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * See the License for the specific language governing permissions and
-  30:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  * limitations under the License.
-  31:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  */
-  32:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  33:C:/InfineonSDK/smack_sl/src\startup_smack.c **** #include "smack.h"
-  34:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  35:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
-  36:C:/InfineonSDK/smack_sl/src\startup_smack.c ****   Exception / Interrupt Handler Function Prototype
-  37:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
-  38:C:/InfineonSDK/smack_sl/src\startup_smack.c **** typedef void( *pFunc )( void );
-  39:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  40:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
-  41:C:/InfineonSDK/smack_sl/src\startup_smack.c ****   External References
-  42:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
-  43:C:/InfineonSDK/smack_sl/src\startup_smack.c **** extern uint32_t __INITIAL_SP;
-  44:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  45:C:/InfineonSDK/smack_sl/src\startup_smack.c **** extern __NO_RETURN void __NVM_PROGRAM_START(void);
-  46:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  47:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
-  48:C:/InfineonSDK/smack_sl/src\startup_smack.c ****   Internal References
-  49:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
-  50:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void             Default_Handler(void);
-  51:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void __NO_RETURN NVM_Reset_Handler  (void);
-  52:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  53:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
-  54:C:/InfineonSDK/smack_sl/src\startup_smack.c ****   Exception / Interrupt Handler
-  55:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
-  56:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /* Exceptions */
-  57:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void NMI_Handler            (void) __attribute__ ((weak, alias("Default_Handler")));
-  58:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HardFault_Handler      (void) __attribute__ ((weak, alias("Default_Handler")));
-  59:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void SVC_Handler            (void) __attribute__ ((weak, alias("Default_Handler")));
-  60:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void PendSV_Handler         (void) __attribute__ ((weak, alias("Default_Handler")));
-  61:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void SysTick_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  62:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  63:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Cl_uart_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  64:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Event_Bus1_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-  65:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Event_Bus2_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-  66:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Event_Bus3_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-  67:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Event_Bus4_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-  68:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Event_Bus5_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-  69:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Event_Bus6_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-  70:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Event_Bus7_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-  71:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Event_Bus8_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-  72:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HPrio_Matrix0_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
-  73:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HPrio_Matrix1_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
-  74:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HPrio_Matrix2_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
-  75:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HPrio_Matrix3_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
-  76:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HPrio_Matrix4_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
-  77:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HPrio_Matrix5_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
-  78:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void WDT_Handler            (void) __attribute__ ((weak, alias("Default_Handler")));
-  79:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HW_field_off_Handler   (void) __attribute__ ((weak, alias("Default_Handler")));
-  80:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void HW_nvm_Handler         (void) __attribute__ ((weak, alias("Default_Handler")));
-  81:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused1_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  82:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused2_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  83:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused3_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  84:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused4_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  85:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused5_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  86:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused6_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  87:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused7_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  88:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused8_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  89:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused9_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
-  90:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused10_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
-  91:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused11_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
-  92:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused12_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
-  93:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused13_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
-  94:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Unused14_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
-  95:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  96:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  97:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
-  98:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
-  99:C:/InfineonSDK/smack_sl/src\startup_smack.c ****   Exception / Interrupt Vector table
- 100:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
- 101:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
- 102:C:/InfineonSDK/smack_sl/src\startup_smack.c **** #if defined ( __GNUC__ )
- 103:C:/InfineonSDK/smack_sl/src\startup_smack.c **** #pragma GCC diagnostic push
- 104:C:/InfineonSDK/smack_sl/src\startup_smack.c **** #pragma GCC diagnostic ignored "-Wpedantic"
- 105:C:/InfineonSDK/smack_sl/src\startup_smack.c **** #endif
- 106:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
- 107:C:/InfineonSDK/smack_sl/src\startup_smack.c **** extern const pFunc __VECTOR_TABLE[48];
- 108:C:/InfineonSDK/smack_sl/src\startup_smack.c **** const pFunc __VECTOR_TABLE[48] __VECTOR_TABLE_ATTRIBUTE =
- 109:C:/InfineonSDK/smack_sl/src\startup_smack.c **** {
- 110:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     /*lint -e(611) warning suspicious cast */
- 111:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     (pFunc)(&__INITIAL_SP),                   /*     Initial Stack Pointer */
- 112:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     NVM_Reset_Handler,                        /*     Reset Handler */
- 113:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     NMI_Handler,                              /* -14 NMI Handler */
- 114:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HardFault_Handler,                        /* -13 Hard Fault Handler */
- 115:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 116:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 117:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 118:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 119:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 120:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 121:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 122:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     SVC_Handler,                              /*  -5 SVCall Handler */
- 123:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 124:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
- 125:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     PendSV_Handler,                           /*  -2 PendSV Handler */
- 126:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     SysTick_Handler,                          /*  -1 SysTick Handler */
- 127:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
- 128:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     /* Interrupts */
- 129:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Cl_uart_Handler,                          /*   0 Interrupt 0 */
- 130:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Event_Bus1_Handler,                       /*   1 Interrupt 1 */
- 131:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Event_Bus2_Handler,                       /*   2 Interrupt 2 */
- 132:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Event_Bus3_Handler,                       /*   3 Interrupt 3 */
- 133:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Event_Bus4_Handler,                       /*   4 Interrupt 4 */
- 134:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Event_Bus5_Handler,                       /*   5 Interrupt 5 */
- 135:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Event_Bus6_Handler,                       /*   6 Interrupt 6 */
- 136:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Event_Bus7_Handler,                       /*   7 Interrupt 7 */
- 137:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Event_Bus8_Handler,                       /*   8 Interrupt 8 */
- 138:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HPrio_Matrix0_Handler,                    /*   9 Interrupt 9 */
- 139:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HPrio_Matrix1_Handler,                    /*  10 Interrupt 10 */
- 140:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HPrio_Matrix2_Handler,                    /*  11 Interrupt 11 */
- 141:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HPrio_Matrix3_Handler,                    /*  12 Interrupt 12 */
- 142:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HPrio_Matrix4_Handler,                    /*  13 Interrupt 13 */
- 143:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HPrio_Matrix5_Handler,                    /*  14 Interrupt 14 */
- 144:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     WDT_Handler,                              /*  15 Interrupt 15 */
- 145:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HW_field_off_Handler,                     /*  16 Interrupt 16 */
- 146:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     HW_nvm_Handler,                           /*  17 Interrupt 17 */
- 147:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused1_Handler,                          /*  18 Interrupt 18 */
- 148:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused2_Handler,                          /*  19 Interrupt 19 */
- 149:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused3_Handler,                          /*  20 Interrupt 20 */
- 150:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused4_Handler,                          /*  21 Interrupt 21 */
- 151:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused5_Handler,                          /*  22 Interrupt 22 */
- 152:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused6_Handler,                          /*  23 Interrupt 23 */
- 153:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused7_Handler,                          /*  24 Interrupt 24 */
- 154:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused8_Handler,                          /*  25 Interrupt 25 */
- 155:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused9_Handler,                          /*  26 Interrupt 26 */
- 156:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused10_Handler,                         /*  27 Interrupt 27 */
- 157:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused11_Handler,                         /*  28 Interrupt 28 */
- 158:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused12_Handler,                         /*  29 Interrupt 29 */
- 159:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused13_Handler,                         /*  30 Interrupt 30 */
- 160:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     Unused14_Handler                          /*  31 Interrupt 31 */
- 161:C:/InfineonSDK/smack_sl/src\startup_smack.c **** };
- 162:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
- 163:C:/InfineonSDK/smack_sl/src\startup_smack.c **** #if defined ( __GNUC__ )
- 164:C:/InfineonSDK/smack_sl/src\startup_smack.c **** #pragma GCC diagnostic pop
- 165:C:/InfineonSDK/smack_sl/src\startup_smack.c **** #endif
- 166:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
- 167:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
- 168:C:/InfineonSDK/smack_sl/src\startup_smack.c ****   Reset Handler called on controller reset
- 169:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
- 170:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void NVM_Reset_Handler(void)
- 171:C:/InfineonSDK/smack_sl/src\startup_smack.c **** {
- 172:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     __NVM_PROGRAM_START();                    /* Enter NVM PreMain (C library entry point) */
- 173:C:/InfineonSDK/smack_sl/src\startup_smack.c **** }
- 174:C:/InfineonSDK/smack_sl/src\startup_smack.c **** 
- 175:C:/InfineonSDK/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
- 176:C:/InfineonSDK/smack_sl/src\startup_smack.c ****   Default Handler for Exceptions / Interrupts
- 177:C:/InfineonSDK/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
- 178:C:/InfineonSDK/smack_sl/src\startup_smack.c **** void Default_Handler(void)
- 179:C:/InfineonSDK/smack_sl/src\startup_smack.c **** {
+  26              	 .file 1 "Z:/Documents/GitHub/OpenSesame/smack_sl/src/startup_smack.c"
+   1:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /* ============================================================================
+   2:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** ** Copyright (c) 2021 Infineon Technologies AG
+   3:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** **               All rights reserved.
+   4:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** **               www.infineon.com
+   5:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** ** ============================================================================
+   6:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** *
+   7:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** */
+   8:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+   9:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /******************************************************************************
+  10:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * @file     startup_smack.c
+  11:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * @brief    CMSIS-Core(M) Device Startup File for a Cortex-M0 Device
+  12:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * @version  V2.0.0
+  13:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * @date     04. June 2019
+  14:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  ******************************************************************************/
+  15:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /*
+  16:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
+  17:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *
+  18:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * SPDX-License-Identifier: Apache-2.0
+  19:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *
+  20:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  21:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * not use this file except in compliance with the License.
+  22:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * You may obtain a copy of the License at
+  23:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *
+  24:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * www.apache.org/licenses/LICENSE-2.0
+  25:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *
+  26:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * Unless required by applicable law or agreed to in writing, software
+  27:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  28:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  29:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * See the License for the specific language governing permissions and
+  30:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  * limitations under the License.
+  31:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  */
+  32:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  33:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** #include "smack.h"
+  34:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  35:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
+  36:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****   Exception / Interrupt Handler Function Prototype
+  37:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
+  38:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** typedef void( *pFunc )( void );
+  39:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  40:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
+  41:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****   External References
+  42:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
+  43:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** extern uint32_t __INITIAL_SP;
+  44:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  45:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** extern __NO_RETURN void __NVM_PROGRAM_START(void);
+  46:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  47:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
+  48:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****   Internal References
+  49:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
+  50:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void             Default_Handler(void);
+  51:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void __NO_RETURN NVM_Reset_Handler  (void);
+  52:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  53:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
+  54:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****   Exception / Interrupt Handler
+  55:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
+  56:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /* Exceptions */
+  57:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void NMI_Handler            (void) __attribute__ ((weak, alias("Default_Handler")));
+  58:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HardFault_Handler      (void) __attribute__ ((weak, alias("Default_Handler")));
+  59:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void SVC_Handler            (void) __attribute__ ((weak, alias("Default_Handler")));
+  60:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void PendSV_Handler         (void) __attribute__ ((weak, alias("Default_Handler")));
+  61:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void SysTick_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  62:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  63:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Cl_uart_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  64:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Event_Bus1_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+  65:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Event_Bus2_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+  66:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Event_Bus3_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+  67:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Event_Bus4_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+  68:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Event_Bus5_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+  69:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Event_Bus6_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+  70:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Event_Bus7_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+  71:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Event_Bus8_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+  72:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HPrio_Matrix0_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
+  73:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HPrio_Matrix1_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
+  74:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HPrio_Matrix2_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
+  75:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HPrio_Matrix3_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
+  76:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HPrio_Matrix4_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
+  77:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HPrio_Matrix5_Handler  (void) __attribute__ ((weak, alias("Default_Handler")));
+  78:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void WDT_Handler            (void) __attribute__ ((weak, alias("Default_Handler")));
+  79:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HW_field_off_Handler   (void) __attribute__ ((weak, alias("Default_Handler")));
+  80:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void HW_nvm_Handler         (void) __attribute__ ((weak, alias("Default_Handler")));
+  81:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused1_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  82:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused2_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  83:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused3_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  84:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused4_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  85:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused5_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  86:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused6_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  87:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused7_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  88:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused8_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  89:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused9_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+  90:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused10_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
+  91:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused11_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
+  92:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused12_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
+  93:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused13_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
+  94:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Unused14_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
+  95:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  96:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  97:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+  98:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
+  99:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****   Exception / Interrupt Vector table
+ 100:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
+ 101:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+ 102:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** #if defined ( __GNUC__ )
+ 103:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** #pragma GCC diagnostic push
+ 104:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** #pragma GCC diagnostic ignored "-Wpedantic"
+ 105:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** #endif
+ 106:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** extern const pFunc __VECTOR_TABLE[48];
+ 108:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** const pFunc __VECTOR_TABLE[48] __VECTOR_TABLE_ATTRIBUTE =
+ 109:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** {
+ 110:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     /*lint -e(611) warning suspicious cast */
+ 111:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     (pFunc)(&__INITIAL_SP),                   /*     Initial Stack Pointer */
+ 112:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     NVM_Reset_Handler,                        /*     Reset Handler */
+ 113:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     NMI_Handler,                              /* -14 NMI Handler */
+ 114:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HardFault_Handler,                        /* -13 Hard Fault Handler */
+ 115:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 116:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 117:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 118:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 119:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 120:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 121:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 122:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     SVC_Handler,                              /*  -5 SVCall Handler */
+ 123:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 124:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     0,                                        /*     Reserved */
+ 125:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     PendSV_Handler,                           /*  -2 PendSV Handler */
+ 126:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     SysTick_Handler,                          /*  -1 SysTick Handler */
+ 127:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+ 128:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     /* Interrupts */
+ 129:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Cl_uart_Handler,                          /*   0 Interrupt 0 */
+ 130:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Event_Bus1_Handler,                       /*   1 Interrupt 1 */
+ 131:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Event_Bus2_Handler,                       /*   2 Interrupt 2 */
+ 132:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Event_Bus3_Handler,                       /*   3 Interrupt 3 */
+ 133:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Event_Bus4_Handler,                       /*   4 Interrupt 4 */
+ 134:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Event_Bus5_Handler,                       /*   5 Interrupt 5 */
+ 135:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Event_Bus6_Handler,                       /*   6 Interrupt 6 */
+ 136:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Event_Bus7_Handler,                       /*   7 Interrupt 7 */
+ 137:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Event_Bus8_Handler,                       /*   8 Interrupt 8 */
+ 138:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HPrio_Matrix0_Handler,                    /*   9 Interrupt 9 */
+ 139:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HPrio_Matrix1_Handler,                    /*  10 Interrupt 10 */
+ 140:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HPrio_Matrix2_Handler,                    /*  11 Interrupt 11 */
+ 141:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HPrio_Matrix3_Handler,                    /*  12 Interrupt 12 */
+ 142:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HPrio_Matrix4_Handler,                    /*  13 Interrupt 13 */
+ 143:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HPrio_Matrix5_Handler,                    /*  14 Interrupt 14 */
+ 144:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     WDT_Handler,                              /*  15 Interrupt 15 */
+ 145:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HW_field_off_Handler,                     /*  16 Interrupt 16 */
+ 146:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     HW_nvm_Handler,                           /*  17 Interrupt 17 */
+ 147:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused1_Handler,                          /*  18 Interrupt 18 */
+ 148:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused2_Handler,                          /*  19 Interrupt 19 */
+ 149:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused3_Handler,                          /*  20 Interrupt 20 */
+ 150:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused4_Handler,                          /*  21 Interrupt 21 */
+ 151:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused5_Handler,                          /*  22 Interrupt 22 */
+ 152:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused6_Handler,                          /*  23 Interrupt 23 */
+ 153:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused7_Handler,                          /*  24 Interrupt 24 */
+ 154:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused8_Handler,                          /*  25 Interrupt 25 */
+ 155:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused9_Handler,                          /*  26 Interrupt 26 */
+ 156:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused10_Handler,                         /*  27 Interrupt 27 */
+ 157:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused11_Handler,                         /*  28 Interrupt 28 */
+ 158:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused12_Handler,                         /*  29 Interrupt 29 */
+ 159:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused13_Handler,                         /*  30 Interrupt 30 */
+ 160:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     Unused14_Handler                          /*  31 Interrupt 31 */
+ 161:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** };
+ 162:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+ 163:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** #if defined ( __GNUC__ )
+ 164:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** #pragma GCC diagnostic pop
+ 165:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** #endif
+ 166:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+ 167:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
+ 168:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****   Reset Handler called on controller reset
+ 169:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
+ 170:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void NVM_Reset_Handler(void)
+ 171:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** {
+ 172:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     __NVM_PROGRAM_START();                    /* Enter NVM PreMain (C library entry point) */
+ 173:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** }
+ 174:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** 
+ 175:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** /*----------------------------------------------------------------------------
+ 176:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****   Default Handler for Exceptions / Interrupts
+ 177:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****  *----------------------------------------------------------------------------*/
+ 178:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** void Default_Handler(void)
+ 179:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** {
   27              	 .loc 1 179 1 view-0
   28              	 .cfi_startproc
   29              	 
@@ -209,13 +209,13 @@
   31              	 
   32              	 
   33              	.L2:
- 180:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     /*lint -e(716) while(1) */
- 181:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     while (1)
+ 180:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     /*lint -e(716) while(1) */
+ 181:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     while (1)
   34              	 .loc 1 181 5 discriminator 1 view .LVU1
- 182:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     {
- 183:C:/InfineonSDK/smack_sl/src\startup_smack.c ****         ;
+ 182:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     {
+ 183:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****         ;
   35              	 .loc 1 183 9 discriminator 1 view .LVU2
- 181:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     {
+ 181:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     {
   36              	 .loc 1 181 11 discriminator 1 view .LVU3
   37 0000 FEE7     	 b .L2
   38              	 .cfi_endproc
@@ -303,232 +303,232 @@
  121              	 .fpu softvfp
  123              	NVM_Reset_Handler:
  124              	.LFB43:
- 171:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     __NVM_PROGRAM_START();                    /* Enter NVM PreMain (C library entry point) */
+ 171:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     __NVM_PROGRAM_START();                    /* Enter NVM PreMain (C library entry point) */
  125              	 .loc 1 171 1 view-0
  126              	 .cfi_startproc
  127              	 
  128              	 
  129              	 
- 172:C:/InfineonSDK/smack_sl/src\startup_smack.c **** }
+ 172:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c **** }
  130              	 .loc 1 172 5 view .LVU5
  131              	.LBB8:
  132              	.LBI8:
- 133              	 .file 2 "C:/InfineonSDK/smack_rom/libs/CMSIS/inc/cmsis_gcc.h"
-   1:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* ============================================================================
-   2:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** ** Copyright (c) 2021 Infineon Technologies AG
-   3:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** **               All rights reserved.
-   4:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** **               www.infineon.com
-   5:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** ** ============================================================================
-   6:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** *
-   7:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** */
-   8:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
-   9:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /**************************************************************************//**
-  10:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @file     cmsis_gcc.h
-  11:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
-  12:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @version  V5.2.0
-  13:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @date     08. May 2019
-  14:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  ******************************************************************************/
-  15:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /*
-  16:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
-  17:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *
-  18:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
-  19:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *
-  20:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
-  21:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * not use this file except in compliance with the License.
-  22:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * You may obtain a copy of the License at
-  23:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *
-  24:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
-  25:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *
-  26:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
-  27:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
-  28:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  29:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * See the License for the specific language governing permissions and
-  30:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * limitations under the License.
-  31:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  */
-  32:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
-  33:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
-  34:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #define __CMSIS_GCC_H
-  35:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
-  36:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* ignore some GCC warnings */
-  37:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #pragma GCC diagnostic push
-  38:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
-  39:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
-  40:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
-  41:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
-  42:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* Fallback for __has_builtin */
-  43:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef __has_builtin
-  44:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __has_builtin(x) (0)
-  45:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  46:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
-  47:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* CMSIS compiler specific defines */
-  48:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __ASM
-  49:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __ASM                                  __asm
-  50:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  51:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __INLINE
-  52:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __INLINE                               inline
-  53:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  54:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __STATIC_INLINE
-  55:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
-  56:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  57:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
-  58:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
-  59:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif                                           
-  60:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __NO_RETURN
-  61:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
-  62:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  63:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __USED
-  64:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
-  65:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  66:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __WEAK
-  67:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
-  68:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  69:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __PACKED
-  70:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
-  71:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  72:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
-  73:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
-  74:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  75:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __PACKED_UNION
-  76:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
-  77:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  78:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
-  79:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
-  80:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
-  81:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
-  82:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
-  83:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
-  84:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
-  85:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  86:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
-  87:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
-  88:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
-  89:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
-  90:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
-  91:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
-  92:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))-
-  93:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
-  94:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
-  95:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
-  96:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
-  97:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
-  98:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
-  99:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
- 100:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
- 101:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
- 102:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
- 103:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
- 104:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
- 105:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
- 106:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
- 107:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
- 108:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
- 109:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
- 110:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
- 111:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
- 112:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
- 113:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
- 114:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
- 115:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
- 116:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
- 117:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
- 118:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __ALIGNED
- 119:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
- 120:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
- 121:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __RESTRICT
- 122:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __RESTRICT                             __restrict
- 123:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
- 124:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __COMPILER_BARRIER
- 125:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __COMPILER_BARRIER()                   __ASM volatile("":::"memory")
- 126:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
- 127:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 128:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
- 129:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 130:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef __PROGRAM_START
- 131:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 132:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /**@brief   Initializes data and bss sections.
- 133:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @details This default implementations initialized all data and additional bss
- 134:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *          sections relying on .copy.table and .zero.table specified properly
- 135:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *          in the used linker script.
- 136:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  */
- 137:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void)
- 138:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** {
- 139:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern void _start(void) __NO_RETURN;
- 140:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
- 141:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****    typedef struct {
- 142:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t const* src;
- 143:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t* dest;
- 144:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t  wlen;
- 145:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   } __copy_table_t;
- 146:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
- 147:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   typedef struct {
- 148:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t* dest;
- 149:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t  wlen;
- 150:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   } __zero_table_t;
- 151:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
- 152:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __copy_table_t __copy_table_start__;
- 153:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __copy_table_t __copy_table_end__;
- 154:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __zero_table_t __zero_table_start__;
- 155:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __zero_table_t __zero_table_end__;
- 156:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 157:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__copy_table_start__; pTable < &__copy_table_end__; ++pTable
- 158:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
- 159:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
- 160:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
- 161:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   }
- 162:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  
- 163:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   for (__zero_table_t const* pTable = &__zero_table_start__; pTable < &__zero_table_end__; ++pTable
- 164:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
- 165:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
- 166:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
- 167:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   }
- 168:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
- 169:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   _start();
- 170:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** }
- 171:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
- 172:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #define __PROGRAM_START           __cmsis_start
- 173:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
- 174:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 175:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
- 176:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 177:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef __NVM_PROGRAM_START
- 178:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 179:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /**
- 180:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   \brief   Initializes data and bss sections
- 181:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   \details This default implementations initialized all data and additional bss
- 182:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****            sections relying on .copy.table and .zero.table specified properly
- 183:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****            in the used linker script.
- 184:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 185:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  */
- 186:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** __STATIC_FORCEINLINE __NO_RETURN void __nvm_cmsis_start(void)
+ 133              	 .file 2 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc/cmsis_gcc.h"
+   1:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* ============================================================================
+   2:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** ** Copyright (c) 2021 Infineon Technologies AG
+   3:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** **               All rights reserved.
+   4:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** **               www.infineon.com
+   5:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** ** ============================================================================
+   6:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** *
+   7:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** */
+   8:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+   9:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /**************************************************************************//**
+  10:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @file     cmsis_gcc.h
+  11:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
+  12:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @version  V5.2.0
+  13:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @date     08. May 2019
+  14:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  ******************************************************************************/
+  15:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /*
+  16:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
+  17:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *
+  18:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
+  19:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *
+  20:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  21:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * not use this file except in compliance with the License.
+  22:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * You may obtain a copy of the License at
+  23:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *
+  24:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
+  25:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *
+  26:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
+  27:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  28:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  29:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * See the License for the specific language governing permissions and
+  30:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * limitations under the License.
+  31:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  */
+  32:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+  33:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
+  34:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #define __CMSIS_GCC_H
+  35:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+  36:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* ignore some GCC warnings */
+  37:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #pragma GCC diagnostic push
+  38:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
+  39:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
+  40:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
+  41:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+  42:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* Fallback for __has_builtin */
+  43:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef __has_builtin
+  44:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __has_builtin(x) (0)
+  45:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  46:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+  47:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* CMSIS compiler specific defines */
+  48:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __ASM
+  49:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __ASM                                  __asm
+  50:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  51:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __INLINE
+  52:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __INLINE                               inline
+  53:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  54:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __STATIC_INLINE
+  55:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
+  56:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  57:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+  58:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
+  59:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif                                           
+  60:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __NO_RETURN
+  61:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
+  62:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  63:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __USED
+  64:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
+  65:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  66:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __WEAK
+  67:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
+  68:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  69:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __PACKED
+  70:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
+  71:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  72:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
+  73:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
+  74:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  75:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __PACKED_UNION
+  76:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
+  77:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  78:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
+  79:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
+  80:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  81:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  82:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
+  83:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  84:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
+  85:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  86:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
+  87:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
+  88:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  89:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  90:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+  91:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  92:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))-
+  93:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+  94:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
+  95:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
+  96:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  97:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  98:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+  99:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 100:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
+ 101:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+ 102:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
+ 103:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
+ 104:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ 105:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ 106:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+ 107:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 108:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
+ 109:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+ 110:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
+ 111:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic push
+ 112:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ 113:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ 114:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ 115:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 116:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
+ 117:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+ 118:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __ALIGNED
+ 119:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
+ 120:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+ 121:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __RESTRICT
+ 122:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __RESTRICT                             __restrict
+ 123:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+ 124:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef   __COMPILER_BARRIER
+ 125:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   #define __COMPILER_BARRIER()                   __ASM volatile("":::"memory")
+ 126:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+ 127:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 128:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
+ 129:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 130:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef __PROGRAM_START
+ 131:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 132:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /**@brief   Initializes data and bss sections.
+ 133:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  * @details This default implementations initialized all data and additional bss
+ 134:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *          sections relying on .copy.table and .zero.table specified properly
+ 135:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  *          in the used linker script.
+ 136:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  */
+ 137:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void)
+ 138:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** {
+ 139:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern void _start(void) __NO_RETURN;
+ 140:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
+ 141:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****    typedef struct {
+ 142:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t const* src;
+ 143:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t* dest;
+ 144:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t  wlen;
+ 145:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   } __copy_table_t;
+ 146:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
+ 147:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   typedef struct {
+ 148:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t* dest;
+ 149:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t  wlen;
+ 150:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   } __zero_table_t;
+ 151:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
+ 152:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __copy_table_t __copy_table_start__;
+ 153:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __copy_table_t __copy_table_end__;
+ 154:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __zero_table_t __zero_table_start__;
+ 155:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __zero_table_t __zero_table_end__;
+ 156:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 157:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__copy_table_start__; pTable < &__copy_table_end__; ++pTable
+ 158:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 159:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 160:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 161:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   }
+ 162:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  
+ 163:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   for (__zero_table_t const* pTable = &__zero_table_start__; pTable < &__zero_table_end__; ++pTable
+ 164:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 165:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ 166:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 167:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   }
+ 168:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
+ 169:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   _start();
+ 170:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** }
+ 171:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   
+ 172:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #define __PROGRAM_START           __cmsis_start
+ 173:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #endif
+ 174:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 175:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
+ 176:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 177:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** #ifndef __NVM_PROGRAM_START
+ 178:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 179:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** /**
+ 180:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   \brief   Initializes data and bss sections
+ 181:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   \details This default implementations initialized all data and additional bss
+ 182:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****            sections relying on .copy.table and .zero.table specified properly
+ 183:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****            in the used linker script.
+ 184:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 185:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****  */
+ 186:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** __STATIC_FORCEINLINE __NO_RETURN void __nvm_cmsis_start(void)
  134              	 .loc 2 186 39 view .LVU6
  135              	.LBB9:
- 187:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** {
- 188:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern void _nvm_start(void) __NO_RETURN;
+ 187:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** {
+ 188:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern void _nvm_start(void) __NO_RETURN;
  136              	 .loc 2 188 3 view .LVU7
- 189:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 190:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****    typedef struct {
+ 189:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 190:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****    typedef struct {
  137              	 .loc 2 190 4 view .LVU8
- 191:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t const* src;
- 192:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t* dest;
- 193:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t  wlen;
- 194:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   } __copy_table_t;
- 195:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 196:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   typedef struct {
+ 191:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t const* src;
+ 192:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t* dest;
+ 193:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t  wlen;
+ 194:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   } __copy_table_t;
+ 195:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 196:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   typedef struct {
  138              	 .loc 2 196 3 view .LVU9
- 197:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t* dest;
- 198:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t  wlen;
- 199:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   } __zero_table_t;
- 200:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 201:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __copy_table_t __nvm_copy_table_start__;
+ 197:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t* dest;
+ 198:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     uint32_t  wlen;
+ 199:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   } __zero_table_t;
+ 200:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 201:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __copy_table_t __nvm_copy_table_start__;
  139              	 .loc 2 201 3 view .LVU10
- 202:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __copy_table_t __nvm_copy_table_end__;
+ 202:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __copy_table_t __nvm_copy_table_end__;
  140              	 .loc 2 202 3 view .LVU11
- 203:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __zero_table_t __nvm_zero_table_start__;
+ 203:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __zero_table_t __nvm_zero_table_start__;
  141              	 .loc 2 203 3 view .LVU12
- 204:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __zero_table_t __nvm_zero_table_end__;
+ 204:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   extern const __zero_table_t __nvm_zero_table_end__;
  142              	 .loc 2 204 3 view .LVU13
- 205:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 206:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__nvm_copy_table_start__; pTable < &__nvm_copy_table_end__; 
+ 205:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 206:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__nvm_copy_table_start__; pTable < &__nvm_copy_table_end__; 
  143              	 .loc 2 206 3 view .LVU14
  144              	.LBB10:
  145              	 .loc 2 206 8 view .LVU15
@@ -537,7 +537,7 @@
  148              	.LBE10:
  149              	.LBE9:
  150              	.LBE8:
- 171:C:/InfineonSDK/smack_sl/src\startup_smack.c ****     __NVM_PROGRAM_START();                    /* Enter NVM PreMain (C library entry point) */
+ 171:Z:/Documents/GitHub/OpenSesame/smack_sl/src\startup_smack.c ****     __NVM_PROGRAM_START();                    /* Enter NVM PreMain (C library entry point) */
  151              	 .loc 1 171 1 view .LVU17
  152 0000 70B5     	 push {r4,r5,r6,lr}
  153              	.LCFI0:
@@ -562,125 +562,125 @@
  172              	.LBE13:
  173              	.LBB14:
  174              	.LBB15:
- 207:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
- 208:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
- 209:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
- 210:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   }
- 211:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 212:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   for (__zero_table_t const* pTable = &__nvm_zero_table_start__; pTable < &__nvm_zero_table_end__; 
- 213:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
- 214:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ 207:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 208:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 209:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 210:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   }
+ 211:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 212:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   for (__zero_table_t const* pTable = &__nvm_zero_table_start__; pTable < &__nvm_zero_table_end__; 
+ 213:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 214:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
  175              	 .loc 2 214 23 view .LVU22
  176 000a 0020     	 movs r0,#0
  177              	.LBE15:
- 212:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 212:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  178              	 .loc 2 212 30 view .LVU23
  179 000c 104B     	 ldr r3,.L12+8
  180              	.LVL2:
- 212:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 212:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  181              	 .loc 2 212 3 view .LVU24
  182 000e 1149     	 ldr r1,.L12+12
  183              	.L7:
  184              	.LVL3:
- 212:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 212:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  185              	 .loc 2 212 66 is_stmt 1 view .LVU25
- 212:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 212:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  186              	 .loc 2 212 3 is_stmt 0 view .LVU26
  187 0010 8B42     	 cmp r3,r1
  188 0012 17D3     	 bcc .L11
  189              	.LBE14:
- 215:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
- 216:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   }
- 217:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
- 218:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   _nvm_start();
+ 215:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 216:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   }
+ 217:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h **** 
+ 218:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****   _nvm_start();
  190              	 .loc 2 218 3 is_stmt 1 view .LVU27
  191 0014 FFF7FEFF 	 bl _nvm_start
  192              	.LVL4:
  193              	.L5:
  194              	.LBB18:
  195              	.LBB11:
- 208:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 208:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
  196              	 .loc 2 208 7 view .LVU28
- 208:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 208:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
  197              	 .loc 2 208 36 is_stmt 0 view .LVU29
  198 0018 1C68     	 ldr r4,[r3]
  199 001a 9100     	 lsls r1,r2,#2
  200 001c 6458     	 ldr r4,[r4,r1]
- 208:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 208:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
  201              	 .loc 2 208 23 view .LVU30
  202 001e 5D68     	 ldr r5,[r3,#4]
- 207:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 207:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
  203              	 .loc 2 207 40 view .LVU31
  204 0020 0132     	 adds r2,r2,#1
  205              	.LVL5:
- 208:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 208:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
  206              	 .loc 2 208 23 view .LVU32
  207 0022 6C50     	 str r4,[r5,r1]
- 207:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 207:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
  208              	 .loc 2 207 40 is_stmt 1 view .LVU33
  209              	.LVL6:
  210              	.L6:
- 207:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 207:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
  211              	 .loc 2 207 24 view .LVU34
- 207:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 207:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
  212              	 .loc 2 207 5 is_stmt 0 view .LVU35
  213 0024 9968     	 ldr r1,[r3,#8]
  214 0026 8A42     	 cmp r2,r1
  215 0028 F6D3     	 bcc .L5
  216              	.LBE11:
- 206:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 206:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  217              	 .loc 2 206 100 is_stmt 1 view .LVU36
  218 002a 0C33     	 adds r3,r3,#12
  219              	.LVL7:
- 206:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 206:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  220              	 .loc 2 206 100 is_stmt 0 view .LVU37
  221 002c EBE7     	 b .L4
  222              	.LVL8:
  223              	.L10:
  224              	.LBB12:
- 207:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 207:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
  225              	 .loc 2 207 18 view .LVU38
  226 002e 0022     	 movs r2,#0
  227 0030 F8E7     	 b .L6
  228              	.LVL9:
  229              	.L8:
- 207:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 207:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
  230              	 .loc 2 207 18 view .LVU39
  231              	.LBE12:
  232              	.LBE18:
  233              	.LBB19:
  234              	.LBB16:
- 214:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 214:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
  235              	 .loc 2 214 7 is_stmt 1 view .LVU40
- 214:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
+ 214:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     }
  236              	 .loc 2 214 23 is_stmt 0 view .LVU41
  237 0032 1D68     	 ldr r5,[r3]
  238 0034 9400     	 lsls r4,r2,#2
  239 0036 6051     	 str r0,[r4,r5]
- 213:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ 213:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
  240              	 .loc 2 213 40 is_stmt 1 view .LVU42
  241 0038 0132     	 adds r2,r2,#1
  242              	.LVL10:
  243              	.L9:
- 213:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ 213:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
  244              	 .loc 2 213 24 view .LVU43
- 213:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ 213:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
  245              	 .loc 2 213 5 is_stmt 0 view .LVU44
  246 003a 5C68     	 ldr r4,[r3,#4]
  247 003c A242     	 cmp r2,r4
  248 003e F8D3     	 bcc .L8
  249              	.LBE16:
- 212:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 212:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  250              	 .loc 2 212 100 is_stmt 1 view .LVU45
  251 0040 0833     	 adds r3,r3,#8
  252              	.LVL11:
- 212:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 212:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  253              	 .loc 2 212 100 is_stmt 0 view .LVU46
  254 0042 E5E7     	 b .L7
  255              	.LVL12:
  256              	.L11:
  257              	.LBB17:
- 213:C:/InfineonSDK/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ 213:Z:/Documents/GitHub/OpenSesame/smack_rom/libs/CMSIS/inc\cmsis_gcc.h ****       pTable->dest[i] = 0u;
  258              	 .loc 2 213 18 view .LVU47
  259 0044 0022     	 movs r2,#0
  260 0046 F8E7     	 b .L9
@@ -751,8 +751,8 @@
  328 00bc 00000000 	 .word Unused14_Handler
  329              	 .text
  330              	.Letext0:
- 331              	 .file 3 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
- 332              	 .file 4 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 331              	 .file 3 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 332              	 .file 4 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 startup_smack.c
     {standard input}:16     .text.Default_Handler:00000000 $t

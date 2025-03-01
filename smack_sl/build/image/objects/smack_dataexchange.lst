@@ -22,117 +22,117 @@
   22              	 .fpu softvfp
   24              	vars_init:
   25              	.LFB49:
-  26              	 .file 1 "C:/InfineonSDK/smack_sl/src/smack_dataexchange.c"
-   1:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** /* ============================================================================
-   2:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** ** Copyright (c) 2022 Infineon Technologies AG
-   3:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** **               All rights reserved.
-   4:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** **               www.infineon.com
-   5:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** ** ============================================================================
-   6:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** **
-   7:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** ** ============================================================================
-   8:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** ** Redistribution and use of this software only permitted to the extent
-   9:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** ** expressly agreed with Infineon Technologies AG.
-  10:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** ** ============================================================================
-  11:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** *
-  12:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** */
-  13:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  14:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** /** @file     smack_dataexchange.c
-  15:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *  @brief    Smack example: data declarations for the data exchange library.
-  16:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *
-  17:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *  This example defines a few datapoints, most of them with no further functionality,
-  18:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *  which are offered to an NFC reader through the data exchange library. An NFC reader
-  19:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *  can read or write these datapoints using the data exchange protocol.
-  20:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *  The reader writes a request frame to the mailbox and triggers evaluation by issuing
-  21:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *  a CALL_APP command. The reader and the NAC1080 firmware must agree upon the CALL_APP
-  22:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *  number, and the callback function of the data exchange library must be listed in the
-  23:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  *  appropriate entry in APARAM (see app_prog[0] in sl_aparam.c).
-  24:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****  */
-  25:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  26:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // standard libs
-  27:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // included by core_cm0.h: #include <stdint.h>
-  28:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include <stddef.h>
-  29:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include "core_cm0.h"
-  30:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include <stdbool.h>
-  31:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include <string.h>
-  32:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  33:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // Smack ROM lib
-  34:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include "rom_lib.h"
-  35:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include "nvm_params.h"
-  36:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  37:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // Smack NVM lib
-  38:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include "aes_lib.h"
-  39:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include "smack_exchange.h"
-  40:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include "inet_lib.h"
-  41:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  42:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // smack_sl project
-  43:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include "smack_sl.h"
-  44:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** #include "smack_dataexchange.h"
-  45:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  46:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  47:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  48:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** //-------------------------------------------------------------
-  49:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // globals/statics
-  50:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  51:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // The following variables are simply placeholders to be listen in data_point_list[]
-  52:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  53:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static uint64_t uid;
-  54:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static uint64_t scratch64;
-  55:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static uint8_t scratch8;
-  56:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static uint8_t scratch_str[100];
-  57:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static uint8_t count8;
-  58:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  59:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // measured values
-  60:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static int16_t temperature;
-  61:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static int16_t humidity;
-  62:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static int16_t pressure;
-  63:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static int32_t m_reserved;
-  64:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  65:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static const aes_block_t aes_default_key =
-  66:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** {
-  67:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {
-  68:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****         0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0
-  69:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     }
-  70:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** };
-  71:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  72:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  73:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** //-------------------------------------------------------------
-  74:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // data point list
-  75:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  76:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static const data_point_entry_t data_point_list[] =
-  77:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** {
-  78:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     // id               type                                             length             element
-  79:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     // status
-  80:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x0004,            data_point_uint64,                               sizeof(uint64_t),  &uid,  
-  81:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x0005,            data_point_uint64,                               sizeof(uint64_t),  &scratc
-  82:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x0030,            data_point_uint8,                                sizeof(uint8_t),   &count8
-  83:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x0080,            data_point_int16,                                sizeof(uint16_t),  &temper
-  84:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x0081,            data_point_int16,                                sizeof(uint16_t),  &humidi
-  85:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x0082,            data_point_int16,                                sizeof(uint16_t),  &pressu
-  86:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x0083,            data_point_int32,                                sizeof(uint32_t),  &m_rese
-  87:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x1800,            data_point_int64  | data_point_write,            sizeof(int64_t),   &scratc
-  88:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x1801,            data_point_string | data_point_write,            sizeof(scratch_str) - 1, &
-  89:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0x1900,            data_point_uint8  | data_point_write,            sizeof(uint8_t),   &scratc
-  90:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0xF000,            data_point_uint32 | data_point_write,            sizeof(sl_counter),&sl_cou
-  91:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     {0xF002,            data_point_uint8  | data_point_write,            sizeof(scratch8),  &scratc
-  92:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** };
-  93:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** static const uint16_t data_point_count = (sizeof(data_point_list) / sizeof(data_point_list[0]));
-  94:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  95:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  96:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** //-------------------------------------------------------------
-  97:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
-  98:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** // Initialize the Smack exchange library with our datapoint list.
-  99:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** void vars_init(void)
- 100:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** {
+  26              	 .file 1 "Z:/Documents/GitHub/OpenSesame/smack_sl/src/smack_dataexchange.c"
+   1:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** /* ============================================================================
+   2:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** ** Copyright (c) 2022 Infineon Technologies AG
+   3:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** **               All rights reserved.
+   4:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** **               www.infineon.com
+   5:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** ** ============================================================================
+   6:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** **
+   7:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** ** ============================================================================
+   8:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** ** Redistribution and use of this software only permitted to the extent
+   9:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** ** expressly agreed with Infineon Technologies AG.
+  10:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** ** ============================================================================
+  11:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** *
+  12:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** */
+  13:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  14:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** /** @file     smack_dataexchange.c
+  15:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *  @brief    Smack example: data declarations for the data exchange library.
+  16:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *
+  17:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *  This example defines a few datapoints, most of them with no further functionality,
+  18:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *  which are offered to an NFC reader through the data exchange library. An NFC reader
+  19:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *  can read or write these datapoints using the data exchange protocol.
+  20:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *  The reader writes a request frame to the mailbox and triggers evaluation by issuing
+  21:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *  a CALL_APP command. The reader and the NAC1080 firmware must agree upon the CALL_APP
+  22:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *  number, and the callback function of the data exchange library must be listed in the
+  23:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  *  appropriate entry in APARAM (see app_prog[0] in sl_aparam.c).
+  24:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****  */
+  25:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  26:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // standard libs
+  27:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // included by core_cm0.h: #include <stdint.h>
+  28:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include <stddef.h>
+  29:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include "core_cm0.h"
+  30:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include <stdbool.h>
+  31:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include <string.h>
+  32:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  33:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // Smack ROM lib
+  34:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include "rom_lib.h"
+  35:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include "nvm_params.h"
+  36:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  37:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // Smack NVM lib
+  38:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include "aes_lib.h"
+  39:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include "smack_exchange.h"
+  40:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include "inet_lib.h"
+  41:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  42:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // smack_sl project
+  43:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include "smack_sl.h"
+  44:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** #include "smack_dataexchange.h"
+  45:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  46:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  47:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  48:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** //-------------------------------------------------------------
+  49:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // globals/statics
+  50:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  51:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // The following variables are simply placeholders to be listen in data_point_list[]
+  52:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  53:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static uint64_t uid;
+  54:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static uint64_t scratch64;
+  55:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static uint8_t scratch8;
+  56:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static uint8_t scratch_str[100];
+  57:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static uint8_t count8;
+  58:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  59:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // measured values
+  60:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static int16_t temperature;
+  61:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static int16_t humidity;
+  62:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static int16_t pressure;
+  63:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static int32_t m_reserved;
+  64:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  65:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static const aes_block_t aes_default_key =
+  66:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** {
+  67:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {
+  68:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****         0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0
+  69:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     }
+  70:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** };
+  71:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  72:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  73:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** //-------------------------------------------------------------
+  74:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // data point list
+  75:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  76:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static const data_point_entry_t data_point_list[] =
+  77:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** {
+  78:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     // id               type                                             length             element
+  79:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     // status
+  80:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x0004,            data_point_uint64,                               sizeof(uint64_t),  &uid,  
+  81:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x0005,            data_point_uint64,                               sizeof(uint64_t),  &scratc
+  82:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x0030,            data_point_uint8,                                sizeof(uint8_t),   &count8
+  83:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x0080,            data_point_int16,                                sizeof(uint16_t),  &temper
+  84:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x0081,            data_point_int16,                                sizeof(uint16_t),  &humidi
+  85:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x0082,            data_point_int16,                                sizeof(uint16_t),  &pressu
+  86:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x0083,            data_point_int32,                                sizeof(uint32_t),  &m_rese
+  87:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x1800,            data_point_int64  | data_point_write,            sizeof(int64_t),   &scratc
+  88:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x1801,            data_point_string | data_point_write,            sizeof(scratch_str) - 1, &
+  89:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0x1900,            data_point_uint8  | data_point_write,            sizeof(uint8_t),   &scratc
+  90:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0xF000,            data_point_uint32 | data_point_write,            sizeof(sl_counter),&sl_cou
+  91:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     {0xF002,            data_point_uint8  | data_point_write,            sizeof(scratch8),  &scratc
+  92:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** };
+  93:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** static const uint16_t data_point_count = (sizeof(data_point_list) / sizeof(data_point_list[0]));
+  94:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  95:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  96:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** //-------------------------------------------------------------
+  97:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+  98:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** // Initialize the Smack exchange library with our datapoint list.
+  99:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** void vars_init(void)
+ 100:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** {
   27              	 .loc 1 100 1 view-0
   28              	 .cfi_startproc
   29              	 
   30              	 
- 101:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     count8 = 1;
+ 101:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     count8 = 1;
   31              	 .loc 1 101 5 view .LVU1
   32              	 .loc 1 101 12 is_stmt 0 view .LVU2
   33 0000 0122     	 movs r2,#1
   34 0002 144B     	 ldr r3,.L2
- 100:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     count8 = 1;
+ 100:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     count8 = 1;
   35              	 .loc 1 100 1 view .LVU3
   36 0004 70B5     	 push {r4,r5,r6,lr}
   37              	.LCFI0:
@@ -143,107 +143,107 @@
   42              	 .cfi_offset 14,-4
   43              	 .loc 1 101 12 view .LVU4
   44 0006 1A70     	 strb r2,[r3]
- 102:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
+ 102:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
   45              	 .loc 1 102 5 is_stmt 1 view .LVU5
   46              	 .loc 1 102 12 is_stmt 0 view .LVU6
   47 0008 E023     	 movs r3,#224
- 103:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
- 104:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[2] << 32) |
- 105:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[3] << 24) |
- 106:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[4] << 16) |
- 107:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
- 108:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
- 109:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
- 110:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     // Setup NFC data point exchange
- 111:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     // The smack_exchange_handler() callback must be configured in the APARAM block
- 112:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     smack_exchange_init(data_point_list, data_point_count);
- 113:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
- 114:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     smack_exchange_key_set(&aes_default_key);
- 115:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** }
+ 103:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
+ 104:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[2] << 32) |
+ 105:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[3] << 24) |
+ 106:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[4] << 16) |
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
+ 108:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
+ 109:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+ 110:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     // Setup NFC data point exchange
+ 111:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     // The smack_exchange_handler() callback must be configured in the APARAM block
+ 112:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     smack_exchange_init(data_point_list, data_point_count);
+ 113:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
+ 114:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     smack_exchange_key_set(&aes_default_key);
+ 115:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** }
   48              	 .loc 1 115 1 view .LVU7
   49              	 
- 102:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
+ 102:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
   50              	 .loc 1 102 42 view .LVU8
   51 000a 134A     	 ldr r2,.L2+4
- 103:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
+ 103:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
   52              	 .loc 1 103 12 view .LVU9
   53 000c 1349     	 ldr r1,.L2+8
- 102:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
+ 102:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
   54              	 .loc 1 102 12 view .LVU10
   55 000e 9B00     	 lsls r3,r3,#2
   56 0010 D35C     	 ldrb r3,[r2,r3]
- 103:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
+ 103:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
   57              	 .loc 1 103 12 view .LVU11
   58 0012 515C     	 ldrb r1,[r2,r1]
- 102:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
+ 102:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
   59              	 .loc 1 102 46 view .LVU12
   60 0014 1B04     	 lsls r3,r3,#16
- 105:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[4] << 16) |
+ 105:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[4] << 16) |
   61              	 .loc 1 105 12 view .LVU13
   62 0016 124D     	 ldr r5,.L2+12
- 103:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
+ 103:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
   63              	 .loc 1 103 46 view .LVU14
   64 0018 0902     	 lsls r1,r1,#8
- 102:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
+ 102:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****     uid = ((uint64_t)dparams.chip_uid.uid[0] << 48) |
   65              	 .loc 1 102 53 view .LVU15
   66 001a 1943     	 orrs r1,r3
- 108:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
+ 108:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
   67              	 .loc 1 108 46 view .LVU16
   68 001c 114B     	 ldr r3,.L2+16
- 105:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[4] << 16) |
+ 105:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[4] << 16) |
   69              	 .loc 1 105 12 view .LVU17
   70 001e 555D     	 ldrb r5,[r2,r5]
- 108:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
+ 108:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
   71              	 .loc 1 108 46 view .LVU18
   72 0020 D35C     	 ldrb r3,[r2,r3]
- 105:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[4] << 16) |
+ 105:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[4] << 16) |
   73              	 .loc 1 105 46 view .LVU19
   74 0022 2D06     	 lsls r5,r5,#24
- 107:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
   75              	 .loc 1 107 53 view .LVU20
   76 0024 2B43     	 orrs r3,r5
- 106:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
+ 106:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
   77              	 .loc 1 106 12 view .LVU21
   78 0026 E125     	 movs r5,#225
   79 0028 AD00     	 lsls r5,r5,#2
   80 002a 555D     	 ldrb r5,[r2,r5]
- 104:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[3] << 24) |
+ 104:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[3] << 24) |
   81              	 .loc 1 104 12 view .LVU22
   82 002c 0E4C     	 ldr r4,.L2+20
- 106:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
+ 106:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[5] <<  8) |
   83              	 .loc 1 106 46 view .LVU23
   84 002e 2D04     	 lsls r5,r5,#16
- 107:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
   85              	 .loc 1 107 53 view .LVU24
   86 0030 2B43     	 orrs r3,r5
- 107:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
   87              	 .loc 1 107 12 view .LVU25
   88 0032 0E4D     	 ldr r5,.L2+24
- 104:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[3] << 24) |
+ 104:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[3] << 24) |
   89              	 .loc 1 104 12 view .LVU26
   90 0034 145D     	 ldrb r4,[r2,r4]
- 107:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
   91              	 .loc 1 107 12 view .LVU27
   92 0036 525D     	 ldrb r2,[r2,r5]
- 102:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
+ 102:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[1] << 40) |
   93              	 .loc 1 102 9 view .LVU28
   94 0038 0D48     	 ldr r0,.L2+28
- 107:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
   95              	 .loc 1 107 46 view .LVU29
   96 003a 1202     	 lsls r2,r2,#8
- 107:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c ****           ((uint64_t)dparams.chip_uid.uid[6] <<  0);
   97              	 .loc 1 107 53 view .LVU30
   98 003c 1343     	 orrs r3,r2
   99 003e 2143     	 orrs r1,r4
  100 0040 0360     	 str r3,[r0]
  101 0042 4160     	 str r1,[r0,#4]
- 112:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** 
+ 112:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** 
  102              	 .loc 1 112 5 is_stmt 1 view .LVU31
  103 0044 0C21     	 movs r1,#12
  104 0046 0B48     	 ldr r0,.L2+32
  105 0048 FFF7FEFF 	 bl smack_exchange_init
  106              	.LVL0:
- 114:C:/InfineonSDK/smack_sl/src\smack_dataexchange.c **** }
+ 114:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_dataexchange.c **** }
  107              	 .loc 1 114 5 view .LVU32
  108 004c 0A48     	 ldr r0,.L2+36
  109 004e FFF7FEFF 	 bl smack_exchange_key_set
@@ -403,14 +403,14 @@
  280 00bc 00000000 	 .word 0
  281              	 .text
  282              	.Letext0:
- 283              	 .file 2 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
- 284              	 .file 3 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
- 285              	 .file 4 "C:/InfineonSDK/smack_rom/libs/smack_lib/inc/aparam.h"
- 286              	 .file 5 "C:/InfineonSDK/smack_rom/libs/smack_lib/inc/dparam.h"
- 287              	 .file 6 "C:/InfineonSDK/smack_lib/inc/aes_lib.h"
- 288              	 .file 7 "C:/InfineonSDK/smack_lib/inc/smack_exchange.h"
- 289              	 .file 8 "C:/InfineonSDK/smack_rom/libs/smack_lib/inc/nvm_params.h"
- 290              	 .file 9 "C:/InfineonSDK/smack_sl/inc/smack_sl.h"
+ 283              	 .file 2 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 284              	 .file 3 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 285              	 .file 4 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/aparam.h"
+ 286              	 .file 5 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/dparam.h"
+ 287              	 .file 6 "Z:/Documents/GitHub/OpenSesame/smack_lib/inc/aes_lib.h"
+ 288              	 .file 7 "Z:/Documents/GitHub/OpenSesame/smack_lib/inc/smack_exchange.h"
+ 289              	 .file 8 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/nvm_params.h"
+ 290              	 .file 9 "Z:/Documents/GitHub/OpenSesame/smack_sl/inc/smack_sl.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 smack_dataexchange.c
     {standard input}:16     .text.vars_init:00000000 $t

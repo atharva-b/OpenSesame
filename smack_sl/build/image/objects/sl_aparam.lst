@@ -22,366 +22,366 @@
   22              	 .fpu softvfp
   24              	NVM_Reset_Handler:
   25              	.LFB28:
-  26              	 .file 1 "C:/InfineonSDK/smack_sl/src/sl_aparam.c"
-   1:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /* ============================================================================
-   2:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** Copyright (c) 2021 Infineon Technologies AG
-   3:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** **               All rights reserved.
-   4:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** **               www.infineon.com
-   5:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** ============================================================================
-   6:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** **
-   7:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** ============================================================================
-   8:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** Redistribution and use of this software only permitted to the extent
-   9:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** expressly agreed with Infineon Technologies AG.
-  10:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ** ============================================================================
-  11:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** *
-  12:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** */
-  13:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  14:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /**
-  15:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @file    empty_aparam.c
-  16:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @brief   Placeholder for application/customer specific aparams in NVM.
-  17:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  */
-  18:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  19:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /*
-  20:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ==============================================================================
-  21:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****    1. INCLUDE FILES
-  22:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** ==============================================================================
-  23:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** */
-  24:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  25:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "cmsis_compiler.h"
-  26:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "aparam.h"
-  27:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "smack_sl.h"
-  28:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "aes_lib.h"
-  29:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** #include "smack_exchange.h"
-  30:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  31:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /**
-  32:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @defgroup group_aparam_variables APARAM variables
-  33:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @ingroup group_aparam_interface
-  34:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  * @{
-  35:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****  */
-  36:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** /// @}
-  37:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  38:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** // Following default APARAM structure must be placed after the DPARAMS at beginning of NVM memory
-  39:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** // linker script for details
-  40:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** // Initialization of NVM is done by customer initiated NVM programming
-  41:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** Aparams_t const aparams __attribute__ ((section (".nvm.APARAMS"))) =
-  42:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** {
-  43:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_rom1 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
-  44:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
-  45:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_rom2 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
-  46:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
-  47:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_ram1 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
-  48:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
-  49:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_ram2 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
-  50:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
-  51:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_hw1 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
-  52:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
-  53:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_hw2 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
-  54:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
-  55:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_hw3 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
-  56:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
-  57:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .prot_rfu =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
-  58:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xff,
-  59:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  60:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .app_prog =                                                /**< [0x447:0x408] (32 * 16) absolut
-  61:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
-  62:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         (param_func_ptr_t)smack_exchange_handler,
-  63:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  64:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  65:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  66:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  67:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  68:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  69:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  70:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  71:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  72:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  73:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  74:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  75:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  76:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff,
-  77:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xffffffff
-  78:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
-  79:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  80:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .bypass_mailbox =                                          /**< [0x44b:0x448] (32) 0x00000000 w
-  81:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
-  82:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  83:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .default_uart_baudrate =                                   /**< [0x44f:0x44c] (24) default UART
-  84:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
-  85:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  86:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .kill_debugger =                                           /**< [0x453:0x450] (32) 0x5deb0ff5 w
-  87:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
-  88:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  89:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .disable_default_uart =                                    /**< [0x457:0x454] (32) 0x11223344 d
-  90:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
-  91:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  92:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .message_disable =                                         /**< [0x0x45b:0x458] (32) 0x11E550FF
-  93:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
-  94:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
-  95:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .rfu0 =                                                    /**< [0x47f:0x45C] (288) reserved fo
-  96:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
-  97:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
-  98:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-  99:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 100:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 101:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
- 102:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
- 103:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 104:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_out_en =                                             /**< [0x483:0x480] (32)  0xabba + GP
- 105:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 106:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 107:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_in_en =                                              /**< [0x487:0x484] (32)  0xabba + GP
- 108:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 109:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 110:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_out_type =                                           /**< [0x48b:0x488] (32)  0xabba + GP
- 111:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 112:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 113:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_pup_en =                                             /**< [0x48f:0x48c] (32)  0xabba + GP
- 114:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 115:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 116:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_pdown_en =                                           /**< [0x493:0x490] (32)  0xabba + GP
- 117:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 118:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 119:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_out_value =                                          /**< [0x497:0x494] (32)  0xabba + GP
- 120:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 121:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 122:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_alt_valid =                                          /**< [0x49b:0x498] (32)  GPIO Alt Va
- 123:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 124:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 125:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_alt =                                                /**< [0x4ab:0x49c] (32)  GPIO Alt 0.
- 126:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
- 127:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
- 128:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
- 129:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
- 130:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
- 131:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
- 132:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 133:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler1_source =                                   /**< [0x4af:0x4ac] (32)  0x00 + cust
- 134:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 135:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 136:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler2_source =                                   /**< [0x4b3:0x4b0] (32)  0x00 + cust
- 137:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 138:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 139:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler3_source =                                   /**< [0x4b7:0x4b4] (32)  0x00 + cust
- 140:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 141:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 142:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler4_source =                                   /**< [0x4bb:0x4b8] (32)  0x00 + cust
- 143:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 144:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 145:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler5_source =                                   /**< [0x4bf:0x4bc] (32)  0x00 + cust
- 146:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 147:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 148:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler6_source =                                   /**< [0x4c3:0x4c0] (32)  0x00 + cust
- 149:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 150:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 151:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler7_source =                                   /**< [0x4c7:0x4c4] (32)  0x00 + cust
- 152:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 153:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 154:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .evbus_handler8_source =                                   /**< [0x4cb:0x4c8] (32)  0x00 + cust
- 155:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 156:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 157:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq9_cfg =                                             /**< [0x4cf:0x4cc] (32)  0x00 + irq 
- 158:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 159:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 160:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq10_cfg =                                            /**< [0x4d3:0x4d0] (32)  0x00 + irq 
- 161:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 162:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 163:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq11_cfg =                                            /**< [0x4d7:0x4d4] (32)  0x00 + irq 
- 164:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 165:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 166:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq12_cfg =                                            /**< [0x4db:0x4d8] (32)  0x00 + irq 
- 167:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 168:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 169:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq13_cfg =                                            /**< [0x4df:0x4dc] (32)  0x00 + irq 
- 170:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 171:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 172:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq14_cfg =                                            /**< [0x4e3:0x4e0] (32)  0x00 + irq 
- 173:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 174:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 175:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq9_col_cfg =                                         /**< [0x4e7:0x4e4] (32)  0x00 + colu
- 176:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 177:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 178:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq10_col_cfg =                                        /**< [0x4eb:0x4e8] (32)  0x00 + colu
- 179:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 180:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 181:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq11_col_cfg =                                        /**< [0x4ef:0x4ec] (32)  0x00 + colu
- 182:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 183:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 184:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq12_col_cfg =                                        /**< [0x4f3:0x4f0] (32)  0x00 + colu
- 185:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 186:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 187:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq13_col_cfg =                                        /**< [0x4f7:0x4f4] (32)  0x00 + colu
- 188:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 189:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 190:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hp_irq14_col_cfg =                                        /**< [0x4fb:0x4f8] (32)  0x00 + colu
- 191:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 192:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 193:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .rfu1 =                                                    /**< [0x4ff:0x4fc] (32)  0x00 + colu
- 194:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
- 195:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
- 196:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
- 197:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 198:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .sense_adc_hand_addr =                                     /**< [0x503:0x500] (32)  absolute ad
- 199:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 200:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 201:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer0_hand_addr =                                        /**< [0x507:0x504] (32)  absolute ad
- 202:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 203:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 204:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer1_hand_addr =                                        /**< [0x50b:0x508] (32)  absolute ad
- 205:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 206:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 207:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer2_hand_addr =                                        /**< [0x50f:0x50c] (32)  absolute ad
- 208:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 209:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 210:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer3_hand_addr =                                        /**< [0x513:0x510] (32)  absolute ad
- 211:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 212:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 213:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_evnt_hand_addr =                                     /**< [0x517:0x514] (32)  absolute ad
- 214:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 215:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 216:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio_evnt_gen_hand_addr =                                 /**< [0x51b:0x518] (32)  absolute ad
- 217:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 218:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 219:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer4_hand_addr =                                        /**< [0x51f:0x51c] (32)  absolute ad
- 220:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 221:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 222:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .timer5_hand_addr =                                        /**< [0x523:0x520] (32)  absolute ad
- 223:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 224:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 225:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .uart_hand_addr =                                          /**< [0x527:0x524] (32)  absolute ad
- 226:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 227:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 228:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .ssp_hand_addr =                                           /**< [0x52b:0x528] (32)  absolute ad
- 229:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 230:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 231:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .i2c_hand_addr =                                           /**< [0x52f:0x52c] (32)  absolute ad
- 232:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 233:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 234:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio0_hand_addr =                                         /**< [0x533:0x530] (32)  absolute ad
- 235:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 236:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 237:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio1_hand_addr =                                         /**< [0x537:0x534] (32)  absolute ad
- 238:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 239:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 240:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio2_hand_addr =                                         /**< [0x53b:0x538] (32)  absolute ad
- 241:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 242:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 243:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio3_hand_addr =                                         /**< [0x53f:0x53c] (32)  absolute ad
- 244:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 245:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 246:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio4_hand_addr =                                         /**< [0x543:0x540] (32)  absolute ad
- 247:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 248:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 249:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio5_hand_addr =                                         /**< [0x547:0x544] (32)  absolute ad
- 250:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 251:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 252:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio6_hand_addr =                                         /**< [0x54b:0x548] (32)  absolute ad
- 253:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 254:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 255:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .gpio7_hand_addr =                                         /**< [0x54f:0x54c] (32)  absolute ad
- 256:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 257:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 258:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .aes_hand_addr =                                           /**< [0x553:0x550] (32)  absolute ad
- 259:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 260:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 261:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .hard_fault_hand_addr =                                    /**< [0x557:0x554] (32)  absolute ad
- 262:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     (param_func_ptr_t)hardfault_handler,
- 263:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 264:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .systick_hand_addr =                                       /**< [0x55b:0x558] (32)  absolute ad
- 265:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     (param_func_ptr_t)example_handler,                         /**  example for a customer owned in
- 266:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 267:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .wdt_hand_addr =                                           /**< [0x55f:0x55c] (32)  absolute ad
- 268:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 269:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 270:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .nvm_hand_addr =                                           /**< [0x563:0x560] (32)  absolute ad
- 271:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     0xffffffff,
- 272:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 273:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .rfu2 =                                                    /**< [0x57b:0x564] (192) reserved fo
- 274:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
- 275:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
- 276:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 277:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 278:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
- 279:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
- 280:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 281:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .tag_type_2_ptr =                                          /**< [0x57f:0x57c] (32)  address of 
- 282:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     (param_ptr_t)smack_sl_tag,
- 283:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 284:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 285:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .nvm_prot_sect =                                           /**< [0x5f7:0x580] (120*8) R/W prote
- 286:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
- 287:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 288:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 289:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 290:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 291:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 292:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 293:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 294:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 295:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 296:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 297:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 298:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 299:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 300:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 301:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
- 302:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
- 303:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 304:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .rfu3 =                                                    /**< [0x5ff:0x5f8] (64)  reserved fo
- 305:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
- 306:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
- 307:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
- 308:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 309:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .secret =                                                  /**< [0x6ff:0x600] reserved for secr
- 310:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
- 311:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 312:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 313:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 314:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 315:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 316:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 317:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 318:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 319:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 320:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 321:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 322:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 323:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 324:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 325:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 326:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 327:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 328:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     },
- 329:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 330:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     .public =                                                  /**< [0x7ff:0x700] reserved for publ
- 331:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     {
- 332:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 333:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 334:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 335:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 336:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 337:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 338:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 339:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 340:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 341:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 342:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 343:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 344:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 345:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 346:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 347:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 348:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
- 349:C:/InfineonSDK/smack_sl/src\sl_aparam.c ****     }
- 350:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** };
- 351:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** 
- 352:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** __WEAK void NVM_Reset_Handler(void)
- 353:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** {
+  26              	 .file 1 "Z:/Documents/GitHub/OpenSesame/smack_sl/src/sl_aparam.c"
+   1:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** /* ============================================================================
+   2:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** ** Copyright (c) 2021 Infineon Technologies AG
+   3:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** **               All rights reserved.
+   4:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** **               www.infineon.com
+   5:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** ** ============================================================================
+   6:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** **
+   7:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** ** ============================================================================
+   8:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** ** Redistribution and use of this software only permitted to the extent
+   9:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** ** expressly agreed with Infineon Technologies AG.
+  10:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** ** ============================================================================
+  11:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** *
+  12:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** */
+  13:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  14:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** /**
+  15:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****  * @file    empty_aparam.c
+  16:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****  * @brief   Placeholder for application/customer specific aparams in NVM.
+  17:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****  */
+  18:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  19:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** /*
+  20:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** ==============================================================================
+  21:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****    1. INCLUDE FILES
+  22:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** ==============================================================================
+  23:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** */
+  24:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  25:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** #include "cmsis_compiler.h"
+  26:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** #include "aparam.h"
+  27:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** #include "smack_sl.h"
+  28:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** #include "aes_lib.h"
+  29:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** #include "smack_exchange.h"
+  30:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  31:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** /**
+  32:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****  * @defgroup group_aparam_variables APARAM variables
+  33:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****  * @ingroup group_aparam_interface
+  34:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****  * @{
+  35:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****  */
+  36:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** /// @}
+  37:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  38:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** // Following default APARAM structure must be placed after the DPARAMS at beginning of NVM memory
+  39:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** // linker script for details
+  40:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** // Initialization of NVM is done by customer initiated NVM programming
+  41:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** Aparams_t const aparams __attribute__ ((section (".nvm.APARAMS"))) =
+  42:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** {
+  43:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .prot_rom1 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
+  44:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xff,
+  45:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .prot_rom2 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
+  46:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xff,
+  47:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .prot_ram1 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
+  48:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xff,
+  49:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .prot_ram2 =                                               /**< [0x403:0x400] (32) ROM1/ROM2/RA
+  50:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xff,
+  51:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .prot_hw1 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
+  52:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xff,
+  53:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .prot_hw2 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
+  54:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xff,
+  55:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .prot_hw3 =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
+  56:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xff,
+  57:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .prot_rfu =                                                /**< [0x407:0x404] (32) HW1/HW2/HW3 
+  58:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xff,
+  59:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  60:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .app_prog =                                                /**< [0x447:0x408] (32 * 16) absolut
+  61:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+  62:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         (param_func_ptr_t)smack_exchange_handler,
+  63:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  64:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  65:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  66:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  67:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  68:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  69:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  70:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  71:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  72:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  73:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  74:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  75:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  76:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff,
+  77:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xffffffff
+  78:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     },
+  79:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  80:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .bypass_mailbox =                                          /**< [0x44b:0x448] (32) 0x00000000 w
+  81:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  82:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  83:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .default_uart_baudrate =                                   /**< [0x44f:0x44c] (24) default UART
+  84:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  85:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  86:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .kill_debugger =                                           /**< [0x453:0x450] (32) 0x5deb0ff5 w
+  87:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  88:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  89:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .disable_default_uart =                                    /**< [0x457:0x454] (32) 0x11223344 d
+  90:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  91:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  92:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .message_disable =                                         /**< [0x0x45b:0x458] (32) 0x11E550FF
+  93:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+  94:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+  95:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .rfu0 =                                                    /**< [0x47f:0x45C] (288) reserved fo
+  96:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+  97:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+  98:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+  99:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 100:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 101:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+ 102:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     },
+ 103:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 104:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_out_en =                                             /**< [0x483:0x480] (32)  0xabba + GP
+ 105:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 106:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_in_en =                                              /**< [0x487:0x484] (32)  0xabba + GP
+ 108:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 109:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 110:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_out_type =                                           /**< [0x48b:0x488] (32)  0xabba + GP
+ 111:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 112:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 113:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_pup_en =                                             /**< [0x48f:0x48c] (32)  0xabba + GP
+ 114:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 115:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 116:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_pdown_en =                                           /**< [0x493:0x490] (32)  0xabba + GP
+ 117:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 118:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 119:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_out_value =                                          /**< [0x497:0x494] (32)  0xabba + GP
+ 120:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 121:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 122:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_alt_valid =                                          /**< [0x49b:0x498] (32)  GPIO Alt Va
+ 123:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 124:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 125:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_alt =                                                /**< [0x4ab:0x49c] (32)  GPIO Alt 0.
+ 126:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+ 127:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+ 128:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+ 129:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+ 130:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
+ 131:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     },
+ 132:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 133:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .evbus_handler1_source =                                   /**< [0x4af:0x4ac] (32)  0x00 + cust
+ 134:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 135:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 136:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .evbus_handler2_source =                                   /**< [0x4b3:0x4b0] (32)  0x00 + cust
+ 137:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 138:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 139:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .evbus_handler3_source =                                   /**< [0x4b7:0x4b4] (32)  0x00 + cust
+ 140:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 141:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 142:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .evbus_handler4_source =                                   /**< [0x4bb:0x4b8] (32)  0x00 + cust
+ 143:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 144:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 145:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .evbus_handler5_source =                                   /**< [0x4bf:0x4bc] (32)  0x00 + cust
+ 146:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 147:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 148:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .evbus_handler6_source =                                   /**< [0x4c3:0x4c0] (32)  0x00 + cust
+ 149:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 150:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 151:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .evbus_handler7_source =                                   /**< [0x4c7:0x4c4] (32)  0x00 + cust
+ 152:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 153:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 154:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .evbus_handler8_source =                                   /**< [0x4cb:0x4c8] (32)  0x00 + cust
+ 155:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 156:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 157:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq9_cfg =                                             /**< [0x4cf:0x4cc] (32)  0x00 + irq 
+ 158:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 159:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 160:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq10_cfg =                                            /**< [0x4d3:0x4d0] (32)  0x00 + irq 
+ 161:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 162:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 163:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq11_cfg =                                            /**< [0x4d7:0x4d4] (32)  0x00 + irq 
+ 164:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 165:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 166:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq12_cfg =                                            /**< [0x4db:0x4d8] (32)  0x00 + irq 
+ 167:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 168:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 169:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq13_cfg =                                            /**< [0x4df:0x4dc] (32)  0x00 + irq 
+ 170:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 171:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 172:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq14_cfg =                                            /**< [0x4e3:0x4e0] (32)  0x00 + irq 
+ 173:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 174:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 175:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq9_col_cfg =                                         /**< [0x4e7:0x4e4] (32)  0x00 + colu
+ 176:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 177:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 178:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq10_col_cfg =                                        /**< [0x4eb:0x4e8] (32)  0x00 + colu
+ 179:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 180:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 181:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq11_col_cfg =                                        /**< [0x4ef:0x4ec] (32)  0x00 + colu
+ 182:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 183:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 184:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq12_col_cfg =                                        /**< [0x4f3:0x4f0] (32)  0x00 + colu
+ 185:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 186:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 187:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq13_col_cfg =                                        /**< [0x4f7:0x4f4] (32)  0x00 + colu
+ 188:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 189:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 190:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hp_irq14_col_cfg =                                        /**< [0x4fb:0x4f8] (32)  0x00 + colu
+ 191:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 192:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 193:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .rfu1 =                                                    /**< [0x4ff:0x4fc] (32)  0x00 + colu
+ 194:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+ 195:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
+ 196:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     },
+ 197:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 198:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .sense_adc_hand_addr =                                     /**< [0x503:0x500] (32)  absolute ad
+ 199:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 200:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 201:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .timer0_hand_addr =                                        /**< [0x507:0x504] (32)  absolute ad
+ 202:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 203:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 204:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .timer1_hand_addr =                                        /**< [0x50b:0x508] (32)  absolute ad
+ 205:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 206:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 207:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .timer2_hand_addr =                                        /**< [0x50f:0x50c] (32)  absolute ad
+ 208:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 209:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 210:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .timer3_hand_addr =                                        /**< [0x513:0x510] (32)  absolute ad
+ 211:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 212:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 213:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_evnt_hand_addr =                                     /**< [0x517:0x514] (32)  absolute ad
+ 214:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 215:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 216:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio_evnt_gen_hand_addr =                                 /**< [0x51b:0x518] (32)  absolute ad
+ 217:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 218:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 219:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .timer4_hand_addr =                                        /**< [0x51f:0x51c] (32)  absolute ad
+ 220:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 221:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 222:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .timer5_hand_addr =                                        /**< [0x523:0x520] (32)  absolute ad
+ 223:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 224:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 225:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .uart_hand_addr =                                          /**< [0x527:0x524] (32)  absolute ad
+ 226:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 227:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 228:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .ssp_hand_addr =                                           /**< [0x52b:0x528] (32)  absolute ad
+ 229:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 230:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 231:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .i2c_hand_addr =                                           /**< [0x52f:0x52c] (32)  absolute ad
+ 232:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 233:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 234:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio0_hand_addr =                                         /**< [0x533:0x530] (32)  absolute ad
+ 235:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 236:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 237:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio1_hand_addr =                                         /**< [0x537:0x534] (32)  absolute ad
+ 238:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 239:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 240:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio2_hand_addr =                                         /**< [0x53b:0x538] (32)  absolute ad
+ 241:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 242:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 243:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio3_hand_addr =                                         /**< [0x53f:0x53c] (32)  absolute ad
+ 244:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 245:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 246:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio4_hand_addr =                                         /**< [0x543:0x540] (32)  absolute ad
+ 247:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 248:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 249:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio5_hand_addr =                                         /**< [0x547:0x544] (32)  absolute ad
+ 250:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 251:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 252:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio6_hand_addr =                                         /**< [0x54b:0x548] (32)  absolute ad
+ 253:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 254:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 255:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .gpio7_hand_addr =                                         /**< [0x54f:0x54c] (32)  absolute ad
+ 256:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 257:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 258:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .aes_hand_addr =                                           /**< [0x553:0x550] (32)  absolute ad
+ 259:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 260:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 261:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .hard_fault_hand_addr =                                    /**< [0x557:0x554] (32)  absolute ad
+ 262:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     (param_func_ptr_t)hardfault_handler,
+ 263:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 264:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .systick_hand_addr =                                       /**< [0x55b:0x558] (32)  absolute ad
+ 265:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     (param_func_ptr_t)example_handler,                         /**  example for a customer owned in
+ 266:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 267:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .wdt_hand_addr =                                           /**< [0x55f:0x55c] (32)  absolute ad
+ 268:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 269:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 270:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .nvm_hand_addr =                                           /**< [0x563:0x560] (32)  absolute ad
+ 271:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     0xffffffff,
+ 272:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 273:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .rfu2 =                                                    /**< [0x57b:0x564] (192) reserved fo
+ 274:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+ 275:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff,
+ 276:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 277:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 278:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff
+ 279:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     },
+ 280:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 281:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .tag_type_2_ptr =                                          /**< [0x57f:0x57c] (32)  address of 
+ 282:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     (param_ptr_t)smack_sl_tag,
+ 283:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 284:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 285:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .nvm_prot_sect =                                           /**< [0x5f7:0x580] (120*8) R/W prote
+ 286:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+ 287:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 288:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 289:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 290:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 291:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 292:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 293:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 294:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 295:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 296:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 297:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 298:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 299:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 300:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 301:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+ 302:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     },
+ 303:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 304:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .rfu3 =                                                    /**< [0x5ff:0x5f8] (64)  reserved fo
+ 305:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+ 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+ 307:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     },
+ 308:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 309:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .secret =                                                  /**< [0x6ff:0x600] reserved for secr
+ 310:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+ 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 312:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 313:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 314:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 315:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 316:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 317:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 318:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 319:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 320:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 321:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 322:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 323:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 324:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 325:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 326:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 327:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 328:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     },
+ 329:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 330:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     .public =                                                  /**< [0x7ff:0x700] reserved for publ
+ 331:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     {
+ 332:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 333:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 334:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 335:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 336:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 337:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 338:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 339:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 340:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 341:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 342:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 343:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 344:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 345:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 346:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 347:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 348:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0
+ 349:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c ****     }
+ 350:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** };
+ 351:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** 
+ 352:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** __WEAK void NVM_Reset_Handler(void)
+ 353:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** {
   27              	 .loc 1 353 1 view-0
   28              	 .cfi_startproc
   29              	 
   30              	 
   31              	 
- 354:C:/InfineonSDK/smack_sl/src\sl_aparam.c **** }
+ 354:Z:/Documents/GitHub/OpenSesame/smack_sl/src\sl_aparam.c **** }
   32              	 .loc 1 354 1 view .LVU1
   33              	 
   34 0000 7047     	 bx lr
@@ -696,10 +696,10 @@
  184      FF
  185              	 .text
  186              	.Letext0:
- 187              	 .file 2 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
- 188              	 .file 3 "c:\\infineonsdk\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
- 189              	 .file 4 "C:/InfineonSDK/smack_rom/libs/smack_lib/inc/aparam.h"
- 190              	 .file 5 "C:/InfineonSDK/smack_sl/inc/smack_sl.h"
+ 187              	 .file 2 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 188              	 .file 3 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 189              	 .file 4 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/aparam.h"
+ 190              	 .file 5 "Z:/Documents/GitHub/OpenSesame/smack_sl/inc/smack_sl.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 sl_aparam.c
     {standard input}:16     .text.NVM_Reset_Handler:00000000 $t
