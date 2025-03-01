@@ -311,6 +311,8 @@ void run_power_state_machine(void)
     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
     bool locked = true;
 
+    single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
+
     while (true)
     {
         switch (current_state)
@@ -350,6 +352,10 @@ void run_power_state_machine(void)
             case POWER_HARVESTING_DONE:
                 // Toggle the persistent LED state and update GPIO1.
                 toggle_led_state();
+                for(;;)
+                {
+                    turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
+                }
                 mbx->content[3] = HARVESTING_DONE;
                 current_state = POWER_IDLE;
                 break;
@@ -405,9 +411,6 @@ void _nvm_start(void)
     init_dand();
     vars_init();
     shc_init();
-
-    // Configure a GPIO (for example, GPIO0) using single_gpio_iocfg.
-    single_gpio_iocfg(true, false, true, false, false, 0);
 
     volatile NFC_State_enum_t state = handle_DAND_protocol();
     volatile NFC_Frame_enum_t frame_type = classify_frame();
