@@ -36,17 +36,17 @@ OUTPUT_ARCH(arm)
 
 INCLUDE smack_memory.ld
 
-section_registration_size = 16;
+section_registration_size = 128;
 
-section_version_base = __NVM_BASE + __NVM_SIZE;
-section_registration_base = section_version_base - section_registration_size;
+section_version_base = __NVM_BASE + __NVM_SIZE + 244;
+section_registration_base = __NVM_BASE + __NVM_SIZE;
 MEMORY
 {
 	/* holds version and code identification for NVM application firmware*/
 	version (r) : ORIGIN = section_version_base, LENGTH = section_version_size
 
 	/* holds registration information for lock users */ 
-	registration (rw) : ORIGIN = section_registration_base, LENGTH = section_registration_size
+	/*registration (rw) : ORIGIN = section_registration_base, LENGTH = section_registration_size*/
 }
 
 
@@ -207,6 +207,14 @@ SECTIONS
 		LONG ((__bss2_end__ - __bss2_start__) / 4) 
 	*/
 		__nvm_zero_table_end__ = .;
+	} > NVM
+
+	.registration (NOLOAD):
+	{
+		. = ALIGN(128);
+		__nvm_registration_section_start__ = .;
+		KEEP(*(.nvm.REGISTRATION));
+		__nvm_registration_section_end__ = .;
 	} > NVM
 
 	/* Location counter can end up 2byte aligned with narrow Thumb code but
@@ -388,7 +396,7 @@ SECTIONS
 	 * the '.version' section. Writing a single pad Byte at the end of the
 	 * section trigger the padding fill operation. */
 	pad_start = __etext + SIZEOF (.data);
-	pad_size = section_version_base - pad_start - 1;
+	pad_size = section_registration_base - pad_start - 1;
 	.text.pad2 pad_start :
 	{
 		. = . + pad_size;

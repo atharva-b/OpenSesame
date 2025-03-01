@@ -44,7 +44,7 @@
 #define PC_INVAL 0x99999999
 #define HARVESTING_DONE 0xBADAB00B
 
-#define REGISTRATION_STRUCT_ADDR 0x0001EFE4
+#define REGISTRATION_STRUCT_ADDR 0x00011c00
 
 // typedef struct {
 //     uint32_t registered; 
@@ -53,7 +53,7 @@
 //     uint32_t rfu2;
 // } registration_data_t;
 
-uint32_t reg_data[4];
+uint32_t reg_data[4] __attribute__ ((section (".nvm.REGISTRATION")));
 /* NDEF tag defined by user.
  * To activate this tag, set the field "tag_type_2_ptr" in aparams.
  */
@@ -277,9 +277,10 @@ void run_power_state_machine(void)
     // bool locked = true;
     bool registered = false;
     if (nvm_open_assembly_buffer(REGISTRATION_STRUCT_ADDR) != 0) { return; }
-    read_nvm((uint32_t*) REGISTRATION_STRUCT_ADDR);
-    bool locked = (reg_data[2] == 1);
-    registered = (reg_data[0] == 1);
+    // read_nvm((uint32_t*) REGISTRATION_STRUCT_ADDR);
+    nvm_config();
+    bool locked = (reg_data[0] == 1);
+    // registered = (reg_data[0] == 1);
 
     while (true)
     {
@@ -313,9 +314,15 @@ void run_power_state_machine(void)
                 break;
             case POWER_HARVESTING_DONE:
                 // sweep_voltages();
-                reg_data[2] = (uint32_t) !locked;
-                nvm_program_verify();
-                for (uint8_t i = 0; i < 3; i++)
+                if (nvm_open_assembly_buffer(REGISTRATION_STRUCT_ADDR) != 0) { return; }
+                // nvm_config();
+                volatile access_state_t registration_state = get_nvm_access_state(REGISTRATION_STRUCT_ADDR);
+                if (registration_state == write_only || registration_state == read_write) {
+                    reg_data[0] = (uint32_t) !locked;
+                    nvm_program_verify();
+                }
+                
+                for (uint8_t i = 0; i < 50; i++)
                 // for(;;)
                 {
                     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
