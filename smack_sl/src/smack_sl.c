@@ -311,8 +311,6 @@ void run_power_state_machine(void)
     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
     bool locked = true;
 
-    single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
-
     while (true)
     {
         switch (current_state)
@@ -351,7 +349,6 @@ void run_power_state_machine(void)
 
             case POWER_HARVESTING_DONE:
                 // Toggle the persistent LED state and update GPIO1.
-                toggle_led_state();
                 for(;;)
                 {
                     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
@@ -417,6 +414,9 @@ void _nvm_start(void)
     nfc_state_machine();
 
     set_hb_eventctrl(false);
+
+    single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
+    toggle_led_state();
 
     while (true)
     {
