@@ -19,6 +19,7 @@
 // included by core_cm0.h: #include <stdint.h>
 #include "core_cm0.h"
 #include <stdbool.h>
+#include <string.h>
 
 // Smack ROM lib
 #include "rom_lib.h"
@@ -44,16 +45,25 @@
 #define PC_INVAL 0x99999999
 #define HARVESTING_DONE 0xBADAB00B
 
-#define REGISTRATION_STRUCT_ADDR 0x0001EFE4
+#define REGISTRATION_STRUCT_ADDR ((registration_data_t*) 0x0001EF00)
 
-// typedef struct {
-//     uint32_t registered; 
-//     uint32_t passcode;
-//     uint32_t lock_state;
-//     uint32_t rfu2;
-// } registration_data_t;
+typedef struct __attribute__((aligned(128))) {
+    uint32_t registered; 
+    uint32_t passcode;
+    uint32_t lock_state;
+    uint32_t rfu2;
+} registration_data_t;
 
-uint32_t reg_data[4];
+// registration_data_t registration_data_s __attribute__((section(".registration_section"))) = {
+//     .registered = 0xFFFFFFFF,
+//     .passcode = 0xFFFFFFFF,
+//     .lock_state = 0xFFFFFFFF,
+//     .rfu2 = 0xFFFFFFFF
+// };
+
+registration_data_t* registration_data __attribute__((section(".registration_section"))) = REGISTRATION_STRUCT_ADDR;
+
+// uint32_t reg_data[4];
 /* NDEF tag defined by user.
  * To activate this tag, set the field "tag_type_2_ptr" in aparams.
  */
@@ -251,35 +261,51 @@ void turn_motor(Mailbox_t* mbx, bool* hs1, bool* ls1, bool* hs2, bool* ls2, bool
     sys_tim_singleshot_32(0, wait_time_charge, 14);  // wait seems to be necessary
 }
 
-// update registration data, and then write to nvm
-void write_nvm(uint32_t* address) {
-    
-    for (int i = 0; i < 4; i++) {
-        address[i] = reg_data[i]; // Store word-by-word
+void *custom_memcpy(void *dest, const void *src, size_t n) {
+    uint8_t *d = (uint8_t *)dest;
+    const uint8_t *s = (const uint8_t *)src;
+    for (size_t i = 0; i < n; i++) {
+        d[i] = s[i];
     }
+    return dest;
 }
 
-void read_nvm(uint32_t* address) {
+bool write_registration_data(registration_data_t* new_data) {
+    uint8_t status;
 
-    for(int i = 0; i < 4; i++) {
-        reg_data[i] = address[i];   // Read word-by-word into array
+    nvm_config();
+
+    status = nvm_open_assembly_buffer((uint32_t) registration_data);
+    if (status != 0x00) {
+        return false;
     }
+
+    nvm_erase_page();
+
+    memcpy(registration_data, new_data, sizeof(registration_data_t));
+
+    status = nvm_program_page();
+    if (status != 0x00) {
+        nvm_abort_program();
+        return false;
+    }
+
+    nvm_config();
+
+    return true;
 }
 
 void run_power_state_machine(void)
 {
-    bool authenticated = false; 
+    nvm_config();
     Mailbox_t* mbx = get_mailbox_address();
     bool hs1 = true;
     bool hs2 = false;
     bool ls1 = false;
     bool ls2 = false;
-    // bool locked = true;
-    bool registered = false;
-    if (nvm_open_assembly_buffer(REGISTRATION_STRUCT_ADDR) != 0) { return; }
-    read_nvm((uint32_t*) REGISTRATION_STRUCT_ADDR);
-    bool locked = (reg_data[2] == 1);
-    registered = (reg_data[0] == 1);
+
+    // registration_data_t new_data = {1, PASSCODE, 0, 0};
+    // write_registration_data(&new_data);
 
     while (true)
     {
@@ -291,7 +317,6 @@ void run_power_state_machine(void)
                 break;
             case POWER_READY_FOR_PASSCODE:
                 if(mbx->content[2] == PASSCODE){
-                    authenticated = true;
                     current_state = POWER_HARVESTING;
                     mbx->content[3] = PC_VAL;
                     set_hb_switch(hs1, ls1, hs2, ls2);
@@ -312,16 +337,31 @@ void run_power_state_machine(void)
                 }
                 break;
             case POWER_HARVESTING_DONE:
-                // sweep_voltages();
-                reg_data[2] = (uint32_t) !locked;
-                nvm_program_verify();
-                for (uint8_t i = 0; i < 3; i++)
-                // for(;;)
+            {
+                registration_data_t new_data;
+                if(registration_data->lock_state == 0xFFFFFFFF){
+                    // registration_data_t new_data = {1, PASSCODE, 0, 0};
+                    new_data.registered = 1;
+                    new_data.passcode = PASSCODE;
+                    new_data.lock_state = 1;
+                    new_data.rfu2 = 0;
+                } else {
+                    // registration_data_t new_data = {1, PASSCODE, ((uint32_t) !((bool)registration_data->lock_state)), 0};
+                    new_data.registered = 1;
+                    new_data.passcode = PASSCODE;
+                    new_data.lock_state = !(registration_data->lock_state == 1);
+                    new_data.rfu2 = 0;
+                } 
+                volatile bool s = write_registration_data(&new_data);
+                volatile bool locked = (registration_data->lock_state == 1);
+
+                for(;;)
                 {
                     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
                 }
                 mbx->content[3] = HARVESTING_DONE;
                 current_state = POWER_IDLE;
+            }
                 break;
             case POWER_IDLE:
                 break;
@@ -396,7 +436,6 @@ void _nvm_start(void)
     vars_init();
     shc_init();
     switch_on_nvm();
-    nvm_config();
 
     // uint16_t* nvm_mem_address = (uint16_t*)(0x00010800 + sizeof(uint16_t));
     // *nvm_mem_address = 2000;

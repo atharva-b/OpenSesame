@@ -36,17 +36,16 @@ OUTPUT_ARCH(arm)
 
 INCLUDE smack_memory.ld
 
-section_registration_size = 16;
 
 section_version_base = __NVM_BASE + __NVM_SIZE;
-section_registration_base = section_version_base - section_registration_size;
+section_registration_base = (__NVM_BASE + 0x0000E800) - 256;
 MEMORY
 {
+	/* holds registration information for lock users */ 
+	registration (rw) : ORIGIN = section_registration_base, LENGTH = 128
+
 	/* holds version and code identification for NVM application firmware*/
 	version (r) : ORIGIN = section_version_base, LENGTH = section_version_size
-
-	/* holds registration information for lock users */ 
-	registration (rw) : ORIGIN = section_registration_base, LENGTH = section_registration_size
 }
 
 
@@ -95,6 +94,14 @@ SECTIONS
 
 	/* Create a section that holds the FW version and code identification.
 	 */
+
+	.registration_section section_registration_base :
+	{
+		. = ALIGN(128);
+		KEEP(*(.registration_section))
+		. = ALIGN(128);
+	} > registration
+	
 	.version :
 	{
 		/* make sure linker is not throwing it away, post-build step needs it */
@@ -388,7 +395,7 @@ SECTIONS
 	 * the '.version' section. Writing a single pad Byte at the end of the
 	 * section trigger the padding fill operation. */
 	pad_start = __etext + SIZEOF (.data);
-	pad_size = section_version_base - pad_start - 1;
+	pad_size = section_registration_base - pad_start - 1;
 	.text.pad2 pad_start :
 	{
 		. = . + pad_size;
