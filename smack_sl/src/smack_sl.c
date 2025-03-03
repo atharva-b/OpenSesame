@@ -88,8 +88,13 @@ const uint8_t smack_sl_tag[] =
    Assuming a page size of 128 bytes, the previous page spans 0x0001EF00–0x0001EF7F.
    Here we reserve address 0x0001EF10 for the LED state.
 */
-#define LED_STATE_ADDR    0x0001EF10   // New LED state address
+#define LOCK_STATE_ADDR    0x0001EF10   // New LED state address
 #define LED_GPIO          1            // LED is connected to GPIO1
+
+/* TODO:
+1. Add registration section in Linker_config; randomly accessing memory seems very unsafe
+2. Add registration info LOW (PRIORITY)
+*/
 
 //---------------------------------------------------------------------
 // Global Variables
@@ -240,7 +245,7 @@ uint16_t get_threshold_from_voltage(float input_voltage)
  *   - Reads the current LED state from flash memory.
  *   - Toggles it (0 becomes 1; nonzero becomes 0).
  *   - Powers up and configures the NVM.
- *   - Opens the assembly buffer for the flash page containing LED_STATE_ADDR.
+ *   - Opens the assembly buffer for the flash page containing LOCK_STATE_ADDR.
  *   - Updates the state word in the assembly buffer.
  *   - Erases the flash page.
  *   - Programs the flash page with the new value.
@@ -259,17 +264,17 @@ void toggle_led_state(void)
     nvm_config();
 
     // Read the current LED state from flash (assumes memory-mapped NVM)
-    uint32_t current_state = *((volatile uint32_t*) LED_STATE_ADDR);
+    uint32_t current_state = *((volatile uint32_t*) LOCK_STATE_ADDR);
     // Toggle state: if 0 then 1; otherwise, set to 0.
     uint32_t new_state = (current_state == 0) ? 1 : 0;
 
-    // Open the assembly buffer for the flash page that includes LED_STATE_ADDR
-    err = nvm_open_assembly_buffer(LED_STATE_ADDR);
+    // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
+    err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
 
     // Write the new LED state into the assembly buffer
-    *((volatile uint32_t*) LED_STATE_ADDR) = new_state;
+    *((volatile uint32_t*) LOCK_STATE_ADDR) = new_state;
 
-    // Erase the flash page (ensure LED_STATE_ADDR is in a dedicated page)
+    // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
     nvm_erase_page();
     nvm_program_page();
 
@@ -283,35 +288,10 @@ void toggle_motor(void)
 {
     volatile uint8_t err;
 
-    // Power up and configure the NVM using ROM routines
-    // switch_on_nvm();
-    nvm_config();
-
-    // Read the current LED state from flash (assumes memory-mapped NVM)
-    uint32_t current_state = *((volatile uint32_t*) LED_STATE_ADDR);
-    // Toggle state: if 0 then 1; otherwise, set to 0.
-    uint32_t new_state = (current_state == 0) ? 1 : 0;
-
-    // Open the assembly buffer for the flash page that includes LED_STATE_ADDR
-    err = nvm_open_assembly_buffer(LED_STATE_ADDR);
-
-    // Write the new LED state into the assembly buffer
-    *((volatile uint32_t*) LED_STATE_ADDR) = new_state;
-
-    // Erase the flash page (ensure LED_STATE_ADDR is in a dedicated page)
-    nvm_erase_page();
-    nvm_program_page();
-
-    nvm_config();
-
-    Mailbox_t* mbx = get_mailbox_address();
-    // bool locked = true;
-    bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
-
-    for (int i = 0; i < 20; i++)
-    {
-        turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !((bool)new_state));
-    }
+    // for (int i = 0; i < 20; i++)
+    // {
+    //     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !((bool)new_state));
+    // }
 }
 
 //---------------------------------------------------------------------
@@ -361,10 +341,31 @@ void run_power_state_machine(void)
                 break;
 
             case POWER_HARVESTING_DONE:
-                // Toggle the persistent LED state and update GPIO1.
+                // Power up and configure the NVM using ROM routines
+                // switch_on_nvm();
+                nvm_config();
+
+                // Read the current lock state from NVM
+                bool current_state = *((volatile bool*) LOCK_STATE_ADDR);
+                // Toggle state: if 0 then 1; otherwise, set to 0.
+                bool new_state = !current_state;
+
+                // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
+                nvm_open_assembly_buffer(LOCK_STATE_ADDR);
+
+                // Write the new LED state into the assembly buffer
+                *((volatile bool*) LOCK_STATE_ADDR) = new_state;
+
+                // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
+                nvm_erase_page();
+                nvm_program_page();
+
+                nvm_config();
+                
+                // TODO: Not make this an infinite loop
                 for(;;)
                 {
-                    turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
+                    turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, (bool) new_state);
                 }
                 mbx->content[3] = HARVESTING_DONE;
                 current_state = POWER_IDLE;
@@ -430,7 +431,7 @@ void _nvm_start(void)
 
     single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
 
-    toggle_led_state();
+    // toggle_led_state();
 
     while (true)
     {
@@ -438,7 +439,7 @@ void _nvm_start(void)
         frame_type = classify_frame();
         run_power_state_machine();
         // toggle_led_state();
-        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS*32, 14);
+        // sys_tim_singleshot_32(0, WAIT_ABOUT_1MS*32, 14);
         asm("WFI"); // Wait For Interrupt to conserve power.
     }
 }
