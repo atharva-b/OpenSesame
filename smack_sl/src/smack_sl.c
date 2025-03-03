@@ -255,7 +255,7 @@ uint16_t get_threshold_from_voltage(float input_voltage)
  *
  * @return The new LED state (0 or 1), or a nonzero error code if an NVM operation fails.
  */
-void toggle_led_state(void)
+bool toggle_lock_state(void)
 {
     volatile uint8_t err;
 
@@ -280,8 +280,7 @@ void toggle_led_state(void)
 
     nvm_config();
 
-    // Update the physical LED via GPIO using set_singlegpio_out (assumes active-high)
-    set_singlegpio_out(new_state ? 1 : 0, LED_GPIO);
+    return new_state;;
 }
 
 //---------------------------------------------------------------------
@@ -332,33 +331,16 @@ void run_power_state_machine(void)
 
             case POWER_HARVESTING_DONE:
                 // Power up and configure the NVM using ROM routines
-                // switch_on_nvm();
-                nvm_config();
-
-                // Read the current lock state from NVM
-                bool current_state = *((volatile bool*) LOCK_STATE_ADDR);
-                // Toggle state: if 0 then 1; otherwise, set to 0.
-                bool new_state = !current_state;
-
-                // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
-                nvm_open_assembly_buffer(LOCK_STATE_ADDR);
-
-                // Write the new LED state into the assembly buffer
-                *((volatile bool*) LOCK_STATE_ADDR) = new_state;
-
-                // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
-                nvm_erase_page();
-                nvm_program_page();
-
-                nvm_config();
-                
-                // TODO: Not make this an infinite loop
-                for(;;)
                 {
-                    turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, (bool) new_state);
+                    bool new_state = toggle_lock_state();
+                    
+                    // TODO: Not make this an infinite loop
+                    for(uint8_t i = 0; i < 5; i++) {
+                        turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, new_state);
+                    }
+                    mbx->content[3] = HARVESTING_DONE;
+                    current_state = POWER_IDLE;
                 }
-                mbx->content[3] = HARVESTING_DONE;
-                current_state = POWER_IDLE;
                 break;
 
             case POWER_IDLE:
