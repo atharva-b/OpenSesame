@@ -129,7 +129,7 @@
  104:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
  105:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** // Local Function Prototypes
  106:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
- 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** static uint32_t toggle_led_state(void);
+ 107:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** void toggle_led_state(void);
  108:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** uint16_t get_threshold_from_voltage(float input_voltage);
  109:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
  110:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
@@ -954,15 +954,15 @@
  610 0010 00007A44 	 .word 1148846080
  611              	 .cfi_endproc
  612              	.LFE48:
- 614              	 .section .text.run_power_state_machine,"ax",%progbits
+ 614              	 .section .text.toggle_led_state,"ax",%progbits
  615              	 .align 1
- 616              	 .global run_power_state_machine
+ 616              	 .global toggle_led_state
  617              	 .syntax unified
  618              	 .code 16
  619              	 .thumb_func
  620              	 .fpu softvfp
- 622              	run_power_state_machine:
- 623              	.LFB50:
+ 622              	toggle_led_state:
+ 623              	.LFB49:
  232:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
  233:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
  234:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** // Persistent LED State Toggle Implementation
@@ -984,827 +984,767 @@
  250:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****  *
  251:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****  * @return The new LED state (0 or 1), or a nonzero error code if an NVM operation fails.
  252:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****  */
- 253:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** static uint32_t toggle_led_state(void)
+ 253:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** void toggle_led_state(void)
  254:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** {
+ 624              	 .loc 1 254 1 is_stmt 1 view-0
+ 625              	 .cfi_startproc
+ 626              	 
+ 627              	 
  255:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     uint8_t err;
+ 628              	 .loc 1 255 5 view .LVU149
  256:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Read the current LED state from flash (assumes memory-mapped NVM)
  257:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     uint32_t current_state = *((volatile uint32_t*) LED_STATE_ADDR);
+ 629              	 .loc 1 257 5 view .LVU150
+ 254:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     uint8_t err;
+ 630              	 .loc 1 254 1 is_stmt 0 view .LVU151
+ 631 0000 73B5     	 push {r0,r1,r4,r5,r6,lr}
+ 632              	.LCFI5:
+ 633              	 .cfi_def_cfa_offset 24
+ 634              	 .cfi_offset 0,-24
+ 635              	 .cfi_offset 1,-20
+ 636              	 .cfi_offset 4,-16
+ 637              	 .cfi_offset 5,-12
+ 638              	 .cfi_offset 6,-8
+ 639              	 .cfi_offset 14,-4
+ 640              	 .loc 1 257 14 view .LVU152
+ 641 0002 144E     	 ldr r6,.L60
  258:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Toggle state: if 0 then 1; otherwise, set to 0.
  259:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     uint32_t new_state = (current_state == 0) ? 1 : 0;
  260:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
  261:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Power up and configure the NVM using ROM routines
  262:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     switch_on_nvm();
+ 642              	 .loc 1 262 5 view .LVU153
+ 643 0004 144C     	 ldr r4,.L60+4
+ 257:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Toggle state: if 0 then 1; otherwise, set to 0.
+ 644              	 .loc 1 257 14 view .LVU154
+ 645 0006 3568     	 ldr r5,[r6]
+ 646              	.LVL47:
+ 259:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 647              	 .loc 1 259 5 is_stmt 1 view .LVU155
+ 259:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 648              	 .loc 1 259 51 is_stmt 0 view .LVU156
+ 649 0008 6B42     	 rsbs r3,r5,#0
+ 650 000a 5D41     	 adcs r5,r5,r3
+ 651              	.LVL48:
+ 652              	 .loc 1 262 5 view .LVU157
+ 653 000c C023     	 movs r3,#192
+ 654 000e 5B00     	 lsls r3,r3,#1
+ 655 0010 E358     	 ldr r3,[r4,r3]
+ 259:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 656              	 .loc 1 259 51 view .LVU158
+ 657 0012 EDB2     	 uxtb r5,r5
+ 658              	.LVL49:
+ 659              	 .loc 1 262 5 is_stmt 1 view .LVU159
+ 660 0014 0193     	 str r3,[sp,#4]
+ 661 0016 9847     	 blx r3
+ 662              	.LVL50:
  263:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nvm_config();
+ 663              	 .loc 1 263 5 view .LVU160
+ 664 0018 C423     	 movs r3,#196
+ 665 001a 5B00     	 lsls r3,r3,#1
+ 666 001c E358     	 ldr r3,[r4,r3]
+ 667 001e 0193     	 str r3,[sp,#4]
+ 668 0020 9847     	 blx r3
+ 669              	.LVL51:
  264:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
  265:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Open the assembly buffer for the flash page that includes LED_STATE_ADDR
  266:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     err = nvm_open_assembly_buffer(LED_STATE_ADDR);
+ 670              	 .loc 1 266 5 view .LVU161
+ 671              	 .loc 1 266 11 is_stmt 0 view .LVU162
+ 672 0022 C623     	 movs r3,#198
+ 673 0024 5B00     	 lsls r3,r3,#1
+ 674 0026 E358     	 ldr r3,[r4,r3]
+ 675 0028 3000     	 movs r0,r6
+ 676 002a 0193     	 str r3,[sp,#4]
+ 677 002c 9847     	 blx r3
+ 678              	.LVL52:
  267:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
+ 679              	 .loc 1 267 5 is_stmt 1 view .LVU163
+ 680              	 .loc 1 267 8 is_stmt 0 view .LVU164
+ 681 002e 0028     	 cmp r0,#0
+ 682 0030 04D0     	 beq .L56
  268:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
  269:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         switch_off_nvm();
- 270:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         return err;
- 271:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
- 272:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 273:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Write the new LED state into the assembly buffer
- 274:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     *((volatile uint32_t*) LED_STATE_ADDR) = new_state;
- 275:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 276:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Erase the flash page (ensure LED_STATE_ADDR is in a dedicated page)
- 277:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nvm_erase_page();
- 278:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 279:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Program the flash page with the new LED state
- 280:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     err = nvm_program_page();
- 281:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
- 282:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 283:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         switch_off_nvm();
- 284:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         return err;
- 285:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
- 286:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 287:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Verify the programming result
- 288:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     err = nvm_program_verify();
- 289:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
- 290:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 291:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         switch_off_nvm();
- 292:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         return err;
- 293:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
+ 683              	 .loc 1 269 9 is_stmt 1 view .LVU165
+ 684 0032 C223     	 movs r3,#194
+ 685 0034 5B00     	 lsls r3,r3,#1
+ 686 0036 E358     	 ldr r3,[r4,r3]
+ 687 0038 0193     	 str r3,[sp,#4]
+ 688 003a 9847     	 blx r3
+ 689              	.LVL53:
+ 690              	.L56:
+ 270:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
+ 271:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 272:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Write the new LED state into the assembly buffer
+ 273:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     *((volatile uint32_t*) LED_STATE_ADDR) = new_state;
+ 691              	 .loc 1 273 5 view .LVU166
+ 274:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 275:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Erase the flash page (ensure LED_STATE_ADDR is in a dedicated page)
+ 276:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nvm_erase_page();
+ 277:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 278:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Program the flash page with the new LED state
+ 279:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //    err = nvm_program_page();
+ 280:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //    if (err != 0)
+ 281:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //    {
+ 282:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //        switch_off_nvm();
+ 283:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //    }
+ 284:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 285:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Verify the programming result
+ 286:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //    err = nvm_program_verify();
+ 287:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //    if (err != 0)
+ 288:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //    {
+ 289:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //        switch_off_nvm();
+ 290:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //    }
+ 291:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 292:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Power down the NVM
+ 293:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     //switch_off_nvm();
  294:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 295:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Power down the NVM
- 296:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     switch_off_nvm();
- 297:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 298:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Update the physical LED via GPIO using set_singlegpio_out (assumes active-high)
- 299:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     set_singlegpio_out(new_state ? 1 : 0, LED_GPIO);
- 300:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 301:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     return new_state;
- 302:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
- 303:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 304:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
- 305:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** // State Machine Functions
- 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
- 307:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** void run_power_state_machine(void)
- 308:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** {
- 624              	 .loc 1 308 1 is_stmt 1 view-0
- 625              	 .cfi_startproc
- 626              	 
- 627              	 
- 309:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool authenticated = false;
- 628              	 .loc 1 309 5 view .LVU149
- 629              	.LVL47:
- 310:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     Mailbox_t* mbx = get_mailbox_address();
- 630              	 .loc 1 310 5 view .LVU150
- 308:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool authenticated = false;
- 631              	 .loc 1 308 1 is_stmt 0 view .LVU151
- 632 0000 F0B5     	 push {r4,r5,r6,r7,lr}
- 633              	.LCFI5:
- 634              	 .cfi_def_cfa_offset 20
- 635              	 .cfi_offset 4,-20
- 636              	 .cfi_offset 5,-16
- 637              	 .cfi_offset 6,-12
- 638              	 .cfi_offset 7,-8
- 639              	 .cfi_offset 14,-4
- 640              	 .loc 1 310 22 view .LVU152
- 641 0002 2B4E     	 ldr r6,.L75
- 308:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool authenticated = false;
- 642              	 .loc 1 308 1 view .LVU153
- 643 0004 87B0     	 sub sp,sp,#28
- 644              	.LCFI6:
- 645              	 .cfi_def_cfa_offset 48
- 646              	 .loc 1 310 22 view .LVU154
- 647 0006 736A     	 ldr r3,[r6,#36]
- 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 312:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool locked = true;
- 313:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 314:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     while (true)
- 315:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 316:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         switch (current_state)
- 317:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         {
- 318:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_POWER_OFF:
- 319:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 mbx->content[1] = MCU_VALID;
- 320:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 current_state = POWER_READY_FOR_PASSCODE;
- 321:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 322:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 323:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_READY_FOR_PASSCODE:
- 324:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 if (mbx->content[2] == PASSCODE)
- 325:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 326:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     authenticated = true;
- 327:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING;
- 328:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[3] = PC_VAL;
- 329:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     set_hb_switch(hs1, ls1, hs2, ls2);
- 330:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 331:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 else if (mbx->content[2] == ZERO_32)
- 332:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 333:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_READY_FOR_PASSCODE;
+ 295:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Update the physical LED via GPIO using set_singlegpio_out (assumes active-high)
+ 296:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     set_singlegpio_out(new_state ? 1 : 0, LED_GPIO);
+ 297:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
+ 692              	 .loc 1 297 1 is_stmt 0 view .LVU167
+ 693              	 
+ 276:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 694              	 .loc 1 276 5 view .LVU168
+ 695 003c CE23     	 movs r3,#206
+ 696 003e 5B00     	 lsls r3,r3,#1
+ 697 0040 E358     	 ldr r3,[r4,r3]
+ 273:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 698              	 .loc 1 273 44 view .LVU169
+ 699 0042 3560     	 str r5,[r6]
+ 276:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 700              	 .loc 1 276 5 is_stmt 1 view .LVU170
+ 296:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
+ 701              	 .loc 1 296 5 is_stmt 0 view .LVU171
+ 702 0044 AC34     	 adds r4,r4,#172
+ 276:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 703              	 .loc 1 276 5 view .LVU172
+ 704 0046 0193     	 str r3,[sp,#4]
+ 705 0048 9847     	 blx r3
+ 706              	.LVL54:
+ 296:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
+ 707              	 .loc 1 296 5 is_stmt 1 view .LVU173
+ 708 004a 2800     	 movs r0,r5
+ 709 004c 0121     	 movs r1,#1
+ 710 004e 2368     	 ldr r3,[r4]
+ 711 0050 9847     	 blx r3
+ 712              	.LVL55:
+ 713              	.LVL56:
+ 714              	 .loc 1 297 1 is_stmt 0 view .LVU174
+ 715 0052 73BD     	 pop {r0,r1,r4,r5,r6,pc}
+ 716              	.L61:
+ 717              	 .align 2
+ 718              	.L60:
+ 719 0054 10EF0100 	 .word 126736
+ 720 0058 00000000 	 .word rom_func_table
+ 721              	 .cfi_endproc
+ 722              	.LFE49:
+ 724              	 .section .text.run_power_state_machine,"ax",%progbits
+ 725              	 .align 1
+ 726              	 .global run_power_state_machine
+ 727              	 .syntax unified
+ 728              	 .code 16
+ 729              	 .thumb_func
+ 730              	 .fpu softvfp
+ 732              	run_power_state_machine:
+ 733              	.LFB50:
+ 298:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 299:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
+ 300:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** // State Machine Functions
+ 301:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
+ 302:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** void run_power_state_machine(void)
+ 303:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** {
+ 734              	 .loc 1 303 1 is_stmt 1 view-0
+ 735              	 .cfi_startproc
+ 736              	 
+ 737              	 
+ 304:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool authenticated = false;
+ 738              	 .loc 1 304 5 view .LVU176
+ 739              	.LVL57:
+ 305:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     Mailbox_t* mbx = get_mailbox_address();
+ 740              	 .loc 1 305 5 view .LVU177
+ 303:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool authenticated = false;
+ 741              	 .loc 1 303 1 is_stmt 0 view .LVU178
+ 742 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 743              	.LCFI6:
+ 744              	 .cfi_def_cfa_offset 20
+ 745              	 .cfi_offset 4,-20
+ 746              	 .cfi_offset 5,-16
+ 747              	 .cfi_offset 6,-12
+ 748              	 .cfi_offset 7,-8
+ 749              	 .cfi_offset 14,-4
+ 750              	 .loc 1 305 22 view .LVU179
+ 751 0002 2B4E     	 ldr r6,.L82
+ 303:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool authenticated = false;
+ 752              	 .loc 1 303 1 view .LVU180
+ 753 0004 87B0     	 sub sp,sp,#28
+ 754              	.LCFI7:
+ 755              	 .cfi_def_cfa_offset 48
+ 756              	 .loc 1 305 22 view .LVU181
+ 757 0006 736A     	 ldr r3,[r6,#36]
+ 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 307:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool locked = true;
+ 308:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 309:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     while (true)
+ 310:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
+ 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         switch (current_state)
+ 312:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         {
+ 313:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_POWER_OFF:
+ 314:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 mbx->content[1] = MCU_VALID;
+ 315:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 current_state = POWER_READY_FOR_PASSCODE;
+ 316:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 317:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 318:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_READY_FOR_PASSCODE:
+ 319:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 if (mbx->content[2] == PASSCODE)
+ 320:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 321:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     authenticated = true;
+ 322:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING;
+ 323:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[3] = PC_VAL;
+ 324:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     set_hb_switch(hs1, ls1, hs2, ls2);
+ 325:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
+ 326:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 else if (mbx->content[2] == ZERO_32)
+ 327:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 328:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_READY_FOR_PASSCODE;
+ 329:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
+ 330:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 else
+ 331:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 332:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[3] = PC_INVAL;
+ 333:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_IDLE;
+ 758              	 .loc 1 333 35 view .LVU182
+ 759 0008 0427     	 movs r7,#4
+ 305:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 760              	 .loc 1 305 22 view .LVU183
+ 761 000a 0393     	 str r3,[sp,#12]
+ 762 000c 9847     	 blx r3
+ 763              	.LVL58:
+ 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 764              	 .loc 1 306 10 view .LVU184
+ 765 000e 0123     	 movs r3,#1
+ 766 0010 02AA     	 add r2,sp,#8
+ 767 0012 1373     	 strb r3,[r2,#12]
+ 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 768              	 .loc 1 306 22 view .LVU185
+ 769 0014 0023     	 movs r3,#0
+ 770 0016 5373     	 strb r3,[r2,#13]
+ 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 771              	 .loc 1 306 35 view .LVU186
+ 772 0018 0E22     	 movs r2,#14
+ 773 001a 02A9     	 add r1,sp,#8
+ 774 001c 5218     	 adds r2,r2,r1
+ 775 001e 1370     	 strb r3,[r2]
+ 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 776              	 .loc 1 306 48 view .LVU187
+ 777 0020 0F22     	 movs r2,#15
+ 305:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 778              	 .loc 1 305 22 view .LVU188
+ 779 0022 0400     	 movs r4,r0
+ 780              	.LVL59:
+ 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 781              	 .loc 1 306 5 is_stmt 1 view .LVU189
+ 306:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+ 782              	 .loc 1 306 48 is_stmt 0 view .LVU190
+ 783 0024 5218     	 adds r2,r2,r1
+ 784 0026 1370     	 strb r3,[r2]
+ 307:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 785              	 .loc 1 307 5 is_stmt 1 view .LVU191
+ 786              	.LVL60:
+ 787              	.L63:
+ 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         {
+ 788              	 .loc 1 311 9 is_stmt 0 view .LVU192
+ 789 0028 224D     	 ldr r5,.L82+4
+ 790 002a 2878     	 ldrb r0,[r5]
+ 791              	.L64:
+ 309:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
+ 792              	 .loc 1 309 5 is_stmt 1 view .LVU193
+ 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         {
+ 793              	 .loc 1 311 9 view .LVU194
+ 794 002c 0328     	 cmp r0,#3
+ 795 002e FDD8     	 bhi .L64
+ 796 0030 FFF7FEFF 	 bl __gnu_thumb1_case_uqi
+ 797              	.L66:
+ 798 0034 02       	 .byte (.L69-.L66)/2
+ 799 0035 07       	 .byte (.L68-.L66)/2
+ 800 0036 24       	 .byte (.L67-.L66)/2
+ 801 0037 2E       	 .byte (.L65-.L66)/2
+ 802              	 .p2align 1
+ 803              	.L69:
+ 314:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 current_state = POWER_READY_FOR_PASSCODE;
+ 804              	 .loc 1 314 17 view .LVU195
+ 314:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 current_state = POWER_READY_FOR_PASSCODE;
+ 805              	 .loc 1 314 33 is_stmt 0 view .LVU196
+ 806 0038 1F4B     	 ldr r3,.L82+8
+ 807 003a 6360     	 str r3,[r4,#4]
+ 315:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 808              	 .loc 1 315 17 is_stmt 1 view .LVU197
+ 315:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 809              	 .loc 1 315 31 is_stmt 0 view .LVU198
+ 810 003c 0123     	 movs r3,#1
+ 811              	.L81:
  334:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 335:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 else
- 336:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 337:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[3] = PC_INVAL;
- 338:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_IDLE;
- 648              	 .loc 1 338 35 view .LVU155
- 649 0008 0427     	 movs r7,#4
- 310:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 650              	 .loc 1 310 22 view .LVU156
- 651 000a 0393     	 str r3,[sp,#12]
- 652 000c 9847     	 blx r3
- 653              	.LVL48:
- 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 654              	 .loc 1 311 10 view .LVU157
- 655 000e 0123     	 movs r3,#1
- 656 0010 02AA     	 add r2,sp,#8
- 657 0012 1373     	 strb r3,[r2,#12]
- 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 658              	 .loc 1 311 22 view .LVU158
- 659 0014 0023     	 movs r3,#0
- 660 0016 5373     	 strb r3,[r2,#13]
- 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 661              	 .loc 1 311 35 view .LVU159
- 662 0018 0E22     	 movs r2,#14
- 663 001a 02A9     	 add r1,sp,#8
- 664 001c 5218     	 adds r2,r2,r1
- 665 001e 1370     	 strb r3,[r2]
- 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 666              	 .loc 1 311 48 view .LVU160
- 667 0020 0F22     	 movs r2,#15
- 310:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 668              	 .loc 1 310 22 view .LVU161
- 669 0022 0400     	 movs r4,r0
- 670              	.LVL49:
- 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 671              	 .loc 1 311 5 is_stmt 1 view .LVU162
- 311:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
- 672              	 .loc 1 311 48 is_stmt 0 view .LVU163
- 673 0024 5218     	 adds r2,r2,r1
- 674 0026 1370     	 strb r3,[r2]
- 312:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 675              	 .loc 1 312 5 is_stmt 1 view .LVU164
- 676              	.LVL50:
- 677              	.L56:
- 316:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         {
- 678              	 .loc 1 316 9 is_stmt 0 view .LVU165
- 679 0028 224D     	 ldr r5,.L75+4
- 680 002a 2878     	 ldrb r0,[r5]
- 681              	.L57:
- 314:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 682              	 .loc 1 314 5 is_stmt 1 view .LVU166
- 316:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         {
- 683              	 .loc 1 316 9 view .LVU167
- 684 002c 0328     	 cmp r0,#3
- 685 002e FDD8     	 bhi .L57
- 686 0030 FFF7FEFF 	 bl __gnu_thumb1_case_uqi
- 687              	.L59:
- 688 0034 02       	 .byte (.L62-.L59)/2
- 689 0035 07       	 .byte (.L61-.L59)/2
- 690 0036 24       	 .byte (.L60-.L59)/2
- 691 0037 2E       	 .byte (.L58-.L59)/2
- 692              	 .p2align 1
- 693              	.L62:
- 319:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 current_state = POWER_READY_FOR_PASSCODE;
- 694              	 .loc 1 319 17 view .LVU168
- 319:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 current_state = POWER_READY_FOR_PASSCODE;
- 695              	 .loc 1 319 33 is_stmt 0 view .LVU169
- 696 0038 1F4B     	 ldr r3,.L75+8
- 697 003a 6360     	 str r3,[r4,#4]
- 320:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 698              	 .loc 1 320 17 is_stmt 1 view .LVU170
- 320:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 699              	 .loc 1 320 31 is_stmt 0 view .LVU171
- 700 003c 0123     	 movs r3,#1
- 701              	.L74:
- 339:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 340:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 341:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 342:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_HARVESTING:
- 343:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
- 344:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 345:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[5] = 0x11111111;
- 346:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING_DONE;
- 702              	 .loc 1 346 35 view .LVU172
- 703 003e 2B70     	 strb r3,[r5]
- 704 0040 F2E7     	 b .L56
- 705              	.L61:
- 324:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 706              	 .loc 1 324 17 is_stmt 1 view .LVU173
- 324:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 707              	 .loc 1 324 33 is_stmt 0 view .LVU174
- 708 0042 A368     	 ldr r3,[r4,#8]
- 324:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 709              	 .loc 1 324 20 view .LVU175
- 710 0044 1D4A     	 ldr r2,.L75+12
- 711 0046 9342     	 cmp r3,r2
- 712 0048 12D1     	 bne .L64
- 326:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING;
- 713              	 .loc 1 326 21 is_stmt 1 view .LVU176
- 714              	.LVL51:
- 327:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[3] = PC_VAL;
- 715              	 .loc 1 327 21 view .LVU177
- 327:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[3] = PC_VAL;
- 716              	 .loc 1 327 35 is_stmt 0 view .LVU178
- 717 004a 0223     	 movs r3,#2
- 718 004c 2B70     	 strb r3,[r5]
- 328:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     set_hb_switch(hs1, ls1, hs2, ls2);
- 719              	 .loc 1 328 21 is_stmt 1 view .LVU179
- 328:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     set_hb_switch(hs1, ls1, hs2, ls2);
- 720              	 .loc 1 328 37 is_stmt 0 view .LVU180
- 721 004e 1C4B     	 ldr r3,.L75+16
- 329:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 722              	 .loc 1 329 21 view .LVU181
- 723 0050 3500     	 movs r5,r6
- 328:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     set_hb_switch(hs1, ls1, hs2, ls2);
- 724              	 .loc 1 328 37 view .LVU182
- 725 0052 E360     	 str r3,[r4,#12]
- 329:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 726              	 .loc 1 329 21 is_stmt 1 view .LVU183
- 727 0054 0E21     	 movs r1,#14
- 728 0056 0F23     	 movs r3,#15
- 729 0058 02AA     	 add r2,sp,#8
- 730 005a 02A8     	 add r0,sp,#8
- 731 005c 9B18     	 adds r3,r3,r2
- 732 005e 0918     	 adds r1,r1,r0
- 733 0060 FC35     	 adds r5,r5,#252
- 734 0062 1B78     	 ldrb r3,[r3]
- 735 0064 527B     	 ldrb r2,[r2,#13]
- 736 0066 0978     	 ldrb r1,[r1]
- 737 0068 007B     	 ldrb r0,[r0,#12]
- 738 006a 6D6A     	 ldr r5,[r5,#36]
- 739 006c A847     	 blx r5
- 740              	.LVL52:
- 741 006e DBE7     	 b .L56
- 742              	.LVL53:
- 743              	.L64:
- 331:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 744              	 .loc 1 331 22 view .LVU184
- 331:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 745              	 .loc 1 331 25 is_stmt 0 view .LVU185
- 746 0070 002B     	 cmp r3,#0
- 747 0072 D9D0     	 beq .L56
- 337:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_IDLE;
- 748              	 .loc 1 337 21 is_stmt 1 view .LVU186
- 337:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_IDLE;
- 749              	 .loc 1 337 37 is_stmt 0 view .LVU187
- 750 0074 134B     	 ldr r3,.L75+20
- 338:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 751              	 .loc 1 338 35 view .LVU188
- 752 0076 2F70     	 strb r7,[r5]
- 337:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_IDLE;
- 753              	 .loc 1 337 37 view .LVU189
- 754 0078 E360     	 str r3,[r4,#12]
- 338:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 755              	 .loc 1 338 21 is_stmt 1 view .LVU190
- 756 007a D5E7     	 b .L56
- 757              	.L60:
- 343:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 758              	 .loc 1 343 17 view .LVU191
- 759              	.LVL54:
+ 335:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 336:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 337:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_HARVESTING:
+ 338:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
+ 339:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 340:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[5] = 0x11111111;
+ 341:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING_DONE;
+ 812              	 .loc 1 341 35 view .LVU199
+ 813 003e 2B70     	 strb r3,[r5]
+ 814 0040 F2E7     	 b .L63
+ 815              	.L68:
+ 319:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 816              	 .loc 1 319 17 is_stmt 1 view .LVU200
+ 319:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 817              	 .loc 1 319 33 is_stmt 0 view .LVU201
+ 818 0042 A368     	 ldr r3,[r4,#8]
+ 319:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 819              	 .loc 1 319 20 view .LVU202
+ 820 0044 1D4A     	 ldr r2,.L82+12
+ 821 0046 9342     	 cmp r3,r2
+ 822 0048 12D1     	 bne .L71
+ 321:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING;
+ 823              	 .loc 1 321 21 is_stmt 1 view .LVU203
+ 824              	.LVL61:
+ 322:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[3] = PC_VAL;
+ 825              	 .loc 1 322 21 view .LVU204
+ 322:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     mbx->content[3] = PC_VAL;
+ 826              	 .loc 1 322 35 is_stmt 0 view .LVU205
+ 827 004a 0223     	 movs r3,#2
+ 828 004c 2B70     	 strb r3,[r5]
+ 323:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     set_hb_switch(hs1, ls1, hs2, ls2);
+ 829              	 .loc 1 323 21 is_stmt 1 view .LVU206
+ 323:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     set_hb_switch(hs1, ls1, hs2, ls2);
+ 830              	 .loc 1 323 37 is_stmt 0 view .LVU207
+ 831 004e 1C4B     	 ldr r3,.L82+16
+ 324:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
+ 832              	 .loc 1 324 21 view .LVU208
+ 833 0050 3500     	 movs r5,r6
+ 323:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     set_hb_switch(hs1, ls1, hs2, ls2);
+ 834              	 .loc 1 323 37 view .LVU209
+ 835 0052 E360     	 str r3,[r4,#12]
+ 324:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
+ 836              	 .loc 1 324 21 is_stmt 1 view .LVU210
+ 837 0054 0E21     	 movs r1,#14
+ 838 0056 0F23     	 movs r3,#15
+ 839 0058 02AA     	 add r2,sp,#8
+ 840 005a 02A8     	 add r0,sp,#8
+ 841 005c 9B18     	 adds r3,r3,r2
+ 842 005e 0918     	 adds r1,r1,r0
+ 843 0060 FC35     	 adds r5,r5,#252
+ 844 0062 1B78     	 ldrb r3,[r3]
+ 845 0064 527B     	 ldrb r2,[r2,#13]
+ 846 0066 0978     	 ldrb r1,[r1]
+ 847 0068 007B     	 ldrb r0,[r0,#12]
+ 848 006a 6D6A     	 ldr r5,[r5,#36]
+ 849 006c A847     	 blx r5
+ 850              	.LVL62:
+ 851 006e DBE7     	 b .L63
+ 852              	.LVL63:
+ 853              	.L71:
+ 326:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 854              	 .loc 1 326 22 view .LVU211
+ 326:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 855              	 .loc 1 326 25 is_stmt 0 view .LVU212
+ 856 0070 002B     	 cmp r3,#0
+ 857 0072 D9D0     	 beq .L63
+ 332:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_IDLE;
+ 858              	 .loc 1 332 21 is_stmt 1 view .LVU213
+ 332:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_IDLE;
+ 859              	 .loc 1 332 37 is_stmt 0 view .LVU214
+ 860 0074 134B     	 ldr r3,.L82+20
+ 333:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
+ 861              	 .loc 1 333 35 view .LVU215
+ 862 0076 2F70     	 strb r7,[r5]
+ 332:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_IDLE;
+ 863              	 .loc 1 332 37 view .LVU216
+ 864 0078 E360     	 str r3,[r4,#12]
+ 333:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
+ 865              	 .loc 1 333 21 is_stmt 1 view .LVU217
+ 866 007a D5E7     	 b .L63
+ 867              	.L67:
+ 338:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 868              	 .loc 1 338 17 view .LVU218
+ 869              	.LVL64:
  230:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
- 760              	 .loc 1 230 5 view .LVU192
- 343:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 761              	 .loc 1 343 21 is_stmt 0 view .LVU193
- 762 007c 0320     	 movs r0,#3
- 763 007e 1249     	 ldr r1,.L75+24
- 764 0080 FFF7FEFF 	 bl shc_compare
- 765              	.LVL55:
- 343:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 766              	 .loc 1 343 20 view .LVU194
- 767 0084 0028     	 cmp r0,#0
- 768 0086 CFD0     	 beq .L56
- 345:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING_DONE;
- 769              	 .loc 1 345 21 is_stmt 1 view .LVU195
- 345:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING_DONE;
- 770              	 .loc 1 345 37 is_stmt 0 view .LVU196
- 771 0088 104B     	 ldr r3,.L75+28
- 772 008a 6361     	 str r3,[r4,#20]
- 773              	 .loc 1 346 21 is_stmt 1 view .LVU197
- 774              	 .loc 1 346 35 is_stmt 0 view .LVU198
- 775 008c 0323     	 movs r3,#3
- 776 008e D6E7     	 b .L74
- 777              	.L58:
- 347:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 348:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 349:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 350:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_HARVESTING_DONE:
- 351:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Toggle the persistent LED state and update GPIO1.
- 352:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 for(;;)
- 778              	 .loc 1 352 17 is_stmt 1 discriminator 1 view .LVU199
- 353:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 354:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
- 779              	 .loc 1 354 21 discriminator 1 view .LVU200
- 780 0090 0023     	 movs r3,#0
- 781 0092 02AA     	 add r2,sp,#8
- 782 0094 0193     	 str r3,[sp,#4]
- 783 0096 0F33     	 adds r3,r3,#15
- 784 0098 9B18     	 adds r3,r3,r2
- 785 009a 0093     	 str r3,[sp]
- 786 009c 0D23     	 movs r3,#13
- 787 009e 9B18     	 adds r3,r3,r2
- 788 00a0 0E22     	 movs r2,#14
- 789 00a2 02A9     	 add r1,sp,#8
- 790 00a4 5218     	 adds r2,r2,r1
- 791 00a6 2000     	 movs r0,r4
- 792 00a8 05A9     	 add r1,sp,#20
- 793 00aa FFF7FEFF 	 bl turn_motor
- 794              	.LVL56:
- 352:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
- 795              	 .loc 1 352 22 discriminator 1 view .LVU201
- 796 00ae EFE7     	 b .L58
- 797              	.L76:
- 798              	 .align 2
- 799              	.L75:
- 800 00b0 00000000 	 .word rom_func_table
- 801 00b4 00000000 	 .word .LANCHOR3
- 802 00b8 B5005BA5 	 .word -1520762699
- 803 00bc 21433412 	 .word 305414945
- 804 00c0 55555555 	 .word 1431655765
- 805 00c4 99999999 	 .word -1717986919
- 806 00c8 B80B0000 	 .word 3000
- 807 00cc 11111111 	 .word 286331153
- 808              	 .cfi_endproc
- 809              	.LFE50:
- 811              	 .section .text.run_lock_state_machine,"ax",%progbits
- 812              	 .align 1
- 813              	 .global run_lock_state_machine
- 814              	 .syntax unified
- 815              	 .code 16
- 816              	 .thumb_func
- 817              	 .fpu softvfp
- 819              	run_lock_state_machine:
- 820              	.LFB51:
- 355:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
- 356:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 mbx->content[3] = HARVESTING_DONE;
- 357:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 current_state = POWER_IDLE;
- 358:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 359:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 360:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_IDLE:
- 361:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Remain idle; add periodic tasks or sleep logic as needed.
- 362:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 363:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 364:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             default:
- 365:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 366:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         }
- 367:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
- 368:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
+ 870              	 .loc 1 230 5 view .LVU219
+ 338:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 871              	 .loc 1 338 21 is_stmt 0 view .LVU220
+ 872 007c 0320     	 movs r0,#3
+ 873 007e 1249     	 ldr r1,.L82+24
+ 874 0080 FFF7FEFF 	 bl shc_compare
+ 875              	.LVL65:
+ 338:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 876              	 .loc 1 338 20 view .LVU221
+ 877 0084 0028     	 cmp r0,#0
+ 878 0086 CFD0     	 beq .L63
+ 340:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING_DONE;
+ 879              	 .loc 1 340 21 is_stmt 1 view .LVU222
+ 340:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     current_state = POWER_HARVESTING_DONE;
+ 880              	 .loc 1 340 37 is_stmt 0 view .LVU223
+ 881 0088 104B     	 ldr r3,.L82+28
+ 882 008a 6361     	 str r3,[r4,#20]
+ 883              	 .loc 1 341 21 is_stmt 1 view .LVU224
+ 884              	 .loc 1 341 35 is_stmt 0 view .LVU225
+ 885 008c 0323     	 movs r3,#3
+ 886 008e D6E7     	 b .L81
+ 887              	.L65:
+ 342:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
+ 343:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 344:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 345:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_HARVESTING_DONE:
+ 346:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Toggle the persistent LED state and update GPIO1.
+ 347:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 for(;;)
+ 888              	 .loc 1 347 17 is_stmt 1 discriminator 1 view .LVU226
+ 348:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 349:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !locked);
+ 889              	 .loc 1 349 21 discriminator 1 view .LVU227
+ 890 0090 0023     	 movs r3,#0
+ 891 0092 02AA     	 add r2,sp,#8
+ 892 0094 0193     	 str r3,[sp,#4]
+ 893 0096 0F33     	 adds r3,r3,#15
+ 894 0098 9B18     	 adds r3,r3,r2
+ 895 009a 0093     	 str r3,[sp]
+ 896 009c 0D23     	 movs r3,#13
+ 897 009e 9B18     	 adds r3,r3,r2
+ 898 00a0 0E22     	 movs r2,#14
+ 899 00a2 02A9     	 add r1,sp,#8
+ 900 00a4 5218     	 adds r2,r2,r1
+ 901 00a6 2000     	 movs r0,r4
+ 902 00a8 05A9     	 add r1,sp,#20
+ 903 00aa FFF7FEFF 	 bl turn_motor
+ 904              	.LVL66:
+ 347:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 {
+ 905              	 .loc 1 347 22 discriminator 1 view .LVU228
+ 906 00ae EFE7     	 b .L65
+ 907              	.L83:
+ 908              	 .align 2
+ 909              	.L82:
+ 910 00b0 00000000 	 .word rom_func_table
+ 911 00b4 00000000 	 .word .LANCHOR3
+ 912 00b8 B5005BA5 	 .word -1520762699
+ 913 00bc 21433412 	 .word 305414945
+ 914 00c0 55555555 	 .word 1431655765
+ 915 00c4 99999999 	 .word -1717986919
+ 916 00c8 B80B0000 	 .word 3000
+ 917 00cc 11111111 	 .word 286331153
+ 918              	 .cfi_endproc
+ 919              	.LFE50:
+ 921              	 .section .text.run_lock_state_machine,"ax",%progbits
+ 922              	 .align 1
+ 923              	 .global run_lock_state_machine
+ 924              	 .syntax unified
+ 925              	 .code 16
+ 926              	 .thumb_func
+ 927              	 .fpu softvfp
+ 929              	run_lock_state_machine:
+ 930              	.LFB51:
+ 350:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 }
+ 351:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 mbx->content[3] = HARVESTING_DONE;
+ 352:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 current_state = POWER_IDLE;
+ 353:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 354:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 355:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case POWER_IDLE:
+ 356:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Remain idle; add periodic tasks or sleep logic as needed.
+ 357:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 358:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 359:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             default:
+ 360:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 361:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         }
+ 362:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
+ 363:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
+ 364:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 365:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** void run_lock_state_machine(void)
+ 366:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** {
+ 931              	 .loc 1 366 1 view-0
+ 932              	 .cfi_startproc
+ 933              	 
+ 934              	 
+ 935 0000 07B5     	 push {r0,r1,r2,lr}
+ 936              	.LCFI8:
+ 937              	 .cfi_def_cfa_offset 16
+ 938              	 .cfi_offset 0,-16
+ 939              	 .cfi_offset 1,-12
+ 940              	 .cfi_offset 2,-8
+ 941              	 .cfi_offset 14,-4
+ 942              	.L86:
+ 367:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool authenticated = false;
+ 368:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     Mailbox_t* mbx;
  369:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 370:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** void run_lock_state_machine(void)
- 371:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** {
- 821              	 .loc 1 371 1 view-0
- 822              	 .cfi_startproc
- 823              	 
- 824              	 
- 825 0000 07B5     	 push {r0,r1,r2,lr}
- 826              	.LCFI7:
- 827              	 .cfi_def_cfa_offset 16
- 828              	 .cfi_offset 0,-16
- 829              	 .cfi_offset 1,-12
- 830              	 .cfi_offset 2,-8
- 831              	 .cfi_offset 14,-4
- 832              	.L79:
- 372:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     bool authenticated = false;
- 373:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     Mailbox_t* mbx;
- 374:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 375:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     while (true)
- 376:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 377:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         switch (current_state)
- 833              	 .loc 1 377 9 is_stmt 0 view .LVU203
- 834 0002 054B     	 ldr r3,.L81
- 835 0004 1B78     	 ldrb r3,[r3]
- 836              	.L78:
- 373:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 837              	 .loc 1 373 5 is_stmt 1 view .LVU204
- 375:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 838              	 .loc 1 375 5 view .LVU205
- 839              	 .loc 1 377 9 view .LVU206
- 840 0006 002B     	 cmp r3,#0
- 841 0008 FDD1     	 bne .L78
- 378:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         {
- 379:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case LOCK_LOCKED:
- 380:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 mbx = get_mailbox_address();
- 842              	 .loc 1 380 17 view .LVU207
- 843              	 .loc 1 380 23 is_stmt 0 view .LVU208
- 844 000a 044B     	 ldr r3,.L81+4
- 845 000c 5B6A     	 ldr r3,[r3,#36]
- 846 000e 0193     	 str r3,[sp,#4]
- 847 0010 9847     	 blx r3
- 848              	.LVL57:
- 381:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 mbx->content[1] = MCU_VALID;
- 849              	 .loc 1 381 17 is_stmt 1 view .LVU209
- 850              	 .loc 1 381 33 is_stmt 0 view .LVU210
- 851 0012 034B     	 ldr r3,.L81+8
- 852 0014 4360     	 str r3,[r0,#4]
- 382:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 853              	 .loc 1 382 17 is_stmt 1 view .LVU211
- 854 0016 F4E7     	 b .L79
- 855              	.L82:
- 856              	 .align 2
- 857              	.L81:
- 858 0018 00000000 	 .word .LANCHOR3
- 859 001c 00000000 	 .word rom_func_table
- 860 0020 B5005BA5 	 .word -1520762699
- 861              	 .cfi_endproc
- 862              	.LFE51:
- 864              	 .section .text._nvm_start,"ax",%progbits
- 865              	 .align 1
- 866              	 .global _nvm_start
- 867              	 .syntax unified
- 868              	 .code 16
- 869              	 .thumb_func
- 870              	 .fpu softvfp
- 872              	_nvm_start:
- 873              	.LFB52:
- 383:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 384:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case LOCK_UNLOCKING:
- 385:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Implement unlocking procedure here if needed.
- 386:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 387:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 388:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case LOCK_UNLOCKED:
- 389:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Code for unlocked state.
- 390:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 391:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 392:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case LOCK_LOCKING:
- 393:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Code for locking state.
- 394:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 395:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 396:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             default:
- 397:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
- 398:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         }
- 399:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
- 400:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
- 401:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 402:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
- 403:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** // Application Entry Point
- 404:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
- 405:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** void _nvm_start(void)
- 406:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** {
- 874              	 .loc 1 406 1 view-0
- 875              	 .cfi_startproc
- 876              	 
- 877              	 
- 878              	 
- 407:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_init();
- 879              	 .loc 1 407 5 view .LVU213
- 406:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_init();
- 880              	 .loc 1 406 1 is_stmt 0 view .LVU214
- 881 0000 F0B5     	 push {r4,r5,r6,r7,lr}
- 882              	.LCFI8:
- 883              	 .cfi_def_cfa_offset 20
- 884              	 .cfi_offset 4,-20
- 885              	 .cfi_offset 5,-16
- 886              	 .cfi_offset 6,-12
- 887              	 .cfi_offset 7,-8
- 888              	 .cfi_offset 14,-4
- 889              	 .loc 1 407 5 view .LVU215
- 890 0002 364C     	 ldr r4,.L89
- 406:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_init();
- 891              	 .loc 1 406 1 view .LVU216
- 892 0004 89B0     	 sub sp,sp,#36
- 893              	.LCFI9:
- 894              	 .cfi_def_cfa_offset 56
- 895              	 .loc 1 407 5 view .LVU217
- 896 0006 2500     	 movs r5,r4
- 897 0008 FC35     	 adds r5,r5,#252
- 898 000a AB6C     	 ldr r3,[r5,#72]
- 899 000c 9847     	 blx r3
- 900              	.LVL58:
- 408:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     init_dand();
- 901              	 .loc 1 408 5 is_stmt 1 view .LVU218
- 902 000e 236A     	 ldr r3,[r4,#32]
- 409:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     vars_init();
- 410:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     shc_init();
- 411:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 412:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_State_enum_t state = handle_DAND_protocol();
- 413:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_Frame_enum_t frame_type = classify_frame();
- 414:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_state_machine();
- 415:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 416:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     set_hb_eventctrl(false);
- 417:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 418:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
- 903              	 .loc 1 418 5 is_stmt 0 view .LVU219
- 904 0010 0126     	 movs r6,#1
- 408:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     init_dand();
- 905              	 .loc 1 408 5 view .LVU220
- 906 0012 0393     	 str r3,[sp,#12]
- 907 0014 9847     	 blx r3
- 908              	.LVL59:
- 409:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     vars_init();
- 909              	 .loc 1 409 5 is_stmt 1 view .LVU221
- 910 0016 FFF7FEFF 	 bl vars_init
- 911              	.LVL60:
+ 370:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     while (true)
+ 371:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
+ 372:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         switch (current_state)
+ 943              	 .loc 1 372 9 is_stmt 0 view .LVU230
+ 944 0002 054B     	 ldr r3,.L88
+ 945 0004 1B78     	 ldrb r3,[r3]
+ 946              	.L85:
+ 368:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 947              	 .loc 1 368 5 is_stmt 1 view .LVU231
+ 370:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
+ 948              	 .loc 1 370 5 view .LVU232
+ 949              	 .loc 1 372 9 view .LVU233
+ 950 0006 002B     	 cmp r3,#0
+ 951 0008 FDD1     	 bne .L85
+ 373:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         {
+ 374:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case LOCK_LOCKED:
+ 375:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 mbx = get_mailbox_address();
+ 952              	 .loc 1 375 17 view .LVU234
+ 953              	 .loc 1 375 23 is_stmt 0 view .LVU235
+ 954 000a 044B     	 ldr r3,.L88+4
+ 955 000c 5B6A     	 ldr r3,[r3,#36]
+ 956 000e 0193     	 str r3,[sp,#4]
+ 957 0010 9847     	 blx r3
+ 958              	.LVL67:
+ 376:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 mbx->content[1] = MCU_VALID;
+ 959              	 .loc 1 376 17 is_stmt 1 view .LVU236
+ 960              	 .loc 1 376 33 is_stmt 0 view .LVU237
+ 961 0012 034B     	 ldr r3,.L88+8
+ 962 0014 4360     	 str r3,[r0,#4]
+ 377:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 963              	 .loc 1 377 17 is_stmt 1 view .LVU238
+ 964 0016 F4E7     	 b .L86
+ 965              	.L89:
+ 966              	 .align 2
+ 967              	.L88:
+ 968 0018 00000000 	 .word .LANCHOR3
+ 969 001c 00000000 	 .word rom_func_table
+ 970 0020 B5005BA5 	 .word -1520762699
+ 971              	 .cfi_endproc
+ 972              	.LFE51:
+ 974              	 .section .text._nvm_start,"ax",%progbits
+ 975              	 .align 1
+ 976              	 .global _nvm_start
+ 977              	 .syntax unified
+ 978              	 .code 16
+ 979              	 .thumb_func
+ 980              	 .fpu softvfp
+ 982              	_nvm_start:
+ 983              	.LFB52:
+ 378:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 379:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case LOCK_UNLOCKING:
+ 380:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Implement unlocking procedure here if needed.
+ 381:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 382:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 383:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case LOCK_UNLOCKED:
+ 384:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Code for unlocked state.
+ 385:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 386:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 387:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             case LOCK_LOCKING:
+ 388:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 // Code for locking state.
+ 389:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 390:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 391:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****             default:
+ 392:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****                 break;
+ 393:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         }
+ 394:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
+ 395:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
+ 396:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 397:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
+ 398:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** // Application Entry Point
+ 399:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** //---------------------------------------------------------------------
+ 400:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** void _nvm_start(void)
+ 401:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** {
+ 984              	 .loc 1 401 1 view-0
+ 985              	 .cfi_startproc
+ 986              	 
+ 987              	 
+ 988              	 
+ 402:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_init();
+ 989              	 .loc 1 402 5 view .LVU240
+ 401:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_init();
+ 990              	 .loc 1 401 1 is_stmt 0 view .LVU241
+ 991 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 992              	.LCFI9:
+ 993              	 .cfi_def_cfa_offset 20
+ 994              	 .cfi_offset 4,-20
+ 995              	 .cfi_offset 5,-16
+ 996              	 .cfi_offset 6,-12
+ 997              	 .cfi_offset 7,-8
+ 998              	 .cfi_offset 14,-4
+ 999              	 .loc 1 402 5 view .LVU242
+ 1000 0002 164D     	 ldr r5,.L91
+ 401:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_init();
+ 1001              	 .loc 1 401 1 view .LVU243
+ 1002 0004 85B0     	 sub sp,sp,#20
+ 1003              	.LCFI10:
+ 1004              	 .cfi_def_cfa_offset 40
+ 1005              	 .loc 1 402 5 view .LVU244
+ 1006 0006 2C00     	 movs r4,r5
+ 1007 0008 FC34     	 adds r4,r4,#252
+ 1008 000a A36C     	 ldr r3,[r4,#72]
+ 1009 000c 9847     	 blx r3
+ 1010              	.LVL68:
+ 403:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     init_dand();
+ 1011              	 .loc 1 403 5 is_stmt 1 view .LVU245
+ 1012 000e 2B6A     	 ldr r3,[r5,#32]
+ 1013 0010 9847     	 blx r3
+ 1014              	.LVL69:
+ 404:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     vars_init();
+ 1015              	 .loc 1 404 5 view .LVU246
+ 1016 0012 FFF7FEFF 	 bl vars_init
+ 1017              	.LVL70:
+ 405:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     shc_init();
+ 1018              	 .loc 1 405 5 view .LVU247
+ 1019 0016 FFF7FEFF 	 bl shc_init
+ 1020              	.LVL71:
+ 406:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 407:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_State_enum_t state = handle_DAND_protocol();
+ 1021              	 .loc 1 407 5 view .LVU248
+ 1022              	 .loc 1 407 39 is_stmt 0 view .LVU249
+ 1023 001a 236F     	 ldr r3,[r4,#112]
+ 1024 001c 9847     	 blx r3
+ 1025              	.LVL72:
+ 1026              	 .loc 1 407 31 view .LVU250
+ 1027 001e 0E23     	 movs r3,#14
+ 408:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_Frame_enum_t frame_type = classify_frame();
+ 1028              	 .loc 1 408 44 view .LVU251
+ 1029 0020 276D     	 ldr r7,[r4,#80]
+ 407:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_Frame_enum_t frame_type = classify_frame();
+ 1030              	 .loc 1 407 31 view .LVU252
+ 1031 0022 6B44     	 add r3,r3,sp
+ 1032              	 .loc 1 408 31 view .LVU253
+ 1033 0024 0F26     	 movs r6,#15
+ 407:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_Frame_enum_t frame_type = classify_frame();
+ 1034              	 .loc 1 407 31 view .LVU254
+ 1035 0026 1870     	 strb r0,[r3]
+ 1036              	 .loc 1 408 5 is_stmt 1 view .LVU255
+ 1037              	 .loc 1 408 44 is_stmt 0 view .LVU256
+ 1038 0028 B847     	 blx r7
+ 1039              	.LVL73:
+ 1040              	 .loc 1 408 31 view .LVU257
+ 1041 002a 6E44     	 add r6,r6,sp
+ 409:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_state_machine();
+ 1042              	 .loc 1 409 5 view .LVU258
+ 1043 002c A36F     	 ldr r3,[r4,#120]
+ 408:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_Frame_enum_t frame_type = classify_frame();
+ 1044              	 .loc 1 408 31 view .LVU259
+ 1045 002e 3070     	 strb r0,[r6]
+ 1046              	 .loc 1 409 5 is_stmt 1 view .LVU260
+ 1047 0030 9847     	 blx r3
+ 1048              	.LVL74:
  410:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 912              	 .loc 1 410 5 view .LVU222
- 913 001a FFF7FEFF 	 bl shc_init
- 914              	.LVL61:
- 412:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_Frame_enum_t frame_type = classify_frame();
- 915              	 .loc 1 412 5 view .LVU223
- 412:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_Frame_enum_t frame_type = classify_frame();
- 916              	 .loc 1 412 39 is_stmt 0 view .LVU224
- 917 001e 2B6F     	 ldr r3,[r5,#112]
- 918 0020 9847     	 blx r3
- 919              	.LVL62:
- 412:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     volatile NFC_Frame_enum_t frame_type = classify_frame();
- 920              	 .loc 1 412 31 view .LVU225
- 921 0022 0E23     	 movs r3,#14
- 922 0024 04AA     	 add r2,sp,#16
- 923 0026 9B18     	 adds r3,r3,r2
- 924 0028 1870     	 strb r0,[r3]
- 413:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_state_machine();
- 925              	 .loc 1 413 5 is_stmt 1 view .LVU226
- 413:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_state_machine();
- 926              	 .loc 1 413 44 is_stmt 0 view .LVU227
- 927 002a 2B6D     	 ldr r3,[r5,#80]
- 928              	.LBB10:
- 929              	.LBB11:
- 257:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Toggle state: if 0 then 1; otherwise, set to 0.
- 930              	 .loc 1 257 14 view .LVU228
- 931 002c 2C4F     	 ldr r7,.L89+4
- 932              	.LBE11:
- 933              	.LBE10:
- 413:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_state_machine();
- 934              	 .loc 1 413 44 view .LVU229
- 935 002e 0493     	 str r3,[sp,#16]
- 936 0030 9847     	 blx r3
- 937              	.LVL63:
- 413:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nfc_state_machine();
- 938              	 .loc 1 413 31 view .LVU230
- 939 0032 04AB     	 add r3,sp,#16
- 940 0034 D873     	 strb r0,[r3,#15]
- 414:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 941              	 .loc 1 414 5 is_stmt 1 view .LVU231
- 942 0036 AB6F     	 ldr r3,[r5,#120]
- 943 0038 9847     	 blx r3
- 944              	.LVL64:
- 416:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 945              	 .loc 1 416 5 view .LVU232
- 946 003a AB6A     	 ldr r3,[r5,#40]
- 947 003c 0020     	 movs r0,#0
- 948 003e 9847     	 blx r3
- 949              	.LVL65:
- 950              	 .loc 1 418 5 view .LVU233
- 951 0040 2300     	 movs r3,r4
- 952 0042 0021     	 movs r1,#0
- 953 0044 A433     	 adds r3,r3,#164
- 954 0046 3200     	 movs r2,r6
- 955 0048 0091     	 str r1,[sp]
- 956 004a 1D68     	 ldr r5,[r3]
- 957 004c 3000     	 movs r0,r6
- 958 004e 0B00     	 movs r3,r1
- 959 0050 0196     	 str r6,[sp,#4]
- 960 0052 A847     	 blx r5
- 961              	.LVL66:
- 419:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     toggle_led_state();
- 962              	 .loc 1 419 5 view .LVU234
- 963              	.LBB14:
- 964              	.LBI10:
- 253:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** {
- 965              	 .loc 1 253 17 view .LVU235
- 966              	.LBB12:
- 255:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Read the current LED state from flash (assumes memory-mapped NVM)
- 967              	 .loc 1 255 5 view .LVU236
- 257:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Toggle state: if 0 then 1; otherwise, set to 0.
- 968              	 .loc 1 257 5 view .LVU237
- 262:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nvm_config();
- 969              	 .loc 1 262 5 is_stmt 0 view .LVU238
- 970 0054 C023     	 movs r3,#192
- 971 0056 5B00     	 lsls r3,r3,#1
- 972 0058 E358     	 ldr r3,[r4,r3]
- 257:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     // Toggle state: if 0 then 1; otherwise, set to 0.
- 973              	 .loc 1 257 14 view .LVU239
- 974 005a 3D68     	 ldr r5,[r7]
- 975              	.LVL67:
- 259:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 976              	 .loc 1 259 5 is_stmt 1 view .LVU240
- 262:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     nvm_config();
- 977              	 .loc 1 262 5 view .LVU241
- 978 005c 0393     	 str r3,[sp,#12]
- 979 005e 9847     	 blx r3
- 980              	.LVL68:
- 263:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 981              	 .loc 1 263 5 view .LVU242
- 982 0060 C423     	 movs r3,#196
- 983 0062 5B00     	 lsls r3,r3,#1
- 984 0064 E358     	 ldr r3,[r4,r3]
- 985 0066 0393     	 str r3,[sp,#12]
- 986 0068 9847     	 blx r3
- 987              	.LVL69:
- 266:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
- 988              	 .loc 1 266 5 view .LVU243
- 266:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
- 989              	 .loc 1 266 11 is_stmt 0 view .LVU244
- 990 006a C623     	 movs r3,#198
- 991 006c 5B00     	 lsls r3,r3,#1
- 992 006e E358     	 ldr r3,[r4,r3]
- 993 0070 3800     	 movs r0,r7
- 994 0072 0393     	 str r3,[sp,#12]
- 995 0074 9847     	 blx r3
- 996              	.LVL70:
- 267:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 997              	 .loc 1 267 5 is_stmt 1 view .LVU245
- 269:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         return err;
- 998              	 .loc 1 269 9 is_stmt 0 view .LVU246
- 999 0076 C223     	 movs r3,#194
- 1000 0078 5B00     	 lsls r3,r3,#1
- 1001 007a E358     	 ldr r3,[r4,r3]
- 1002 007c 0393     	 str r3,[sp,#12]
- 267:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 1003              	 .loc 1 267 8 view .LVU247
- 1004 007e 0028     	 cmp r0,#0
- 1005 0080 09D0     	 beq .L84
- 1006              	.LVL71:
- 1007              	.L88:
- 283:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         return err;
- 1008              	 .loc 1 283 9 view .LVU248
- 1009 0082 9847     	 blx r3
- 1010              	.LVL72:
- 284:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
- 1011              	 .loc 1 284 9 is_stmt 1 view .LVU249
- 1012              	.L85:
- 284:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     }
- 1013              	 .loc 1 284 9 is_stmt 0 view .LVU250
- 1014              	.LBE12:
- 1015              	.LBE14:
- 420:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 421:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     while (true)
- 1016              	 .loc 1 421 5 is_stmt 1 view .LVU251
- 422:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 423:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         read_frame();
- 1017              	 .loc 1 423 9 view .LVU252
- 1018 0084 FC34     	 adds r4,r4,#252
- 1019 0086 E36C     	 ldr r3,[r4,#76]
- 1020 0088 9847     	 blx r3
- 1021              	.LVL73:
- 424:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         frame_type = classify_frame();
- 1022              	 .loc 1 424 9 view .LVU253
- 1023              	 .loc 1 424 22 is_stmt 0 view .LVU254
- 1024 008a 049B     	 ldr r3,[sp,#16]
- 1025 008c 9847     	 blx r3
- 1026              	.LVL74:
- 1027              	 .loc 1 424 20 view .LVU255
- 1028 008e 04AB     	 add r3,sp,#16
- 1029 0090 D873     	 strb r0,[r3,#15]
- 425:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         run_power_state_machine();
- 1030              	 .loc 1 425 9 is_stmt 1 view .LVU256
- 1031 0092 FFF7FEFF 	 bl run_power_state_machine
- 1032              	.LVL75:
- 1033              	.L84:
- 1034              	.LBB15:
- 1035              	.LBB13:
- 259:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 1036              	 .loc 1 259 51 is_stmt 0 view .LVU257
- 1037 0096 6B42     	 rsbs r3,r5,#0
- 1038 0098 5D41     	 adcs r5,r5,r3
- 1039              	.LVL76:
- 277:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 1040              	 .loc 1 277 5 view .LVU258
- 1041 009a CE23     	 movs r3,#206
- 1042 009c 5B00     	 lsls r3,r3,#1
- 1043 009e E358     	 ldr r3,[r4,r3]
- 259:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 1044              	 .loc 1 259 51 view .LVU259
- 1045 00a0 EDB2     	 uxtb r5,r5
- 274:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 1046              	 .loc 1 274 5 is_stmt 1 view .LVU260
- 274:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 1047              	 .loc 1 274 44 is_stmt 0 view .LVU261
- 1048 00a2 3D60     	 str r5,[r7]
- 277:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 1049              	 .loc 1 277 5 is_stmt 1 view .LVU262
- 1050 00a4 0593     	 str r3,[sp,#20]
- 1051 00a6 9847     	 blx r3
- 1052              	.LVL77:
- 280:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
- 1053              	 .loc 1 280 5 view .LVU263
- 280:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
- 1054              	 .loc 1 280 11 is_stmt 0 view .LVU264
- 1055 00a8 C823     	 movs r3,#200
- 1056 00aa 5B00     	 lsls r3,r3,#1
- 1057 00ac E358     	 ldr r3,[r4,r3]
- 1058 00ae 0593     	 str r3,[sp,#20]
- 1059 00b0 9847     	 blx r3
- 1060              	.LVL78:
- 281:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 1061              	 .loc 1 281 5 is_stmt 1 view .LVU265
- 281:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 1062              	 .loc 1 281 8 is_stmt 0 view .LVU266
- 1063 00b2 0028     	 cmp r0,#0
- 1064 00b4 01D0     	 beq .L86
- 283:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         return err;
- 1065              	 .loc 1 283 9 is_stmt 1 view .LVU267
- 1066 00b6 039B     	 ldr r3,[sp,#12]
- 1067 00b8 E3E7     	 b .L88
- 1068              	.L86:
- 288:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
- 1069              	 .loc 1 288 5 view .LVU268
- 288:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     if (err != 0)
- 1070              	 .loc 1 288 11 is_stmt 0 view .LVU269
- 1071 00ba CA23     	 movs r3,#202
- 1072 00bc 5B00     	 lsls r3,r3,#1
- 1073 00be E358     	 ldr r3,[r4,r3]
- 1074 00c0 0593     	 str r3,[sp,#20]
- 1075 00c2 9847     	 blx r3
+ 411:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     set_hb_eventctrl(false);
+ 1049              	 .loc 1 411 5 view .LVU261
+ 1050 0032 0020     	 movs r0,#0
+ 1051 0034 A36A     	 ldr r3,[r4,#40]
+ 1052 0036 9847     	 blx r3
+ 1053              	.LVL75:
+ 412:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 413:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
+ 1054              	 .loc 1 413 5 view .LVU262
+ 1055 0038 0021     	 movs r1,#0
+ 1056 003a 0120     	 movs r0,#1
+ 1057 003c A435     	 adds r5,r5,#164
+ 1058 003e 0B00     	 movs r3,r1
+ 1059 0040 0200     	 movs r2,r0
+ 1060 0042 0091     	 str r1,[sp]
+ 1061 0044 2D68     	 ldr r5,[r5]
+ 1062 0046 0190     	 str r0,[sp,#4]
+ 1063 0048 A847     	 blx r5
+ 1064              	.LVL76:
+ 414:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     toggle_led_state();
+ 1065              	 .loc 1 414 5 view .LVU263
+ 1066 004a FFF7FEFF 	 bl toggle_led_state
+ 1067              	.LVL77:
+ 415:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
+ 416:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     while (true)
+ 1068              	 .loc 1 416 5 view .LVU264
+ 417:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
+ 418:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         read_frame();
+ 1069              	 .loc 1 418 9 view .LVU265
+ 1070 004e E36C     	 ldr r3,[r4,#76]
+ 1071 0050 9847     	 blx r3
+ 1072              	.LVL78:
+ 419:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         frame_type = classify_frame();
+ 1073              	 .loc 1 419 9 view .LVU266
+ 1074              	 .loc 1 419 22 is_stmt 0 view .LVU267
+ 1075 0052 B847     	 blx r7
  1076              	.LVL79:
- 289:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 1077              	 .loc 1 289 5 is_stmt 1 view .LVU270
- 291:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         return err;
- 1078              	 .loc 1 291 9 is_stmt 0 view .LVU271
- 1079 00c4 039B     	 ldr r3,[sp,#12]
- 289:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****     {
- 1080              	 .loc 1 289 8 view .LVU272
- 1081 00c6 0028     	 cmp r0,#0
- 1082 00c8 DBD1     	 bne .L88
- 296:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 1083              	 .loc 1 296 5 is_stmt 1 view .LVU273
- 1084 00ca 9847     	 blx r3
- 1085              	.LVL80:
- 299:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** 
- 1086              	 .loc 1 299 5 view .LVU274
- 1087 00cc 2300     	 movs r3,r4
- 1088 00ce AC33     	 adds r3,r3,#172
- 1089 00d0 3100     	 movs r1,r6
- 1090 00d2 2800     	 movs r0,r5
- 1091 00d4 1B68     	 ldr r3,[r3]
- 1092 00d6 9847     	 blx r3
- 1093              	.LVL81:
- 301:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
- 1094              	 .loc 1 301 5 view .LVU275
- 301:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c **** }
- 1095              	 .loc 1 301 12 is_stmt 0 view .LVU276
- 1096 00d8 D4E7     	 b .L85
- 1097              	.L90:
- 1098 00da C046     	 .align 2
- 1099              	.L89:
- 1100 00dc 00000000 	 .word rom_func_table
- 1101 00e0 10EF0100 	 .word 126736
- 1102              	.LBE13:
- 1103              	.LBE15:
- 1104              	 .cfi_endproc
- 1105              	.LFE52:
- 1107              	 .global done_sweep
- 1108              	 .global voltage_sweep
- 1109              	 .global turn_cycles
- 1110              	 .global current_state
- 1111              	 .global sl_counter
- 1112              	 .global smack_sl_tag
- 1113              	 .section .bss.current_state,"aw",%nobits
- 1114              	 .set .LANCHOR3,.+0
- 1117              	current_state:
- 1118 0000 00       	 .space 1
- 1119              	 .section .bss.done_sweep,"aw",%nobits
- 1120              	 .set .LANCHOR2,.+0
- 1123              	done_sweep:
- 1124 0000 00       	 .space 1
- 1125              	 .section .bss.example_counter,"aw",%nobits
- 1126              	 .align 2
- 1127              	 .set .LANCHOR0,.+0
- 1130              	example_counter:
- 1131 0000 00000000 	 .space 4
- 1132              	 .section .bss.sl_counter,"aw",%nobits
- 1133              	 .align 2
- 1136              	sl_counter:
- 1137 0000 00000000 	 .space 4
- 1138              	 .section .bss.turn_cycles,"aw",%nobits
- 1139              	 .align 2
- 1142              	turn_cycles:
- 1143 0000 00000000 	 .space 4
- 1144              	 .section .bss.voltage_sweep,"aw",%nobits
- 1145              	 .align 1
- 1146              	 .set .LANCHOR1,.+0
- 1149              	voltage_sweep:
- 1150 0000 0000     	 .space 2
- 1151              	 .section .rodata.smack_sl_tag,"a"
- 1154              	smack_sl_tag:
- 1155 0000 05C0BEEF 	 .ascii "\005\300\276\357\336\255\000\000\377\377\377\377\341"
- 1155      DEAD0000 
- 1155      FFFFFFFF 
- 1155      E1
- 1156 000d 100B0F03 	 .ascii "\020\013\017\003O\321\001KT\002enInfineon Technolog"
- 1156      4FD1014B 
- 1156      5402656E 
- 1156      496E6669 
- 1156      6E656F6E 
- 1157 002b 69657320 	 .ascii "ies AG  NGC1080  SmAcK  05C0BEEFDEAD000  V4.0.1 (NV"
- 1157      41472020 
- 1157      4E474331 
- 1157      30383020 
- 1157      20536D41 
- 1158 005e 4D29FEFF 	 .ascii "M)\376\377\377\377\377\377\377"
- 1158      FFFFFFFF 
- 1158      FF
- 1159              	 .text
- 1160              	.Letext0:
- 1161              	 .file 2 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
- 1162              	 .file 3 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
- 1163              	 .file 4 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/aes_drv.h"
- 1164              	 .file 5 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/aparam.h"
- 1165              	 .file 6 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/dand_handler.h"
- 1166              	 .file 7 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/dparam.h"
- 1167              	 .file 8 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/hbctrl_drv.h"
- 1168              	 .file 9 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/hwdiv.h"
- 1169              	 .file 10 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/nfc_handler.h"
- 1170              	 .file 11 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/nvm.h"
- 1171              	 .file 12 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/pmu.h"
- 1172              	 .file 13 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/sense_ctrl.h"
- 1173              	 .file 14 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/ssp_drv.h"
- 1174              	 .file 15 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/sys_tim_drv.h"
- 1175              	 .file 16 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/uart_drv.h"
- 1176              	 .file 17 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/wdt.h"
- 1177              	 .file 18 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/rom_lib.h"
- 1178              	 .file 19 "Z:/Documents/GitHub/OpenSesame/smack_lib/inc/shc_lib.h"
- 1179              	 .file 20 "Z:/Documents/GitHub/OpenSesame/smack_sl/inc/smack_sl.h"
- 1180              	 .file 21 "Z:/Documents/GitHub/OpenSesame/smack_sl/inc/smack_dataexchange.h"
- 1181              	 .file 22 "Z:/Documents/GitHub/OpenSesame/smack_lib/inc/sys_tim_lib.h"
+ 1077              	 .loc 1 419 20 view .LVU268
+ 1078 0054 3070     	 strb r0,[r6]
+ 420:Z:/Documents/GitHub/OpenSesame/smack_sl/src\smack_sl.c ****         run_power_state_machine();
+ 1079              	 .loc 1 420 9 is_stmt 1 view .LVU269
+ 1080 0056 FFF7FEFF 	 bl run_power_state_machine
+ 1081              	.LVL80:
+ 1082              	.L92:
+ 1083 005a C046     	 .align 2
+ 1084              	.L91:
+ 1085 005c 00000000 	 .word rom_func_table
+ 1086              	 .cfi_endproc
+ 1087              	.LFE52:
+ 1089              	 .global done_sweep
+ 1090              	 .global voltage_sweep
+ 1091              	 .global turn_cycles
+ 1092              	 .global current_state
+ 1093              	 .global sl_counter
+ 1094              	 .global smack_sl_tag
+ 1095              	 .section .bss.current_state,"aw",%nobits
+ 1096              	 .set .LANCHOR3,.+0
+ 1099              	current_state:
+ 1100 0000 00       	 .space 1
+ 1101              	 .section .bss.done_sweep,"aw",%nobits
+ 1102              	 .set .LANCHOR2,.+0
+ 1105              	done_sweep:
+ 1106 0000 00       	 .space 1
+ 1107              	 .section .bss.example_counter,"aw",%nobits
+ 1108              	 .align 2
+ 1109              	 .set .LANCHOR0,.+0
+ 1112              	example_counter:
+ 1113 0000 00000000 	 .space 4
+ 1114              	 .section .bss.sl_counter,"aw",%nobits
+ 1115              	 .align 2
+ 1118              	sl_counter:
+ 1119 0000 00000000 	 .space 4
+ 1120              	 .section .bss.turn_cycles,"aw",%nobits
+ 1121              	 .align 2
+ 1124              	turn_cycles:
+ 1125 0000 00000000 	 .space 4
+ 1126              	 .section .bss.voltage_sweep,"aw",%nobits
+ 1127              	 .align 1
+ 1128              	 .set .LANCHOR1,.+0
+ 1131              	voltage_sweep:
+ 1132 0000 0000     	 .space 2
+ 1133              	 .section .rodata.smack_sl_tag,"a"
+ 1136              	smack_sl_tag:
+ 1137 0000 05C0BEEF 	 .ascii "\005\300\276\357\336\255\000\000\377\377\377\377\341"
+ 1137      DEAD0000 
+ 1137      FFFFFFFF 
+ 1137      E1
+ 1138 000d 100B0F03 	 .ascii "\020\013\017\003O\321\001KT\002enInfineon Technolog"
+ 1138      4FD1014B 
+ 1138      5402656E 
+ 1138      496E6669 
+ 1138      6E656F6E 
+ 1139 002b 69657320 	 .ascii "ies AG  NGC1080  SmAcK  05C0BEEFDEAD000  V4.0.1 (NV"
+ 1139      41472020 
+ 1139      4E474331 
+ 1139      30383020 
+ 1139      20536D41 
+ 1140 005e 4D29FEFF 	 .ascii "M)\376\377\377\377\377\377\377"
+ 1140      FFFFFFFF 
+ 1140      FF
+ 1141              	 .text
+ 1142              	.Letext0:
+ 1143              	 .file 2 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1144              	 .file 3 "z:\\documents\\github\\opensesame\\tools\\extern\\gcc-arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1145              	 .file 4 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/aes_drv.h"
+ 1146              	 .file 5 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/aparam.h"
+ 1147              	 .file 6 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/dand_handler.h"
+ 1148              	 .file 7 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/dparam.h"
+ 1149              	 .file 8 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/hbctrl_drv.h"
+ 1150              	 .file 9 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/hwdiv.h"
+ 1151              	 .file 10 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/nfc_handler.h"
+ 1152              	 .file 11 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/nvm.h"
+ 1153              	 .file 12 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/pmu.h"
+ 1154              	 .file 13 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/sense_ctrl.h"
+ 1155              	 .file 14 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/ssp_drv.h"
+ 1156              	 .file 15 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/sys_tim_drv.h"
+ 1157              	 .file 16 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/uart_drv.h"
+ 1158              	 .file 17 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/wdt.h"
+ 1159              	 .file 18 "Z:/Documents/GitHub/OpenSesame/smack_rom/libs/smack_lib/inc/rom_lib.h"
+ 1160              	 .file 19 "Z:/Documents/GitHub/OpenSesame/smack_lib/inc/shc_lib.h"
+ 1161              	 .file 20 "Z:/Documents/GitHub/OpenSesame/smack_sl/inc/smack_sl.h"
+ 1162              	 .file 21 "Z:/Documents/GitHub/OpenSesame/smack_sl/inc/smack_dataexchange.h"
+ 1163              	 .file 22 "Z:/Documents/GitHub/OpenSesame/smack_lib/inc/sys_tim_lib.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 smack_sl.c
     {standard input}:16     .text.example_handler:00000000 $t
@@ -1825,30 +1765,33 @@ DEFINED SYMBOLS
     {standard input}:574    .text.get_threshold_from_voltage:00000000 $t
     {standard input}:581    .text.get_threshold_from_voltage:00000000 get_threshold_from_voltage
     {standard input}:610    .text.get_threshold_from_voltage:00000010 $d
-    {standard input}:615    .text.run_power_state_machine:00000000 $t
-    {standard input}:622    .text.run_power_state_machine:00000000 run_power_state_machine
-    {standard input}:688    .text.run_power_state_machine:00000034 $d
-    {standard input}:692    .text.run_power_state_machine:00000038 $t
-    {standard input}:800    .text.run_power_state_machine:000000b0 $d
-    {standard input}:812    .text.run_lock_state_machine:00000000 $t
-    {standard input}:819    .text.run_lock_state_machine:00000000 run_lock_state_machine
-    {standard input}:858    .text.run_lock_state_machine:00000018 $d
-    {standard input}:865    .text._nvm_start:00000000 $t
-    {standard input}:872    .text._nvm_start:00000000 _nvm_start
-    {standard input}:1100   .text._nvm_start:000000dc $d
-    {standard input}:1123   .bss.done_sweep:00000000 done_sweep
-    {standard input}:1149   .bss.voltage_sweep:00000000 voltage_sweep
-    {standard input}:1142   .bss.turn_cycles:00000000 turn_cycles
-    {standard input}:1117   .bss.current_state:00000000 current_state
-    {standard input}:1136   .bss.sl_counter:00000000 sl_counter
-    {standard input}:1154   .rodata.smack_sl_tag:00000000 smack_sl_tag
-    {standard input}:1118   .bss.current_state:00000000 $d
-    {standard input}:1124   .bss.done_sweep:00000000 $d
-    {standard input}:1126   .bss.example_counter:00000000 $d
-    {standard input}:1130   .bss.example_counter:00000000 example_counter
-    {standard input}:1133   .bss.sl_counter:00000000 $d
-    {standard input}:1139   .bss.turn_cycles:00000000 $d
-    {standard input}:1145   .bss.voltage_sweep:00000000 $d
+    {standard input}:615    .text.toggle_led_state:00000000 $t
+    {standard input}:622    .text.toggle_led_state:00000000 toggle_led_state
+    {standard input}:719    .text.toggle_led_state:00000054 $d
+    {standard input}:725    .text.run_power_state_machine:00000000 $t
+    {standard input}:732    .text.run_power_state_machine:00000000 run_power_state_machine
+    {standard input}:798    .text.run_power_state_machine:00000034 $d
+    {standard input}:802    .text.run_power_state_machine:00000038 $t
+    {standard input}:910    .text.run_power_state_machine:000000b0 $d
+    {standard input}:922    .text.run_lock_state_machine:00000000 $t
+    {standard input}:929    .text.run_lock_state_machine:00000000 run_lock_state_machine
+    {standard input}:968    .text.run_lock_state_machine:00000018 $d
+    {standard input}:975    .text._nvm_start:00000000 $t
+    {standard input}:982    .text._nvm_start:00000000 _nvm_start
+    {standard input}:1085   .text._nvm_start:0000005c $d
+    {standard input}:1105   .bss.done_sweep:00000000 done_sweep
+    {standard input}:1131   .bss.voltage_sweep:00000000 voltage_sweep
+    {standard input}:1124   .bss.turn_cycles:00000000 turn_cycles
+    {standard input}:1099   .bss.current_state:00000000 current_state
+    {standard input}:1118   .bss.sl_counter:00000000 sl_counter
+    {standard input}:1136   .rodata.smack_sl_tag:00000000 smack_sl_tag
+    {standard input}:1100   .bss.current_state:00000000 $d
+    {standard input}:1106   .bss.done_sweep:00000000 $d
+    {standard input}:1108   .bss.example_counter:00000000 $d
+    {standard input}:1112   .bss.example_counter:00000000 example_counter
+    {standard input}:1115   .bss.sl_counter:00000000 $d
+    {standard input}:1121   .bss.turn_cycles:00000000 $d
+    {standard input}:1127   .bss.voltage_sweep:00000000 $d
 
 UNDEFINED SYMBOLS
 shc_compare

@@ -37,6 +37,9 @@ OUTPUT_ARCH(arm)
 INCLUDE smack_memory.ld
 
 section_version_base = __NVM_BASE + __NVM_SIZE;
+
+section_persitent_NVM = 0x0001EF00;
+
 MEMORY
 {
 	/* holds version and code identification for NVM application firmware*/
@@ -382,7 +385,7 @@ SECTIONS
 	 * the '.version' section. Writing a single pad Byte at the end of the
 	 * section trigger the padding fill operation. */
 	pad_start = __etext + SIZEOF (.data);
-	pad_size = section_version_base - pad_start - 1;
+	pad_size = section_persitent_NVM - pad_start - 1;
 	.text.pad2 pad_start :
 	{
 		. = . + pad_size;

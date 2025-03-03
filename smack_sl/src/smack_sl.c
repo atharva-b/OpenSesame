@@ -104,7 +104,7 @@ bool done_sweep = false;
 //---------------------------------------------------------------------
 // Local Function Prototypes
 //---------------------------------------------------------------------
-static uint32_t toggle_led_state(void);
+void toggle_led_state(void);
 uint16_t get_threshold_from_voltage(float input_voltage);
 
 //---------------------------------------------------------------------
@@ -250,7 +250,7 @@ uint16_t get_threshold_from_voltage(float input_voltage)
  *
  * @return The new LED state (0 or 1), or a nonzero error code if an NVM operation fails.
  */
-static uint32_t toggle_led_state(void)
+void toggle_led_state(void)
 {
     uint8_t err;
     // Read the current LED state from flash (assumes memory-mapped NVM)
@@ -267,7 +267,6 @@ static uint32_t toggle_led_state(void)
     if (err != 0)
     {
         switch_off_nvm();
-        return err;
     }
 
     // Write the new LED state into the assembly buffer
@@ -277,28 +276,24 @@ static uint32_t toggle_led_state(void)
     nvm_erase_page();
 
     // Program the flash page with the new LED state
-    err = nvm_program_page();
-    if (err != 0)
-    {
-        switch_off_nvm();
-        return err;
-    }
+//    err = nvm_program_page();
+//    if (err != 0)
+//    {
+//        switch_off_nvm();
+//    }
 
     // Verify the programming result
-    err = nvm_program_verify();
-    if (err != 0)
-    {
-        switch_off_nvm();
-        return err;
-    }
+//    err = nvm_program_verify();
+//    if (err != 0)
+//    {
+//        switch_off_nvm();
+//    }
 
     // Power down the NVM
-    switch_off_nvm();
+    //switch_off_nvm();
 
     // Update the physical LED via GPIO using set_singlegpio_out (assumes active-high)
     set_singlegpio_out(new_state ? 1 : 0, LED_GPIO);
-
-    return new_state;
 }
 
 //---------------------------------------------------------------------
