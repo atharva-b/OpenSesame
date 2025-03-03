@@ -252,48 +252,66 @@ uint16_t get_threshold_from_voltage(float input_voltage)
  */
 void toggle_led_state(void)
 {
-    uint8_t err;
+    volatile uint8_t err;
+
+    // Power up and configure the NVM using ROM routines
+    // switch_on_nvm();
+    nvm_config();
+
     // Read the current LED state from flash (assumes memory-mapped NVM)
     uint32_t current_state = *((volatile uint32_t*) LED_STATE_ADDR);
     // Toggle state: if 0 then 1; otherwise, set to 0.
     uint32_t new_state = (current_state == 0) ? 1 : 0;
 
-    // Power up and configure the NVM using ROM routines
-    switch_on_nvm();
-    nvm_config();
-
     // Open the assembly buffer for the flash page that includes LED_STATE_ADDR
     err = nvm_open_assembly_buffer(LED_STATE_ADDR);
-    if (err != 0)
-    {
-        switch_off_nvm();
-    }
 
     // Write the new LED state into the assembly buffer
     *((volatile uint32_t*) LED_STATE_ADDR) = new_state;
 
     // Erase the flash page (ensure LED_STATE_ADDR is in a dedicated page)
     nvm_erase_page();
+    nvm_program_page();
 
-    // Program the flash page with the new LED state
-//    err = nvm_program_page();
-//    if (err != 0)
-//    {
-//        switch_off_nvm();
-//    }
-
-    // Verify the programming result
-//    err = nvm_program_verify();
-//    if (err != 0)
-//    {
-//        switch_off_nvm();
-//    }
-
-    // Power down the NVM
-    //switch_off_nvm();
+    nvm_config();
 
     // Update the physical LED via GPIO using set_singlegpio_out (assumes active-high)
     set_singlegpio_out(new_state ? 1 : 0, LED_GPIO);
+}
+
+void toggle_motor(void)
+{
+    volatile uint8_t err;
+
+    // Power up and configure the NVM using ROM routines
+    // switch_on_nvm();
+    nvm_config();
+
+    // Read the current LED state from flash (assumes memory-mapped NVM)
+    uint32_t current_state = *((volatile uint32_t*) LED_STATE_ADDR);
+    // Toggle state: if 0 then 1; otherwise, set to 0.
+    uint32_t new_state = (current_state == 0) ? 1 : 0;
+
+    // Open the assembly buffer for the flash page that includes LED_STATE_ADDR
+    err = nvm_open_assembly_buffer(LED_STATE_ADDR);
+
+    // Write the new LED state into the assembly buffer
+    *((volatile uint32_t*) LED_STATE_ADDR) = new_state;
+
+    // Erase the flash page (ensure LED_STATE_ADDR is in a dedicated page)
+    nvm_erase_page();
+    nvm_program_page();
+
+    nvm_config();
+
+    Mailbox_t* mbx = get_mailbox_address();
+    // bool locked = true;
+    bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
+
+    for (int i = 0; i < 20; i++)
+    {
+        turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !((bool)new_state));
+    }
 }
 
 //---------------------------------------------------------------------
@@ -411,6 +429,7 @@ void _nvm_start(void)
     set_hb_eventctrl(false);
 
     single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
+
     toggle_led_state();
 
     while (true)
@@ -418,6 +437,8 @@ void _nvm_start(void)
         read_frame();
         frame_type = classify_frame();
         run_power_state_machine();
+        // toggle_led_state();
+        sys_tim_singleshot_32(0, WAIT_ABOUT_1MS*32, 14);
         asm("WFI"); // Wait For Interrupt to conserve power.
     }
 }
