@@ -284,16 +284,6 @@ void toggle_led_state(void)
     set_singlegpio_out(new_state ? 1 : 0, LED_GPIO);
 }
 
-void toggle_motor(void)
-{
-    volatile uint8_t err;
-
-    // for (int i = 0; i < 20; i++)
-    // {
-    //     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !((bool)new_state));
-    // }
-}
-
 //---------------------------------------------------------------------
 // State Machine Functions
 //---------------------------------------------------------------------
@@ -431,15 +421,11 @@ void _nvm_start(void)
 
     single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
 
-    // toggle_led_state();
-
     while (true)
     {
         read_frame();
         frame_type = classify_frame();
         run_power_state_machine();
-        // toggle_led_state();
-        // sys_tim_singleshot_32(0, WAIT_ABOUT_1MS*32, 14);
         asm("WFI"); // Wait For Interrupt to conserve power.
     }
 }
