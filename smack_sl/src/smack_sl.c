@@ -10,8 +10,8 @@
 *
 */
 
-/** @file smack_sl.c
- *  @brief Entry point for the application code after low-level ROM boot.
+/** @file     smack_sl.c
+ *  @brief    holds smack_sl() which serves as the entry point for the application code after all the low-level ROM boot code is done
  */
 
 // standard libs
@@ -103,6 +103,43 @@ uint32_t sl_counter;
 Power_State_enum_t current_state = POWER_POWER_OFF;
 uint32_t turn_cycles = 0;
 
+/**
+ * H-BRIDGE LAYOUT
+ * 
+ *      ---------*VDD_HB*---------
+ *      |                        |   
+ *      |                        |
+ *      *HS1*                 *HS2*
+ *      |                        |
+ *      |---*M_A*        *M_B*---|
+ *      |                        |
+ *      |                        |
+ *      *LS1*                 *LS2*
+ *      |                        |
+ *      |                        |
+ *      -----------*GND*----------
+ * 
+ */
+
+/** _nvm_start() is the main() routine of the application code:
+ * - when building the image (rom or ram), it is called by Reset_Handler() (see startup_smack.c) after SystemInit().
+ * - when building and running the unit tests, it is not called, as far as I know, it is not subject to unit testing.
+ * - when building and running integration and/or system tests, it is called by sc_main() upon simulation start.
+ * This is also the reason of why it is called _start() and not main(): The VP has a higher layer main() which
+ * calls sc_main() and _start(). Having two main's will fail when linking the VP executable.
+ *
+ * @note _start() cannot be made static, it is referenced by startup_smack.c and also by the interface
+ * to the Virtual Prototype. But linting does not know about such external references. The default
+ * approach to solve is to add '//lint -e765'. Our linter is plain old, we don't get a new one thanks to
+ * the application owner from IT and it has a bug which renders -e765 useless. The only option we had
+ * is to suppress the warning in au_misra2_fixes.lnt
+ *
+ * @return nothing
+ */
+
+void _nvm_start(void);
+
+// TODO: Figure out if we actually need this
 uint16_t voltage_sweep = 0;
 bool done_sweep = false;
 
