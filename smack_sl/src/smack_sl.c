@@ -81,6 +81,18 @@ const uint8_t smack_sl_tag[] =
 #define PC_VAL            0x55555555
 #define PC_INVAL          0x99999999
 #define HARVESTING_DONE   0xBADAB00B
+#define REGISTER_RQ       0xEFEFEFEF
+#define SERIAL_NUMBER     0xFEDCBA20
+#define REG_ERROR         0x88888888
+
+#define MAX_MOTOR_ROTATIONS 8
+
+// typedef __PACKED_STRUCT {
+//     bool registered;
+//     bool lock_state;
+//     uint32_t passcode;
+//     uint32_t sn;
+// } registration_data_t;
 
 /*
    Previous firmware stored version data in the last flash page (0x1EFF4–0x1EFFF).
@@ -292,7 +304,7 @@ uint16_t get_threshold_from_voltage(float input_voltage)
  *
  * @return The new LED state (0 or 1), or a nonzero error code if an NVM operation fails.
  */
-void toggle_led_state(void)
+bool toggle_lock_state(void)
 {
     volatile uint8_t err;
 
@@ -317,8 +329,7 @@ void toggle_led_state(void)
 
     nvm_config();
 
-    // Update the physical LED via GPIO using set_singlegpio_out (assumes active-high)
-    set_singlegpio_out(new_state ? 1 : 0, LED_GPIO);
+    return new_state;
 }
 
 void toggle_motor(void)
@@ -329,6 +340,25 @@ void toggle_motor(void)
     // {
     //     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !((bool)new_state));
     // }
+}
+
+void generate_passcode(Mailbox_t *mbx, uint32_t arr[]) {
+    uint32_t new_pc[4];
+    generate_random_number(&new_pc);
+    mbx->content[6] = new_pc[0];
+    nvm_config();
+
+    // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
+    uint8_t err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
+
+    // Write the new LED state into the assembly buffer
+    uint32_t lock_state_addr = (uint32_t) arr;
+    arr[1] = (uint32_t) new_pc[0];
+    // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
+    nvm_erase_page();
+    err = nvm_program_page();
+
+    nvm_config();
 }
 
 //---------------------------------------------------------------------
@@ -351,12 +381,23 @@ void run_power_state_machine(void)
                 break;
 
             case POWER_READY_FOR_PASSCODE:
-                if (mbx->content[2] == PASSCODE)
+            {
+                nvm_config();
+                uint32_t* arr = ((volatile uint32_t*) LOCK_STATE_ADDR);
+                if (mbx->content[2] == arr[1])
                 {
                     authenticated = true;
                     current_state = POWER_HARVESTING;
+                    generate_passcode(mbx, arr);
                     mbx->content[3] = PC_VAL;
                     set_hb_switch(hs1, ls1, hs2, ls2);
+                }
+                else if (mbx->content[2] == REGISTER_RQ){
+                    mbx->content[4] = SERIAL_NUMBER;
+                    generate_passcode(mbx, arr);
+                    mbx->content[2] = ZERO_32;
+
+                    current_state = POWER_POWER_OFF;
                 }
                 else if (mbx->content[2] == ZERO_32)
                 {
@@ -367,6 +408,7 @@ void run_power_state_machine(void)
                     mbx->content[3] = PC_INVAL;
                     current_state = POWER_IDLE;
                 }
+            }
                 break;
 
             case POWER_HARVESTING:
@@ -379,33 +421,16 @@ void run_power_state_machine(void)
 
             case POWER_HARVESTING_DONE:
                 // Power up and configure the NVM using ROM routines
-                // switch_on_nvm();
-                nvm_config();
-
-                // Read the current lock state from NVM
-                bool current_state = *((volatile bool*) LOCK_STATE_ADDR);
-                // Toggle state: if 0 then 1; otherwise, set to 0.
-                bool new_state = !current_state;
-
-                // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
-                nvm_open_assembly_buffer(LOCK_STATE_ADDR);
-
-                // Write the new LED state into the assembly buffer
-                *((volatile bool*) LOCK_STATE_ADDR) = new_state;
-
-                // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
-                nvm_erase_page();
-                nvm_program_page();
-
-                nvm_config();
-                
-                // TODO: Not make this an infinite loop
-                for(;;)
                 {
-                    turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, (bool) new_state);
+                    bool new_state = toggle_lock_state();
+                    
+                    // TODO: Not make this an infinite loop
+                    for(uint8_t i = 0; i < MAX_MOTOR_ROTATIONS; i++) {
+                        turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, new_state);
+                    }
+                    mbx->content[3] = HARVESTING_DONE;
+                    current_state = POWER_IDLE;
                 }
-                mbx->content[3] = HARVESTING_DONE;
-                current_state = POWER_IDLE;
                 break;
 
             case POWER_IDLE:
