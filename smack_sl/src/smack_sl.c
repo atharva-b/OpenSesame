@@ -317,7 +317,7 @@ bool toggle_lock_state(void)
 
     nvm_config();
 
-    return new_state;;
+    return new_state;
 }
 
 //---------------------------------------------------------------------
@@ -370,8 +370,7 @@ void run_power_state_machine(void)
                 // Power up and configure the NVM using ROM routines
                 {
                     bool new_state = toggle_lock_state();
-                    
-                    // TODO: Not make this an infinite loop
+
                     for(uint8_t i = 0; i < 5; i++) {
                         turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, new_state);
                     }
