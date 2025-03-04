@@ -317,7 +317,7 @@ bool toggle_lock_state(void)
 
     nvm_config();
 
-    return new_state;;
+    return new_state;
 }
 
 void toggle_motor(void)
