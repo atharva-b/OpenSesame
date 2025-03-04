@@ -81,6 +81,16 @@ const uint8_t smack_sl_tag[] =
 #define PC_VAL            0x55555555
 #define PC_INVAL          0x99999999
 #define HARVESTING_DONE   0xBADAB00B
+#define REGISTER_RQ       0xEFEFEFEF
+#define SERIAL_NUMBER     0xFEDCBA05
+#define REG_ERROR         0x88888888
+
+// typedef __PACKED_STRUCT {
+//     bool registered;
+//     bool lock_state;
+//     uint32_t passcode;
+//     uint32_t sn;
+// } registration_data_t;
 
 /*
    Previous firmware stored version data in the last flash page (0x1EFF4–0x1EFFF).
@@ -301,23 +311,23 @@ bool toggle_lock_state(void)
     nvm_config();
 
     // Read the current LED state from flash (assumes memory-mapped NVM)
-    uint32_t current_state = *((volatile uint32_t*) LOCK_STATE_ADDR);
+    uint32_t* current_state = ((volatile uint32_t*) LOCK_STATE_ADDR);
     // Toggle state: if 0 then 1; otherwise, set to 0.
-    uint32_t new_state = (current_state == 0) ? 1 : 0;
+    bool new_state = (current_state[0] == 0) ? 1 : 0;
 
     // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
     err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
 
     // Write the new LED state into the assembly buffer
-    *((volatile uint32_t*) LOCK_STATE_ADDR) = new_state;
-
+    uint32_t lock_state_addr = (uint32_t) current_state;
+    current_state[0] = (uint32_t) new_state;
     // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
     nvm_erase_page();
-    nvm_program_page();
+    err = nvm_program_page();
 
     nvm_config();
 
-    return new_state;
+    return (bool) new_state;
 }
 
 void toggle_motor(void)
@@ -357,6 +367,30 @@ void run_power_state_machine(void)
                     mbx->content[3] = PC_VAL;
                     set_hb_switch(hs1, ls1, hs2, ls2);
                 }
+                else if (mbx->content[2] == REGISTER_RQ){
+                    mbx->content[4] = SERIAL_NUMBER;
+                    uint32_t new_pc[4];
+                    generate_random_number(&new_pc);
+                    mbx->content[6] = new_pc[0];
+                    nvm_config();
+
+                    uint32_t* arr = ((volatile uint32_t*) LOCK_STATE_ADDR);
+
+                    // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
+                    uint8_t err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
+
+                    // Write the new LED state into the assembly buffer
+                    uint32_t lock_state_addr = (uint32_t) arr;
+                    arr[1] = (uint32_t) new_pc[0];
+                    // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
+                    nvm_erase_page();
+                    err = nvm_program_page();
+
+                    nvm_config();
+                    mbx->content[2] = ZERO_32;
+
+                    current_state = POWER_POWER_OFF;
+                }
                 else if (mbx->content[2] == ZERO_32)
                 {
                     current_state = POWER_READY_FOR_PASSCODE;
@@ -369,7 +403,7 @@ void run_power_state_machine(void)
                 break;
 
             case POWER_HARVESTING:
-                if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
+                // if (shc_compare(shc_channel_ma, get_threshold_from_voltage(3.0)) == true)
                 {
                     mbx->content[5] = 0x11111111;
                     current_state = POWER_HARVESTING_DONE;
