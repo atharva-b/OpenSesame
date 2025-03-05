@@ -82,7 +82,7 @@ const uint8_t smack_sl_tag[] =
 #define PC_INVAL          0x99999999
 #define HARVESTING_DONE   0xBADAB00B
 #define REGISTER_RQ       0xEFEFEFEF
-#define SERIAL_NUMBER     0xFEDCBA05
+#define SERIAL_NUMBER     0xFEDCBA10
 #define REG_ERROR         0x88888888
 
 // typedef __PACKED_STRUCT {
@@ -340,6 +340,25 @@ void toggle_motor(void)
     // }
 }
 
+void generate_passcode(Mailbox_t *mbx, uint32_t arr[]) {
+    uint32_t new_pc[4];
+    generate_random_number(&new_pc);
+    mbx->content[6] = new_pc[0];
+    nvm_config();
+
+    // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
+    uint8_t err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
+
+    // Write the new LED state into the assembly buffer
+    uint32_t lock_state_addr = (uint32_t) arr;
+    arr[1] = (uint32_t) new_pc[0];
+    // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
+    nvm_erase_page();
+    err = nvm_program_page();
+
+    nvm_config();
+}
+
 //---------------------------------------------------------------------
 // State Machine Functions
 //---------------------------------------------------------------------
@@ -360,33 +379,20 @@ void run_power_state_machine(void)
                 break;
 
             case POWER_READY_FOR_PASSCODE:
-                if (mbx->content[2] == PASSCODE)
+            {
+                nvm_config();
+                uint32_t* arr = ((volatile uint32_t*) LOCK_STATE_ADDR);
+                if (mbx->content[2] == arr[1])
                 {
                     authenticated = true;
                     current_state = POWER_HARVESTING;
+                    generate_passcode(mbx, arr);
                     mbx->content[3] = PC_VAL;
                     set_hb_switch(hs1, ls1, hs2, ls2);
                 }
                 else if (mbx->content[2] == REGISTER_RQ){
                     mbx->content[4] = SERIAL_NUMBER;
-                    uint32_t new_pc[4];
-                    generate_random_number(&new_pc);
-                    mbx->content[6] = new_pc[0];
-                    nvm_config();
-
-                    uint32_t* arr = ((volatile uint32_t*) LOCK_STATE_ADDR);
-
-                    // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
-                    uint8_t err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
-
-                    // Write the new LED state into the assembly buffer
-                    uint32_t lock_state_addr = (uint32_t) arr;
-                    arr[1] = (uint32_t) new_pc[0];
-                    // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
-                    nvm_erase_page();
-                    err = nvm_program_page();
-
-                    nvm_config();
+                    generate_passcode(mbx, arr);
                     mbx->content[2] = ZERO_32;
 
                     current_state = POWER_POWER_OFF;
@@ -400,6 +406,7 @@ void run_power_state_machine(void)
                     mbx->content[3] = PC_INVAL;
                     current_state = POWER_IDLE;
                 }
+            }
                 break;
 
             case POWER_HARVESTING:
