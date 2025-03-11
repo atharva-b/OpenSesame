@@ -285,24 +285,19 @@ uint16_t get_threshold_from_voltage(float input_voltage)
  *
  * @return The new lock state (0 or 1), or a nonzero error code if an NVM operation fails.
  */
-bool toggle_lock_state(void)
+uint8_t write_lock_state(uint32_t lock_state)
 {
-    volatile uint8_t __attribute__((unused)) err;
+    uint8_t err;
 
     // Power up and configure the NVM using ROM routines
     // switch_on_nvm();
     nvm_config();
 
-    // Read the current LED state from flash (assumes memory-mapped NVM)
-    uint32_t current_state = *((volatile uint32_t*) LOCK_STATE_ADDR);
-    // Toggle state: if 0 then 1; otherwise, set to 0.
-    uint32_t new_state = (current_state == 0) ? 1 : 0;
-
     // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
     err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
 
     // Write the new LED state into the assembly buffer
-    *((volatile uint32_t*) LOCK_STATE_ADDR) = new_state;
+    *((volatile uint32_t*) LOCK_STATE_ADDR) = lock_state;
 
     // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
     nvm_erase_page();
@@ -310,7 +305,27 @@ bool toggle_lock_state(void)
 
     nvm_config();
 
-    return new_state;
+    return err;
+}
+
+uint32_t remaining_turns(uint32_t* arr) 
+{
+    nvm_config();
+    volatile uint32_t num = arr[2];
+    return num % MAX_MOTOR_ROTATIONS;
+}
+
+// write number of turns completed to NVM
+void turns_completed(uint32_t turns, uint32_t arr[]) 
+{
+    nvm_config();
+
+    uint8_t err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
+    arr[2] = turns;
+
+    nvm_erase_page();
+    nvm_program_page();
+    nvm_config();
 }
 
 void generate_passcode(Mailbox_t *mbx, uint32_t arr[]) {
@@ -320,14 +335,13 @@ void generate_passcode(Mailbox_t *mbx, uint32_t arr[]) {
     nvm_config();
 
     // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
-    uint8_t __attribute__((unused)) err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
+    nvm_open_assembly_buffer(LOCK_STATE_ADDR);
 
     // Write the new LED state into the assembly buffer
-    uint32_t __attribute__((unused)) lock_state_addr = (uint32_t) arr;
     arr[1] = (uint32_t) new_pc[0];
     // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
     nvm_erase_page();
-    err = nvm_program_page();
+    nvm_program_page();
 
     nvm_config();
 }
@@ -390,12 +404,25 @@ void run_power_state_machine(void)
             case POWER_HARVESTING_DONE:
                 // Power up and configure the NVM using ROM routines
                 {
-                    bool new_state = toggle_lock_state();
+                    nvm_config();
+                    uint32_t* arr = ((volatile uint32_t*) LOCK_STATE_ADDR);
+                    uint32_t lock_state = arr[0];
+                    uint32_t num = arr[2];
+                    uint32_t turns = MAX_MOTOR_ROTATIONS - (num % MAX_MOTOR_ROTATIONS);
                     
                     // TODO: Not make this an infinite loop
-                    for(uint8_t i = 0; i < MAX_MOTOR_ROTATIONS; i++) {
-                        turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, new_state);
+                    for(uint8_t i = 0; i < turns; i++) {
+                        uint8_t err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
+                        arr[2] = (uint32_t)(i+1);
+
+                        nvm_erase_page();
+                        nvm_program_page();
+                        nvm_config();
+                        turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !lock_state);
                     }
+                    turns_completed(0, arr);
+                    lock_state = !lock_state;
+                    write_lock_state(lock_state);
                     mbx->content[3] = HARVESTING_DONE;
                     current_state = POWER_IDLE;
                 }
