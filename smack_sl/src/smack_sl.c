@@ -75,30 +75,11 @@ const uint8_t smack_sl_tag[] =
 #define WAIT_ABOUT_1MS   0x8000   //!< clock tick constant ~1ms @ 28MHz
 #endif
 
-#define MCU_VALID         0xA55B00B5
-#define PASSCODE          0x12344321
-#define ZERO_32           0x00000000
-#define PC_VAL            0x55555555
-#define PC_INVAL          0x99999999
-#define HARVESTING_DONE   0xBADAB00B
-#define REGISTER_RQ       0xEFEFEFEF
-#define SERIAL_NUMBER     0xFEDCBA20
-#define REG_ERROR         0x88888888
-
-#define MAX_MOTOR_ROTATIONS 8
-
-// typedef __PACKED_STRUCT {
-//     bool registered;
-//     bool lock_state;
-//     uint32_t passcode;
-//     uint32_t sn;
-// } registration_data_t;
-
 /*
    Previous firmware stored version data in the last flash page (0x1EFF4–0x1EFFF).
-   To avoid conflicts, we now store the LED state in the previous page.
+   To avoid conflicts, we now store the LOCK state in the previous page.
    Assuming a page size of 128 bytes, the previous page spans 0x0001EF00–0x0001EF7F.
-   Here we reserve address 0x0001EF10 for the LED state.
+   Here we reserve address 0x0001EF10 for the LOCK state.
 */
 #define LOCK_STATE_ADDR    0x0001EF10   // New LED state address
 #define LED_GPIO          1            // LED is connected to GPIO1
@@ -285,13 +266,13 @@ uint16_t get_threshold_from_voltage(float input_voltage)
 }
 
 //---------------------------------------------------------------------
-// Persistent LED State Toggle Implementation
+// Persistent lock State Toggle Implementation
 //---------------------------------------------------------------------
 /**
- * @brief Toggle the persistent LED state stored in NVM and update the physical LED.
+ * @brief Toggle the persistent lock state stored in NVM and update the physical lock.
  *
  * This function:
- *   - Reads the current LED state from flash memory.
+ *   - Reads the current lock state from flash memory.
  *   - Toggles it (0 becomes 1; nonzero becomes 0).
  *   - Powers up and configures the NVM.
  *   - Opens the assembly buffer for the flash page containing LOCK_STATE_ADDR.
@@ -302,11 +283,11 @@ uint16_t get_threshold_from_voltage(float input_voltage)
  *   - Powers down the NVM.
  *   - Updates GPIO1 (using set_singlegpio_out) to reflect the new state.
  *
- * @return The new LED state (0 or 1), or a nonzero error code if an NVM operation fails.
+ * @return The new lock state (0 or 1), or a nonzero error code if an NVM operation fails.
  */
 bool toggle_lock_state(void)
 {
-    volatile uint8_t err;
+    volatile uint8_t __attribute__((unused)) err;
 
     // Power up and configure the NVM using ROM routines
     // switch_on_nvm();
@@ -332,16 +313,6 @@ bool toggle_lock_state(void)
     return new_state;
 }
 
-void toggle_motor(void)
-{
-    volatile uint8_t err;
-
-    // for (int i = 0; i < 20; i++)
-    // {
-    //     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !((bool)new_state));
-    // }
-}
-
 void generate_passcode(Mailbox_t *mbx, uint32_t arr[]) {
     uint32_t new_pc[4];
     generate_random_number(&new_pc);
@@ -349,10 +320,10 @@ void generate_passcode(Mailbox_t *mbx, uint32_t arr[]) {
     nvm_config();
 
     // Open the assembly buffer for the flash page that includes LOCK_STATE_ADDR
-    uint8_t err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
+    uint8_t __attribute__((unused)) err = nvm_open_assembly_buffer(LOCK_STATE_ADDR);
 
     // Write the new LED state into the assembly buffer
-    uint32_t lock_state_addr = (uint32_t) arr;
+    uint32_t __attribute__((unused)) lock_state_addr = (uint32_t) arr;
     arr[1] = (uint32_t) new_pc[0];
     // Erase the flash page (ensure LOCK_STATE_ADDR is in a dedicated page)
     nvm_erase_page();
@@ -366,11 +337,9 @@ void generate_passcode(Mailbox_t *mbx, uint32_t arr[]) {
 //---------------------------------------------------------------------
 void run_power_state_machine(void)
 {
-    bool authenticated = false;
     Mailbox_t* mbx = get_mailbox_address();
     bool hs1 = true, hs2 = false, ls1 = false, ls2 = false;
-    bool locked = true;
-
+    
     while (true)
     {
         switch (current_state)
@@ -386,7 +355,6 @@ void run_power_state_machine(void)
                 uint32_t* arr = ((volatile uint32_t*) LOCK_STATE_ADDR);
                 if (mbx->content[2] == arr[1])
                 {
-                    authenticated = true;
                     current_state = POWER_HARVESTING;
                     generate_passcode(mbx, arr);
                     mbx->content[3] = PC_VAL;
@@ -435,6 +403,8 @@ void run_power_state_machine(void)
 
             case POWER_IDLE:
                 // Remain idle; add periodic tasks or sleep logic as needed.
+                request_power_saving_mode(true, false, false, false);
+                current_state = POWER_POWER_OFF;
                 break;
 
             default:
@@ -443,37 +413,6 @@ void run_power_state_machine(void)
     }
 }
 
-void run_lock_state_machine(void)
-{
-    bool authenticated = false;
-    Mailbox_t* mbx;
-
-    while (true)
-    {
-        switch (current_state)
-        {
-            case LOCK_LOCKED:
-                mbx = get_mailbox_address();
-                mbx->content[1] = MCU_VALID;
-                break;
-
-            case LOCK_UNLOCKING:
-                // Implement unlocking procedure here if needed.
-                break;
-
-            case LOCK_UNLOCKED:
-                // Code for unlocked state.
-                break;
-
-            case LOCK_LOCKING:
-                // Code for locking state.
-                break;
-
-            default:
-                break;
-        }
-    }
-}
 
 //---------------------------------------------------------------------
 // Application Entry Point
@@ -485,23 +424,18 @@ void _nvm_start(void)
     vars_init();
     shc_init();
 
-    volatile NFC_State_enum_t state = handle_DAND_protocol();
-    volatile NFC_Frame_enum_t frame_type = classify_frame();
+    volatile NFC_State_enum_t __attribute__((unused)) state = handle_DAND_protocol();
+    volatile NFC_Frame_enum_t __attribute__((unused)) frame_type = classify_frame();
     nfc_state_machine();
 
     set_hb_eventctrl(false);
-
     single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
-
-    // toggle_led_state();
 
     while (true)
     {
         read_frame();
         frame_type = classify_frame();
         run_power_state_machine();
-        // toggle_led_state();
-        // sys_tim_singleshot_32(0, WAIT_ABOUT_1MS*32, 14);
         asm("WFI"); // Wait For Interrupt to conserve power.
     }
 }
