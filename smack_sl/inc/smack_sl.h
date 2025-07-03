@@ -68,6 +68,17 @@ typedef enum
     LOCK_LOCKING = 3,
 } Lock_State_enum_t; 
 
+#define MCU_VALID         0xDDDDDDDD
+#define PASSCODE          0x12344321
+#define ZERO_32           0x00000000
+#define PC_VAL            0x55555555
+#define PC_INVAL          0x99999999
+#define HARVESTING_DONE   0xBADAB00B
+#define REGISTER_RQ       0xEFEFEFEF
+#define SERIAL_NUMBER     0xFEDCBA20
+#define REG_ERROR         0x88888888
+
+#define MAX_MOTOR_ROTATIONS 8
 
 /** @} */ /* End of group fw_config */
 

@@ -75,24 +75,6 @@ const uint8_t smack_sl_tag[] =
 #define WAIT_ABOUT_1MS   0x8000   //!< clock tick constant ~1ms @ 28MHz
 #endif
 
-#define MCU_VALID         0xA55B00B5
-#define PASSCODE          0x12344321
-#define ZERO_32           0x00000000
-#define PC_VAL            0x55555555
-#define PC_INVAL          0x99999999
-#define HARVESTING_DONE   0xBADAB00B
-#define REGISTER_RQ       0xEFEFEFEF
-#define SERIAL_NUMBER     0xFEDCBA20
-#define REG_ERROR         0x88888888
-
-#define MAX_MOTOR_ROTATIONS 8
-
-// typedef __PACKED_STRUCT {
-//     bool registered;
-//     bool lock_state;
-//     uint32_t passcode;
-//     uint32_t sn;
-// } registration_data_t;
 
 /*
    Previous firmware stored version data in the last flash page (0x1EFF4–0x1EFFF).
@@ -332,16 +314,6 @@ bool toggle_lock_state(void)
     return new_state;
 }
 
-void toggle_motor(void)
-{
-    volatile uint8_t err;
-
-    // for (int i = 0; i < 20; i++)
-    // {
-    //     turn_motor(mbx, &hs1, &ls1, &hs2, &ls2, !((bool)new_state));
-    // }
-}
-
 void generate_passcode(Mailbox_t *mbx, uint32_t arr[]) {
     uint32_t new_pc[4];
     generate_random_number(&new_pc);
@@ -443,38 +415,6 @@ void run_power_state_machine(void)
     }
 }
 
-void run_lock_state_machine(void)
-{
-    bool authenticated = false;
-    Mailbox_t* mbx;
-
-    while (true)
-    {
-        switch (current_state)
-        {
-            case LOCK_LOCKED:
-                mbx = get_mailbox_address();
-                mbx->content[1] = MCU_VALID;
-                break;
-
-            case LOCK_UNLOCKING:
-                // Implement unlocking procedure here if needed.
-                break;
-
-            case LOCK_UNLOCKED:
-                // Code for unlocked state.
-                break;
-
-            case LOCK_LOCKING:
-                // Code for locking state.
-                break;
-
-            default:
-                break;
-        }
-    }
-}
-
 //---------------------------------------------------------------------
 // Application Entry Point
 //---------------------------------------------------------------------
@@ -493,15 +433,11 @@ void _nvm_start(void)
 
     single_gpio_iocfg(true, false, true, false, false, LED_GPIO);
 
-    // toggle_led_state();
-
     while (true)
     {
         read_frame();
         frame_type = classify_frame();
         run_power_state_machine();
-        // toggle_led_state();
-        // sys_tim_singleshot_32(0, WAIT_ABOUT_1MS*32, 14);
         asm("WFI"); // Wait For Interrupt to conserve power.
     }
 }
