@@ -236,7 +236,7 @@ void toggle_lock(bool *hs1, bool *ls1, bool *hs2, bool *ls2, bool lock)
     }
 }
 
-/* Function to control the motor; as in your original implementation */
+/* Function to control the motor */
 void turn_motor(Mailbox_t* mbx, bool* hs1, bool* ls1, bool* hs2, bool* ls2, bool lock)
 {
     const uint32_t wait_time_discharge = WAIT_ABOUT_1MS * 32;
